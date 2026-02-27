@@ -1,207 +1,145 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl" class="dark">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ארכיון המאובנים החיים | The Eternal Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Fossils Archive - ארכיון מאובנים חיים</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
-        /* S25 Ultra Optimized - Balanced Contrast Edition */
-        :root {
-            --amoled-black: #000000;
-            --card-gray: #0f172a; /* Slate 900 */
-            --accent-teal: #14b8a6; /* Teal 500 */
-            --text-main: #e2e8f0;   /* Slate 200 - High legibility, no dazzle */
-            --text-muted: #94a3b8;  /* Slate 400 */
-        }
-
         body {
-            background-color: var(--amoled-black);
-            color: var(--text-main);
-            font-family: system-ui, -apple-system, sans-serif;
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
-            line-height: 1.6;
+            font-family: 'Assistant', sans-serif;
+            scroll-behavior: smooth;
         }
-
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
+        /* התאמה ספציפית למסך ה-S25 Ultra - יחס גובה-רוחב וצפיפות פיקסלים */
+        @media (max-width: 450px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
         }
-
-        .category-icon {
-            background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(20, 184, 166, 0.05));
+        .category-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        h1, h2, h3 {
-            color: #f8fafc; /* Slate 50 for headings */
-            letter-spacing: -0.01em;
-        }
-
-        /* Subtle ambient light */
-        .ambient-glow {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 300px;
-            background: radial-gradient(circle at 80% 0%, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: -1;
+        .category-card:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
-    <div class="ambient-glow"></div>
-
-    <!-- Header -->
-    <header class="pt-14 pb-10 px-6 text-center">
-        <div class="inline-block px-4 py-1 mb-6 text-[11px] font-bold tracking-widest text-teal-500 uppercase bg-teal-950/40 rounded-full border border-teal-800/30">
-            Digital Museum of Natural History
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-tight text-emerald-500">Living Fossils <span class="text-slate-400 font-light">Archive</span></h1>
+            <div class="text-xs text-slate-500 font-mono">v1.0.0 | S25-Optimized</div>
         </div>
-        <h1 class="text-4xl font-extrabold mb-4">
-            ארכיון <span class="text-teal-500">המאובנים החיים</span>
-        </h1>
-        <p class="text-slate-400 text-base max-w-lg mx-auto leading-relaxed">
-            מסע אבולוציוני בעקבות אורגניזמים ששימרו את צורתם המקורית במשך מאות מיליוני שנים.
-        </p>
     </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-6 max-w-4xl">
+    <main class="flex-grow max-w-4xl mx-auto px-6 py-10 w-full">
         
-        <!-- Introduction Section -->
-        <section class="mb-14 glass-card rounded-[2.5rem] p-8 border-r-4 border-teal-600">
-            <h2 class="text-2xl font-bold text-teal-500 mb-6 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                מהו "מאובן חי"?
-            </h2>
-            <div class="space-y-6 text-slate-200 leading-relaxed text-lg">
+        <!-- Hero Section: Introduction -->
+        <section class="mb-16">
+            <div class="inline-block px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-4">
+                מבוא למחקר
+            </div>
+            <h2 class="hero-title text-4xl font-bold mb-6 leading-tight">מהו "מאובן חי"?</h2>
+            <div class="space-y-4 text-lg text-slate-300 leading-relaxed border-r-2 border-emerald-500/30 pr-6">
                 <p>
-                    המונח <span class="text-teal-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר מינים הקיימים כיום ודומים דמיון מפתיע למאובנים של אבותיהם הקדמונים. אלו הם יצורים שהאבולוציה המורפולוגית שלהם כמעט ונעצרה.
+                    המונח **"מאובן חי" (Living Fossil)** הוא מושג מרתק בביולוגיה אבולוציונית, המתאר מינים קיימים הנראים דומים מאוד למינים המוכרים רק מרשומות המאובנים, ואין להם קרובי משפחה חיים קרובים.
                 </p>
-                
-                <div class="bg-slate-900/80 p-5 rounded-2xl border border-teal-900/30">
-                    <p class="text-sm">
-                        <span class="text-teal-500 font-bold uppercase tracking-wider block mb-1">היסטוריה של המושג</span>
-                        המונח נטבע על ידי <span class="text-white font-bold">צ'ארלס דרווין</span> בשנת <span class="text-white">1859</span> בספרו <span class="italic text-teal-200">"מוצא המינים"</span>. דרווין השתמש בו כדי לתאר מינים כמו הברווזן, ששרדו בסביבות מבודדות עם תחרות נמוכה, ובכך שמרו על תכונות עתיקות שנעלמו משאר עולם החי.
-                    </p>
-                </div>
+                <p>
+                    טביעת המונח מיוחסת לחוקר הטבע הנודע **צ'ארלס דרווין**, שפרסם אותו לראשונה בשנת **1859** בספרו המונומנטלי <span class="italic text-emerald-400">"מוצא המינים" (On the Origin of Species)</span>. דרווין השתמש במושג כדי לתאר אורגניזמים ששרדו כמעט ללא שינוי לאורך עידנים גיאולוגיים, לעיתים בשל תחרות מועטה או סביבת מחיה יציבה במיוחד.
+                </p>
             </div>
         </section>
 
-        <!-- Navigation Grid -->
-        <section class="mb-24">
-            <h2 class="text-sm font-bold text-slate-500 uppercase tracking-[0.2em] mb-8 text-center">קטגוריות המחקר</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                
-                <!-- Category Card -->
-                <a href="fish/index.html" class="glass-card rounded-3xl p-6 group hover:border-teal-500/50 transition-all active:scale-[0.97]">
-                    <div class="flex items-center space-x-5 space-x-reverse">
-                        <div class="category-icon p-4 rounded-2xl group-hover:scale-110 transition-transform">
-                            <span class="text-3xl">🐟</span>
+        <!-- Categories Navigation Grid -->
+        <section class="mb-16">
+            <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                <span class="w-8 h-px bg-slate-700"></span>
+                קטגוריות המחקר
+            </h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Fish - דגים -->
+                <a href="fish/coelacanth.html" class="category-card group bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-emerald-500/50 hover:bg-slate-800/50">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7s-1 1-4 1-4-2-9-2-4 2-7 3c3 0 3 6 4 8 2 4 11 2 11 2 1 1 5 1 5 1v-5c-2 0-3-2-3-2V7Z"/><path d="M19 7v.01"/><path d="M11 13c.5-1.5 2-1.5 2 0"/></svg>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-bold">דגים</h3>
-                            <p class="text-slate-400 text-sm mt-1">צילקנת ודגי ריאות</p>
-                        </div>
+                        <span class="text-xs font-mono text-slate-500">CATEGORY_01</span>
                     </div>
+                    <h4 class="text-xl font-bold mb-2 text-slate-100">דגים</h4>
+                    <p class="text-sm text-slate-400">מחקר על הצילקנת ומינים ימיים קדומים ששרדו ממעמקים.</p>
                 </a>
 
-                <a href="trees/index.html" class="glass-card rounded-3xl p-6 group hover:border-emerald-500/50 transition-all active:scale-[0.97]">
-                    <div class="flex items-center space-x-5 space-x-reverse">
-                        <div class="category-icon p-4 rounded-2xl group-hover:scale-110 transition-transform">
-                            <span class="text-3xl">🌿</span>
+                <!-- Trees - עצים -->
+                <a href="trees/ginkgo.html" class="category-card group bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-emerald-500/50 hover:bg-slate-800/50">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-emerald-500/10 rounded-xl text-emerald-400 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 3-7 3 7"/><path d="M9 19h10"/><path d="M19 15.5c3.5-3.5 3.5-9 0-12.5s-9-3.5-12.5 0"/><path d="M9.5 14.5c-3.5 3.5-9 3.5-12.5 0s-3.5-9 0-12.5"/></svg>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-bold">עצים וצומח</h3>
-                            <p class="text-slate-400 text-sm mt-1">גינקו דו-אונתי ווולמיה</p>
-                        </div>
+                        <span class="text-xs font-mono text-slate-500">CATEGORY_02</span>
                     </div>
+                    <h4 class="text-xl font-bold mb-2 text-slate-100">עצים</h4>
+                    <p class="text-sm text-slate-400">הגינקו דו-אונתי וצמחים מתקופת הדינוזאורים.</p>
                 </a>
 
-                <a href="reptiles/index.html" class="glass-card rounded-3xl p-6 group hover:border-amber-500/50 transition-all active:scale-[0.97]">
-                    <div class="flex items-center space-x-5 space-x-reverse">
-                        <div class="category-icon p-4 rounded-2xl group-hover:scale-110 transition-transform">
-                            <span class="text-3xl">🦎</span>
+                <!-- Reptiles - זוחלים -->
+                <a href="reptiles/tuatara.html" class="category-card group bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-emerald-500/50 hover:bg-slate-800/50">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-orange-500/10 rounded-xl text-orange-400 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-7.35 16.76l1.42-1.42A8 8 0 1 1 12 20a8.38 8.38 0 0 1-2.2-.3l-1.43 1.43A10 10 0 1 0 12 2Z"/><path d="M12 6a6 6 0 1 0 6 6 6 6 0 0 0-6-6Z"/></svg>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-bold">זוחלים</h3>
-                            <p class="text-slate-400 text-sm mt-1">טואטרה וסרטני פרסה</p>
-                        </div>
+                        <span class="text-xs font-mono text-slate-500">CATEGORY_03</span>
                     </div>
+                    <h4 class="text-xl font-bold mb-2 text-slate-100">זוחלים</h4>
+                    <p class="text-sm text-slate-400">הטואטרה מניו זילנד - השריד האחרון לסדרת ה-Sphenodontia.</p>
                 </a>
 
-                <a href="turtles/index.html" class="glass-card rounded-3xl p-6 group hover:border-orange-500/50 transition-all active:scale-[0.97]">
-                    <div class="flex items-center space-x-5 space-x-reverse">
-                        <div class="category-icon p-4 rounded-2xl group-hover:scale-110 transition-transform">
-                            <span class="text-3xl">🐢</span>
+                <!-- Turtles - צבים -->
+                <a href="turtles/leatherback.html" class="category-card group bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-emerald-500/50 hover:bg-slate-800/50">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-teal-500/10 rounded-xl text-teal-400 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10V2"/><path d="m4.93 10.93 1.41-1.41"/><path d="M2 18h20"/><path d="M20 18c0-4.42-3.58-8-8-8s-8 3.58-8 8"/><path d="M16 18a4 4 0 0 0-8 0"/></svg>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-bold">צבים</h3>
-                            <p class="text-slate-400 text-sm mt-1">צבי ענק וצביי ים קדומים</p>
-                        </div>
+                        <span class="text-xs font-mono text-slate-500">CATEGORY_04</span>
                     </div>
+                    <h4 class="text-xl font-bold mb-2 text-slate-100">צבים</h4>
+                    <p class="text-sm text-slate-400">צב הגלד - ענק הימים שמשמר מבנה אנטומי עתיק.</p>
                 </a>
 
+                <!-- Invertebrates - חסרי חוליות -->
+                <a href="invertebrates/horseshoe-crab.html" class="category-card group bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-emerald-500/50 hover:bg-slate-800/50 sm:col-span-2">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10"/><path d="m4.93 4.93 4.24 4.24"/><path d="M2 12h10"/><path d="m4.93 19.07 4.24-4.24"/><path d="M12 22v-10"/><path d="m19.07 19.07-4.24-4.24"/><path d="M22 12h-10"/><path d="m19.07 4.93-4.24 4.24"/></svg>
+                        </div>
+                        <span class="text-xs font-mono text-slate-500">CATEGORY_05</span>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2 text-slate-100">חסרי חוליות</h4>
+                    <p class="text-sm text-slate-400">סרטן הפרסה - יצור ששרד 5 הכחדות המוניות עם דם כחול וייחודי.</p>
+                </a>
             </div>
         </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="mt-auto bg-slate-950 border-t border-white/5 pt-16 pb-20">
-        <div class="container mx-auto px-8 max-w-4xl text-center md:text-right">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-                <div>
-                    <h4 class="text-teal-500 font-bold text-lg mb-6 tracking-tight">ארכיון הנצח</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג'מיני ועל ידי רם.
-                    </p>
-                </div>
-                <div class="flex flex-col items-center md:items-start">
-                    <h4 class="text-slate-200 font-bold text-sm uppercase tracking-widest mb-6 text-center w-full md:text-right">קישורים מהירים</h4>
-                    <ul class="text-slate-500 text-sm space-y-4 w-full md:text-right">
-                        <li><a href="#" class="hover:text-teal-500 transition-colors">דף הבית</a></li>
-                        <li><a href="https://github.com" target="_blank" class="hover:text-teal-500 transition-colors">GitHub Repo</a></li>
-                        <li><a href="#" class="hover:text-teal-500 transition-colors">מדיניות פרטיות</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-white/5 pt-8 text-center">
-                <p class="text-slate-600 text-[11px] uppercase tracking-[0.3em]">
-                    © 2026 THE ETERNAL ARCHIVE | RESEARCHED FOR RAM
-                </p>
+    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-slate-400 text-sm leading-loose">
+                פרויקט מחקר ייעודי לחשיפת מינים שחמקו משיני הזמן.<br>
+                האתר נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
+            </p>
+            <div class="mt-6 flex justify-center gap-4 text-xs text-slate-600 font-mono">
+                <span>© 2026 ARCHIVE</span>
+                <span>•</span>
+                <span>DATA_DRIVEN_BIOLOGY</span>
             </div>
         </div>
     </footer>
 
-    <!-- Bottom Mobile Navigation -->
-    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-md bg-slate-900/90 backdrop-blur-2xl rounded-full py-4 px-10 flex justify-around items-center z-50 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] md:hidden">
-        <button class="flex flex-col items-center text-teal-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            <span class="text-[10px] mt-1 font-bold">בית</span>
-        </button>
-        <button class="flex flex-col items-center text-slate-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <span class="text-[10px] mt-1">חיפוש</span>
-        </button>
-        <button class="flex flex-col items-center text-slate-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="text-[10px] mt-1">אודות</span>
-        </button>
-    </nav>
-
 </body>
 </html>
+

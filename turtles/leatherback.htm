@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר: צב גלד | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --amoled-black: #000000;
+            --accent-orange: #f97316;
+            --text-main: #e2e8f0;
+        }
+        body {
+            background-color: var(--amoled-black);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .etymology-part {
+            border-right: 2px solid var(--accent-orange);
+            padding-right: 1rem;
+            margin-bottom: 1rem;
+        }
+        [dir="ltr"] .etymology-part {
+            border-right: 0;
+            border-left: 2px solid var(--accent-orange);
+            padding-right: 0;
+            padding-left: 1rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pb-24 text-justify">
+
+    <!-- Language Toggle -->
+    <div class="fixed top-6 left-6 z-50">
+        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-4 py-2 rounded-full text-xs font-bold text-orange-500">
+            EN
+        </button>
+    </div>
+
+    <!-- Main Header -->
+    <header class="pt-16 px-6 text-center mb-8">
+        <a href="../index.html" class="text-orange-500 text-sm mb-4 inline-block">← חזרה לארכיון</a>
+        <h1 id="fossilName" class="text-4xl font-extrabold text-white">צב גלד (Leatherback)</h1>
+        <p class="text-orange-500 font-mono mt-2 italic">Dermochelys coriacea</p>
+    </header>
+
+    <main class="px-6 space-y-8 max-w-2xl mx-auto">
+        
+        <!-- Section: Discovery Details -->
+        <section class="glass-card rounded-3xl p-6 border-r-4 border-orange-500" id="discoverCard">
+            <h2 class="text-xl font-bold text-orange-400 mb-4" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
+            <div class="space-y-3 text-slate-300">
+                <p><span class="font-bold text-white" id="labelScientist">החוקר המזהה:</span> <span id="valScientist">דומניקו ונדלי (1735–1816)</span></p>
+                <p><span class="font-bold text-white" id="labelYear">שנת זיהוי מדעי:</span> <span id="valYear">1761 (פורסם לראשונה)</span></p>
+                <p><span class="font-bold text-white" id="labelLocation">מיקום הגילוי:</span> <span id="valLocation">חופי הים התיכון (איטליה)</span></p>
+                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">הנציג האחרון של משפחת ה-Dermochelyidae</span></p>
+            </div>
+        </section>
+
+        <!-- Section: Physical Specs & Lifespan -->
+        <section class="glass-card rounded-3xl p-6 border-r-4 border-red-600" id="specsCard">
+            <h2 class="text-xl font-bold text-red-400 mb-4" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
+            <div class="grid grid-cols-1 gap-4 text-slate-300">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <span class="text-red-500">📏</span>
+                    <p><span class="font-bold text-white" id="labelSize">אורך:</span> <span id="valSize">עד 2.2 מטרים</span></p>
+                </div>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <span class="text-red-500">⚖️</span>
+                    <p><span class="font-bold text-white" id="labelWeight">משקל:</span> <span id="valWeight">600–900 קילוגרם</span></p>
+                </div>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <span class="text-red-500">⏳</span>
+                    <p><span class="font-bold text-white" id="labelLifespan">תוחלת חיים:</span> <span id="valLifespan">כ-50 עד 100 שנים</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Detailed Etymology -->
+        <section class="glass-card rounded-3xl p-6" id="etymCard">
+            <h2 class="text-xl font-bold text-orange-400 mb-6" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
+            <div class="space-y-4">
+                <div class="etymology-part">
+                    <h3 class="text-orange-300 font-bold text-lg">Dermo-chelys (דמו-קליס)</h3>
+                    <p class="text-slate-400 text-sm italic" id="etym1_src">מקור: יוונית עתיקה (derma = עור, chelys = צב)</p>
+                    <p class="text-slate-200" id="etym1_def">משמעות: צב בעל עור (Skin-turtle).</p>
+                </div>
+                <div class="etymology-part">
+                    <h3 class="text-orange-300 font-bold text-lg">Coriacea (קוריאציה)</h3>
+                    <p class="text-slate-400 text-sm italic" id="etym2_src">מקור: לטינית (corium = עור מעובד/גלד)</p>
+                    <p class="text-slate-200" id="etym2_def">משמעות: דמוי עור או גלד (Leathery).</p>
+                </div>
+                <div class="bg-orange-900/10 p-4 rounded-xl border border-orange-900/30">
+                    <p class="text-sm italic text-slate-300" id="etymTotal">
+                        משמעות השם המלאה: "צב בעל שריון דמוי עור", על שם התכונה המבדילה אותו מכל הצבים האחרים – שריונו אינו עשוי עצם קשיחה אלא רקמה גמישה ודמויית עור.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Survival & Evolution -->
+        <section class="glass-card rounded-3xl p-6 border-b-2 border-orange-500/30">
+            <h2 class="text-xl font-bold text-orange-400 mb-4" id="surviveTitle">סיבת ההישרדות והישגים אבולוציוניים</h2>
+            <div class="space-y-4 text-slate-300">
+                <p id="surviveText">
+                    הצב הגלד שרד בזכות יכולתו לנדוד למרחקים עצומים ולצלול לעומקים של למעלה מ-1,000 מטרים. הוא פיתח מנגנוני ויסות חום (גיגנטותרמיה) המאפשרים לו לשרוד במים קרים מאוד, בניגוד לרוב הזוחלים.
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-sm text-orange-100" id="achieveList">
+                    <li>שריון גמיש המאפשר לו לעמוד בלחצי מים אדירים בזמן צלילות עומק.</li>
+                    <li>מערכת כלי דם המבודדת את חום הגוף מהסביבה החיצונית.</li>
+                    <li>שיניים דמויות קוצים בגרון (Papillae) המונעות מטרף חלקלק (כמו מדוזות) לברוח.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
+        <a href="../index.html" class="flex flex-col items-center text-orange-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            <span class="text-[10px] mt-1 uppercase" id="navHome">בית</span>
+        </a>
+        <button class="flex flex-col items-center text-slate-500 opacity-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            <span class="text-[10px] mt-1 uppercase" id="navNext">סוף</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                name: 'צב גלד (Leatherback)',
+                discoverTitle: 'פרטי התיעוד והזיהוי',
+                lScientist: 'החוקר המזהה:',
+                vScientist: 'דומניקו ונדלי (1735–1816)',
+                lYear: 'שנת זיהוי מדעי:',
+                vYear: '1761 (פורסם לראשונה)',
+                lLocation: 'מיקום הגילוי:',
+                vLocation: 'חופי הים התיכון (איטליה)',
+                lStatus: 'סטטוס אבולוציוני:',
+                vStatus: 'הנציג האחרון של משפחת ה-Dermochelyidae',
+                specsTitle: 'מאופיינים פיזיים ותוחלת חיים',
+                lSize: 'אורך:',
+                vSize: 'עד 2.2 מטרים',
+                lWeight: 'משקל:',
+                vWeight: '600–900 קילוגרם',
+                lLifespan: 'תוחלת חיים:',
+                vLifespan: 'כ-50 עד 100 שנים',
+                etymTitle: 'ניתוח אטימולוגי נרחב',
+                etym1src: 'מקור: יוונית עתיקה (derma, chelys)',
+                etym1def: 'משמעות: צב בעל עור (Skin-turtle).',
+                etym2src: 'מקור: לטינית (corium)',
+                etym2def: 'משמעות: דמוי עור או גלד (Leathery).',
+                etymTotal: 'משמעות השם המלאה: "צב בעל שריון דמוי עור", שריונו עשוי רקמה גמישה בניגוד לצבים אחרים.',
+                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים',
+                surText: 'הצב הגלד שרד בזכות יכולת נדידה וצלילה לעומק. הוא פיתח מנגנון ויסות חום המאפשר לו לשרוד במים קרים.',
+                achieve: ['שריון גמיש העומד בלחצי עומק אדירים', 'מערכת בידוד חום גופנית מתקדמת', 'שיניים פנימיות בגרון למניעת בריחת טרף'],
+                navHome: 'בית',
+                navNext: 'סוף',
+                btn: 'EN',
+                dir: 'rtl'
+            },
+            en: {
+                name: 'Leatherback Sea Turtle',
+                discoverTitle: 'Identification & Records',
+                lScientist: 'Identifying Scientist:',
+                vScientist: 'Domenico Vandelli (1735–1816)',
+                lYear: 'Year Identified:',
+                vYear: '1761 (First published)',
+                lLocation: 'Discovery Location:',
+                vLocation: 'Mediterranean coasts (Italy)',
+                lStatus: 'Evolutionary Status:',
+                vStatus: 'Sole survivor of the Dermochelyidae family',
+                specsTitle: 'Physical Traits & Lifespan',
+                lSize: 'Size:',
+                vSize: 'Up to 2.2 meters (7.2 ft)',
+                lWeight: 'Weight:',
+                vWeight: '600–900 kg (1,300–2,000 lbs)',
+                lLifespan: 'Lifespan:',
+                vLifespan: 'Estimated 50 to 100 years',
+                etymTitle: 'Detailed Etymology',
+                etym1src: 'Source: Ancient Greek (derma, chelys)',
+                etym1def: 'Meaning: Skin-turtle.',
+                etym2src: 'Source: Latin (corium)',
+                etym2def: 'Meaning: Leathery.',
+                etymTotal: 'Full Meaning: "Leathery skin turtle", named after its flexible shell which lacks bony plates.',
+                surTitle: 'Survival & Evolutionary Achievements',
+                surText: 'The Leatherback survived through extreme migration and diving capabilities. It developed gigantothermy to maintain body heat in cold waters.',
+                achieve: ['Flexible carapace for deep-sea pressure resistance', 'Counter-current heat exchange system', 'Esophageal papillae to trap slippery prey'],
+                navHome: 'HOME',
+                navNext: 'END',
+                btn: 'HE',
+                dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const data = content[currentLang];
+            document.getElementById('fossilName').innerText = data.name;
+            document.getElementById('discoverTitle').innerText = data.discoverTitle;
+            document.getElementById('labelScientist').innerText = data.lScientist;
+            document.getElementById('valScientist').innerText = data.vScientist;
+            document.getElementById('labelYear').innerText = data.lYear;
+            document.getElementById('valYear').innerText = data.vYear;
+            document.getElementById('labelLocation').innerText = data.lLocation;
+            document.getElementById('valLocation').innerText = data.vLocation;
+            document.getElementById('labelStatus').innerText = data.lStatus;
+            document.getElementById('valStatus').innerText = data.vStatus;
+            
+            document.getElementById('specsTitle').innerText = data.specsTitle;
+            document.getElementById('labelSize').innerText = data.lSize;
+            document.getElementById('valSize').innerText = data.vSize;
+            document.getElementById('labelWeight').innerText = data.lWeight;
+            document.getElementById('valWeight').innerText = data.vWeight;
+            document.getElementById('labelLifespan').innerText = data.lLifespan;
+            document.getElementById('valLifespan').innerText = data.vLifespan;
+
+            document.getElementById('etymTitle').innerText = data.etymTitle;
+            document.getElementById('etym1_src').innerText = data.etym1src;
+            document.getElementById('etym1_def').innerText = data.etym1def;
+            document.getElementById('etym2_src').innerText = data.etym2src;
+            document.getElementById('etym2_def').innerText = data.etym2def;
+            document.getElementById('etymTotal').innerText = data.etymTotal;
+            document.getElementById('surviveTitle').innerText = data.surTitle;
+            document.getElementById('surviveText').innerText = data.surText;
+            document.getElementById('navHome').innerText = data.navHome;
+            document.getElementById('navNext').innerText = data.navNext;
+            document.getElementById('langBtn').innerText = data.btn;
+            
+            const list = document.getElementById('achieveList');
+            list.innerHTML = data.achieve.map(item => `<li>${item}</li>`).join('');
+            
+            document.documentElement.dir = data.dir;
+            document.documentElement.lang = currentLang;
+            
+            const cards = [document.getElementById('discoverCard'), document.getElementById('specsCard')];
+            cards.forEach(card => {
+                card.style.borderRightWidth = currentLang === 'en' ? '0' : '4px';
+                card.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+            });
+        }
+    </script>
+</body>
+</html>

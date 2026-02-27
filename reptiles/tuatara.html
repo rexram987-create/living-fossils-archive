@@ -1,255 +1,139 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl" class="dark">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>מחקר: טואטרה | The Eternal Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טואטרה - Living Fossils Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --amoled-black: #000000;
-            --accent-amber: #f59e0b;
-            --text-main: #e2e8f0;
-        }
-        body {
-            background-color: var(--amoled-black);
-            color: var(--text-main);
-            font-family: system-ui, -apple-system, sans-serif;
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
-        }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .etymology-part {
-            border-right: 2px solid var(--accent-amber);
-            padding-right: 1rem;
-            margin-bottom: 1rem;
-        }
-        [dir="ltr"] .etymology-part {
-            border-right: 0;
-            border-left: 2px solid var(--accent-amber);
-            padding-right: 0;
-            padding-left: 1rem;
-        }
+        body { font-family: 'Assistant', sans-serif; }
+        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
+        .text-justify { text-align: justify; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col pb-24 text-justify">
+<body class="bg-slate-950 text-slate-100 min-h-screen">
 
-    <!-- Language Toggle -->
-    <div class="fixed top-6 left-6 z-50">
-        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-4 py-2 rounded-full text-xs font-bold text-amber-500">
-            EN
-        </button>
-    </div>
-
-    <!-- Main Header -->
-    <header class="pt-16 px-6 text-center mb-8">
-        <a href="../index.html" class="text-amber-500 text-sm mb-4 inline-block">← חזרה לארכיון</a>
-        <h1 id="fossilName" class="text-4xl font-extrabold text-white">טואטרה (Tuatara)</h1>
-        <p class="text-amber-500 font-mono mt-2 italic">Sphenodon punctatus</p>
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                <span class="font-bold">חזרה לארכיון</span>
+            </a>
+            <span class="text-xs font-mono text-slate-500 italic">S25 ULTRA OPTIMIZED</span>
+        </div>
     </header>
 
-    <main class="px-6 space-y-8 max-w-2xl mx-auto">
+    <main class="max-w-4xl mx-auto px-6 py-10 space-y-12">
         
-        <!-- Section: Discovery Details -->
-        <section class="glass-card rounded-3xl p-6 border-r-4 border-amber-500" id="discoverCard">
-            <h2 class="text-xl font-bold text-amber-400 mb-4" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
-            <div class="space-y-3 text-slate-300">
-                <p><span class="font-bold text-white" id="labelScientist">החוקר המזהה:</span> <span id="valScientist">ג'ון אדוארד גריי (1800–1875)</span></p>
-                <p><span class="font-bold text-white" id="labelYear">שנת זיהוי מדעי:</span> <span id="valYear">1831 (זוהה כסוג נפרד מלטאות)</span></p>
-                <p><span class="font-bold text-white" id="labelLocation">מיקום הגילוי:</span> <span id="valLocation">איי ניו זילנד (למשל איי מצר קוק)</span></p>
-                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">השריד האחרון מסדרת הרינקוצפליה</span></p>
+        <!-- Specimen Hero -->
+        <section class="text-center space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                מצב שימור: ללא חשש (Least Concern)
+            </div>
+            <h1 class="text-5xl font-extrabold tracking-tight text-white mb-2">טואטרה <span class="text-orange-500 text-2xl font-light italic block mt-1">Sphenodon punctatus</span></h1>
+            <p class="text-orange-400 text-xl font-light">חוקר: ג'ון אדוארד גריי (1800–1875)</p>
+        </section>
+
+        <!-- Extended Etymology -->
+        <section class="glass-panel rounded-3xl p-8 space-y-6">
+            <h2 class="text-2xl font-bold flex items-center gap-3 text-orange-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
+                ניתוח אטימולוגי מורחב
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-900/50 p-6 rounded-2xl border border-orange-500/20">
+                    <div class="text-4xl font-bold text-white mb-1">Tua</div>
+                    <div class="text-orange-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART I: THE BASE</div>
+                    <div class="text-slate-300 leading-relaxed text-justify">
+                        מקור המילה בשפה המאורית (Māori), השפה הילידית של ניו זילנד. המונח **Tua** מתייחס למושג **"גב"** או **"צד אחורי"**. בראייה המאורית, הגב נחשב לאזור המייצג עוצמה והיסטוריה, והשימוש בו בתיאור בעל החיים מדגיש את המיקום הפיזי שבו מתרכז המאפיין הבולט ביותר של היצור.
+                    </div>
+                </div>
+                <div class="bg-slate-900/50 p-6 rounded-2xl border border-orange-500/20">
+                    <div class="text-4xl font-bold text-white mb-1">Tara</div>
+                    <div class="text-orange-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART II: THE SUMMIT</div>
+                    <div class="text-slate-300 leading-relaxed text-justify">
+                        מקור המילה במאורית, ומשמעותה **"קוצים"**, **"פסגות"** או **"קרניים"**. צירוף שתי המילים יחד, **Tua-tara**, מתרגם ל**"גב קוצני"**. השם מתאר במדויק את רכס הקוצים המשונן הנמשך לאורך גבו וזנבו של הזוחל, המזכיר פסגות הרים זעירות. קוצים אלו עשויים קפלי עור קשיחים והם בולטים במיוחד אצל הזכרים בעת תצוגות דומיננטיות.
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Section: Physical Specs & Lifespan -->
-        <section class="glass-card rounded-3xl p-6 border-r-4 border-orange-600" id="specsCard">
-            <h2 class="text-xl font-bold text-orange-400 mb-4" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
-            <div class="grid grid-cols-1 gap-4 text-slate-300">
-                <div class="flex items-center space-x-3 space-x-reverse">
-                    <span class="text-orange-500">📏</span>
-                    <p><span class="font-bold text-white" id="labelSize">אורך:</span> <span id="valSize">עד 80 סנטימטרים</span></p>
+        <!-- Expanded Object Discovery & Biology Details -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-bold flex items-center gap-3 text-emerald-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                פרטי אובייקט הגילוי: The Ancient Rhynchocephalian
+            </h2>
+            
+            <div class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-10">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
+                        נסיבות הגילוי והבידוד הגיאוגרפי
+                    </h3>
+                    <p class="text-slate-300 leading-relaxed text-justify">
+                        האובייקט אותר במקור באיי מצר קוק (Cook Strait) וסמוך לחופי האי הצפוני של ניו זילנד. ג'ון אדוארד גריי, אוצר הזואולוגיה במוזיאון הבריטי, תיאר את המין לראשונה ב-1831, אך רק ב-1867 הוא הבין שמדובר ביצור ייחודי לחלוטין שאינו לטאה. הטואטרה שרדה אך ורק בניו זילנד בזכות בידוד גיאוגרפי של כ-80 מיליון שנים, לאחר שהתנתקה מיבשת גונדוואנה. כיום היא מוגנת באיים נטולי טורפים, מה שהוביל לשיפור במצבה לדרגת "ללא חשש".
+                    </p>
                 </div>
-                <div class="flex items-center space-x-3 space-x-reverse">
-                    <span class="text-orange-500">⚖️</span>
-                    <p><span class="font-bold text-white" id="labelWeight">משקל:</span> <span id="valWeight">עד 1.3 קילוגרם</span></p>
-                </div>
-                <div class="flex items-center space-x-3 space-x-reverse">
-                    <span class="text-orange-500">⏳</span>
-                    <p><span class="font-bold text-white" id="labelLifespan">תוחלת חיים:</span> <span id="valLifespan">מעל 100 שנים (מתרבים גם בגיל 80)</span></p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Section: Detailed Etymology -->
-        <section class="glass-card rounded-3xl p-6" id="etymCard">
-            <h2 class="text-xl font-bold text-amber-400 mb-6" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
-            <div class="space-y-4">
-                <div class="etymology-part">
-                    <h3 class="text-amber-300 font-bold text-lg">Tua (טוא)</h3>
-                    <p class="text-slate-400 text-sm italic" id="etym1_src">מקור: שפת המאורי (Māori)</p>
-                    <p class="text-slate-200" id="etym1_def">משמעות: גב / אחורי (Back).</p>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
+                        העין השלישית ומנגנונים ביולוגיים עתיקים
+                    </h3>
+                    <p class="text-slate-300 leading-relaxed text-justify">
+                        הטואטרה מחזיקה ב**עין פריאטלית (Parietal Eye)** – עין שלישית הממוקמת בקודקוד הראש. היא מצוידת בעדשה, רשתית וקצות עצבים, אם כי היא מכוסה בעור אצל מבוגרים. עין זו משמשת כחיישן אור מתוחכם לוויסות המקצב הצירקדי (השעון הביולוגי) וסיוע בספיגת ויטמין D. בנוסף, לאובייקט מבנה שיניים ייחודי בעולם הזוחלים: שתי שורות שיניים בלסת העליונה ושורה אחת בתחתונה, הנסגרות זו לתוך זו כמו מספריים, מה שמאפשר לה לבתר טרף קשיח בקלות.
+                    </p>
                 </div>
-                <div class="etymology-part">
-                    <h3 class="text-amber-300 font-bold text-lg">Tara (טרה)</h3>
-                    <p class="text-slate-400 text-sm italic" id="etym2_src">מקור: שפת המאורי (Māori)</p>
-                    <p class="text-slate-200" id="etym2_def">משמעות: קוצים / פסגות (Spines / Peaks).</p>
-                </div>
-                <div class="bg-amber-900/10 p-4 rounded-xl border border-amber-900/30">
-                    <p class="text-sm italic text-slate-300" id="etymTotal">
-                        משמעות השם המלאה מהשפה המאורית: "פסגות על הגב", על שם שורת הקוצים הבולטים לאורך גבו וראשו של הזוחל.
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
+                        אבולוציה של "חיים בהילוך אטי"
+                    </h3>
+                    <p class="text-slate-300 leading-relaxed text-justify">
+                        הטואטרה היא הניצולה היחידה מסדרת ה-Rhynchocephalia, ששגשגה לפני כ-200 מיליון שנה. היא מפגינה חילוף חומרים אטי להפליא; היא פעילה בטמפרטורות של עד 5 מעלות צלזיוס (טמפרטורה שבה רוב הזוחלים נכנסים לתרדמת) ונושמת פעם אחת בדקה בלבד בזמן מנוחה. האובייקט מתאפיין בקצב רבייה אטי מאוד – הנקבות מטילות ביצים רק פעם ב-2-5 שנים, ותקופת הדגירה נמשכת בין 12 ל-15 חודשים, מהארוכות בעולם הזוחלים.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Section: Survival & Evolution -->
-        <section class="glass-card rounded-3xl p-6 border-b-2 border-amber-500/30">
-            <h2 class="text-xl font-bold text-amber-400 mb-4" id="surviveTitle">סיבת ההישרדות והישגים אבולוציוניים</h2>
-            <div class="space-y-4 text-slate-300">
-                <p id="surviveText">
-                    הטואטרה שרד באיים מבודדים סביב ניו זילנד, שם לא היו יונקים טורפים עד לבוא האדם. הוא מפגין עמידות יוצאת דופן לטמפרטורות נמוכות שבהן זוחלים אחרים קופאים.
-                </p>
-                <ul class="list-disc list-inside space-y-2 text-sm text-amber-100" id="achieveList">
-                    <li>קיומה של עין שלישית (Parietal eye) בחלק העליון של הראש, המשמשת לוויסות חום ושעון ביולוגי.</li>
-                    <li>מערכת שיניים ייחודית שבה השיניים הן חלק מהלסת עצמה ואינן נושרות.</li>
-                    <li>קצב חילוף חומרים איטי ביותר המאפשר לו לשרוד תקופות ארוכות ללא מזון.</li>
-                </ul>
+        <!-- Technical Specs Grid -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
+                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase tracking-widest">מיקום מחקר</div>
+                <div class="text-lg font-bold">מצר קוק</div>
+                <div class="text-[10px] text-slate-500">ניו זילנד</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
+                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase tracking-widest">אורך אובייקט</div>
+                <div class="text-lg font-bold">עד 80 ס"מ</div>
+                <div class="text-[10px] text-slate-500">Robust Structure</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
+                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase tracking-widest">טמפ' פעילות</div>
+                <div class="text-lg font-bold">5°C - 20°C</div>
+                <div class="text-[10px] text-slate-500">Cold-Adapted</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
+                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase tracking-widest">תוחלת חיים</div>
+                <div class="text-lg font-bold">100+ שנים</div>
+                <div class="text-[10px] text-slate-500">Ancient Longevity</div>
             </div>
         </section>
 
     </main>
 
-    <!-- Navigation Bar -->
-    <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
-        <a href="../index.html" class="flex flex-col items-center text-amber-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-            <span class="text-[10px] mt-1 uppercase" id="navHome">בית</span>
-        </a>
-        <button class="flex flex-col items-center text-slate-500 opacity-50">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-            <span class="text-[10px] mt-1 uppercase" id="navNext">הבא</span>
-        </a>
-    </nav>
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 mt-20">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-slate-400 text-sm leading-loose">
+                פרויקט מחקר ייעודי לחשיפת מינים שחמקו משיני הזמן.<br>
+                האתר נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
+            </p>
+        </div>
+    </footer>
 
-    <script>
-        let currentLang = 'he';
-        const content = {
-            he: {
-                name: 'טואטרה (Tuatara)',
-                discoverTitle: 'פרטי התיעוד והזיהוי',
-                lScientist: 'החוקר המזהה:',
-                vScientist: 'ג\'ון אדוארד גריי (1800–1875)',
-                lYear: 'שנת זיהוי מדעי:',
-                vYear: '1831 (זוהה כסוג נפרד)',
-                lLocation: 'מיקום הגילוי:',
-                vLocation: 'איי ניו זילנד (למשל איי מצר קוק)',
-                lStatus: 'סטטוס אבולוציוני:',
-                vStatus: 'השריד האחרון מסדרת הרינקוצפליה',
-                specsTitle: 'מאופיינים פיזיים ותוחלת חיים',
-                lSize: 'אורך:',
-                vSize: 'עד 80 סנטימטרים',
-                lWeight: 'משקל:',
-                vWeight: 'עד 1.3 קילוגרם',
-                lLifespan: 'תוחלת חיים:',
-                vLifespan: 'מעל 100 שנים',
-                etymTitle: 'ניתוח אטימולוגי נרחב',
-                etym1src: 'מקור: שפת המאורי (Māori)',
-                etym1def: 'משמעות: גב / אחורי (Back).',
-                etym2src: 'מקור: שפת המאורי (Māori)',
-                etym2def: 'משמעות: קוצים / פסגות (Spines).',
-                etymTotal: 'משמעות השם המלאה: "פסגות על הגב", על שם הקוצים לאורך הגב והראש.',
-                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים',
-                surText: 'הטואטרה שרד באיים מבודדים בניו זילנד בזכות חוסר בטורפים ועמידות לקור קיצוני.',
-                achieve: ['עין שלישית (Parietal eye) לוויסות ביולוגי', 'מערכת שיניים ייחודית המחוברת ללסת', 'חילוף חומרים איטי ביותר'],
-                navHome: 'בית',
-                navNext: 'הבא',
-                btn: 'EN',
-                dir: 'rtl'
-            },
-            en: {
-                name: 'Tuatara',
-                discoverTitle: 'Identification & Records',
-                lScientist: 'Identifying Scientist:',
-                vScientist: 'John Edward Gray (1800–1875)',
-                lYear: 'Year Identified:',
-                vYear: '1831 (Identified as a unique genus)',
-                lLocation: 'Discovery Location:',
-                vLocation: 'Islands of New Zealand (e.g., Cook Strait islands)',
-                lStatus: 'Evolutionary Status:',
-                vStatus: 'Last survivor of the Rhynchocephalia order',
-                specsTitle: 'Physical Traits & Lifespan',
-                lSize: 'Size:',
-                vSize: 'Up to 80 cm (31 in)',
-                lWeight: 'Weight:',
-                vWeight: 'Up to 1.3 kg (2.9 lbs)',
-                lLifespan: 'Lifespan:',
-                vLifespan: 'Over 100 years (active up to 80+)',
-                etymTitle: 'Detailed Etymology',
-                etym1src: 'Source: Māori language',
-                etym1def: 'Meaning: Back.',
-                etym2src: 'Source: Māori language',
-                etym2def: 'Meaning: Spines / Peaks.',
-                etymTotal: 'Full Meaning: "Peaks on the back", named after the distinct spines along its back and head.',
-                surTitle: 'Survival & Evolutionary Achievements',
-                surText: 'The Tuatara survived on isolated New Zealand islands due to lack of predators and extreme cold tolerance.',
-                achieve: ['Parietal eye (third eye) for biological regulation', 'Unique tooth structure fused to the jawbone', 'Extremely slow metabolic rate'],
-                navHome: 'HOME',
-                navNext: 'NEXT',
-                btn: 'HE',
-                dir: 'ltr'
-            }
-        };
-
-        function toggleLanguage() {
-            currentLang = currentLang === 'he' ? 'en' : 'he';
-            const data = content[currentLang];
-            document.getElementById('fossilName').innerText = data.name;
-            document.getElementById('discoverTitle').innerText = data.discoverTitle;
-            document.getElementById('labelScientist').innerText = data.lScientist;
-            document.getElementById('valScientist').innerText = data.vScientist;
-            document.getElementById('labelYear').innerText = data.lYear;
-            document.getElementById('valYear').innerText = data.vYear;
-            document.getElementById('labelLocation').innerText = data.lLocation;
-            document.getElementById('valLocation').innerText = data.vLocation;
-            document.getElementById('labelStatus').innerText = data.lStatus;
-            document.getElementById('valStatus').innerText = data.vStatus;
-            
-            document.getElementById('specsTitle').innerText = data.specsTitle;
-            document.getElementById('labelSize').innerText = data.lSize;
-            document.getElementById('valSize').innerText = data.vSize;
-            document.getElementById('labelWeight').innerText = data.lWeight;
-            document.getElementById('valWeight').innerText = data.vWeight;
-            document.getElementById('labelLifespan').innerText = data.lLifespan;
-            document.getElementById('valLifespan').innerText = data.vLifespan;
-
-            document.getElementById('etymTitle').innerText = data.etymTitle;
-            document.getElementById('etym1_src').innerText = data.etym1src;
-            document.getElementById('etym1_def').innerText = data.etym1def;
-            document.getElementById('etym2_src').innerText = data.etym2src;
-            document.getElementById('etym2_def').innerText = data.etym2def;
-            document.getElementById('etymTotal').innerText = data.etymTotal;
-            document.getElementById('surviveTitle').innerText = data.surTitle;
-            document.getElementById('surviveText').innerText = data.surText;
-            document.getElementById('navHome').innerText = data.navHome;
-            document.getElementById('navNext').innerText = data.navNext;
-            document.getElementById('langBtn').innerText = data.btn;
-            
-            const list = document.getElementById('achieveList');
-            list.innerHTML = data.achieve.map(item => `<li>${item}</li>`).join('');
-            
-            document.documentElement.dir = data.dir;
-            document.documentElement.lang = currentLang;
-            
-            const cards = [document.getElementById('discoverCard'), document.getElementById('specsCard')];
-            cards.forEach(card => {
-                card.style.borderRightWidth = currentLang === 'en' ? '0' : '4px';
-                card.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
-            });
-        }
-    </script>
 </body>
 </html>
+

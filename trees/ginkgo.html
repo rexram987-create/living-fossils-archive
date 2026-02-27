@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר: גינקו דו-אונתי | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --amoled-black: #000000;
+            --accent-emerald: #10b981;
+            --text-main: #e2e8f0;
+        }
+        body {
+            background-color: var(--amoled-black);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .etymology-part {
+            border-right: 2px solid var(--accent-emerald);
+            padding-right: 1rem;
+            margin-bottom: 1rem;
+        }
+        [dir="ltr"] .etymology-part {
+            border-right: 0;
+            border-left: 2px solid var(--accent-emerald);
+            padding-right: 0;
+            padding-left: 1rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pb-24 text-justify">
+
+    <!-- Language Toggle -->
+    <div class="fixed top-6 left-6 z-50">
+        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-4 py-2 rounded-full text-xs font-bold text-emerald-500">
+            EN
+        </button>
+    </div>
+
+    <!-- Main Header -->
+    <header class="pt-16 px-6 text-center mb-8">
+        <a href="../index.html" class="text-emerald-500 text-sm mb-4 inline-block">← חזרה לארכיון</a>
+        <h1 id="fossilName" class="text-4xl font-extrabold text-white">גינקו דו-אונתי (Ginkgo)</h1>
+        <p class="text-emerald-500 font-mono mt-2 italic">Ginkgo biloba</p>
+    </header>
+
+    <main class="px-6 space-y-8 max-w-2xl mx-auto">
+        
+        <!-- Section: Discovery Details -->
+        <section class="glass-card rounded-3xl p-6 border-r-4 border-emerald-500" id="discoverCard">
+            <h2 class="text-xl font-bold text-emerald-400 mb-4" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
+            <div class="space-y-3 text-slate-300">
+                <p><span class="font-bold text-white" id="labelScientist">החוקר המזהה:</span> <span id="valScientist">אנגלברט קמפר (1651–1716)</span></p>
+                <p><span class="font-bold text-white" id="labelYear">שנת תיעוד למערב:</span> <span id="valYear">1690 (נצפה ביפן)</span></p>
+                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">המין היחיד שנותר במערכת הגינקואים</span></p>
+            </div>
+        </section>
+
+        <!-- Section: Physical Specs & Lifespan -->
+        <section class="glass-card rounded-3xl p-6 border-r-4 border-amber-600" id="specsCard">
+            <h2 class="text-xl font-bold text-amber-400 mb-4" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
+            <div class="grid grid-cols-1 gap-4 text-slate-300">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <span class="text-amber-500">📏</span>
+                    <p><span class="font-bold text-white" id="labelSize">גובה:</span> <span id="valSize">20–35 מטרים</span></p>
+                </div>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <span class="text-amber-500">🌳</span>
+                    <p><span class="font-bold text-white" id="labelWeight">היקף גזע:</span> <span id="valWeight">עד 9 מטרים</span></p>
+                </div>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <span class="text-amber-500">⏳</span>
+                    <p><span class="font-bold text-white" id="labelLifespan">תוחלת חיים:</span> <span id="valLifespan">מעל 1,000 שנים (פרטים מסוימים הגיעו ל-3,000)</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Detailed Etymology -->
+        <section class="glass-card rounded-3xl p-6" id="etymCard">
+            <h2 class="text-xl font-bold text-emerald-400 mb-6" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
+            <div class="space-y-4">
+                <div class="etymology-part">
+                    <h3 class="text-emerald-300 font-bold text-lg">Ginkgo (גינקו)</h3>
+                    <p class="text-slate-400 text-sm italic" id="etym1_src">מקור: שיבוש של השם היפני (Gin-kyo / 銀杏)</p>
+                    <p class="text-slate-200" id="etym1_def">משמעות: משמש כסוף (Silver Apricot).</p>
+                </div>
+                <div class="etymology-part">
+                    <h3 class="text-emerald-300 font-bold text-lg">Bi-loba (דו-אונתי)</h3>
+                    <p class="text-slate-400 text-sm italic" id="etym2_src">מקור: לטינית (bis = פעמיים, lobus = אונה)</p>
+                    <p class="text-slate-200" id="etym2_def">משמעות: בעל שתי אונות (על שם צורת העלה הייחודית).</p>
+                </div>
+                <div class="bg-emerald-900/10 p-4 rounded-xl border border-emerald-900/30">
+                    <p class="text-sm italic text-slate-300" id="etymTotal">
+                        משמעות השם המלאה: "משמש כסוף בעל שתי אונות", שם המשלב את מראה הפרי (לכאורה) עם הצורה הייחודית של העלים שנראים כשני חלקים מחוברים.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Survival & Evolution -->
+        <section class="glass-card rounded-3xl p-6 border-b-2 border-emerald-500/30">
+            <h2 class="text-xl font-bold text-emerald-400 mb-4" id="surviveTitle">סיבת ההישרדות וחוסן ביולוגי</h2>
+            <div class="space-y-4 text-slate-300">
+                <p id="surviveText">
+                    הגינקו הוא דוגמה קלאסית ל"סטזיס" (חוסר שינוי). הוא שרד כמעט ללא שינוי מזה 270 מיליון שנה. חוסנו נובע ממנגנוני הגנה כימיים נגד חרקים, פטריות וזיהום אוויר, מה שהופך אותו לעץ עירוני פופולרי כיום.
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-sm text-emerald-100" id="achieveList">
+                    <li>יכולת לייצר כימיקלים נוגדי חמצון המונעים הזדקנות תאים.</li>
+                    <li>עמידות יוצאת דופן לקרינה וזיהום (עצי גינקו שרדו את הירושימה).</li>
+                    <li>מערכת גנטית המאפשרת התחדשות מתמדת של רקמות העץ.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
+        <a href="../index.html" class="flex flex-col items-center text-emerald-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            <span class="text-[10px] mt-1 uppercase" id="navHome">בית</span>
+        </a>
+        <button class="flex flex-col items-center text-slate-500 opacity-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            <span class="text-[10px] mt-1 uppercase" id="navNext">הבא</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                name: 'גינקו דו-אונתי (Ginkgo)',
+                discoverTitle: 'פרטי התיעוד והזיהוי',
+                lScientist: 'החוקר המזהה:',
+                vScientist: 'אנגלברט קמפר (1651–1716)',
+                lYear: 'שנת תיעוד למערב:',
+                vYear: '1690 (נצפה ביפן)',
+                lStatus: 'סטטוס אבולוציוני:',
+                vStatus: 'המין היחיד שנותר במערכת הגינקואים',
+                specsTitle: 'מאופיינים פיזיים ותוחלת חיים',
+                lSize: 'גובה:',
+                vSize: '20–35 מטרים',
+                lWeight: 'היקף גזע:',
+                vWeight: 'עד 9 מטרים',
+                lLifespan: 'תוחלת חיים:',
+                vLifespan: 'מעל 1,000 שנים',
+                etymTitle: 'ניתוח אטימולוגי נרחב',
+                etym1src: 'מקור: שיבוש של השם היפני (Gin-kyo / 銀杏)',
+                etym1def: 'משמעות: משמש כסוף (Silver Apricot).',
+                etym2src: 'מקור: לטינית (bis = פעמיים, lobus = אונה)',
+                etym2def: 'משמעות: בעל שתי אונות.',
+                etymTotal: 'משמעות השם המלאה: "משמש כסוף בעל שתי אונות", שם המשלב את מראה הפרי עם צורת העלים הייחודית.',
+                surTitle: 'סיבת ההישרדות וחוסן ביולוגי',
+                surText: 'הגינקו הוא דוגמה קלאסית לסטזיס. הוא שרד כמעט ללא שינוי מזה 270 מיליון שנה בזכות מנגנוני הגנה כימיים נגד מזיקים וזיהום.',
+                achieve: ['יכולת ייצר כימיקלים המונעים הזדקנות תאים', 'עמידות קיצונית לקרינה וזיהום אוויר', 'מנגנון התחדשות גנטי של רקמות העץ'],
+                navHome: 'בית',
+                navNext: 'הבא',
+                btn: 'EN',
+                dir: 'rtl'
+            },
+            en: {
+                name: 'Ginkgo Biloba',
+                discoverTitle: 'Identification & Records',
+                lScientist: 'Identifying Scientist:',
+                vScientist: 'Engelbert Kaempfer (1651–1716)',
+                lYear: 'Year Documented:',
+                vYear: '1690 (Observed in Japan)',
+                lStatus: 'Evolutionary Status:',
+                vStatus: 'Sole survivor of the Ginkgophyta division',
+                specsTitle: 'Physical Traits & Lifespan',
+                lSize: 'Height:',
+                vSize: '20–35 meters (65–115 ft)',
+                lWeight: 'Trunk Girth:',
+                vWeight: 'Up to 9 meters (30 ft)',
+                lLifespan: 'Lifespan:',
+                vLifespan: 'Over 1,000 years (up to 3,000)',
+                etymTitle: 'Detailed Etymology',
+                etym1src: 'Source: Corruption of Japanese (Gin-kyo / 銀杏)',
+                etym1def: 'Meaning: Silver Apricot.',
+                etym2src: 'Source: Latin (bis = twice, lobus = lobe)',
+                etym2def: 'Meaning: Two-lobed.',
+                etymTotal: 'Full Meaning: "Two-lobed Silver Apricot", combining the fruit appearance with the unique leaf morphology.',
+                surTitle: 'Survival & Biological Resilience',
+                surText: 'The Ginkgo is a classic example of stasis. It has survived nearly unchanged for 270 million years due to chemical defenses against pests and pollution.',
+                achieve: ['Ability to synthesize anti-aging chemicals', 'Extreme resistance to radiation and pollution', 'Genetic regeneration of wood tissues'],
+                navHome: 'HOME',
+                navNext: 'NEXT',
+                btn: 'HE',
+                dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const data = content[currentLang];
+            document.getElementById('fossilName').innerText = data.name;
+            document.getElementById('discoverTitle').innerText = data.discoverTitle;
+            document.getElementById('labelScientist').innerText = data.lScientist;
+            document.getElementById('valScientist').innerText = data.vScientist;
+            document.getElementById('labelYear').innerText = data.lYear;
+            document.getElementById('valYear').innerText = data.vYear;
+            document.getElementById('labelStatus').innerText = data.lStatus;
+            document.getElementById('valStatus').innerText = data.vStatus;
+            
+            document.getElementById('specsTitle').innerText = data.specsTitle;
+            document.getElementById('labelSize').innerText = data.lSize;
+            document.getElementById('valSize').innerText = data.vSize;
+            document.getElementById('labelWeight').innerText = data.lWeight;
+            document.getElementById('valWeight').innerText = data.vWeight;
+            document.getElementById('labelLifespan').innerText = data.lLifespan;
+            document.getElementById('valLifespan').innerText = data.vLifespan;
+
+            document.getElementById('etymTitle').innerText = data.etymTitle;
+            document.getElementById('etym1_src').innerText = data.etym1src;
+            document.getElementById('etym1_def').innerText = data.etym1def;
+            document.getElementById('etym2_src').innerText = data.etym2src;
+            document.getElementById('etym2_def').innerText = data.etym2def;
+            document.getElementById('etymTotal').innerText = data.etymTotal;
+            document.getElementById('surviveTitle').innerText = data.surTitle;
+            document.getElementById('surviveText').innerText = data.surText;
+            document.getElementById('navHome').innerText = data.navHome;
+            document.getElementById('navNext').innerText = data.navNext;
+            document.getElementById('langBtn').innerText = data.btn;
+            
+            const list = document.getElementById('achieveList');
+            list.innerHTML = data.achieve.map(item => `<li>${item}</li>`).join('');
+            
+            document.documentElement.dir = data.dir;
+            document.documentElement.lang = currentLang;
+            
+            const cards = [document.getElementById('discoverCard'), document.getElementById('specsCard')];
+            cards.forEach(card => {
+                card.style.borderRightWidth = currentLang === 'en' ? '0' : '4px';
+                card.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+            });
+        }
+    </script>
+</body>
+</html>

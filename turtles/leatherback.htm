@@ -10,137 +10,82 @@
         body { font-family: 'Assistant', sans-serif; }
         .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
         .text-justify { text-align: justify; }
-        
-        #lightbox { transition: opacity 0.3s ease-in-out; display: none; }
+        #lightbox { transition: opacity 0.3s ease; display: none; }
         #lightbox.active { display: flex; opacity: 1; }
-        .lightbox-img { transform: scale(0.9); transition: transform 0.3s ease-in-out; }
-        #lightbox.active .lightbox-img { transform: scale(1); }
-        .specimen-image-container { cursor: zoom-in; overflow: hidden; border-radius: 1.5rem; }
-        .specimen-image-container img { transition: transform 0.5s ease; }
-        .specimen-image-container:hover img { transform: scale(1.05); }
+        .specimen-img-container { cursor: zoom-in; overflow: hidden; border-radius: 1.5rem; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen">
-
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+    <header class="border-b border-slate-800 bg-slate-900/50">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors">
+            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 font-bold hover:text-emerald-400 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                <span class="font-bold">חזרה לארכיון</span>
+                חזרה לארכיון
             </a>
-            <span class="text-xs font-mono text-slate-500 italic uppercase">S25 Ultra Optimized</span>
+            <span class="text-xs font-mono text-slate-500 italic text-left">S25 ULTRA OPTIMIZED</span>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-6 py-10 space-y-12">
-        
         <section class="text-center space-y-6">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-bold uppercase tracking-wider mb-2">
-                <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
-                מצב שימור: פגיע (Vulnerable)
-            </div>
-            <h1 class="text-5xl font-extrabold tracking-tight text-white mb-2 leading-tight">צב גלד</h1>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-bold uppercase mb-2">מצב שימור: פגיע (Vulnerable)</div>
+            <h1 class="text-5xl font-extrabold text-white">צב גלד</h1>
             <p class="text-teal-400 text-xl font-light">חוקר: דומניקו ונדלי (1735–1816)</p>
 
-            <div class="specimen-image-container relative group max-w-2xl mx-auto border border-slate-800 shadow-2xl" onclick="openLightbox()">
-                <img id="specimenImg" src="../images/leatherback.jpg" 
-                     alt="צב גלד - אובייקט מחקר" 
-                     class="w-full h-[400px] object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                     onerror="this.src='https://via.placeholder.com/1200x800/0f172a/14b8a6?text=Upload+leatherback.jpg+to+GitHub'">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
-                <div class="absolute bottom-6 right-6 flex items-center gap-2 bg-black/50 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-                    לחץ להגדלת תמונת המחקר
-                </div>
+            <div class="specimen-img-container relative group max-w-2xl mx-auto border border-slate-800 shadow-2xl" onclick="openLightbox()">
+                <img id="specimenImg" src="../images/leatherback.jpg" onerror="this.src='https://via.placeholder.com/1200x800/0f172a/14b8a6?text=Upload+leatherback.jpg'" class="w-full h-80 object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                <div class="absolute bottom-4 right-4 bg-black/60 px-4 py-2 rounded-full text-xs font-mono">🔍 לחץ להגדלה</div>
             </div>
         </section>
 
-        <!-- Detailed Etymology -->
+        <!-- Etymology -->
         <section class="glass-panel rounded-3xl p-8 space-y-8">
-            <h2 class="text-2xl font-bold flex items-center gap-3 text-teal-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
-                ניתוח אטימולוגי מורחב
-            </h2>
+            <h2 class="text-2xl font-bold text-teal-400">ניתוח אטימולוגי מורחב</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-justify">
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-teal-500/20">
-                    <div class="text-4xl font-bold text-white mb-2">Dermochelys</div>
-                    <div class="text-teal-400 text-[10px] font-mono mb-4 uppercase tracking-widest border-b border-teal-500/20 pb-2">Part I: The Skin-Shell</div>
-                    <div class="text-slate-300 leading-relaxed">
-                        שילוב של שתי מילים ביוונית עתיקה: **Derma** (עור) ו-**Chelys** (צב). השם הוענק לאובייקט כדי להדגיש את המאפיין החריג ביותר שלו: בניגוד לשאר צבי הים, צב זה אינו מחזיק בשריון גרמי קשיח המכוסה בלוחיות קרן, אלא בשריון העשוי רקמת חיבור עבה וגמישה דמוית עור המגנה על גופו.
-                    </div>
+                    <div class="text-4xl font-bold text-white mb-2 border-b border-teal-500/30 pb-2">Dermochelys</div>
+                    <div class="text-teal-400 text-[10px] font-mono mb-2 uppercase">Part I: The Skin-Shell</div>
+                    <p class="text-slate-300 leading-relaxed">שילוב של מילים ביוונית: **Derma** (עור) ו-**Chelys** (צב). השם מדגיש את המאפיין החריג: לצב זה אין שריון גרמי קשיח המכוסה בלוחיות קרן, אלא שריון העשוי רקמת חיבור עבה וגמישה דמוית עור.</p>
                 </div>
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-teal-500/20">
-                    <div class="text-4xl font-bold text-white mb-2">Coriacea</div>
-                    <div class="text-teal-400 text-[10px] font-mono mb-4 uppercase tracking-widest border-b border-teal-500/20 pb-2">Part II: The Texture</div>
-                    <div class="text-slate-300 leading-relaxed">
-                        מקור המילה בלטינית (**Coriaceus**), שפירושה **"עשוי עור"** או **"דמוי גלד"**. תיאור זה מתייחס למרקם הפיזי של השריון, המורכב מאלפי לוחיות עצם זעירות המשובצות בתוך שכבת עור עבה. מבנה זה מאפשר לאובייקט להתרחב ולהתכווץ במהלך צלילות לעומקים אדירים בהם הלחץ היה מרסק שריון קשיח.
-                    </div>
+                    <div class="text-4xl font-bold text-white mb-2 border-b border-teal-500/30 pb-2">Coriacea</div>
+                    <div class="text-teal-400 text-[10px] font-mono mb-2 uppercase">Part II: The Texture</div>
+                    <p class="text-slate-300 leading-relaxed">מקור המילה בלטינית (**Coriaceus**) - **"דמוי גלד"**. מתייחס למרקם השריון המורכב מאלפי לוחיות עצם זעירות המשובצות בעור עב. מבנה זה מאפשר לצב להתרחב ולהתכווץ במהלך צלילות לעומקים אדירים.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Object Details -->
-        <section class="space-y-8">
-            <h2 class="text-2xl font-bold flex items-center gap-3 text-emerald-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                פרטי אובייקט הגילוי: The Ocean Wanderer
-            </h2>
-            <div class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-12">
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">נסיבות הגילוי ותיעוד האב-טיפוס</h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        האובייקט הוגדר מדעית בשנת 1761 על ידי דומניקו ונדלי לאחר שדגימה יוצאת דופן נלכדה בחופי הים התיכון ליד רומא. צב הגלד הוא השריד האחרון למשפחת ה-Dermochelyidae שקיימת מעל 110 מיליון שנים ושגשגה לצד הדינוזאורים, כשהיא משמרת מבנה גוף כמעט ללא שינוי.
-                    </p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">פיזיולוגיה של צוללת ביולוגית</h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        צב הגלד מציג יכולות צלילה לעומק של עד 1,280 מטרים. כדי לשרוד את הקור הקיצוני, האובייקט פיתח יכולת נדירה של **גיגאנטותרמיה**, המאפשרת לו לשמור על טמפרטורת גוף גבוהה מהסביבה בזכות מסת גוף עצומה ושכבת שומן מבודדת. פיו מצויד בקוצים קרניים למניעת החלקת מדוזות (טרפו העיקרי) בזמן הפליטה.
-                    </p>
-                </div>
+        <!-- Discovery -->
+        <section class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-10">
+            <h2 class="text-2xl font-bold text-emerald-400">פרטי אובייקט הגילוי: The Ocean Wanderer</h2>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">נסיבות הגילוי והיסטוריה</h3>
+                <p class="text-slate-300 leading-relaxed text-justify">האובייקט הוגדר מדעית בשנת 1761 על ידי דומניקו ונדלי לאחר שדגימה יוצאת דופן נלכדה בחופי הים התיכון. צב הגלד הוא השריד האחרון למשפחת ה-Dermochelyidae שקיימת מעל 110 מיליון שנים ושגשגה לצד הדינוזאורים.</p>
             </div>
-        </section>
-
-        <!-- Specs -->
-        <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-teal-400 text-[10px] font-mono mb-2 uppercase">מיקום</div>
-                <div class="text-lg font-bold">הים התיכון</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-teal-400 text-[10px] font-mono mb-2 uppercase">משקל</div>
-                <div class="text-lg font-bold">600-900 ק"ג</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-teal-400 text-[10px] font-mono mb-2 uppercase">אורך</div>
-                <div class="text-lg font-bold">2.2 מ'</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-teal-400 text-[10px] font-mono mb-2 uppercase">עומק צלילה</div>
-                <div class="text-lg font-bold">1,280 מ'</div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">פיזיולוגיה וצלילה</h3>
+                <p class="text-slate-300 leading-relaxed text-justify">צב הגלד מציג יכולות צלילה לעומק של עד 1,280 מטרים. הוא פיתח יכולת נדירה של **גיגאנטותרמיה**, המאפשרת לו לשמור על טמפרטורת גוף גבוהה מהסביבה הקרה בזכות מסת גוף עצומה ושכבת שומן מבודדת.</p>
             </div>
         </section>
     </main>
 
     <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center p-4" onclick="closeLightbox()">
-        <button class="absolute top-10 right-10 text-white text-5xl">&times;</button>
-        <img id="lightboxImg" src="" alt="תמונת מחקר מוגדלת" class="lightbox-img max-w-full max-h-[85vh] rounded-xl shadow-2xl">
+        <img id="lightboxImg" src="" class="max-w-full max-h-[85vh] rounded-xl shadow-2xl">
     </div>
-
-    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 mt-20 text-center text-slate-400 text-sm leading-loose">
-        האתר נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
-    </footer>
 
     <script>
         function openLightbox() {
             const lb = document.getElementById('lightbox');
             const lbImg = document.getElementById('lightboxImg');
             lbImg.src = document.getElementById('specimenImg').src;
-            lb.classList.add('active');
+            lb.style.display = 'flex';
+            setTimeout(() => lb.classList.add('active'), 10);
             document.body.style.overflow = 'hidden';
         }
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
+        function closeLightbox() { 
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            setTimeout(() => lb.style.display = 'none', 300);
             document.body.style.overflow = 'auto';
         }
     </script>

@@ -10,130 +10,90 @@
         body { font-family: 'Assistant', sans-serif; }
         .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
         .text-justify { text-align: justify; }
+        #lightbox { transition: opacity 0.3s ease; display: none; }
+        #lightbox.active { display: flex; opacity: 1; }
+        .specimen-img-container { cursor: zoom-in; overflow: hidden; border-radius: 1.5rem; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen">
-
-    <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+    <!-- Header - Non-sticky fix -->
+    <header class="border-b border-slate-800 bg-slate-900/50">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors">
+            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 font-bold hover:text-emerald-400 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                <span class="font-bold">חזרה לארכיון</span>
+                חזרה לארכיון
             </a>
             <span class="text-xs font-mono text-slate-500 italic">S25 ULTRA OPTIMIZED</span>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-6 py-10 space-y-12">
-        
-        <!-- Specimen Hero -->
-        <section class="text-center space-y-4">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider mb-2">
-                <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-                מצב שימור: בסכנת הכחדה (Endangered)
-            </div>
-            <h1 class="text-5xl font-extrabold tracking-tight text-white mb-2">גינקו דו-אונתי <span class="text-emerald-500 text-2xl font-light italic block mt-1">Ginkgo biloba</span></h1>
+        <section class="text-center space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase mb-2">מצב שימור: בסכנת הכחדה (Endangered)</div>
+            <h1 class="text-5xl font-extrabold text-white">גינקו דו-אונתי</h1>
             <p class="text-emerald-400 text-xl font-light">חוקר: אנגלברט קמפר (1651–1716)</p>
+
+            <div class="specimen-img-container relative group max-w-2xl mx-auto border border-slate-800 shadow-2xl" onclick="openLightbox()">
+                <img id="specimenImg" src="../images/ginkgo.jpg" onerror="this.src='https://via.placeholder.com/1200x800/0f172a/10b981?text=Upload+ginkgo.jpg'" class="w-full h-80 object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                <div class="absolute bottom-4 right-4 bg-black/60 px-4 py-2 rounded-full text-xs font-mono">🔍 לחץ להגדלה</div>
+            </div>
         </section>
 
-        <!-- Extended Etymology -->
-        <section class="glass-panel rounded-3xl p-8 space-y-6">
-            <h2 class="text-2xl font-bold flex items-center gap-3 text-emerald-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
-                ניתוח אטימולוגי מורחב
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Detailed Etymology -->
+        <section class="glass-panel rounded-3xl p-8 space-y-8">
+            <h2 class="text-2xl font-bold text-emerald-400">ניתוח אטימולוגי מורחב</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-justify">
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-emerald-500/20">
-                    <div class="text-4xl font-bold text-white mb-1">Ginkgo</div>
-                    <div class="text-emerald-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART I: THE LINGUISTIC DRIFT</div>
-                    <div class="text-slate-300 leading-relaxed text-justify">
-                        מקור השם בשיבוש פונטי של המונח היפני **Ginkyo**, שנגזר במקור מהמילים הסיניות **"ג'ין"** (זהב/כסף) ו-**"קו"** (פרי/אגוז). המשמעות הכוללת היא **"משמש כסוף"**. השם מתאר את הזרעים הבשרניים והעגולים של העץ, המכוסים בשכבה דקיקה של "אבקה" לבנה-כסופה המעניקה להם מראה יוקרתי של פרי משמש כסוף כשהם מגיעים לבשלות מלאה. חוסר הדיוק של קמפר בכתיבת השם ב-1712 הפך לשם המדעי הרשמי.
-                    </div>
+                    <div class="text-4xl font-bold text-white mb-2 border-b border-emerald-500/30 pb-2">Ginkgo</div>
+                    <div class="text-emerald-400 text-[10px] font-mono mb-2 uppercase">Part I: Linguistic Origin</div>
+                    <p class="text-slate-300 leading-relaxed">שיבוש פונטי של המונח הסיני-יפני **Ginkyo**, שמשמעותו **"משמש כסוף"**. השם מתאר את הזרעים הבשרניים והעגולים של העץ, המכוסים בשכבה דקיקה של אבקה לבנה-כסופה המעניקה להם מראה של פרי משמש כסוף כשהם מגיעים לבשלות מלאה.</p>
                 </div>
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-emerald-500/20">
-                    <div class="text-4xl font-bold text-white mb-1">Bi-loba</div>
-                    <div class="text-emerald-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART II: BOTANICAL SIGNATURE</div>
-                    <div class="text-slate-300 leading-relaxed text-justify">
-                        צירוף לטיני מדעי: **Bi** (שניים/כפול) + **Loba** (אונה). השם מתאר בדייקנות מורפולוגית את המבנה הייחודי של העלים המרהיבים של העץ. העלים, המעוצבים בצורת מניפה רחבה, מחולקים לרוב על ידי חריץ מרכזי עמוק לשתי אונות סימטריות וברורות. בניגוד לעצים מודרניים, לעלי הגינקו אין רשת של עורקים; במקום זאת, הם מחזיקים בעורקים המסתעפים בזוגות (Dichotomous venation), מאפיין פרימיטיבי שנראה במאובנים מלפני 170 מיליון שנה.
-                    </div>
+                    <div class="text-4xl font-bold text-white mb-2 border-b border-emerald-500/30 pb-2">Bi-loba</div>
+                    <div class="text-emerald-400 text-[10px] font-mono mb-2 uppercase">Part II: Morphology</div>
+                    <p class="text-slate-300 leading-relaxed">צירוף לטיני מדעי: **Bi** (שניים) + **Loba** (אונה). מתאר את צורת המניפה המרהיבה של העלים, המחולקים לרוב על ידי חריץ מרכזי לשתי אונות סימטריות. עורקי העלים מסתעפים בזוגות, מאפיין פרימיטיבי מעידן היורה.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Expanded Object Discovery & Botanical Details -->
-        <section class="space-y-8">
-            <h2 class="text-2xl font-bold flex items-center gap-3 text-orange-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 17l3-3 3 3"/><path d="M8 12l4-4 4 4"/><path d="M7 7l5-5 5 5"/></svg>
-                פרטי אובייקט הגילוי: The Living Monolith
-            </h2>
-            
-            <div class="glass-panel rounded-3xl p-8 border-r-4 border-orange-500 space-y-10">
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-orange-500/50 underline-offset-8">
-                        נסיבות הגילוי והישרדות בצל המקדשים
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        האובייקט אותר במקור במחוז ג'ג'יאנג שבסין, סמוך להרי טיאנמו (Tianmu). בעוד שכל שאר בני משפחתו והסדרות הקרובות לו נכחדו מהעולם כבר לפני מיליוני שנים, הגינקו שרד הודות לבידוד גיאוגרפי בסין וטיפוח אינטנסיבי ומסור של נזירים בודהיסטים וטאואיסטים, שראו בו סמל לאריכות ימים ולחוכמה. המערב נחשף לאובייקט החי לראשונה ב-1690 כאשר קמפר תיעד אותו ביפן. הגילוי הוכיח שהמין לא רק קיים, אלא מסוגל לשרוד בסביבות אקלימיות מגוונות.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-orange-500/50 underline-offset-8">
-                        ביולוגיה של "שורד אולטימטיבי"
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        הגינקו הוא "דיואיקי" (נפרד לזכר ונקבה), ומציג מנגנון רבייה פרימיטיבי ונדיר: זרעיו מצוידים ב**תאי זרע שוחים** (Flagellated sperm) – תכונה המשותפת לו רק לשרכים ולטחבים, ושנעלמה מכל שאר הצמחים בעלי הזרע המודרניים. העץ מפגין עמידות יוצאת דופן לזיהום אוויר, פטריות, בקטריות ואפילו קרינה רדיואקטיבית; עצי גינקו הם בין האורגניזמים היחידים ששרדו את ההפצצה האטומית בהירושימה במרחק קצר ממוקד הפיצוץ, והם ממשיכים לצמוח עד היום.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-orange-500/50 underline-offset-8">
-                        חשיבות מחקרית ומדעית
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        הגינקו נחשב ל"קישור חסר" בבוטניקה; הוא חשופזרע (כמו אורנים) אך בעל עלים רחבים, מה שהופך אותו למעבדה חיה לחקר אבולוציה של צמחים. הזרעים שלו עטופים בשכבה בשרנית (Sarcotesta) המפיצה ריח עז של חומצה בוטירית (ריח של חמאה מעופשת) כשהם נרקבים, מנגנון פרימיטיבי שנועד בעבר למשוך דינוזאורים או יונקים קדומים להפצת הזרעים. כיום, המחקר מתמקד ביכולותיו נוגדות החמצון ובעמידותו בפני מחלות ניווניות של העץ עצמו.
-                    </p>
-                </div>
+        <!-- Discovery & Biology -->
+        <section class="glass-panel rounded-3xl p-8 border-r-4 border-orange-500 space-y-10">
+            <h2 class="text-2xl font-bold text-orange-400">פרטי אובייקט הגילוי: The Living Monolith</h2>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 underline decoration-orange-500/50 underline-offset-8">הישרדות בצל המקדשים</h3>
+                <p class="text-slate-300 leading-relaxed text-justify">האובייקט אותר במקור במחוז ג'ג'יאנג, סין. בעוד ששאר משפחתו נכחדה לפני מיליוני שנים, הגינקו שרד הודות לבידוד גיאוגרפי וטיפוח של נזירים בודהיסטים. קמפר תיעד אותו לראשונה למערב ב-1690. העץ עמיד באופן נדיר לזיהום אוויר, מחלות ואפילו לקרינה רדיואקטיבית.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 underline decoration-orange-500/50 underline-offset-8">חשיבות בוטנית ומחקר</h3>
+                <p class="text-slate-300 leading-relaxed text-justify">הגינקו הוא "קישור חסר" בבוטניקה; הוא חשופזרע בעל עלים רחבים. זרעיו מצוידים בתאי זרע שוחים – תכונה נדירה שנעלמה מרוב הצמחים המודרניים. גילם של פרטים מסוימים בסין מוערך ביותר מ-1,000 שנים.</p>
             </div>
         </section>
-
-        <!-- Technical Specs Grid -->
-        <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-emerald-400 text-[10px] font-mono mb-2 uppercase tracking-widest">מקור בוטני</div>
-                <div class="text-lg font-bold">הרי טיאנמו</div>
-                <div class="text-[10px] text-slate-500">ג'ג'יאנג, סין</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-emerald-400 text-[10px] font-mono mb-2 uppercase tracking-widest">גובה מקסימלי</div>
-                <div class="text-lg font-bold">20-35 מטרים</div>
-                <div class="text-[10px] text-slate-500">Towering Presence</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-emerald-400 text-[10px] font-mono mb-2 uppercase tracking-widest">סיווג רבייה</div>
-                <div class="text-lg font-bold">חשופזרע</div>
-                <div class="text-[10px] text-slate-500">Primitive Seed Plant</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-emerald-400 text-[10px] font-mono mb-2 uppercase tracking-widest">תוחלת חיים</div>
-                <div class="text-lg font-bold">1,000+ שנים</div>
-                <div class="text-[10px] text-slate-500">Millennial Organism</div>
-            </div>
-        </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 mt-20">
-        <div class="max-w-4xl mx-auto text-center">
-            <p class="text-slate-400 text-sm leading-loose">
-                פרויקט מחקר ייעודי לחשיפת מינים שחמקו משיני הזמן.<br>
-                האתר נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
-            </p>
-        </div>
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center p-4" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" class="max-w-full max-h-[85vh] rounded-xl shadow-2xl transition-transform duration-300 scale-95 hover:scale-100">
+    </div>
+
+    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 text-center text-slate-500 text-xs">
+        פרויקט מחקר ייעודי. נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
     </footer>
 
+    <script>
+        function openLightbox() {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            lbImg.src = document.getElementById('specimenImg').src;
+            lb.style.display = 'flex';
+            setTimeout(() => lb.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() { 
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            setTimeout(() => lb.style.display = 'none', 300);
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>
 

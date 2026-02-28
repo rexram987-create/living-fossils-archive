@@ -10,130 +10,140 @@
         body { font-family: 'Assistant', sans-serif; }
         .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
         .text-justify { text-align: justify; }
+        
+        #lightbox { transition: opacity 0.3s ease-in-out; display: none; }
+        #lightbox.active { display: flex; opacity: 1; }
+        .lightbox-img { transform: scale(0.9); transition: transform 0.3s ease-in-out; }
+        #lightbox.active .lightbox-img { transform: scale(1); }
+        .specimen-image-container { cursor: zoom-in; overflow: hidden; border-radius: 1.5rem; }
+        .specimen-image-container img { transition: transform 0.5s ease; }
+        .specimen-image-container:hover img { transform: scale(1.05); }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen">
 
-    <!-- Header -->
     <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                 <span class="font-bold">חזרה לארכיון</span>
             </a>
-            <span class="text-xs font-mono text-slate-500 italic">S25 ULTRA OPTIMIZED</span>
+            <span class="text-xs font-mono text-slate-500 italic uppercase">S25 Ultra Optimized</span>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-6 py-10 space-y-12">
         
-        <!-- Specimen Hero -->
-        <section class="text-center space-y-4">
+        <section class="text-center space-y-6">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 מצב שימור: ללא חשש (Least Concern)
             </div>
-            <h1 class="text-5xl font-extrabold tracking-tight text-white mb-2">טואטרה <span class="text-orange-500 text-2xl font-light italic block mt-1">Sphenodon punctatus</span></h1>
+            <h1 class="text-5xl font-extrabold tracking-tight text-white mb-2 leading-tight">טואטרה</h1>
             <p class="text-orange-400 text-xl font-light">חוקר: ג'ון אדוארד גריי (1800–1875)</p>
+
+            <div class="specimen-image-container relative group max-w-2xl mx-auto border border-slate-800 shadow-2xl" onclick="openLightbox()">
+                <img id="specimenImg" src="../images/tuatara.jpg" 
+                     alt="טואטרה - אובייקט מחקר" 
+                     class="w-full h-[400px] object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                     onerror="this.src='https://via.placeholder.com/1200x800/0f172a/10b981?text=Upload+tuatara.jpg+to+GitHub'">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                <div class="absolute bottom-6 right-6 flex items-center gap-2 bg-black/50 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    לחץ להגדלת תמונת המחקר
+                </div>
+            </div>
         </section>
 
-        <!-- Extended Etymology -->
-        <section class="glass-panel rounded-3xl p-8 space-y-6">
+        <!-- Detailed Etymology -->
+        <section class="glass-panel rounded-3xl p-8 space-y-8">
             <h2 class="text-2xl font-bold flex items-center gap-3 text-orange-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
                 ניתוח אטימולוגי מורחב
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-justify">
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-orange-500/20">
-                    <div class="text-4xl font-bold text-white mb-1">Tua</div>
-                    <div class="text-orange-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART I: THE BASE</div>
-                    <div class="text-slate-300 leading-relaxed text-justify">
-                        מקור המילה בשפה המאורית (Māori), השפה הילידית של ניו זילנד. המונח **Tua** מתייחס למושג **"גב"** או **"צד אחורי"**. בראייה המאורית, הגב נחשב לאזור המייצג עוצמה והיסטוריה, והשימוש בו בתיאור בעל החיים מדגיש את המיקום הפיזי שבו מתרכז המאפיין הבולט ביותר של היצור.
+                    <div class="text-4xl font-bold text-white mb-2">Tua</div>
+                    <div class="text-orange-400 text-[10px] font-mono mb-4 uppercase tracking-widest border-b border-orange-500/20 pb-2">Part I: The Foundation</div>
+                    <div class="text-slate-300 leading-relaxed">
+                        מקור המילה בשפה המאורית (Māori), השפה הילידית של ניו זילנד. המונח **Tua** מתייחס למושג **"גב"** או **"צד אחורי"**. בראייה המאורית העתיקה, הגב מייצג את עמוד השדרה של ההיסטוריה והעוצמה. השימוש במושג זה נועד לסמן את המקום הפיזי בו מתרכז המאפיין הבולט ביותר של היצור, אשר נחשב לשומר סודות העבר של האיים.
                     </div>
                 </div>
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-orange-500/20">
-                    <div class="text-4xl font-bold text-white mb-1">Tara</div>
-                    <div class="text-orange-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART II: THE SUMMIT</div>
-                    <div class="text-slate-300 leading-relaxed text-justify">
-                        מקור המילה במאורית, ומשמעותה **"קוצים"**, **"פסגות"** או **"קרניים"**. צירוף שתי המילים יחד, **Tua-tara**, מתרגם ל**"גב קוצני"**. השם מתאר במדויק את רכס הקוצים המשונן הנמשך לאורך גבו וזנבו של הזוחל, המזכיר פסגות הרים זעירות. קוצים אלו עשויים קפלי עור קשיחים והם בולטים במיוחד אצל הזכרים בעת תצוגות דומיננטיות.
+                    <div class="text-4xl font-bold text-white mb-2">Tara</div>
+                    <div class="text-orange-400 text-[10px] font-mono mb-4 uppercase tracking-widest border-b border-orange-500/20 pb-2">Part II: The Spines</div>
+                    <div class="text-slate-300 leading-relaxed">
+                        במאורית, המילה **Tara** משמעותה **"קוצים"**, **"פסגות"** או **"קרניים"**. צירוף המילים **Tua-tara** מתרגם ל**"גב קוצני"**. השם מתאר בדייקנות את רכס הקוצים המשונן העשוי קפלי עור קשיחים לאורך הגב והזנב. קוצים אלו מזכירים פסגות הרים זעירות ומעניקים ליצור מראה דרקוני קדום, המבדיל אותו מכל לטאה מודרנית אחרת.
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Expanded Object Discovery & Biology Details -->
+        <!-- Object Details -->
         <section class="space-y-8">
             <h2 class="text-2xl font-bold flex items-center gap-3 text-emerald-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                פרטי אובייקט הגילוי: The Ancient Rhynchocephalian
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                פרטי אובייקט הגילוי: The Ancient Reptilian
             </h2>
-            
-            <div class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-10">
+            <div class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-12">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
-                        נסיבות הגילוי והבידוד הגיאוגרפי
-                    </h3>
+                    <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">נסיבות הגילוי והבידוד הגיאוגרפי</h3>
                     <p class="text-slate-300 leading-relaxed text-justify">
-                        האובייקט אותר במקור באיי מצר קוק (Cook Strait) וסמוך לחופי האי הצפוני של ניו זילנד. ג'ון אדוארד גריי, אוצר הזואולוגיה במוזיאון הבריטי, תיאר את המין לראשונה ב-1831, אך רק ב-1867 הוא הבין שמדובר ביצור ייחודי לחלוטין שאינו לטאה. הטואטרה שרדה אך ורק בניו זילנד בזכות בידוד גיאוגרפי של כ-80 מיליון שנים, לאחר שהתנתקה מיבשת גונדוואנה. כיום היא מוגנת באיים נטולי טורפים, מה שהוביל לשיפור במצבה לדרגת "ללא חשש".
+                        האובייקט אותר במקור באיי מצר קוק ובחופי האי הצפוני של ניו זילנד. ג'ון אדוארד גריי תיאר את המין ב-1831, אך רק עשרות שנים לאחר מכן הובן כי מדובר בשריד אחרון לסדרת ה-Sphenodontia שחיה לפני 200 מיליון שנה. הטואטרה שרדה אך ורק בניו זילנד בזכות בידוד גיאוגרפי מוחלט לאחר התנתקות יבשת גונדוואנה.
                     </p>
                 </div>
-
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
-                        העין השלישית ומנגנונים ביולוגיים עתיקים
-                    </h3>
+                    <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">העין השלישית ומנגנונים עתיקים</h3>
                     <p class="text-slate-300 leading-relaxed text-justify">
-                        הטואטרה מחזיקה ב**עין פריאטלית (Parietal Eye)** – עין שלישית הממוקמת בקודקוד הראש. היא מצוידת בעדשה, רשתית וקצות עצבים, אם כי היא מכוסה בעור אצל מבוגרים. עין זו משמשת כחיישן אור מתוחכם לוויסות המקצב הצירקדי (השעון הביולוגי) וסיוע בספיגת ויטמין D. בנוסף, לאובייקט מבנה שיניים ייחודי בעולם הזוחלים: שתי שורות שיניים בלסת העליונה ושורה אחת בתחתונה, הנסגרות זו לתוך זו כמו מספריים, מה שמאפשר לה לבתר טרף קשיח בקלות.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
-                        אבולוציה של "חיים בהילוך אטי"
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        הטואטרה היא הניצולה היחידה מסדרת ה-Rhynchocephalia, ששגשגה לפני כ-200 מיליון שנה. היא מפגינה חילוף חומרים אטי להפליא; היא פעילה בטמפרטורות של עד 5 מעלות צלזיוס (טמפרטורה שבה רוב הזוחלים נכנסים לתרדמת) ונושמת פעם אחת בדקה בלבד בזמן מנוחה. האובייקט מתאפיין בקצב רבייה אטי מאוד – הנקבות מטילות ביצים רק פעם ב-2-5 שנים, ותקופת הדגירה נמשכת בין 12 ל-15 חודשים, מהארוכות בעולם הזוחלים.
+                        הטואטרה מחזיקה ב**עין פריאטלית** (עין שלישית) בקודקוד הראש, הכוללת עדשה ורשתית. היא משמשת כחיישן אור לוויסות השעון הביולוגי. בנוסף, לאובייקט מבנה שיניים כפול בלסת העליונה שאין לאף זוחל אחר, המאפשר לו לבתר טרף בדיוק של מספריים.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Technical Specs Grid -->
+        <!-- Specs -->
         <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase tracking-widest">מיקום מחקר</div>
+                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase">מיקום</div>
                 <div class="text-lg font-bold">מצר קוק</div>
-                <div class="text-[10px] text-slate-500">ניו זילנד</div>
             </div>
             <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase tracking-widest">אורך אובייקט</div>
-                <div class="text-lg font-bold">עד 80 ס"מ</div>
-                <div class="text-[10px] text-slate-500">Robust Structure</div>
+                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase">אורך</div>
+                <div class="text-lg font-bold">80 ס"מ</div>
             </div>
             <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase tracking-widest">טמפ' פעילות</div>
+                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase">טמפ'</div>
                 <div class="text-lg font-bold">5°C - 20°C</div>
-                <div class="text-[10px] text-slate-500">Cold-Adapted</div>
             </div>
             <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase tracking-widest">תוחלת חיים</div>
+                <div class="text-orange-400 text-[10px] font-mono mb-2 uppercase">חיים</div>
                 <div class="text-lg font-bold">100+ שנים</div>
-                <div class="text-[10px] text-slate-500">Ancient Longevity</div>
             </div>
         </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 mt-20">
-        <div class="max-w-4xl mx-auto text-center">
-            <p class="text-slate-400 text-sm leading-loose">
-                פרויקט מחקר ייעודי לחשיפת מינים שחמקו משיני הזמן.<br>
-                האתר נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
-            </p>
-        </div>
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center p-4" onclick="closeLightbox()">
+        <button class="absolute top-10 right-10 text-white text-5xl">&times;</button>
+        <img id="lightboxImg" src="" alt="תמונת מחקר מוגדלת" class="lightbox-img max-w-full max-h-[85vh] rounded-xl shadow-2xl">
+    </div>
+
+    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 mt-20 text-center text-slate-400 text-sm leading-loose">
+        האתר נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
     </footer>
 
+    <script>
+        function openLightbox() {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            lbImg.src = document.getElementById('specimenImg').src;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>
 

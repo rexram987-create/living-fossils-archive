@@ -10,130 +10,91 @@
         body { font-family: 'Assistant', sans-serif; }
         .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
         .text-justify { text-align: justify; }
+        #lightbox { transition: opacity 0.3s ease; display: none; }
+        #lightbox.active { display: flex; opacity: 1; }
+        .specimen-img-container { cursor: zoom-in; overflow: hidden; border-radius: 1.5rem; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen">
-
-    <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+    <!-- Header - Non-sticky -->
+    <header class="border-b border-slate-800 bg-slate-900/50">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors">
+            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 font-bold hover:text-emerald-400 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                <span class="font-bold">חזרה לארכיון</span>
+                חזרה לארכיון
             </a>
             <span class="text-xs font-mono text-slate-500 italic">S25 ULTRA OPTIMIZED</span>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-6 py-10 space-y-12">
-        
-        <!-- Specimen Hero -->
-        <section class="text-center space-y-4">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-bold uppercase tracking-wider mb-2">
-                <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-                מצב שימור: סכנת הכחדה חמורה (Critically Endangered)
-            </div>
-            <h1 class="text-5xl font-extrabold tracking-tight text-white mb-2">צילקנת <span class="text-blue-500 text-2xl font-light italic block mt-1">Latimeria chalumnae</span></h1>
+        <section class="text-center space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-bold uppercase mb-2">מצב שימור: סכנת הכחדה חמורה</div>
+            <h1 class="text-5xl font-extrabold text-white">צילקנת</h1>
             <p class="text-blue-400 text-xl font-light">חוקרת: מרג'ורי קורטני-לטימר (1907–2004)</p>
+
+            <div class="specimen-img-container relative group max-w-2xl mx-auto border border-slate-800 shadow-2xl" onclick="openLightbox()">
+                <img id="specimenImg" src="../images/coelacanth.jpg" onerror="this.src='https://via.placeholder.com/1200x800/0f172a/3b82f6?text=Upload+coelacanth.jpg'" class="w-full h-80 object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                <div class="absolute bottom-4 right-4 bg-black/60 px-4 py-2 rounded-full text-xs font-mono">🔍 לחץ להגדלה</div>
+            </div>
         </section>
 
-        <!-- Extended Etymology -->
-        <section class="glass-panel rounded-3xl p-8 space-y-6">
-            <h2 class="text-2xl font-bold flex items-center gap-3 text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
-                ניתוח אטימולוגי מורחב
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Etymology -->
+        <section class="glass-panel rounded-3xl p-8 space-y-8">
+            <h2 class="text-2xl font-bold text-blue-400">ניתוח אטימולוגי מורחב</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-justify">
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-blue-500/20">
-                    <div class="text-4xl font-bold text-white mb-1">Coela</div>
-                    <div class="text-blue-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART I: ANATOMICAL CORE</div>
-                    <div class="text-slate-300 leading-relaxed text-justify">
-                        מקור המונח ביוונית קלאסית (**Koilos**), שפירושה **"חלול"**. בתיאור המדעי, חלק זה מתייחס למיתר הגב (Notochord) הייחודי של המין. בניגוד לרוב בעלי החוליות המודרניים, לצילקנת אין עמוד שדרה גרמי מלא. במקומו, הוא מחזיק בצינור סחוסי רחב וחלול, הממולא בנוזל שומני דחוס. מבנה זה מעניק לדג גמישות יוצאת דופן ועמידות מבנית בלחצים האדירים של מי המעמקים (עד 700 מטר).
-                    </div>
+                    <div class="text-4xl font-bold text-white mb-2 border-b border-blue-500/30 pb-2">Coela</div>
+                    <div class="text-blue-400 text-[10px] font-mono mb-2 uppercase">PART I: THE CORE</div>
+                    <p class="text-slate-300 leading-relaxed">ביוונית (**Koilos**) - **"חלול"**. מתייחס למיתר הגב (Notochord) הייחודי של המין. לצילקנת אין עמוד שדרה גרמי מלא אלא צינור סחוסי רחב וחלול מלא בנוזל שומני, המעניק לו גמישות ועמידות בלחץ המעמקים הכבד.</p>
                 </div>
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-blue-500/20">
-                    <div class="text-4xl font-bold text-white mb-1">Acanth</div>
-                    <div class="text-blue-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART II: MORPHOLOGICAL SPINE</div>
-                    <div class="text-slate-300 leading-relaxed text-justify">
-                        מקור המונח ביוונית (**Akantha**), שפירושה **"קוץ"** או **"חוד"**. מונח זה מתאר את מערכת הקוצים הגרמיים החלולים התומכים בסנפירים ובזנב המשולש הייחודי של הצילקנת. הסנפירים שלו אינם רק קוצניים; הם בעלי מבנה בשרני מורכב המחובר לגוף באמצעות מפרקים סיבוביים, מאפיין שהיה ידוע למדענים רק ממאובנים של דגי ה-Lobe-finned, שנחשבו לאבותיהם של הדו-חיים הראשונים.
-                    </div>
+                    <div class="text-4xl font-bold text-white mb-2 border-b border-blue-500/30 pb-2">Acanth</div>
+                    <div class="text-blue-400 text-[10px] font-mono mb-2 uppercase">PART II: THE STRUCTURE</div>
+                    <p class="text-slate-300 leading-relaxed">ביוונית (**Akantha**) - **"קוץ"**. מתאר את הקוצים הגרמיים החלולים התומכים בסנפירים ובזנב המשולש. הסנפירים שלו בשרניים ומחוברים לגוף במפרקים סיבוביים, עדות לקשר האבולוציונית לדו-חיים.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Expanded Object Discovery & Biology Details -->
-        <section class="space-y-8">
-            <h2 class="text-2xl font-bold flex items-center gap-3 text-emerald-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                פרטי אובייקט הגילוי: The Lazarus Specimen
-            </h2>
-            
-            <div class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-10">
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
-                        נסיבות הגילוי הפיזי וההלם המדעי
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        ב-22 בדצמבר 1938, האובייקט נלכד במקרה ברשת מכמורת של ספינת הדיג "נרין" (Nerine) בשפך נהר הצ'אלומנה, דרום אפריקה. עד לאותו רגע, הקהילה המדעית הייתה משוכנעת שסדרת הצילקנתים נכחדה בסוף תקופת הקרטיקון, לפני כ-66 מיליון שנים. הגילוי נחשב לאחד האירועים המכוננים בזואולוגיה של המאה ה-20. הדגימה הציגה עור כחול מנצנץ, קשקשי "קוסמואיד" קשיחים כשריון, ושמונה סנפירים בשרניים שנעו בצורה המזכירה הליכת יונק. הצילקנת שרד שלוש שעות ביבשה, כשהוא מפגין חיוניות מפתיעה ליצור מעמקים.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
-                        אנטומיה של "מכונת זמן" ביולוגית
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        הצילקנת מחזיק בשורה של מאפיינים אנטומיים שאין לאף יצור חי אחר. הוא מצויד ב**מפרק תוך-גולגולתי (Intracranial Joint)** המאפשר לו להרים את חלקו הקדמי של הראש כדי להגדיל אתפתח הפה – תכונה שנעלמה מרוב בעלי החוליות המודרניים. בנוסף, הוא מחזיק ב**איבר רוסטראלי** בחרטום המשמש כגלאי אלקטרו-מגנטי רגיש לאיתור טרף בחשיכה מוחלטת של מערות תת-ימיות. לבסוף, לצילקנת יש ריאה פרימיטיבית שאינה מתפקדת, הממולאת ברקמת שומן, עדות למקורותיו האבולוציוניים במים רדודים לפני מאות מיליוני שנים.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
-                        חשיבות גנטית ושימור
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        מיפוי הגנום של הצילקנת גילה כי קצב האבולוציה של חלבוניו הוא מהאיטיים ביותר שנמדדו אי פעם בטבע. הוא מהווה "קפסולת זמן" גנטית. מצב השימור שלו מוגדר כ**סכנת הכחדה חמורה** בשל קצב רבייה אטי במיוחד (הריון הנמשך כ-3 שנים) ואוכלוסייה מצומצמת מאוד המתרכזת באיי קומורו ובחופי מזרח אפריקה.
-                    </p>
-                </div>
+        <!-- Discovery -->
+        <section class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-10">
+            <h2 class="text-2xl font-bold text-emerald-400">פרטי אובייקט הגילוי: Specimen #1938</h2>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">נסיבות הגילוי וההלם המדעי</h3>
+                <p class="text-slate-300 leading-relaxed text-justify">ב-22 בדצמבר 1938, האובייקט נלכד במקרה ברשת מכמורת בשפך נהר הצ'אלומנה. הקהילה המדעית נדהמה לגלות יצור שנחשב לנכחד מזה 66 מיליון שנים. הדגימה הציגה עור כחול מנצנץ וסנפירים בשרניים שנעו בתבנית המזכירה הליכה של יונק, גילוי ששינה את פני הזואולוגיה המודרנית.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">אנטומיה וגנטיקה</h3>
+                <p class="text-slate-300 leading-relaxed text-justify">לצילקנת מפרק תוך-גולגולתי להרחבת הפה ואיבר רוסטראלי לאיתור אלקטרו-מגנטי. מחקר גנטי גילה כי קצב האבולוציה של חלבוניו הוא מהאיטיים ביותר שנמדדו אי פעם, מה שהופך אותו ל"קפסולת זמן" גנטית אמיתית.</p>
             </div>
         </section>
-
-        <!-- Technical Specs Grid -->
-        <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-blue-400 text-[10px] font-mono mb-2 uppercase tracking-widest">מיקום גיאוגרפי</div>
-                <div class="text-lg font-bold">נהר הצ'אלומנה</div>
-                <div class="text-[10px] text-slate-500">דרום אפריקה</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-blue-400 text-[10px] font-mono mb-2 uppercase tracking-widest">משקל אובייקט</div>
-                <div class="text-lg font-bold">90 ק"ג</div>
-                <div class="text-[10px] text-slate-500">High Density</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-blue-400 text-[10px] font-mono mb-2 uppercase tracking-widest">אורך מרבי</div>
-                <div class="text-lg font-bold">2.0 מטרים</div>
-                <div class="text-[10px] text-slate-500">Giant Specimen</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-blue-400 text-[10px] font-mono mb-2 uppercase tracking-widest">תוחלת חיים</div>
-                <div class="text-lg font-bold">~100 שנים</div>
-                <div class="text-[10px] text-slate-500">Centennial Species</div>
-            </div>
-        </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 mt-20">
-        <div class="max-w-4xl mx-auto text-center">
-            <p class="text-slate-400 text-sm leading-loose">
-                פרויקט מחקר ייעודי לחשיפת מינים שחמקו משיני הזמן.<br>
-                האתר נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
-            </p>
-        </div>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center p-4" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" class="max-w-full max-h-[85vh] rounded-xl shadow-2xl transition-transform duration-300 scale-95 hover:scale-100">
+    </div>
+
+    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 text-center text-slate-500 text-xs">
+        פרויקט מחקר ייעודי. נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
     </footer>
 
+    <script>
+        function openLightbox() {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            lbImg.src = document.getElementById('specimenImg').src;
+            lb.style.display = 'flex';
+            setTimeout(() => lb.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() { 
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            setTimeout(() => lb.style.display = 'none', 300);
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>
 

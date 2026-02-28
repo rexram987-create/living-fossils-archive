@@ -10,130 +10,85 @@
         body { font-family: 'Assistant', sans-serif; }
         .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
         .text-justify { text-align: justify; }
+        #lightbox { transition: opacity 0.3s ease; display: none; }
+        #lightbox.active { display: flex; opacity: 1; }
+        .specimen-img-container { cursor: zoom-in; overflow: hidden; border-radius: 1.5rem; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen">
-
-    <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+    <header class="border-b border-slate-800 bg-slate-900/50">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors">
+            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 font-bold hover:text-emerald-400 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                <span class="font-bold">חזרה לארכיון</span>
+                חזרה לארכיון
             </a>
             <span class="text-xs font-mono text-slate-500 italic">S25 ULTRA OPTIMIZED</span>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-6 py-10 space-y-12">
-        
-        <!-- Specimen Hero -->
-        <section class="text-center space-y-4">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-bold uppercase tracking-wider mb-2">
-                <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
-                מצב שימור: פגיע (Vulnerable)
-            </div>
-            <h1 class="text-5xl font-extrabold tracking-tight text-white mb-2">סרטן הפרסה <span class="text-purple-500 text-2xl font-light italic block mt-1">Limulus polyphemus</span></h1>
+        <section class="text-center space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-bold uppercase mb-2">מצב שימור: פגיע (Vulnerable)</div>
+            <h1 class="text-5xl font-extrabold text-white">סרטן הפרסה</h1>
             <p class="text-purple-400 text-xl font-light">חוקר: קרל לינאוס (1707–1778)</p>
+
+            <div class="specimen-img-container relative group max-w-2xl mx-auto border border-slate-800 shadow-2xl" onclick="openLightbox()">
+                <img id="specimenImg" src="../images/horseshoe-crab.jpg" onerror="this.src='https://via.placeholder.com/1200x800/0f172a/6366f1?text=Upload+horseshoe-crab.jpg'" class="w-full h-80 object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                <div class="absolute bottom-4 right-4 bg-black/60 px-4 py-2 rounded-full text-xs font-mono">🔍 לחץ להגדלה</div>
+            </div>
         </section>
 
-        <!-- Extended Etymology -->
-        <section class="glass-panel rounded-3xl p-8 space-y-6">
-            <h2 class="text-2xl font-bold flex items-center gap-3 text-purple-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
-                ניתוח אטימולוגי מורחב
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Etymology -->
+        <section class="glass-panel rounded-3xl p-8 space-y-8">
+            <h2 class="text-2xl font-bold text-purple-400">ניתוח אטימולוגי מורחב</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-justify">
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-purple-500/20">
-                    <div class="text-4xl font-bold text-white mb-1">Limulus</div>
-                    <div class="text-purple-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART I: THE PERSPECTIVE</div>
-                    <div class="text-slate-300 leading-relaxed text-justify">
-                        מקור המילה בלטינית, כצורה מוקטנת של המילה **Limus**, שפירושה **"מלוכסן"**, **"עקום"** או **"מבט הצידה"**. השם הוענק לאובייקט בשל המיקום הייחודי של עיניו המורכבות בצידי השריון הקשיח, המקנות לו זווית ראייה אלכסונית ורחבה מאוד, ובשל הדרך שבה הוא "מביט" על סביבתו תוך כדי תנועה על קרקעית הים.
-                    </div>
+                    <div class="text-4xl font-bold text-white mb-2 border-b border-purple-500/30 pb-2">Limulus</div>
+                    <div class="text-purple-400 text-[10px] font-mono mb-2 uppercase">Part I: The Perspective</div>
+                    <p class="text-slate-300 leading-relaxed">מקור המילה בלטינית, כצורה מוקטנת של המילה **Limus**, שפירושה **"מלוכסן"** או **"מביט הצידה"**. מתייחס למיקום עיניו המורכבות בצידי השריון, המעניקות לו זווית ראייה אלכסונית ורחבה על קרקעית הים.</p>
                 </div>
                 <div class="bg-slate-900/50 p-6 rounded-2xl border border-purple-500/20">
-                    <div class="text-4xl font-bold text-white mb-1">Polyphemus</div>
-                    <div class="text-purple-400 text-[10px] font-mono mb-4 uppercase tracking-tighter">PART II: THE MYTHOLOGICAL VISION</div>
-                    <div class="text-slate-300 leading-relaxed text-justify">
-                        מקור השם במיתולוגיה היוונית – **פוליפמוס** היה הקיקלופ המפורסם, בנו של פוסידון, בעל העין האחת המרכזית. למרות שלסרטן הפרסה יש מספר עיניים, השם מתייחס לעיניים המדיאניות (האמצעיות) הקטנות הנמצאות במרכז חזית השריון שלו, הנראות כעין אחת גדולה ומרכזית המזכירה את דמותו של הקיקלופ המיתולוגי.
-                    </div>
+                    <div class="text-4xl font-bold text-white mb-2 border-b border-purple-500/30 pb-2">Polyphemus</div>
+                    <div class="text-purple-400 text-[10px] font-mono mb-2 uppercase">Part II: The Cyclops</div>
+                    <p class="text-slate-300 leading-relaxed">מקור השם במיתולוגיה היוונית – הקיקלופ בעל העין האחת. מתייחס לעיניים המדיאניות הקטנות במרכז חזית השריון, הנראות כעין אחת מרכזית הבוחנת את הסביבה מלמעלה.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Expanded Object Discovery & Biology Details -->
-        <section class="space-y-8">
-            <h2 class="text-2xl font-bold flex items-center gap-3 text-emerald-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                פרטי אובייקט הגילוי: The Blue Blood Sentinel
-            </h2>
-            
-            <div class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-10">
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
-                        נסיבות הגילוי והיסטוריה אבולוציונית
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        האובייקט תועד מדעית לראשונה על ידי קרל לינאוס בשנת 1758. למרות שמו, סרטן הפרסה אינו סרטן אמיתי אלא קרוב משפחה רחוק של העכבישנים. הוא נחשב לאחד הניצולים המרשימים בתולדות כדור הארץ – מאובנים של אבותיו מתוארכים ללפני 450 מיליון שנים, מה שאומר שהאובייקט שרד חמש הכחדות המוניות, כולל ההכחדה שחיסלה את הדינוזאורים. הוא חי בעיקר לאורך חופי האוקיינוס האטלנטי של צפון אמריקה.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
-                        המערכת החיסונית: דם כחול וקסם רפואי
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        המאפיין המדהים ביותר של האובייקט הוא דמו הכחול, הנובע מנוכחות של הומוציאנין המבוסס על נחושת (בניגוד להמוגלובין מבוסס ברזל אצל בני אדם). הדם מכיל תאי אמבוציטים (Amebocytes) בעלי יכולת נדירה: הם נקרשים באופן מיידי במגע עם רעלנים של חיידקים (Endotoxins). תכונה זו משמשת את עולם הרפואה המודרני לייצור חומר הנקרא LAL, שבאמצעותו בודקים סטריליות של כל חיסון, שתל רפואי או מכשור כירורגי בעולם.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 underline decoration-emerald-500/50 underline-offset-8">
-                        ראייה רב-ממדית ועמידות פיזית
-                    </h3>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        האובייקט מצויד במערכת ראייה מורכבת הכוללת 10 עיניים הפזורות על גופו, כולל שתי עיניים מורכבות גדולות לזיהוי תנועה ושמונה חיישני אור נוספים לוויסות המקצב הביולוגי. השריון שלו (Carapace) פועל כקליפה קשיחה המגנה עליו מפני טורפים ולחצים. למרות חוסנו, הוא פגיע כיום בשל דיג יתר (למטרות פיתיון ורפואה) ואובדן חופי רבייה, מה שהופך את השמירה עליו לקריטית למערכת האקולוגית הימית.
-                    </p>
-                </div>
+        <!-- Discovery -->
+        <section class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-10">
+            <h2 class="text-2xl font-bold text-emerald-400">פרטי אובייקט הגילוי: Specimen #450M</h2>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">היסטוריה אבולוציונית</h3>
+                <p class="text-slate-300 leading-relaxed text-justify">האובייקט תועד לראשונה על ידי לינאוס ב-1758. סרטן הפרסה הופיע לפני כ-450 מיליון שנים ושרד חמש הכחדות המוניות. למרות שמו, הוא קרוב משפחה רחוק של העכבישנים והעקרבים ולא של הסרטנים האמיתיים.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">דם כחול וחשיבות רפואית</h3>
+                <p class="text-slate-300 leading-relaxed text-justify">לסרטן הפרסה דם כחול מבוסס נחושת. תאי הדם שלו (Amebocytes) רגישים לרעלני חיידקים ונקרשים מיידית במגע עמם. תכונה זו משמשת את הרפואה המודרנית לבדיקת סטריליות של כל חיסון ושתל רפואי בעולם.</p>
             </div>
         </section>
-
-        <!-- Technical Specs Grid -->
-        <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-purple-400 text-[10px] font-mono mb-2 uppercase tracking-widest">מקור גיאוגרפי</div>
-                <div class="text-lg font-bold">חופי האטלנטי</div>
-                <div class="text-[10px] text-slate-500">צפון אמריקה</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-purple-400 text-[10px] font-mono mb-2 uppercase tracking-widest">צבע דם</div>
-                <div class="text-lg font-bold text-blue-400">כחול בוהק</div>
-                <div class="text-[10px] text-slate-500">Hemocyanin Based</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-purple-400 text-[10px] font-mono mb-2 uppercase tracking-widest">עמידות זמן</div>
-                <div class="text-lg font-bold">5 הכחדות</div>
-                <div class="text-[10px] text-slate-500">450M Years Survival</div>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-                <div class="text-purple-400 text-[10px] font-mono mb-2 uppercase tracking-widest">תוחלת חיים</div>
-                <div class="text-lg font-bold">20-40 שנים</div>
-                <div class="text-[10px] text-slate-500">Stable Population</div>
-            </div>
-        </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 mt-20">
-        <div class="max-w-4xl mx-auto text-center">
-            <p class="text-slate-400 text-sm leading-loose">
-                פרויקט מחקר ייעודי לחשיפת מינים שחמקו משיני הזמן.<br>
-                האתר נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
-            </p>
-        </div>
-    </footer>
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center p-4" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" class="max-w-full max-h-[85vh] rounded-xl shadow-2xl">
+    </div>
 
+    <script>
+        function openLightbox() {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            lbImg.src = document.getElementById('specimenImg').src;
+            lb.style.display = 'flex';
+            setTimeout(() => lb.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() { 
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            setTimeout(() => lb.style.display = 'none', 300);
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>
 

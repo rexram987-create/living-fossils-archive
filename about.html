@@ -1,147 +1,171 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>אודות הפרויקט - Living Fossils Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ארכיון המאובנים החיים | The Eternal Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Assistant', sans-serif; 
-            overflow-x: hidden; /* Prevent horizontal scroll */
+        /* S25 Ultra Optimized - Premium Deep Dark Edition */
+        :root {
+            --amoled-black: #000000;
+            --card-gray: #0f172a;
+            --accent-teal: #14b8a6;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
         }
-        .glass-panel { 
-            background: rgba(15, 23, 42, 0.8); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(51, 65, 85, 0.3); 
+
+        body {
+            background-color: var(--amoled-black);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.6;
+            transition: all 0.3s ease;
         }
-        .text-justify { text-align: justify; }
-        .lang-en { direction: ltr; text-align: left; font-family: sans-serif; }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
+            overflow: hidden;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 300px;
+            background: radial-gradient(circle at 80% 0%, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .lang-switch {
+            position: fixed;
+            top: env(safe-area-inset-top, 20px);
+            left: 20px;
+            z-index: 100;
+        }
+
+        .card-img-container {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col w-full">
+<body class="min-h-screen flex flex-col">
 
-    <!-- Header - Non-sticky fix for S25 Ultra -->
-    <header class="border-b border-slate-800 bg-slate-900/50 w-full">
-        <div class="max-w-4xl mx-auto px-5 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2 text-emerald-500 font-bold hover:text-emerald-400 transition-colors text-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                חזרה לארכיון
-            </a>
-            <span class="text-[10px] font-mono text-slate-500 italic">ABOUT PROJECT</span>
-        </div>
+    <div class="ambient-glow"></div>
+
+    <div class="lang-switch">
+        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-teal-500 hover:bg-teal-500 hover:text-white transition-all shadow-xl active:scale-95">EN</button>
+    </div>
+
+    <header class="pt-14 pb-10 px-6 text-center">
+        <div class="inline-block px-4 py-1 mb-6 text-[11px] font-bold tracking-widest text-teal-500 uppercase bg-teal-950/40 rounded-full border border-teal-800/30">Digital Museum of Natural History</div>
+        <h1 id="mainTitle" class="text-4xl font-extrabold mb-4 text-white">ארכיון <span class="text-teal-500">המאובנים החיים</span></h1>
+        <p id="mainSub" class="text-slate-400 text-base max-w-lg mx-auto leading-relaxed">מסע אבולוציוני בעקבות אורגניזמים ששימרו את צורתם המקורית במשך מאות מיליוני שנים.</p>
     </header>
 
-    <main class="max-w-4xl mx-auto px-5 py-8 space-y-12 w-full box-border">
-        
-        <!-- Introduction Block -->
-        <section class="space-y-10 border-b border-slate-800 pb-10">
-            <!-- Hebrew Intro -->
-            <div class="space-y-3">
-                <h1 class="text-3xl font-extrabold text-emerald-500">אודות הארכיון המדעי</h1>
-                <p class="text-base text-slate-300 leading-relaxed text-justify">
-                    ארכיון דיגיטלי אינטראקטיבי המוקדש למחקר והצגת "מאובנים חיים" – מינים ששרדו עידנים גיאולוגיים כמעט ללא שינוי אבולוציוני. הפרויקט משלב מחקר ביולוגי מעמיק עם חוויית משתמש מודרנית המותאמת באופן ייעודי למכשיר ה-Samsung S25 Ultra.
-                </p>
-            </div>
-            <!-- English Intro -->
-            <div class="space-y-3 lang-en">
-                <h1 class="text-2xl font-bold text-emerald-500 font-sans">About the Scientific Archive</h1>
-                <p class="text-base text-slate-300 leading-relaxed text-justify">
-                    An interactive digital archive dedicated to the research and presentation of "living fossils" – species that have survived geological eras with minimal evolutionary changes. This project combines in-depth biological research with a modern mobile user experience, specifically optimized for the Samsung S25 Ultra.
-                </p>
-            </div>
-        </section>
-
-        <!-- All 5 Specimens Section -->
-        <section class="space-y-6">
-            <h2 class="text-xl font-bold text-white border-r-4 border-emerald-500 pr-3">אובייקטים במחקר / Research Specimens</h2>
-            
-            <div class="space-y-4">
-                <!-- 1. Coelacanth -->
-                <div class="glass-panel p-5 rounded-2xl space-y-4">
-                    <div class="space-y-2">
-                        <h3 class="text-lg font-bold text-blue-400">צילקנת (Coelacanth)</h3>
-                        <p class="text-sm text-slate-300 text-justify italic leading-relaxed">דג מעמקים שנחשב לנכחד במשך 66 מיליון שנים עד לגילויו מחדש ב-1938 בשפך נהר הצ'אלומנה. הוא מהווה עדות חיה למעבר האבולוציוני מהים ליבשה.</p>
-                    </div>
-                    <div class="space-y-1 lang-en pt-2 border-t border-slate-800/50">
-                        <p class="text-xs text-slate-400 leading-relaxed">A deep-sea fish once thought extinct for 66 million years until its 1938 discovery. It serves as a living witness to the evolutionary transition from sea to land.</p>
-                    </div>
-                </div>
-
-                <!-- 2. Ginkgo -->
-                <div class="glass-panel p-5 rounded-2xl space-y-4">
-                    <div class="space-y-2">
-                        <h3 class="text-lg font-bold text-emerald-400">גינקו דו-אונתי (Ginkgo biloba)</h3>
-                        <p class="text-sm text-slate-300 text-justify italic leading-relaxed">השורד האחרון ממשפחת עצים ששגשגה בעידן היורה. העץ ידוע בעמידותו המדהימה למחלות, זיהום ואפילו קרינה רדיואקטיבית.</p>
-                    </div>
-                    <div class="space-y-1 lang-en pt-2 border-t border-slate-800/50">
-                        <p class="text-xs text-slate-400 leading-relaxed">The sole survivor of a prehistoric tree family. Known for its incredible resilience against diseases, pollution, and even radioactive radiation.</p>
-                    </div>
-                </div>
-
-                <!-- 3. Tuatara -->
-                <div class="glass-panel p-5 rounded-2xl space-y-4">
-                    <div class="space-y-2">
-                        <h3 class="text-lg font-bold text-orange-400">טואטרה (Tuatara)</h3>
-                        <p class="text-sm text-slate-300 text-justify italic leading-relaxed">זוחל ייחודי מניו זילנד המהווה שריד אחרון לסדרה שנעלמה מהעולם לפני כ-200 מיליון שנה. בעל "עין שלישית" ומבנה שיניים קדום.</p>
-                    </div>
-                    <div class="space-y-1 lang-en pt-2 border-t border-slate-800/50">
-                        <p class="text-xs text-slate-400 leading-relaxed">A unique New Zealand reptile and the last of its order. It features a "third eye" and an ancient dental structure dating back 200 million years.</p>
-                    </div>
-                </div>
-
-                <!-- 4. Leatherback -->
-                <div class="glass-panel p-5 rounded-2xl space-y-4">
-                    <div class="space-y-2">
-                        <h3 class="text-lg font-bold text-teal-400">צב גלד (Leatherback Turtle)</h3>
-                        <p class="text-sm text-slate-300 text-justify italic leading-relaxed">צב הים הגדול ביותר בעולם. בניגוד לצבים מודרניים, שריונו עשוי עור וגלד גמיש המאפשר לו לצלול לעומקים של מעל קילומטר.</p>
-                    </div>
-                    <div class="space-y-1 lang-en pt-2 border-t border-slate-800/50">
-                        <p class="text-xs text-slate-400 leading-relaxed">The world's largest sea turtle. Unlike others, its shell is made of flexible skin and cartilage, enabling deep dives exceeding one kilometer.</p>
-                    </div>
-                </div>
-
-                <!-- 5. Horseshoe Crab -->
-                <div class="glass-panel p-5 rounded-2xl space-y-4">
-                    <div class="space-y-2">
-                        <h3 class="text-lg font-bold text-purple-400">סרטן הפרסה (Horseshoe Crab)</h3>
-                        <p class="text-sm text-slate-300 text-justify italic leading-relaxed">יצור ימי בעל דם כחול ששרד חמש הכחדות המוניות לאורך 450 מיליון שנה. דמו משמש כיום כבסיס קריטי לבטיחות עולם הרפואה.</p>
-                    </div>
-                    <div class="space-y-1 lang-en pt-2 border-t border-slate-800/50">
-                        <p class="text-xs text-slate-400 leading-relaxed">A blue-blooded marine creature that has survived five mass extinctions over 450 million years. Its blood is vital to modern medical safety testing.</p>
-                    </div>
+    <main class="flex-grow container mx-auto px-6 max-w-4xl">
+        <section class="mb-14 glass-card rounded-[2.5rem] p-8 border-r-4 border-teal-600" id="introBox">
+            <h2 id="introTitle" class="text-2xl font-bold text-teal-500 mb-6 flex items-center">מהו "מאובן חי"?</h2>
+            <div id="introContent" class="space-y-6 text-slate-200 leading-relaxed text-lg text-justify">
+                <p id="p1">המונח <span class="text-teal-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר מינים הקיימים כיום ודומים דמיון מפתיע למאובנים של אבותיהם הקדמונים. אלו הם יצורים שהאבולוציה המורפולוגית שלהם כמעט ונעצרה לאורך עידנים.</p>
+                <div class="bg-slate-900/80 p-6 rounded-2xl border border-teal-900/30">
+                    <p class="text-sm" id="p2">המונח נטבע לראשונה על ידי חוקר הטבע המפורסם <span class="text-white font-bold">צ'ארלס דרווין</span> בשנת <span class="text-white font-bold">1859</span>, בספרו <span class="italic text-teal-200">"מוצא המינים"</span>. דרווין השתמש בו לתיאור מינים ששרדו בסביבות מבודדות.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Technical Excellence Section -->
-        <section class="space-y-6 pt-6 border-t border-slate-800">
-            <h2 class="text-xl font-bold text-white">מאפיינים טכניים / Technical Features</h2>
-            <div class="grid grid-cols-1 gap-4">
-                <div class="p-4 bg-slate-900/50 border border-slate-800 rounded-xl">
-                    <h4 class="text-emerald-500 font-bold mb-1">אופטימיזציה למובייל</h4>
-                    <p class="text-sm text-slate-400">התאמה מלאה למסך ה-Samsung S25 Ultra, כולל טיפול ברוחב התוכן ומניעת גלילה רוחבית.</p>
-                </div>
-                <div class="p-4 bg-slate-900/50 border border-slate-800 rounded-xl lang-en">
-                    <h4 class="text-emerald-500 font-bold mb-1">Mobile Optimization</h4>
-                    <p class="text-sm text-slate-400">Fully optimized for the Samsung S25 Ultra display, ensuring responsive layout and no horizontal overflow.</p>
-                </div>
+        <section class="mb-20">
+            <h2 id="catHeader" class="text-xs font-bold text-slate-500 uppercase tracking-[0.3em] mb-8 text-center">קטגוריות המחקר</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <a href="fish/coelacanth.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-teal-500 transition-all active:scale-95 group">
+                    <div class="card-img-container ml-4"><img src="images/coelacanth.png" alt="צילקנת" onerror="this.src='https://via.placeholder.com/150/0f172a/14b8a6?text=🐟'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catFish">דגים (צילקנת)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Coelacanthiformes</p></div>
+                </a>
+                <a href="trees/ginkgo.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-emerald-500 transition-all active:scale-95 group">
+                    <div class="card-img-container ml-4"><img src="images/ginkgo.png" alt="גינקו" onerror="this.src='https://via.placeholder.com/150/0f172a/10b981?text=🌿'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catTrees">עצים (גינקו)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Ginkgophyta</p></div>
+                </a>
+                <a href="reptiles/tuatara.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-amber-500 transition-all active:scale-95 group">
+                    <div class="card-img-container ml-4"><img src="images/tuatara.png" alt="טואטרה" onerror="this.src='https://via.placeholder.com/150/0f172a/f59e0b?text=🦎'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catReptiles">זוחלים (טואטרה)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Rhynchocephalia</p></div>
+                </a>
+                <a href="turtles/leatherback.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-orange-500 transition-all active:scale-95 group">
+                    <div class="card-img-container ml-4"><img src="images/leatherback.png" alt="צב גלד" onerror="this.src='https://via.placeholder.com/150/0f172a/f97316?text=🐢'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catTurtles">צבים (צב גלד)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Testudines</p></div>
+                </a>
+                <a href="invertebrates/horseshoe-crab.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-blue-500 transition-all active:scale-95 group sm:col-span-2">
+                    <div class="card-img-container ml-4"><img src="images/horseshoe-crab.png" alt="סרטן הפרסה" onerror="this.src='https://via.placeholder.com/150/0f172a/3b82f6?text=🦀'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catInv">חסרי חוליות (סרטן הפרסה)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Xiphosura</p></div>
+                </a>
             </div>
         </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 text-center mt-auto w-full">
-        <p class="text-slate-500 text-xs mb-3 font-mono uppercase tracking-widest">
-            Collaborative Research Project
-        </p>
-        <p class="text-slate-400 text-sm">
-            האתר נוצר במסגרת פרויקט מחקר משותף על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
-        </p>
+    <footer class="mt-auto bg-slate-950 border-t border-white/5 pt-12 pb-24 text-center px-6">
+        <p id="footerText" class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג'מיני ועל ידי רם.</p>
     </footer>
 
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                title: 'ארכיון <span class="text-teal-500">המאובנים החיים</span>', sub: 'מסע אבולוציוני בעקבות אורגניזמים ששימרו את צורתם המקורית במשך מאות מיליוני שנים.',
+                introTitle: 'מהו "מאובן חי"?', p1: 'המונח <span class="text-teal-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר מינים הקיימים כיום ודומים דמיון מפתיע למאובנים של אבותיהם הקדמונים. אלו הם יצורים שהאבולוציה המורפולוגית שלהם כמעט ונעצרה לאורך עידנים.',
+                p2: 'המונח נטבע לראשונה על ידי חוקר הטבע המפורסם <span class="text-white font-bold">צ\'ארלס דרווין</span> בשנת <span class="text-white font-bold">1859</span>, בספרו המונומנטלי <span class="italic text-teal-200">"מוצא המינים" (On the Origin of Species)</span>. דרווין השתמש במושג זה כדי לתאר יצורים ששרדו בסביבות מבודדות.',
+                catHeader: 'קטגוריות המחקר', catFish: 'דגים (צילקנת)', catTrees: 'עצים (גינקו)', catReptiles: 'זוחלים (טואטרה)', catTurtles: 'צבים (צב גלד)', catInv: 'חסרי חוליות (סרטן הפרסה)',
+                footer: 'פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג\'מיני ועל ידי רם.',
+                btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                title: 'The <span class="text-teal-500">Eternal Archive</span>', sub: 'An evolutionary journey following organisms that preserved their original form for hundreds of millions of years.',
+                introTitle: 'What is a "Living Fossil"?', p1: 'The term <span class="text-teal-400 font-bold">"Living Fossil"</span> describes species existing today that show a surprising similarity to fossils of their ancient ancestors. These are creatures whose morphological evolution has nearly stopped over eons.',
+                p2: 'The term was first coined by the famous naturalist <span class="text-white font-bold">Charles Darwin</span> in <span class="text-white font-bold">1859</span>, in his monumental book <span class="italic text-teal-200">"On the Origin of Species"</span>. Darwin used this concept to describe species that survived in isolated environments or under low competition.',
+                catHeader: 'Research Categories', catFish: 'Fish (Coelacanth)', catTrees: 'Trees (Ginkgo)', catReptiles: 'Reptiles (Tuatara)', catTurtles: 'Turtles (Leatherback)', catInv: 'Invertebrates (Horseshoe Crab)',
+                footer: 'A dedicated research project for preserving knowledge of organisms that stood the test of time. Created by Gemini and Ram.',
+                btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const data = content[currentLang];
+            document.getElementById('mainTitle').innerHTML = data.title;
+            document.getElementById('mainSub').innerText = data.sub;
+            document.getElementById('introTitle').innerText = data.introTitle;
+            document.getElementById('p1').innerHTML = data.p1;
+            document.getElementById('p2').innerHTML = data.p2;
+            document.getElementById('catHeader').innerText = data.catHeader;
+            document.getElementById('catFish').innerText = data.catFish;
+            document.getElementById('catTrees').innerText = data.catTrees;
+            document.getElementById('catReptiles').innerText = data.catReptiles;
+            document.getElementById('catTurtles').innerText = data.catTurtles;
+            document.getElementById('catInv').innerText = data.catInv;
+            document.getElementById('footerText').innerText = data.footer;
+            document.getElementById('langBtn').innerText = data.btn;
+            document.documentElement.dir = data.dir;
+            document.documentElement.lang = currentLang;
+            const introBox = document.getElementById('introBox');
+            introBox.style.borderRightWidth = currentLang === 'en' ? '0' : '4px';
+            introBox.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+        }
+    </script>
 </body>
 </html>
-

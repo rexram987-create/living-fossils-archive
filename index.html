@@ -30,188 +30,175 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
+            overflow: hidden;
         }
 
         .ambient-glow {
-            position: fixed;
+            position: absolute;
             top: 0;
             right: 0;
             width: 100%;
-            height: 300px;
-            background: radial-gradient(circle at 80% 0%, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
+            height: 500px;
+            background: radial-gradient(circle at 80% 0%, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
             pointer-events: none;
-            z-index: -1;
+            z-index: 0;
         }
 
-        .lang-switch {
-            position: fixed;
-            top: env(safe-area-inset-top, 20px);
-            left: 20px;
-            z-index: 100;
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 2rem;
         }
 
-        h1, h2, h3 {
-            color: #f8fafc;
-            letter-spacing: -0.01em;
+        .card-img-container {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* High-quality transition for language switch */
-        .fade-content {
-            transition: opacity 0.2s ease;
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Prevent fixed elements from blocking reading */
+        nav, .top-nav {
+            position: relative !important;
+            transform: none !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            width: 100% !important;
+            margin: 2rem 0;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            border: none !important;
+            box-shadow: none !important;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col relative">
 
     <div class="ambient-glow"></div>
 
-    <!-- כפתור החלפת שפה -->
-    <div class="lang-switch">
-        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900/80 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-teal-500 hover:bg-teal-500 hover:text-white transition-all shadow-xl active:scale-95">
-            EN
-        </button>
-    </div>
-
-    <!-- Header -->
-    <header class="pt-14 pb-10 px-6 text-center">
-        <div class="inline-block px-4 py-1 mb-6 text-[11px] font-bold tracking-widest text-teal-500 uppercase bg-teal-950/40 rounded-full border border-teal-800/30">
-            Digital Museum of Natural History
+    <!-- Header Section -->
+    <header class="pt-10 pb-6 px-6 max-w-4xl mx-auto w-full relative z-10">
+        <div class="header-actions">
+            <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-6 py-2.5 rounded-full text-xs font-bold text-teal-500 hover:bg-teal-500 hover:text-white transition-all shadow-lg active:scale-95">EN</button>
+            <a href="about.html" id="topAboutBtn" class="bg-slate-900 border border-white/10 px-6 py-2.5 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-lg active:scale-95">אודות</a>
         </div>
-        <h1 id="mainTitle" class="text-4xl font-extrabold mb-4 text-white">
-            ארכיון <span class="text-teal-500">המאובנים החיים</span>
-        </h1>
-        <p id="mainSub" class="text-slate-400 text-base max-w-lg mx-auto leading-relaxed">
-            מסע אבולוציוני בעקבות אורגניזמים ששימרו את צורתם המקורית במשך מאות מיליוני שנים.
-        </p>
+        
+        <div class="text-center">
+            <div class="inline-block px-4 py-1 mb-6 text-[11px] font-bold tracking-widest text-teal-500 uppercase bg-teal-950/40 rounded-full border border-teal-800/30">Digital Museum of Natural History</div>
+            <h1 id="mainTitle" class="text-4xl font-extrabold mb-4 text-white">ארכיון <span class="text-teal-500">המאובנים החיים</span></h1>
+            <p id="mainSub" class="text-slate-400 text-base max-w-lg mx-auto leading-relaxed">מסע אבולוציוני בעקבות אורגניזמים ששימרו את צורתם המקורית במשך מאות מיליוני שנים.</p>
+        </div>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-6 max-w-4xl">
+    <main class="flex-grow container mx-auto px-6 max-w-4xl relative z-10">
         
         <!-- מבוא היסטורי מורחב -->
         <section class="mb-14 glass-card rounded-[2.5rem] p-8 border-r-4 border-teal-600" id="introBox">
-            <h2 id="introTitle" class="text-2xl font-bold text-teal-500 mb-6 flex items-center">
-                מהו "מאובן חי"?
-            </h2>
+            <h2 id="introTitle" class="text-2xl font-bold text-teal-500 mb-6 flex items-center">מהו "מאובן חי"?</h2>
             <div id="introContent" class="space-y-6 text-slate-200 leading-relaxed text-lg text-justify">
-                <p id="p1">
-                    המונח <span class="text-teal-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר מינים הקיימים כיום ודומים דמיון מפתיע למאובנים של אבותיהם הקדמונים. אלו הם יצורים שהאבולוציה המורפולוגית שלהם כמעט ונעצרה לאורך עידנים, והם נותרו כשרידים בודדים של קבוצות עתיקות שנכחדו ברובן.
-                </p>
+                <p id="p1">המונח <span class="text-teal-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר מינים הקיימים כיום ודומים דמיון מפתיע למאובנים של אבותיהם הקדמונים. אלו הם יצורים שהאבולוציה המורפולוגית שלהם כמעט ונעצרה לאורך עידנים, והם נותרו כשרידים בודדים של קבוצות עתיקות שנכחדו ברובן.</p>
                 <div class="bg-slate-900/80 p-6 rounded-2xl border border-teal-900/30">
-                    <p class="text-sm" id="p2">
-                        המונח נטבע לראשונה על ידי חוקר הטבע המפורסם <span class="text-white font-bold">צ'ארלס דרווין</span> בשנת <span class="text-white font-bold">1859</span>, בספרו המונומנטלי <span class="italic text-teal-200">"מוצא המינים" (On the Origin of Species)</span>. דרווין השתמש במושג זה כדי לתאר יצורים ששרדו בסביבות מבודדות או בתנאי תחרות נמוכה, ובכך שמרו על תכונות עתיקות שנעלמו משאר עולם החי המודרני.
-                    </p>
+                    <p class="text-sm" id="p2">המונח נטבע לראשונה על ידי חוקר הטבע המפורסם <span class="text-white font-bold">צ'ארלס דרווין</span> בשנת <span class="text-white font-bold">1859</span>, בספרו המונומנטלי <span class="italic text-teal-200">"מוצא המינים" (On the Origin of Species)</span>. דרווין השתמש במושג זה כדי לתאר יצורים ששרדו בסביבות מבודדות או בתנאי תחרות נמוכה, ובכך שמרו על תכונות עתיקות שנעלמו משאר עולם החי המודרני.</p>
                 </div>
             </div>
         </section>
 
         <!-- רשת קטגוריות המחקר -->
-        <section class="mb-20">
+        <section class="mb-10">
             <h2 id="catHeader" class="text-xs font-bold text-slate-500 uppercase tracking-[0.3em] mb-8 text-center">קטגוריות המחקר</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <!-- דגים -->
-                <a href="fish/coelacanth.html" class="glass-card p-6 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-teal-500 transition-all active:scale-95 group">
-                    <span class="text-3xl ml-4 group-hover:scale-110 transition-transform">🐟</span>
-                    <div>
-                        <h3 class="font-bold text-lg text-white" id="catFish">דגים (צילקנת)</h3>
-                        <p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Coelacanthiformes</p>
-                    </div>
+                <a href="fish/coelacanth.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-teal-500 transition-all active:scale-95 group">
+                    <div class="card-img-container ml-4"><img src="images/coelacanth.png" alt="צילקנת" onerror="this.src='https://via.placeholder.com/150/0f172a/14b8a6?text=🐟'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catFish">דגים (צילקנת)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Coelacanthiformes</p></div>
                 </a>
                 <!-- עצים -->
-                <a href="trees/ginkgo.html" class="glass-card p-6 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-emerald-500 transition-all active:scale-95 group">
-                    <span class="text-3xl ml-4 group-hover:scale-110 transition-transform">🌿</span>
-                    <div>
-                        <h3 class="font-bold text-lg text-white" id="catTrees">עצים (גינקו)</h3>
-                        <p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Ginkgophyta</p>
-                    </div>
+                <a href="trees/ginkgo.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-emerald-500 transition-all active:scale-95 group">
+                    <div class="card-img-container ml-4"><img src="images/ginkgo.png" alt="גינקו" onerror="this.src='https://via.placeholder.com/150/0f172a/10b981?text=🌿'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catTrees">עצים (גינקו)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Ginkgophyta</p></div>
                 </a>
                 <!-- זוחלים -->
-                <a href="reptiles/tuatara.html" class="glass-card p-6 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-amber-500 transition-all active:scale-95 group">
-                    <span class="text-3xl ml-4 group-hover:scale-110 transition-transform">🦎</span>
-                    <div>
-                        <h3 class="font-bold text-lg text-white" id="catReptiles">זוחלים (טואטרה)</h3>
-                        <p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Rhynchocephalia</p>
-                    </div>
+                <a href="reptiles/tuatara.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-amber-500 transition-all active:scale-95 group">
+                    <div class="card-img-container ml-4"><img src="images/tuatara.png" alt="טואטרה" onerror="this.src='https://via.placeholder.com/150/0f172a/f59e0b?text=🦎'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catReptiles">זוחלים (טואטרה)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Rhynchocephalia</p></div>
                 </a>
                 <!-- צבים -->
-                <a href="turtles/leatherback.html" class="glass-card p-6 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-orange-500 transition-all active:scale-95 group">
-                    <span class="text-3xl ml-4 group-hover:scale-110 transition-transform">🐢</span>
-                    <div>
-                        <h3 class="font-bold text-lg text-white" id="catTurtles">צבים (צב גלד)</h3>
-                        <p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Testudines</p>
-                    </div>
+                <a href="turtles/leatherback.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-orange-500 transition-all active:scale-95 group">
+                    <div class="card-img-container ml-4"><img src="images/leatherback.png" alt="צב גלד" onerror="this.src='https://via.placeholder.com/150/0f172a/f97316?text=🐢'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catTurtles">צבים (צב גלד)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Testudines</p></div>
                 </a>
                 <!-- חסרי חוליות -->
-                <a href="invertebrates/horseshoe-crab.html" class="glass-card p-6 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-blue-500 transition-all active:scale-95 group sm:col-span-2">
-                    <span class="text-3xl ml-4 group-hover:scale-110 transition-transform">🦀</span>
-                    <div>
-                        <h3 class="font-bold text-lg text-white" id="catInv">חסרי חוליות (סרטן הפרסה)</h3>
-                        <p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Xiphosura</p>
-                    </div>
+                <a href="invertebrates/horseshoe-crab.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-blue-500 transition-all active:scale-95 group sm:col-span-2">
+                    <div class="card-img-container ml-4"><img src="images/horseshoe-crab.png" alt="סרטן הפרסה" onerror="this.src='https://via.placeholder.com/150/0f172a/3b82f6?text=🦀'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catInv">חסרי חוליות (סרטן הפרסה)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Xiphosura</p></div>
                 </a>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-auto bg-slate-950 border-t border-white/5 pt-12 pb-24 text-center px-6">
-        <p id="footerText" class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">
-            פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג'מיני ועל ידי רם.
-        </p>
-        <div class="mt-6 text-[9px] text-slate-700 uppercase tracking-[0.4em]">
-            © 2026 The Eternal Archive | S25 Ultra Edition
+    <!-- Footer with non-floating navigation -->
+    <footer class="mt-auto bg-slate-950 border-t border-white/5 pt-12 pb-16 text-center px-6">
+        <!-- Static Navigation inside footer -->
+        <div class="flex justify-center items-center space-x-12 space-x-reverse mb-10">
+            <a href="index.html" class="flex flex-col items-center text-teal-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                <span class="text-[10px] mt-1 font-bold" id="navHome">בית</span>
+            </a>
+            <a href="about.html" class="flex flex-col items-center text-slate-500 hover:text-teal-400 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span class="text-[10px] mt-1" id="navAbout">אודות</span>
+            </a>
         </div>
+        
+        <p id="footerText" class="text-slate-500 text-xs max-w-md mx-auto leading-relaxed mb-4">פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג'מיני ועל ידי רם.</p>
+        <div class="text-[9px] text-slate-700 uppercase tracking-[0.4em]">© 2026 The Eternal Archive | S25 Ultra</div>
     </footer>
-
-    <!-- Bottom Navigation (Mobile Only) -->
-    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-slate-900/90 backdrop-blur-2xl rounded-full py-4 px-10 flex justify-around items-center z-50 border border-white/10 shadow-2xl md:hidden">
-        <button class="flex flex-col items-center text-teal-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-            <span class="text-[10px] mt-1 font-bold" id="navHome">בית</span>
-        </button>
-        <button class="flex flex-col items-center text-slate-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span class="text-[10px] mt-1" id="navInfo">מידע</span>
-        </button>
-    </nav>
 
     <script>
         let currentLang = 'he';
         const content = {
             he: {
-                title: 'ארכיון <span class="text-teal-500">המאובנים החיים</span>',
-                sub: 'מסע אבולוציוני בעקבות אורגניזמים ששימרו את צורתם המקורית במשך מאות מיליוני שנים.',
-                introTitle: 'מהו "מאובן חי"?',
-                p1: 'המונח <span class="text-teal-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר מינים הקיימים כיום ודומים דמיון מפתיע למאובנים של אבותיהם הקדמונים. אלו הם יצורים שהאבולוציה המורפולוגית שלהם כמעט ונעצרה לאורך עידנים, והם נותרו כשרידים בודדים של קבוצות עתיקות שנכחדו ברובן.',
-                p2: 'המונח נטבע לראשונה על ידי חוקר הטבע המפורסם <span class="text-white font-bold">צ\'ארלס דרווין</span> בשנת <span class="text-white font-bold">1859</span>, בספרו המונומנטלי <span class="italic text-teal-200">"מוצא המינים" (On the Origin of Species)</span>. דרווין השתמש במושג זה כדי לתאר יצורים ששרדו בסביבות מבודדות או בתנאי תחרות נמוכה, ובכך שמרו על תכונות עתיקות שנעלמו משאר עולם החי המודרני.',
-                catHeader: 'קטגוריות המחקר',
+                title: 'ארכיון <span class="text-teal-500">המאובנים החיים</span>', sub: 'מסע אבולוציוני בעקבות אורגניזמים ששימרו את צורתם המקורית במשך מאות מיליוני שנים.',
+                introTitle: 'מהו "מאובן חי"?', p1: 'המונח <span class="text-teal-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר מינים הקיימים כיום ודומים דמיון מפתיע למאובנים של אבותיהם הקדמונים. אלו הם יצורים שהאבולוציה המורפולוגית שלהם כמעט ונעצרה לאורך עידנים.',
+                p2: 'המונח נטבע לראשונה על ידי חוקר הטבע המפורסם <span class="text-white font-bold">צ\'ארלס דרווין</span> בשנת <span class="text-white font-bold">1859</span>, בספרו המונומנטלי <span class="italic text-teal-200">"מוצא המינים" (On the Origin of Species)</span>.',
+                catHeader: 'קטגוריות המחקר', topAbout: 'אודות',
                 catFish: 'דגים (צילקנת)', catTrees: 'עצים (גינקו)', catReptiles: 'זוחלים (טואטרה)', catTurtles: 'צבים (צב גלד)', catInv: 'חסרי חוליות (סרטן הפרסה)',
                 footer: 'פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג\'מיני ועל ידי רם.',
-                navHome: 'בית', navInfo: 'מידע', btn: 'EN', dir: 'rtl'
+                navHome: 'בית', navAbout: 'אודות', btn: 'EN', dir: 'rtl'
             },
             en: {
-                title: 'The <span class="text-teal-500">Eternal Archive</span>',
-                sub: 'An evolutionary journey following organisms that preserved their original form for hundreds of millions of years.',
-                introTitle: 'What is a "Living Fossil"?',
-                p1: 'The term <span class="text-teal-400 font-bold">"Living Fossil"</span> describes species existing today that show a surprising similarity to fossils of their ancient ancestors. These are creatures whose morphological evolution has nearly stopped over eons, remaining as lone remnants of ancient groups that have mostly gone extinct.',
-                p2: 'The term was first coined by the famous naturalist <span class="text-white font-bold">Charles Darwin</span> in <span class="text-white font-bold">1859</span>, in his monumental book <span class="italic text-teal-200">"On the Origin of Species"</span>. Darwin used this concept to describe species that survived in isolated environments or under low competition, thereby retaining ancient traits that vanished from the rest of the modern biological world.',
-                catHeader: 'Research Categories',
+                title: 'The <span class="text-teal-500">Eternal Archive</span>', sub: 'An evolutionary journey following organisms that preserved their original form for hundreds of millions of years.',
+                introTitle: 'What is a "Living Fossil"?', p1: 'The term <span class="text-teal-400 font-bold">"Living Fossil"</span> describes species existing today that show a surprising similarity to fossils of their ancient ancestors. These are creatures whose morphological evolution has nearly stopped over eons.',
+                p2: 'The term was first coined by the famous naturalist <span class="text-white font-bold">Charles Darwin</span> in <span class="text-white font-bold">1859</span>, in his monumental book <span class="italic text-teal-200">"On the Origin of Species"</span>.',
+                catHeader: 'Research Categories', topAbout: 'About',
                 catFish: 'Fish (Coelacanth)', catTrees: 'Trees (Ginkgo)', catReptiles: 'Reptiles (Tuatara)', catTurtles: 'Turtles (Leatherback)', catInv: 'Invertebrates (Horseshoe Crab)',
                 footer: 'A dedicated research project for preserving knowledge of organisms that stood the test of time. Created by Gemini and Ram.',
-                navHome: 'HOME', navInfo: 'INFO', btn: 'HE', dir: 'ltr'
+                navHome: 'HOME', navAbout: 'ABOUT', btn: 'HE', dir: 'ltr'
             }
         };
 
         function toggleLanguage() {
             currentLang = currentLang === 'he' ? 'en' : 'he';
             const data = content[currentLang];
-            
             document.getElementById('mainTitle').innerHTML = data.title;
             document.getElementById('mainSub').innerText = data.sub;
             document.getElementById('introTitle').innerText = data.introTitle;
             document.getElementById('p1').innerHTML = data.p1;
             document.getElementById('p2').innerHTML = data.p2;
             document.getElementById('catHeader').innerText = data.catHeader;
+            document.getElementById('topAboutBtn').innerText = data.topAbout;
             document.getElementById('catFish').innerText = data.catFish;
             document.getElementById('catTrees').innerText = data.catTrees;
             document.getElementById('catReptiles').innerText = data.catReptiles;
@@ -219,13 +206,10 @@
             document.getElementById('catInv').innerText = data.catInv;
             document.getElementById('footerText').innerText = data.footer;
             document.getElementById('navHome').innerText = data.navHome;
-            document.getElementById('navInfo').innerText = data.navInfo;
+            document.getElementById('navAbout').innerText = data.navAbout;
             document.getElementById('langBtn').innerText = data.btn;
-            
             document.documentElement.dir = data.dir;
             document.documentElement.lang = currentLang;
-            
-            // Adjust card border side based on direction
             const introBox = document.getElementById('introBox');
             introBox.style.borderRightWidth = currentLang === 'en' ? '0' : '4px';
             introBox.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
@@ -233,3 +217,4 @@
     </script>
 </body>
 </html>
+

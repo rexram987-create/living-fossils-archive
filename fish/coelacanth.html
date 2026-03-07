@@ -1,98 +1,365 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>צילקנת - Living Fossils Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: צילקנת | The Eternal Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Assistant', sans-serif; }
-        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
-        .text-justify { text-align: justify; }
-        #lightbox { transition: opacity 0.3s ease; display: none; }
-        #lightbox.active { display: flex; opacity: 1; }
-        .specimen-img-container { cursor: zoom-in; overflow: hidden; border-radius: 1.5rem; }
+        /* S25 Ultra Optimized - Premium Deep Dark Edition */
+        :root {
+            --amoled-black: #000000;
+            --card-gray: #0f172a;
+            --accent-teal: #14b8a6;
+            --text-main: #e2e8f0;   /* Slate 200 - Legibility */
+            --text-muted: #94a3b8;  /* Slate 400 */
+        }
+
+        body {
+            background-color: var(--amoled-black);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
+        }
+
+        .etymology-part {
+            border-right: 3px solid var(--accent-teal);
+            padding-right: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        [dir="ltr"] .etymology-part {
+            border-right: 0;
+            border-left: 3px solid var(--accent-teal);
+            padding-right: 0;
+            padding-left: 1.25rem;
+        }
+
+        .fossil-hero-container {
+            position: relative;
+            cursor: zoom-in;
+            margin-bottom: 2.5rem;
+        }
+
+        .fossil-hero-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Image Zoom Modal */
+        #imageModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        #imageModal img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 1rem;
+            box-shadow: 0 0 50px rgba(20, 184, 166, 0.2);
+        }
+
+        h1, h2, h3 {
+            color: #f8fafc;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-fixed {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(20px);
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen">
-    <!-- Header - Non-sticky -->
-    <header class="border-b border-slate-800 bg-slate-900/50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 font-bold hover:text-emerald-400 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                חזרה לארכיון
-            </a>
-            <span class="text-xs font-mono text-slate-500 italic">S25 ULTRA OPTIMIZED</span>
-        </div>
-    </header>
+<body class="min-h-screen flex flex-col pb-24 text-justify">
 
-    <main class="max-w-4xl mx-auto px-6 py-10 space-y-12">
-        <section class="text-center space-y-6">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-bold uppercase mb-2">מצב שימור: סכנת הכחדה חמורה</div>
-            <h1 class="text-5xl font-extrabold text-white">צילקנת</h1>
-            <p class="text-blue-400 text-xl font-light">חוקרת: מרג'ורי קורטני-לטימר (1907–2004)</p>
-
-            <div class="specimen-img-container relative group max-w-2xl mx-auto border border-slate-800 shadow-2xl" onclick="openLightbox()">
-                <img id="specimenImg" src="../images/coelacanth.jpg" onerror="this.src='https://via.placeholder.com/1200x800/0f172a/3b82f6?text=Upload+coelacanth.jpg'" class="w-full h-80 object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                <div class="absolute bottom-4 right-4 bg-black/60 px-4 py-2 rounded-full text-xs font-mono">🔍 לחץ להגדלה</div>
-            </div>
-        </section>
-
-        <!-- Etymology -->
-        <section class="glass-panel rounded-3xl p-8 space-y-8">
-            <h2 class="text-2xl font-bold text-blue-400">ניתוח אטימולוגי מורחב</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-justify">
-                <div class="bg-slate-900/50 p-6 rounded-2xl border border-blue-500/20">
-                    <div class="text-4xl font-bold text-white mb-2 border-b border-blue-500/30 pb-2">Coela</div>
-                    <div class="text-blue-400 text-[10px] font-mono mb-2 uppercase">PART I: THE CORE</div>
-                    <p class="text-slate-300 leading-relaxed">ביוונית (**Koilos**) - **"חלול"**. מתייחס למיתר הגב (Notochord) הייחודי של המין. לצילקנת אין עמוד שדרה גרמי מלא אלא צינור סחוסי רחב וחלול מלא בנוזל שומני, המעניק לו גמישות ועמידות בלחץ המעמקים הכבד.</p>
-                </div>
-                <div class="bg-slate-900/50 p-6 rounded-2xl border border-blue-500/20">
-                    <div class="text-4xl font-bold text-white mb-2 border-b border-blue-500/30 pb-2">Acanth</div>
-                    <div class="text-blue-400 text-[10px] font-mono mb-2 uppercase">PART II: THE STRUCTURE</div>
-                    <p class="text-slate-300 leading-relaxed">ביוונית (**Akantha**) - **"קוץ"**. מתאר את הקוצים הגרמיים החלולים התומכים בסנפירים ובזנב המשולש. הסנפירים שלו בשרניים ומחוברים לגוף במפרקים סיבוביים, עדות לקשר האבולוציונית לדו-חיים.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Discovery -->
-        <section class="glass-panel rounded-3xl p-8 border-r-4 border-emerald-500 space-y-10">
-            <h2 class="text-2xl font-bold text-emerald-400">פרטי אובייקט הגילוי: Specimen #1938</h2>
-            <div>
-                <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">נסיבות הגילוי וההלם המדעי</h3>
-                <p class="text-slate-300 leading-relaxed text-justify">ב-22 בדצמבר 1938, האובייקט נלכד במקרה ברשת מכמורת בשפך נהר הצ'אלומנה. הקהילה המדעית נדהמה לגלות יצור שנחשב לנכחד מזה 66 מיליון שנים. הדגימה הציגה עור כחול מנצנץ וסנפירים בשרניים שנעו בתבנית המזכירה הליכה של יונק, גילוי ששינה את פני הזואולוגיה המודרנית.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold text-white mb-4 underline decoration-emerald-500/50 underline-offset-8">אנטומיה וגנטיקה</h3>
-                <p class="text-slate-300 leading-relaxed text-justify">לצילקנת מפרק תוך-גולגולתי להרחבת הפה ואיבר רוסטראלי לאיתור אלקטרו-מגנטי. מחקר גנטי גילה כי קצב האבולוציה של חלבוניו הוא מהאיטיים ביותר שנמדדו אי פעם, מה שהופך אותו ל"קפסולת זמן" גנטית אמיתית.</p>
-            </div>
-        </section>
-    </main>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center p-4" onclick="closeLightbox()">
-        <img id="lightboxImg" src="" class="max-w-full max-h-[85vh] rounded-xl shadow-2xl transition-transform duration-300 scale-95 hover:scale-100">
+    <!-- Modal עבור הגדלת תמונה -->
+    <div id="imageModal" onclick="closeImage()">
+        <img src="../assets/images/coelacanth.webp" alt="צילקנת מוגדל" id="modalImg">
+        <div class="absolute top-10 right-10 text-white text-4xl">&times;</div>
     </div>
 
-    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 text-center text-slate-500 text-xs">
-        פרויקט מחקר ייעודי. נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
-    </footer>
+    <!-- Language Toggle -->
+    <div class="fixed top-6 left-6 z-50">
+        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-4 py-2 rounded-full text-xs font-bold text-teal-500 hover:bg-teal-500 hover:text-white transition-all shadow-lg active:scale-95">
+            EN
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="pt-16 px-6 text-center mb-6">
+        <a href="../index.html" id="backBtn" class="text-teal-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
+        <h1 id="fossilName" class="text-4xl font-extrabold text-white">צילקנת (Coelacanth)</h1>
+        <p class="text-teal-600 font-mono mt-2 italic">Latimeria chalumnae</p>
+    </header>
+
+    <main class="px-6 space-y-8 max-w-2xl mx-auto">
+        
+        <!-- תמונה עם אפשרות הגדלה -->
+        <div class="fossil-hero-container group" onclick="openImage()">
+            <img src="../assets/images/coelacanth.webp" alt="צילקנת במעמקי הים" class="fossil-hero-img shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]" onerror="this.src='https://via.placeholder.com/800x450/000000/14b8a6?text=Coelacanth+Image+Processing...'">
+            <div class="absolute bottom-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 flex items-center space-x-2 space-x-reverse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                <span class="text-[10px] text-teal-400 font-bold uppercase" id="labelZoom">הגדל תמונה</span>
+            </div>
+        </div>
+
+        <!-- Section 1: Discovery Details -->
+        <section class="glass-card rounded-[2rem] p-7 border-r-4 border-teal-500" id="discoverCard">
+            <h2 class="text-xl font-bold text-teal-400 mb-5 flex items-center" id="discoverTitle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                פרטי הגילוי והזיהוי
+            </h2>
+            <div class="space-y-4 text-slate-300">
+                <p><span class="font-bold text-white" id="labelScientist">שם המגלה:</span> <span id="valScientist">מרג'ורי קורטני-לטימר (1907–2004)</span></p>
+                <p><span class="font-bold text-white" id="labelConfirm">זיהוי מדעי:</span> <span id="valConfirm">פרופ' ג'.ל.ב. סמית' (J.L.B. Smith)</span></p>
+                <p><span class="font-bold text-white" id="labelYear">שנת גילוי מחדש:</span> <span id="valYear">1938 (נחשב לנכחד לפני 66 מיליון שנה)</span></p>
+                <p><span class="font-bold text-white" id="labelLocation">מיקום הגילוי:</span> <span id="valLocation">איסט לונדון, דרום אפריקה (שפך נהר הצ'אלומנה)</span></p>
+            </div>
+        </section>
+
+        <!-- Section 2: Physical Specs & Lifespan -->
+        <section class="glass-card rounded-[2rem] p-7 border-r-4 border-emerald-600" id="specsCard">
+            <h2 class="text-xl font-bold text-emerald-400 mb-5 flex items-center" id="specsTitle">
+                מאפיינים פיזיים ותוחלת חיים
+            </h2>
+            <div class="grid grid-cols-1 gap-5 text-slate-300">
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <span class="text-emerald-500 text-xl">📏</span>
+                    <p><span class="font-bold text-white" id="labelSize">אורך מקסימלי:</span> <span id="valSize">עד 2 מטרים</span></p>
+                </div>
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <span class="text-emerald-500 text-xl">⚖️</span>
+                    <p><span class="font-bold text-white" id="labelWeight">משקל מקסימלי:</span> <span id="valWeight">עד 90 קילוגרם</span></p>
+                </div>
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <span class="text-emerald-500 text-xl">⏳</span>
+                    <p><span class="font-bold text-white" id="labelLifespan">תוחלת חיים:</span> <span id="valLifespan">מוערכת בכ-100 שנים</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Detailed Etymology -->
+        <section class="glass-card rounded-[2rem] p-7" id="etymCard">
+            <h2 class="text-xl font-bold text-teal-400 mb-8" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
+            <div class="space-y-6">
+                <div class="etymology-part">
+                    <h3 class="text-teal-300 font-bold text-lg">Coela (צילו)</h3>
+                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-2" id="etym1_src">מקור: יוונית עתיקה (koilos / κοῖλος)</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym1_def">משמעות: חלול (Hollow). המונח מתייחס למבנה המורפולוגי הייחודי של קרני הסנפירים שלו.</p>
+                </div>
+                <div class="etymology-part">
+                    <h3 class="text-teal-300 font-bold text-lg">Acanth (קנת)</h3>
+                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-2" id="etym2_src">מקור: יוונית עתיקה (akantha / ἄκανθα)</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym2_def">משמעות: קוץ או עמוד שדרה (Thorn / Spine). על שם הקשיחות של קרני הסנפיר הגביות.</p>
+                </div>
+                <div class="bg-teal-900/10 p-5 rounded-2xl border border-teal-900/30">
+                    <p class="text-sm italic text-slate-300 leading-relaxed" id="etymTotal">
+                        משמעות השם המלאה: "קוץ חלול", תיאור מדעי מדויק של קרני הסנפירים הגביים שלו, שהן חלולות בבסיסן – תכונה פרימיטיבית שנותרה ללא שינוי מעידן הדבון.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Survival & Evolution -->
+        <section class="glass-card rounded-[2rem] p-7 border-b-2 border-teal-500/30">
+            <h2 class="text-xl font-bold text-teal-400 mb-5" id="surviveTitle">סיבת ההישרדות והישגים אבולוציוניים</h2>
+            <div class="space-y-5 text-slate-300 leading-relaxed">
+                <p id="surviveText">
+                    הצילקנת שרד בזכות התאמה מושלמת ל"רפוגיה" (מקלטים טבעיים) – מערות תת-ימיות בעומק של 150-700 מטרים. קצב חילוף החומרים האיטי שלו והסביבה היציבה מנעו את הצורך בשינויים מורפולוגיים מהותיים.
+                </p>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider" id="labelAchieve">הישגים אנטומיים ייחודיים:</h4>
+                <ul class="space-y-4 text-sm text-teal-100/80" id="achieveList">
+                    <li class="flex items-start gap-3">
+                        <span class="text-teal-500 mt-1">•</span>
+                        <span>סנפירים בשרניים בעלי מבנה עצם המזכיר גפיים של חולייתני יבשה קדומים.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-teal-500 mt-1">•</span>
+                        <span>איבר "רוסטרלי" בחרטום המשמש לחישה חשמלית (Electroreception) של טרף בחשיכה.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-teal-500 mt-1">•</span>
+                        <span>מפרק תוך-גולגולתי ייחודי המאפשר לו להרים את החלק העליון של ראשו בזמן האכילה.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 w-full nav-fixed border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
+        <a href="../index.html" class="flex flex-col items-center text-teal-500 transition-transform active:scale-90">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            <span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span>
+        </a>
+    </nav>
 
     <script>
-        function openLightbox() {
-            const lb = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lightboxImg');
-            lbImg.src = document.getElementById('specimenImg').src;
-            lb.style.display = 'flex';
-            setTimeout(() => lb.classList.add('active'), 10);
-            document.body.style.overflow = 'hidden';
+        let currentLang = 'he';
+
+        function openImage() {
+            document.getElementById('imageModal').style.display = 'flex';
         }
-        function closeLightbox() { 
-            const lb = document.getElementById('lightbox');
-            lb.classList.remove('active');
-            setTimeout(() => lb.style.display = 'none', 300);
-            document.body.style.overflow = 'auto';
+
+        function closeImage() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        const content = {
+            he: {
+                name: 'צילקנת (Coelacanth)',
+                back: '← חזרה לארכיון',
+                labelZoom: 'הגדל תמונה',
+                discoverTitle: 'פרטי הגילוי והזיהוי',
+                lScientist: 'שם המגלה:',
+                vScientist: 'מרג\'ורי קורטני-לטימר (1907–2004)',
+                lConfirm: 'זיהוי מדעי:',
+                vConfirm: 'פרופ\' ג\'.ל.ב. סמית\' (J.L.B. Smith)',
+                lYear: 'שנת גילוי מחדש:',
+                vYear: '1938 (נחשב לנכחד לפני 66 מיליון שנה)',
+                lLocation: 'מיקום הגילוי:',
+                vLocation: 'איסט לונדון, דרום אפריקה (שפך נהר הצ\'אלומנה)',
+                specsTitle: 'מאופיינים פיזיים ותוחלת חיים',
+                lSize: 'אורך מקסימלי:',
+                vSize: 'עד 2 מטרים',
+                lWeight: 'משקל מקסימלי:',
+                vWeight: 'עד 90 קילוגרם',
+                lLifespan: 'תוחלת חיים:',
+                vLifespan: 'מוערכת בכ-100 שנים',
+                etymTitle: 'ניתוח אטימולוגי נרחב',
+                etym1src: 'מקור: יוונית עתיקה (koilos / κοῖλος)',
+                etym1def: 'משמעות: חלול (Hollow). המונח מתייחס למבנה המורפולוגי הייחודי של קרני הסנפירים שלו.',
+                etym2src: 'מקור: יוונית עתיקה (akantha / ἄκανθα)',
+                etym2def: 'משמעות: קוץ או עמוד שדרה (Thorn / Spine). על שם הקשיחות של קרני הסנפיר הגביות.',
+                etymTotal: 'משמעות השם המלאה: "קוץ חלול", תיאור מדעי מדויק של קרני הסנפירים הגביים שלו, שהן חלולות בבסיסן – תכונה פרימיטיבית שנותרה ללא שינוי מעידן הדבון.',
+                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים',
+                surText: 'הצילקנת שרד בזכות התאמה מושלמת ל"רפוגיה" (מקלטים טבעיים) – מערות תת-ימיות בעומק של 150-700 מטרים. קצב חילוף החומרים האיטי שלו והסביבה היציבה מנעו את הצורך בשינויים מורפולוגיים מהותיים.',
+                lAchieve: 'הישגים אנטומיים ייחודיים:',
+                achieve: [
+                    'סנפירים בשרניים בעלי מבנה עצם המזכיר גפיים של חולייתני יבשה קדומים.',
+                    'איבר "רוסטרלי" בחרטום המשמש לחישה חשמלית (Electroreception) של טרף בחשיכה.',
+                    'מפרק תוך-גולגולתי ייחודי המאפשר לו להרים את החלק העליון של ראשו בזמן האכילה.'
+                ],
+                navHome: 'בית',
+                btn: 'EN',
+                dir: 'rtl'
+            },
+            en: {
+                name: 'Coelacanth',
+                back: '← Back to Archive',
+                labelZoom: 'Enlarge Image',
+                discoverTitle: 'Discovery & Identification',
+                lScientist: 'Discoverer:',
+                vScientist: 'Marjorie Courtenay-Latimer (1907–2004)',
+                lConfirm: 'Scientific ID:',
+                vConfirm: 'Prof. J.L.B. Smith',
+                lYear: 'Rediscovery Year:',
+                vYear: '1938 (Thought extinct for 66m years)',
+                lLocation: 'Discovery Location:',
+                vLocation: 'East London, South Africa (Chalumna River mouth)',
+                specsTitle: 'Physical Spec & Lifespan',
+                lSize: 'Max Length:',
+                vSize: 'Up to 2 meters (6.6 ft)',
+                lWeight: 'Max Weight:',
+                vWeight: 'Up to 90 kg (200 lbs)',
+                lLifespan: 'Lifespan:',
+                vLifespan: 'Estimated up to 100 years',
+                etymTitle: 'Detailed Etymology',
+                etym1src: 'Source: Ancient Greek (koilos / κοῖλος)',
+                etym1def: 'Meaning: Hollow. Referring to the unique morphological structure of its fin rays.',
+                etym2src: 'Source: Ancient Greek (akantha / ἄκανθα)',
+                etym2def: 'Meaning: Thorn or Spine. Named after the rigidity of the dorsal fin rays.',
+                etymTotal: 'Full Meaning: "Hollow Spine", a precise scientific description of its dorsal fin rays, which are hollow at the base – a primitive feature unchanged since the Devonian.',
+                surTitle: 'Survival & Evolution',
+                surText: 'The Coelacanth survived due to perfect adaptation to "refugia" (natural shelters) – deep-sea caves at 150-700 meters. Its slow metabolic rate and stable environment removed the pressure for change.',
+                lAchieve: 'Unique Anatomical Achievements:',
+                achieve: [
+                    'Fleshy lobed fins with a bone structure similar to early land vertebrates.',
+                    'A "rostral organ" in the snout used for electroreception in the deep sea.',
+                    'A unique intracranial joint allowing it to lift its upper head while feeding.'
+                ],
+                navHome: 'HOME',
+                btn: 'HE',
+                dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const data = content[currentLang];
+            
+            document.getElementById('fossilName').innerText = data.name;
+            document.getElementById('backBtn').innerText = data.back;
+            document.getElementById('labelZoom').innerText = data.labelZoom;
+            document.getElementById('discoverTitle').innerText = data.discoverTitle;
+            document.getElementById('labelScientist').innerText = data.lScientist;
+            document.getElementById('valScientist').innerText = data.vScientist;
+            document.getElementById('labelConfirm').innerText = data.lConfirm;
+            document.getElementById('valConfirm').innerText = data.vConfirm;
+            document.getElementById('labelYear').innerText = data.lYear;
+            document.getElementById('valYear').innerText = data.vYear;
+            document.getElementById('labelLocation').innerText = data.lLocation;
+            document.getElementById('valLocation').innerText = data.vLocation;
+            
+            document.getElementById('specsTitle').innerText = data.specsTitle;
+            document.getElementById('labelSize').innerText = data.lSize;
+            document.getElementById('valSize').innerText = data.vSize;
+            document.getElementById('labelWeight').innerText = data.lWeight;
+            document.getElementById('valWeight').innerText = data.vWeight;
+            document.getElementById('labelLifespan').innerText = data.lLifespan;
+            document.getElementById('valLifespan').innerText = data.vLifespan;
+
+            document.getElementById('etymTitle').innerText = data.etymTitle;
+            document.getElementById('etym1_src').innerText = data.etym1src;
+            document.getElementById('etym1_def').innerText = data.etym1_def || data.etym1def;
+            document.getElementById('etym2_src').innerText = data.etym2src;
+            document.getElementById('etym2_def').innerText = data.etym2_def || data.etym2def;
+            document.getElementById('etymTotal').innerText = data.etymTotal;
+            
+            document.getElementById('surviveTitle').innerText = data.surTitle;
+            document.getElementById('surviveText').innerText = data.surText;
+            document.getElementById('labelAchieve').innerText = data.lAchieve;
+            
+            document.getElementById('navHome').innerText = data.navHome;
+            document.getElementById('langBtn').innerText = data.btn;
+            
+            const list = document.getElementById('achieveList');
+            list.innerHTML = data.achieve.map(item => `
+                <li class="flex items-start gap-3">
+                    <span class="text-teal-500 mt-1">•</span>
+                    <span>${item}</span>
+                </li>`).join('');
+            
+            document.documentElement.dir = data.dir;
+            document.documentElement.lang = currentLang;
+            
+            const cards = [document.getElementById('discoverCard'), document.getElementById('specsCard')];
+            cards.forEach(card => {
+                card.style.borderRightWidth = currentLang === 'en' ? '0' : '4px';
+                card.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+            });
         }
     </script>
 </body>

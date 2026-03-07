@@ -1,99 +1,324 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>גינקו דו-אונתי - Living Fossils Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: גינקו דו-אונתי | The Eternal Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Assistant', sans-serif; }
-        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
-        .text-justify { text-align: justify; }
-        #lightbox { transition: opacity 0.3s ease; display: none; }
-        #lightbox.active { display: flex; opacity: 1; }
-        .specimen-img-container { cursor: zoom-in; overflow: hidden; border-radius: 1.5rem; }
+        /* S25 Ultra Optimized - Premium Deep Dark Edition */
+        :root {
+            --amoled-black: #000000;
+            --card-gray: #0f172a;
+            --accent-emerald: #10b981;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            background-color: var(--amoled-black);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
+        }
+
+        .etymology-part {
+            border-right: 3px solid var(--accent-emerald);
+            padding-right: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        [dir="ltr"] .etymology-part {
+            border-right: 0;
+            border-left: 3px solid var(--accent-emerald);
+            padding-right: 0;
+            padding-left: 1.25rem;
+        }
+
+        .fossil-hero-container {
+            position: relative;
+            cursor: zoom-in;
+            margin-bottom: 2.5rem;
+        }
+
+        .fossil-hero-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Image Zoom Modal */
+        #imageModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        #imageModal img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 1.5rem;
+            box-shadow: 0 0 60px rgba(16, 185, 129, 0.25);
+        }
+
+        h1, h2, h3 {
+            color: #f8fafc;
+            letter-spacing: -0.01em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(to left, rgba(16, 185, 129, 0.1), transparent);
+            border-right: 2px solid var(--accent-emerald);
+        }
+
+        [dir="ltr"] .highlight-box {
+            background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
+            border-right: 0;
+            border-left: 2px solid var(--accent-emerald);
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen">
-    <!-- Header - Non-sticky fix -->
-    <header class="border-b border-slate-800 bg-slate-900/50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="flex items-center gap-2 text-emerald-500 font-bold hover:text-emerald-400 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                חזרה לארכיון
-            </a>
-            <span class="text-xs font-mono text-slate-500 italic">S25 ULTRA OPTIMIZED</span>
-        </div>
+<body class="min-h-screen flex flex-col pb-24 text-justify">
+
+    <!-- Modal עבור הגדלת תמונה -->
+    <div id="imageModal" onclick="this.style.display='none'">
+        <img src="../images/ginkgo.webp" alt="גינקו מוגדל" id="modalImg">
+        <div class="absolute top-10 right-10 text-white text-5xl cursor-pointer">&times;</div>
+    </div>
+
+    <!-- Language Toggle -->
+    <div class="fixed top-6 left-6 z-50">
+        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-lg active:scale-95">EN</button>
+    </div>
+
+    <!-- Header -->
+    <header class="pt-16 px-6 text-center mb-6">
+        <a href="../index.html" id="backBtn" class="text-emerald-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
+        <h1 id="fossilName" class="text-4xl font-extrabold text-white">גינקו דו-אונתי (Ginkgo)</h1>
+        <p class="text-emerald-600 font-mono mt-2 italic">Ginkgo biloba</p>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 py-10 space-y-12">
-        <section class="text-center space-y-6">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase mb-2">מצב שימור: בסכנת הכחדה (Endangered)</div>
-            <h1 class="text-5xl font-extrabold text-white">גינקו דו-אונתי</h1>
-            <p class="text-emerald-400 text-xl font-light">חוקר: אנגלברט קמפר (1651–1716)</p>
+    <main class="px-6 space-y-8 max-w-2xl mx-auto">
+        
+        <!-- תמונה עם אפשרות הגדלה -->
+        <div class="fossil-hero-container group" onclick="document.getElementById('imageModal').style.display='flex'">
+            <img src="../images/ginkgo.webp" alt="עלי גינקו" class="fossil-hero-img shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]" onerror="this.src='https://via.placeholder.com/800x450/000000/10b981?text=Ginkgo+Image+Not+Found'">
+            <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center space-x-2 space-x-reverse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                <span class="text-[10px] text-emerald-400 font-bold uppercase" id="labelZoom">לחץ להגדלה</span>
+            </div>
+        </div>
 
-            <div class="specimen-img-container relative group max-w-2xl mx-auto border border-slate-800 shadow-2xl" onclick="openLightbox()">
-                <img id="specimenImg" src="../images/ginkgo.jpg" onerror="this.src='https://via.placeholder.com/1200x800/0f172a/10b981?text=Upload+ginkgo.jpg'" class="w-full h-80 object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                <div class="absolute bottom-4 right-4 bg-black/60 px-4 py-2 rounded-full text-xs font-mono">🔍 לחץ להגדלה</div>
+        <!-- Section 1: Discovery Details -->
+        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-emerald-500" id="discoverCard">
+            <h2 class="text-xl font-bold text-emerald-400 mb-6 flex items-center" id="discoverTitle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                פרטי התיעוד והזיהוי
+            </h2>
+            <div class="space-y-4 text-slate-300">
+                <p><span class="font-bold text-white" id="labelScientist">החוקר המתעד (למערב):</span> <span id="valScientist">אנגלברט קמפר (1651–1716)</span></p>
+                <p><span class="font-bold text-white" id="labelYear">שנת תיעוד ראשונה:</span> <span id="valYear">1690 (נצפה לראשונה ביפן על ידי קמפר)</span></p>
+                <p><span class="font-bold text-white" id="labelLocation">מקור ביולוגי עתיק:</span> <span id="valLocation">מחוז ג'ג'יאנג, סין (הרי טיאנמו)</span></p>
+                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">המין היחיד שנותר במערכת הגינקואים (Ginkgophyta)</span></p>
             </div>
         </section>
 
-        <!-- Detailed Etymology -->
-        <section class="glass-panel rounded-3xl p-8 space-y-8">
-            <h2 class="text-2xl font-bold text-emerald-400">ניתוח אטימולוגי מורחב</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-justify">
-                <div class="bg-slate-900/50 p-6 rounded-2xl border border-emerald-500/20">
-                    <div class="text-4xl font-bold text-white mb-2 border-b border-emerald-500/30 pb-2">Ginkgo</div>
-                    <div class="text-emerald-400 text-[10px] font-mono mb-2 uppercase">Part I: Linguistic Origin</div>
-                    <p class="text-slate-300 leading-relaxed">שיבוש פונטי של המונח הסיני-יפני **Ginkyo**, שמשמעותו **"משמש כסוף"**. השם מתאר את הזרעים הבשרניים והעגולים של העץ, המכוסים בשכבה דקיקה של אבקה לבנה-כסופה המעניקה להם מראה של פרי משמש כסוף כשהם מגיעים לבשלות מלאה.</p>
-                </div>
-                <div class="bg-slate-900/50 p-6 rounded-2xl border border-emerald-500/20">
-                    <div class="text-4xl font-bold text-white mb-2 border-b border-emerald-500/30 pb-2">Bi-loba</div>
-                    <div class="text-emerald-400 text-[10px] font-mono mb-2 uppercase">Part II: Morphology</div>
-                    <p class="text-slate-300 leading-relaxed">צירוף לטיני מדעי: **Bi** (שניים) + **Loba** (אונה). מתאר את צורת המניפה המרהיבה של העלים, המחולקים לרוב על ידי חריץ מרכזי לשתי אונות סימטריות. עורקי העלים מסתעפים בזוגות, מאפיין פרימיטיבי מעידן היורה.</p>
+        <!-- New Section: Discovery Circumstances & China-Japan Connection -->
+        <section class="glass-card rounded-[2rem] p-8" id="originCard">
+            <h2 class="text-xl font-bold text-emerald-400 mb-6 flex items-center" id="originTitle">נסיבות הגילוי והקשר הגיאוגרפי</h2>
+            <div class="space-y-5 text-slate-300 leading-relaxed">
+                <p id="originDesc1">
+                    למרות שהגינקו מזוהה לעיתים קרובות עם יפן, מקורו הביולוגי היחיד הוא בסין. עצי הגינקו הפראיים האחרונים בעולם שרדו בבידוד ב**הרי טיאנמו** שבמחוז ג'ג'יאנג. משם הם הופצו ליפן ולקוריאה לפני מאות שנים על ידי נזירים בודהיסטים שראו בהם עצים מקודשים.
+                </p>
+                <div class="highlight-box p-5 rounded-xl">
+                    <p id="originDesc2" class="text-sm">
+                        החוקר **אנגלברט קמפר** נחשף לעץ לראשונה בשנת 1690 בזמן ששהה ב**נגסאקי, יפן**. קמפר, שעבד עבור חברת הודו המזרחית ההולנדית, תיעד את העץ בגנים של מקדשים מקומיים. מכיוון שהדיווח המערבי הראשון הגיע מיפן, נוצר בלבול היסטורי לגבי מולדת העץ, אך מחקרים גנטיים מודרניים אישרו כי כל עצי הגינקו בעולם מוצאם מהאוכלוסייה הסינית העתיקה.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- Discovery & Biology -->
-        <section class="glass-panel rounded-3xl p-8 border-r-4 border-orange-500 space-y-10">
-            <h2 class="text-2xl font-bold text-orange-400">פרטי אובייקט הגילוי: The Living Monolith</h2>
-            <div>
-                <h3 class="text-xl font-bold text-white mb-4 underline decoration-orange-500/50 underline-offset-8">הישרדות בצל המקדשים</h3>
-                <p class="text-slate-300 leading-relaxed text-justify">האובייקט אותר במקור במחוז ג'ג'יאנג, סין. בעוד ששאר משפחתו נכחדה לפני מיליוני שנים, הגינקו שרד הודות לבידוד גיאוגרפי וטיפוח של נזירים בודהיסטים. קמפר תיעד אותו לראשונה למערב ב-1690. העץ עמיד באופן נדיר לזיהום אוויר, מחלות ואפילו לקרינה רדיואקטיבית.</p>
+        <!-- Section 2: Physical Specs & Lifespan -->
+        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-amber-600" id="specsCard">
+            <h2 class="text-xl font-bold text-amber-400 mb-6 flex items-center" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
+            <div class="grid grid-cols-1 gap-6 text-slate-300">
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <span class="text-amber-500 text-xl">📏</span>
+                    <p><span class="font-bold text-white" id="labelSize">גובה ממוצע:</span> <span id="valSize">20–35 מטרים</span></p>
+                </div>
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <span class="text-amber-500 text-xl">🌳</span>
+                    <p><span class="font-bold text-white" id="labelWeight">היקף גזע:</span> <span id="valWeight">עד 9 מטרים</span></p>
+                </div>
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <span class="text-amber-500 text-xl">⏳</span>
+                    <p><span class="font-bold text-white" id="labelLifespan">תוחלת חיים:</span> <span id="valLifespan">מעל 1,000 שנים (תועד עד 3,500)</span></p>
+                </div>
             </div>
-            <div>
-                <h3 class="text-xl font-bold text-white mb-4 underline decoration-orange-500/50 underline-offset-8">חשיבות בוטנית ומחקר</h3>
-                <p class="text-slate-300 leading-relaxed text-justify">הגינקו הוא "קישור חסר" בבוטניקה; הוא חשופזרע בעל עלים רחבים. זרעיו מצוידים בתאי זרע שוחים – תכונה נדירה שנעלמה מרוב הצמחים המודרניים. גילם של פרטים מסוימים בסין מוערך ביותר מ-1,000 שנים.</p>
+        </section>
+
+        <!-- Section 3: Detailed Etymology -->
+        <section class="glass-card rounded-[2rem] p-8" id="etymCard">
+            <h2 class="text-xl font-bold text-emerald-400 mb-8" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
+            <div class="space-y-8">
+                <div class="etymology-part">
+                    <h3 class="text-emerald-300 font-bold text-lg">Ginkgo (גינקו)</h3>
+                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym1_src">מקור: יפנית (Gin-kyo / 銀杏)</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym1_def">משמעות: משמש כסוף (Silver Apricot). המילה 銀 (Gin) פירושה כסף, והמילה 杏 (Kyo) פירושה משמש. השם מתייחס למראה הזרעים המכוסים בשכבה לבנה-כסופה המזכירה פרי משמש.</p>
+                </div>
+                <div class="etymology-part">
+                    <h3 class="text-emerald-300 font-bold text-lg">Bi-loba (דו-אונתי)</h3>
+                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: לטינית (bis = פעמיים, lobus = אונה)</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym2_def">משמעות: בעל שתי אונות. השם המדעי מתאר את צורתם הייחודית של עלי המניפה, אשר לרוב מחולקים לשני חלקים (אונות) מרכזיים.</p>
+                </div>
+                <div class="bg-emerald-900/15 p-6 rounded-2xl border border-emerald-800/40 text-sm italic text-slate-300" id="etymTotal">
+                    משמעות השם המלאה: "משמש כסוף בעל שתי אונות", שם המשלב את המראה המטעה של הזרעים (הנראים כפרי אך מבחינה בוטנית הם זרעים חשופים) עם המורפולוגיה הבלתי משתנה של העלים.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Survival & Resilience -->
+        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-emerald-500/30">
+            <h2 class="text-xl font-bold text-emerald-400 mb-6" id="surviveTitle">סיבת ההישרדות וחוסן ביולוגי</h2>
+            <div class="space-y-6 text-slate-300 leading-relaxed">
+                <p id="surviveText">הגינקו הוא דוגמה חיה ל"סטזיס" (Stasis) אבולוציוני – מצב שבו המין שומר על תכונותיו כמעט ללא שינוי לאורך מאות מיליוני שנים. חוסנו נובע ממנגנוני הגנה כימיים מורכבים במיוחד המגנים עליו מפני חרקים, פטריות וחיידקים.</p>
+                <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">הישגי חוסן יוצאי דופן:</h4>
+                <ul class="space-y-5 text-sm text-emerald-100/80" id="achieveList">
+                    <li class="flex items-start gap-3"><span class="text-emerald-500">•</span><span>יכולת לייצר כימיקלים נוגדי חמצון המונעים הזדקנות תאים וריקבון פנימי.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-emerald-500">•</span><span>עמידות קיצונית לזיהום אוויר, קרינה רדיואקטיבית ומתכות כבדות (היה מהראשונים להתחדש לאחר הפיצוץ בהירושימה).</span></li>
+                    <li class="flex items-start gap-3"><span class="text-emerald-500">•</span><span>מערכת גנטית המאפשרת התחדשות מתמדת של רקמות ללא ירידה ביעילות המערכת החיסונית עם הגיל.</span></li>
+                </ul>
             </div>
         </section>
     </main>
 
-    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center p-4" onclick="closeLightbox()">
-        <img id="lightboxImg" src="" class="max-w-full max-h-[85vh] rounded-xl shadow-2xl transition-transform duration-300 scale-95 hover:scale-100">
-    </div>
-
-    <footer class="border-t border-slate-800 bg-slate-900 py-10 px-6 text-center text-slate-500 text-xs">
-        פרויקט מחקר ייעודי. נוצר על ידי <span class="text-emerald-500 font-bold">ג'מיני</span> ועל ידי <span class="text-emerald-500 font-bold">רם</span>.
-    </footer>
+    <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-2xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
+        <a href="../index.html" class="flex flex-col items-center text-emerald-500 transition-transform active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span></a>
+    </nav>
 
     <script>
-        function openLightbox() {
-            const lb = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lightboxImg');
-            lbImg.src = document.getElementById('specimenImg').src;
-            lb.style.display = 'flex';
-            setTimeout(() => lb.classList.add('active'), 10);
-            document.body.style.overflow = 'hidden';
-        }
-        function closeLightbox() { 
-            const lb = document.getElementById('lightbox');
-            lb.classList.remove('active');
-            setTimeout(() => lb.style.display = 'none', 300);
-            document.body.style.overflow = 'auto';
+        let currentLang = 'he';
+        const content = {
+            he: {
+                name: 'גינקו דו-אונתי (Ginkgo)',
+                back: '← חזרה לארכיון',
+                labelZoom: 'לחץ להגדלה',
+                discoverTitle: 'פרטי התיעוד והזיהוי',
+                lScientist: 'החוקר המתעד (למערב):',
+                vScientist: 'אנגלברט קמפר (1651–1716)',
+                lYear: 'שנת תיעוד ראשונה:',
+                vYear: '1690 (נצפה לראשונה ביפן על ידי קמפר)',
+                lLocation: 'מקור ביולוגי עתיק:',
+                vLocation: 'מחוז ג\'ג\'יאנג, סין (הרי טיאנמו)',
+                lStatus: 'סטטוס אבולוציוני:',
+                vStatus: 'המין היחיד שנותר במערכת הגינקואים (Ginkgophyta)',
+                originTitle: 'נסיבות הגילוי והקשר הגיאוגרפי',
+                originDesc1: 'למרות שהגינקו מזוהה עם יפן, מקורו הוא בסין. עצי הגינקו הפראיים האחרונים שרדו בהרי טיאנמו, ומשם הופצו ליפן על ידי נזירים.',
+                originDesc2: 'החוקר אנגלברט קמפר נחשף לעץ בשנת 1690 בנגסאקי, יפן. בשל כך נוצר בלבול לגבי מולדת העץ, אך מוצאו הוא סיני.',
+                specsTitle: 'מאופיינים פיזיים ותוחלת חיים',
+                lLifespan: 'תוחלת חיים:',
+                vLifespan: 'מעל 1,000 שנים (תועד עד 3,500)',
+                etymTitle: 'ניתוח אטימולוגי נרחב',
+                etymTotal: 'משמעות השם המלאה: "משמש כסוף בעל שתי אונות".',
+                surTitle: 'סיבת ההישרדות וחוסן ביולוגי',
+                surText: 'הגינקו שרד בזכות מנגנוני הגנה כימיים מורכבים המגנים עליו מפני מזיקים ופטריות.',
+                lAchieve: 'הישגי חוסן יוצאי דופן:',
+                achieve: [
+                    'יכולת לייצר כימיקלים נוגדי חמצון המונעים הזדקנות תאים.',
+                    'עמידות קיצונית לזיהום אוויר, קרינה ומתכות כבדות.',
+                    'מערכת גנטית המאפשרת התחדשות מתמדת של רקמות.'
+                ],
+                navHome: 'בית', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                name: 'Ginkgo Biloba',
+                back: '← Back to Archive',
+                labelZoom: 'Click to Enlarge',
+                discoverTitle: 'Identification & Records',
+                lScientist: 'Identifying Scientist:',
+                vScientist: 'Engelbert Kaempfer (1651–1716)',
+                lYear: 'Year Documented:',
+                vYear: '1690 (First observed in Japan)',
+                lLocation: 'Biological Origin:',
+                vLocation: 'Zhejiang, China (Tianmu Mts)',
+                lStatus: 'Evolutionary Status:',
+                vStatus: 'Sole survivor of Ginkgophyta division',
+                originTitle: 'Discovery & Geographical Context',
+                originDesc1: 'While often associated with Japan, Ginkgo is native to China. The last wild trees survived in the Tianmu Mountains and were spread by monks.',
+                originDesc2: 'Engelbert Kaempfer discovered the tree in 1690 in Nagasaki, Japan. This led to historical confusion, but modern genetics confirm its Chinese origin.',
+                specsTitle: 'Physical Traits & Lifespan',
+                lLifespan: 'Lifespan:',
+                vLifespan: 'Over 1,000 years (up to 3,500 recorded)',
+                etymTitle: 'Detailed Etymology',
+                etymTotal: 'Full Meaning: "Two-lobed Silver Apricot".',
+                surTitle: 'Survival & Resilience',
+                surText: 'Ginkgo survived due to complex chemical defenses against pests and fungi.',
+                lAchieve: 'Exceptional Resilience:',
+                achieve: [
+                    'Synthesis of antioxidants preventing cell decay.',
+                    'Extreme resistance to pollution, radiation, and heavy metals.',
+                    'Genetic system allowing constant tissue regeneration.'
+                ],
+                navHome: 'HOME', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const data = content[currentLang];
+            document.getElementById('fossilName').innerText = data.name;
+            document.getElementById('backBtn').innerText = data.back;
+            document.getElementById('labelZoom').innerText = data.labelZoom;
+            document.getElementById('discoverTitle').innerText = data.discoverTitle;
+            document.getElementById('labelScientist').innerText = data.lScientist;
+            document.getElementById('valScientist').innerText = data.vScientist;
+            document.getElementById('labelYear').innerText = data.lYear;
+            document.getElementById('valYear').innerText = data.vYear;
+            document.getElementById('labelLocation').innerText = data.lLocation;
+            document.getElementById('valLocation').innerText = data.vLocation;
+            document.getElementById('labelStatus').innerText = data.lStatus;
+            document.getElementById('valStatus').innerText = data.vStatus;
+            document.getElementById('originTitle').innerText = data.originTitle;
+            document.getElementById('originDesc1').innerText = data.originDesc1;
+            document.getElementById('originDesc2').innerText = data.originDesc2;
+            document.getElementById('specsTitle').innerText = data.specsTitle;
+            document.getElementById('labelLifespan').innerText = data.lLifespan;
+            document.getElementById('valLifespan').innerText = data.vLifespan;
+            document.getElementById('etymTitle').innerText = data.etymTitle;
+            document.getElementById('etymTotal').innerText = data.etymTotal;
+            document.getElementById('surviveTitle').innerText = data.surTitle;
+            document.getElementById('surviveText').innerText = data.surText;
+            document.getElementById('labelAchieve').innerText = data.lAchieve;
+            document.getElementById('navHome').innerText = data.navHome;
+            document.getElementById('langBtn').innerText = data.btn;
+            document.getElementById('achieveList').innerHTML = data.achieve.map(item => `<li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">•</span><span>${item}</span></li>`).join('');
+            document.documentElement.dir = data.dir;
+            document.documentElement.lang = currentLang;
+            const cards = [document.getElementById('discoverCard'), document.getElementById('specsCard')];
+            cards.forEach(card => {
+                card.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
+                card.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+            });
         }
     </script>
 </body>
 </html>
-

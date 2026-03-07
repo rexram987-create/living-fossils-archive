@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ארכיון המאובנים החיים | The Eternal Archive</title>
+    <title>אודות הארכיון | The Eternal Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* S25 Ultra Optimized - Premium Deep Dark Edition */
@@ -30,7 +30,6 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
-            overflow: hidden;
         }
 
         .ambient-glow {
@@ -51,19 +50,9 @@
             z-index: 100;
         }
 
-        .card-img-container {
-            width: 80px;
-            height: 80px;
-            flex-shrink: 0;
-            border-radius: 1rem;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .card-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        h1, h2, h3 {
+            color: #f8fafc;
+            letter-spacing: -0.01em;
         }
     </style>
 </head>
@@ -71,75 +60,89 @@
 
     <div class="ambient-glow"></div>
 
+    <!-- כפתור החלפת שפה -->
     <div class="lang-switch">
         <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-teal-500 hover:bg-teal-500 hover:text-white transition-all shadow-xl active:scale-95">EN</button>
     </div>
 
-    <header class="pt-14 pb-10 px-6 text-center">
-        <div class="inline-block px-4 py-1 mb-6 text-[11px] font-bold tracking-widest text-teal-500 uppercase bg-teal-950/40 rounded-full border border-teal-800/30">Digital Museum of Natural History</div>
-        <h1 id="mainTitle" class="text-4xl font-extrabold mb-4 text-white">ארכיון <span class="text-teal-500">המאובנים החיים</span></h1>
-        <p id="mainSub" class="text-slate-400 text-base max-w-lg mx-auto leading-relaxed">מסע אבולוציוני בעקבות אורגניזמים ששימרו את צורתם המקורית במשך מאות מיליוני שנים.</p>
+    <!-- Header -->
+    <header class="pt-16 pb-10 px-6 text-center">
+        <a href="index.html" id="backBtn" class="text-teal-500 text-sm mb-4 inline-block hover:underline">← חזרה לבית</a>
+        <h1 id="aboutTitle" class="text-4xl font-extrabold text-white">אודות <span class="text-teal-500">הארכיון</span></h1>
+        <p id="aboutSub" class="text-slate-400 text-sm mt-3 uppercase tracking-widest font-mono">The Eternal Archive Project</p>
     </header>
 
-    <main class="flex-grow container mx-auto px-6 max-w-4xl">
-        <section class="mb-14 glass-card rounded-[2.5rem] p-8 border-r-4 border-teal-600" id="introBox">
-            <h2 id="introTitle" class="text-2xl font-bold text-teal-500 mb-6 flex items-center">מהו "מאובן חי"?</h2>
-            <div id="introContent" class="space-y-6 text-slate-200 leading-relaxed text-lg text-justify">
-                <p id="p1">המונח <span class="text-teal-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר מינים הקיימים כיום ודומים דמיון מפתיע למאובנים של אבותיהם הקדמונים. אלו הם יצורים שהאבולוציה המורפולוגית שלהם כמעט ונעצרה לאורך עידנים.</p>
-                <div class="bg-slate-900/80 p-6 rounded-2xl border border-teal-900/30">
-                    <p class="text-sm" id="p2">המונח נטבע לראשונה על ידי חוקר הטבע המפורסם <span class="text-white font-bold">צ'ארלס דרווין</span> בשנת <span class="text-white font-bold">1859</span>, בספרו <span class="italic text-teal-200">"מוצא המינים"</span>. דרווין השתמש בו לתיאור מינים ששרדו בסביבות מבודדות.</p>
-                </div>
+    <main class="flex-grow container mx-auto px-6 max-w-3xl space-y-8">
+        
+        <!-- חזון הפרויקט -->
+        <section class="glass-card rounded-[2rem] p-8">
+            <h2 id="visionTitle" class="text-xl font-bold text-teal-400 mb-4">חזון ומטרה</h2>
+            <p id="visionText" class="text-slate-200 text-justify">
+                פרויקט "ארכיון הנצח" הוקם בשנת 2026 במטרה ליצור מוזיאון דיגיטלי אינטראקטיבי המוקדש ליצורים המרתקים ביותר בטבע: המאובנים החיים. אלו הם אורגניזמים ששרדו מאות מיליוני שנים ללא שינוי מורפולוגי משמעותי, ובכך הם מהווים גשר חי לעבר הרחוק של כדור הארץ. מטרתנו היא לרכז ידע מדעי, היסטורי ואטימולוגי מעמיק תחת קורת גג אחת, תוך שימוש בטכנולוגיות התצוגה המתקדמות ביותר.
+            </p>
+        </section>
+
+        <!-- הצוות והטכנולוגיה -->
+        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-teal-500" id="techBox">
+            <h2 id="techTitle" class="text-xl font-bold text-teal-400 mb-4 text-justify">היוצרים והטכנולוגיה</h2>
+            <p id="techText" class="text-slate-200 text-justify mb-6">
+                הארכיון הוא תוצר של שיתוף פעולה ייחודי בין הבינה המלאכותית (Gemini) לבין החזון המחקרי של **רם**. כל פיסת מידע עברה אימות מדעי והצלבה היסטורית כדי להבטיח רמת דיוק מקסימלית. האתר תוכנן במיוחד עבור מכשיר ה-Samsung S25 Ultra, תוך ניצול מקסימלי של טכנולוגיית ה-AMOLED להשגת ניגודיות מושלמת וחיסכון באנרגיה באמצעות עיצוב "Deep Dark".
+            </p>
+            <div class="bg-teal-900/10 p-5 rounded-2xl border border-teal-800/30">
+                <h3 id="etymHead" class="text-sm font-bold text-white uppercase mb-2">אטימולוגיה של שם הפרויקט:</h3>
+                <p id="etymText" class="text-xs text-teal-100/70 italic leading-relaxed">
+                    **The Eternal Archive** (ארכיון הנצח): המילה *Eternal* (נצחי) מתייחסת ליכולת ההישרדות המופלאה של המאובנים החיים שנדמה כי הזמן פסח עליהם. המילה *Archive* (ארכיון) מדגישה את מחויבותנו לשימור המידע ההיסטורי והביולוגי של שושלות אלו לדורות הבאים.
+                </p>
             </div>
         </section>
 
-        <section class="mb-20">
-            <h2 id="catHeader" class="text-xs font-bold text-slate-500 uppercase tracking-[0.3em] mb-8 text-center">קטגוריות המחקר</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <a href="fish/coelacanth.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-teal-500 transition-all active:scale-95 group">
-                    <div class="card-img-container ml-4"><img src="images/coelacanth.png" alt="צילקנת" onerror="this.src='https://via.placeholder.com/150/0f172a/14b8a6?text=🐟'"></div>
-                    <div><h3 class="font-bold text-lg text-white" id="catFish">דגים (צילקנת)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Coelacanthiformes</p></div>
-                </a>
-                <a href="trees/ginkgo.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-emerald-500 transition-all active:scale-95 group">
-                    <div class="card-img-container ml-4"><img src="images/ginkgo.png" alt="גינקו" onerror="this.src='https://via.placeholder.com/150/0f172a/10b981?text=🌿'"></div>
-                    <div><h3 class="font-bold text-lg text-white" id="catTrees">עצים (גינקו)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Ginkgophyta</p></div>
-                </a>
-                <a href="reptiles/tuatara.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-amber-500 transition-all active:scale-95 group">
-                    <div class="card-img-container ml-4"><img src="images/tuatara.png" alt="טואטרה" onerror="this.src='https://via.placeholder.com/150/0f172a/f59e0b?text=🦎'"></div>
-                    <div><h3 class="font-bold text-lg text-white" id="catReptiles">זוחלים (טואטרה)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Rhynchocephalia</p></div>
-                </a>
-                <a href="turtles/leatherback.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-orange-500 transition-all active:scale-95 group">
-                    <div class="card-img-container ml-4"><img src="images/leatherback.png" alt="צב גלד" onerror="this.src='https://via.placeholder.com/150/0f172a/f97316?text=🐢'"></div>
-                    <div><h3 class="font-bold text-lg text-white" id="catTurtles">צבים (צב גלד)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Testudines</p></div>
-                </a>
-                <a href="invertebrates/horseshoe-crab.html" class="glass-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover:border-blue-500 transition-all active:scale-95 group sm:col-span-2">
-                    <div class="card-img-container ml-4"><img src="images/horseshoe-crab.png" alt="סרטן הפרסה" onerror="this.src='https://via.placeholder.com/150/0f172a/3b82f6?text=🦀'"></div>
-                    <div><h3 class="font-bold text-lg text-white" id="catInv">חסרי חוליות (סרטן הפרסה)</h3><p class="text-[10px] text-slate-500 font-mono uppercase tracking-tighter">Xiphosura</p></div>
-                </a>
-            </div>
+        <!-- הערת נגישות ומחקר -->
+        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-white/5">
+            <h2 id="researchTitle" class="text-xl font-bold text-teal-400 mb-4">מתודולוגיית המחקר</h2>
+            <p id="researchText" class="text-slate-300 text-sm text-justify">
+                המידע בארכיון זה נאסף ממקורות אקדמיים, רישומים היסטוריים ודו"חות משלחות מחקר. אנו שמים דגש מיוחד על נסיבות הגילוי של כל מין על ידי המדע המערבי, מתוך הבנה שהסיפורים האנושיים מאחורי הגילויים חשובים לא פחות מהנתונים הביולוגיים עצמם. המחקר הוא תהליך מתמשך ומתעדכן תמיד.
+            </p>
         </section>
     </main>
 
-    <footer class="mt-auto bg-slate-950 border-t border-white/5 pt-12 pb-24 text-center px-6">
-        <p id="footerText" class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג'מיני ועל ידי רם.</p>
+    <!-- Footer -->
+    <footer class="mt-12 bg-slate-950 border-t border-white/5 pt-10 pb-24 text-center px-6">
+        <div id="footerCopyright" class="text-[10px] text-slate-700 uppercase tracking-[0.4em]">
+            © 2026 The Eternal Archive | Created by Gemini & Ram
+        </div>
     </footer>
 
     <script>
         let currentLang = 'he';
         const content = {
             he: {
-                title: 'ארכיון <span class="text-teal-500">המאובנים החיים</span>', sub: 'מסע אבולוציוני בעקבות אורגניזמים ששימרו את צורתם המקורית במשך מאות מיליוני שנים.',
-                introTitle: 'מהו "מאובן חי"?', p1: 'המונח <span class="text-teal-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר מינים הקיימים כיום ודומים דמיון מפתיע למאובנים של אבותיהם הקדמונים. אלו הם יצורים שהאבולוציה המורפולוגית שלהם כמעט ונעצרה לאורך עידנים.',
-                p2: 'המונח נטבע לראשונה על ידי חוקר הטבע המפורסם <span class="text-white font-bold">צ\'ארלס דרווין</span> בשנת <span class="text-white font-bold">1859</span>, בספרו המונומנטלי <span class="italic text-teal-200">"מוצא המינים" (On the Origin of Species)</span>. דרווין השתמש במושג זה כדי לתאר יצורים ששרדו בסביבות מבודדות.',
-                catHeader: 'קטגוריות המחקר', catFish: 'דגים (צילקנת)', catTrees: 'עצים (גינקו)', catReptiles: 'זוחלים (טואטרה)', catTurtles: 'צבים (צב גלד)', catInv: 'חסרי חוליות (סרטן הפרסה)',
-                footer: 'פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג\'מיני ועל ידי רם.',
+                about: 'אודות הארכיון',
+                back: '← חזרה לבית',
+                title: 'אודות <span class="text-teal-500">הארכיון</span>',
+                visionTitle: 'חזון ומטרה',
+                visionText: 'פרויקט "ארכיון הנצח" הוקם בשנת 2026 במטרה ליצור מוזיאון דיגיטלי אינטראקטיבי המוקדש ליצורים המרתקים ביותר בטבע: המאובנים החיים. אלו הם אורגניזמים ששרדו מאות מיליוני שנים ללא שינוי מורפולוגי משמעותי, ובכך הם מהווים גשר חי לעבר הרחוק של כדור הארץ. מטרתנו היא לרכז ידע מדעי, היסטורי ואטימולוגי מעמיק תחת קורת גג אחת, תוך שימוש בטכנולוגיות התצוגה המתקדמות ביותר.',
+                techTitle: 'היוצרים והטכנולוגיה',
+                techText: 'הארכיון הוא תוצר של שיתוף פעולה ייחודי בין הבינה המלאכותית (Gemini) לבין החזון המחקרי של **רם**. כל פיסת מידע עברה אימות מדעי והצלבה היסטורית כדי להבטיח רמת דיוק מקסימלית. האתר תוכנן במיוחד עבור מכשיר ה-Samsung S25 Ultra, תוך ניצול מקסימלי של טכנולוגיית ה-AMOLED להשגת ניגודיות מושלמת וחיסכון באנרגיה באמצעות עיצוב "Deep Dark".',
+                etymHead: 'אטימולוגיה של שם הפרויקט:',
+                etymText: '**The Eternal Archive** (ארכיון הנצח): המילה *Eternal* (נצחי) מתייחסת ליכולת ההישרדות המופלאה של המאובנים החיים שנדמה כי הזמן פסח עליהם. המילה *Archive* (ארכיון) מדגישה את מחויבותנו לשימור המידע ההיסטורי והביולוגי של שושלות אלו לדורות הבאים.',
+                researchTitle: 'מתודולוגיית המחקר',
+                researchText: 'המידע בארכיון זה נאסף ממקורות אקדמיים, רישומים היסטוריים ודו"חות משלחות מחקר. אנו שמים דגש מיוחד על נסיבות הגילוי של כל מין על ידי המדע המערבי, מתוך הבנה שהסיפורים האנושיים מאחורי הגילויים חשובים לא פחות מהנתונים הביולוגיים עצמם. המחקר הוא תהליך מתמשך ומתעדכן תמיד.',
+                footer: '© 2026 The Eternal Archive | Created by Gemini & Ram',
                 btn: 'EN', dir: 'rtl'
             },
             en: {
-                title: 'The <span class="text-teal-500">Eternal Archive</span>', sub: 'An evolutionary journey following organisms that preserved their original form for hundreds of millions of years.',
-                introTitle: 'What is a "Living Fossil"?', p1: 'The term <span class="text-teal-400 font-bold">"Living Fossil"</span> describes species existing today that show a surprising similarity to fossils of their ancient ancestors. These are creatures whose morphological evolution has nearly stopped over eons.',
-                p2: 'The term was first coined by the famous naturalist <span class="text-white font-bold">Charles Darwin</span> in <span class="text-white font-bold">1859</span>, in his monumental book <span class="italic text-teal-200">"On the Origin of Species"</span>. Darwin used this concept to describe species that survived in isolated environments or under low competition.',
-                catHeader: 'Research Categories', catFish: 'Fish (Coelacanth)', catTrees: 'Trees (Ginkgo)', catReptiles: 'Reptiles (Tuatara)', catTurtles: 'Turtles (Leatherback)', catInv: 'Invertebrates (Horseshoe Crab)',
-                footer: 'A dedicated research project for preserving knowledge of organisms that stood the test of time. Created by Gemini and Ram.',
+                about: 'About the Archive',
+                back: '← Back to Home',
+                title: 'About the <span class="text-teal-500">Archive</span>',
+                visionTitle: 'Vision & Mission',
+                visionText: 'The "Eternal Archive" project was established in 2026 to create an interactive digital museum dedicated to nature\'s most fascinating creatures: Living Fossils. These are organisms that have survived hundreds of millions of years without significant morphological change, serving as living bridges to Earth\'s distant past. Our mission is to centralize in-depth scientific, historical, and etymological knowledge under one digital roof, utilizing the most advanced display technologies available.',
+                techTitle: 'The Creators & Technology',
+                techText: 'This archive is the result of a unique collaboration between Artificial Intelligence (Gemini) and the research vision of **Ram**. Every piece of information has undergone scientific verification and historical cross-referencing to ensure maximum accuracy. The website was specifically optimized for the Samsung S25 Ultra, maximizing AMOLED technology to achieve perfect contrast and energy efficiency through its signature "Deep Dark" design.',
+                etymHead: 'Project Name Etymology:',
+                etymText: '**The Eternal Archive**: The word *Eternal* refers to the miraculous survival of living fossils that seem to have been bypassed by time itself. The word *Archive* emphasizes our commitment to preserving the biological and historical records of these ancient lineages for future generations.',
+                researchTitle: 'Research Methodology',
+                researchText: 'The information in this archive is gathered from academic sources, historical records, and research expedition reports. We place special emphasis on the discovery circumstances of each species by Western science, recognizing that the human stories behind these discoveries are as vital as the biological data itself. This research is an ongoing and ever-evolving process.',
+                footer: '© 2026 The Eternal Archive | Created by Gemini & Ram',
                 btn: 'HE', dir: 'ltr'
             }
         };
@@ -147,25 +150,28 @@
         function toggleLanguage() {
             currentLang = currentLang === 'he' ? 'en' : 'he';
             const data = content[currentLang];
-            document.getElementById('mainTitle').innerHTML = data.title;
-            document.getElementById('mainSub').innerText = data.sub;
-            document.getElementById('introTitle').innerText = data.introTitle;
-            document.getElementById('p1').innerHTML = data.p1;
-            document.getElementById('p2').innerHTML = data.p2;
-            document.getElementById('catHeader').innerText = data.catHeader;
-            document.getElementById('catFish').innerText = data.catFish;
-            document.getElementById('catTrees').innerText = data.catTrees;
-            document.getElementById('catReptiles').innerText = data.catReptiles;
-            document.getElementById('catTurtles').innerText = data.catTurtles;
-            document.getElementById('catInv').innerText = data.catInv;
-            document.getElementById('footerText').innerText = data.footer;
+            
+            document.getElementById('aboutTitle').innerHTML = data.title;
+            document.getElementById('backBtn').innerText = data.back;
+            document.getElementById('visionTitle').innerText = data.visionTitle;
+            document.getElementById('visionText').innerText = data.visionText;
+            document.getElementById('techTitle').innerText = data.techTitle;
+            document.getElementById('techText').innerText = data.techText;
+            document.getElementById('etymHead').innerText = data.etymHead;
+            document.getElementById('etymText').innerText = data.etymText;
+            document.getElementById('researchTitle').innerText = data.researchTitle;
+            document.getElementById('researchText').innerText = data.researchText;
+            document.getElementById('footerCopyright').innerText = data.footer;
             document.getElementById('langBtn').innerText = data.btn;
+            
             document.documentElement.dir = data.dir;
             document.documentElement.lang = currentLang;
-            const introBox = document.getElementById('introBox');
-            introBox.style.borderRightWidth = currentLang === 'en' ? '0' : '4px';
-            introBox.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+
+            const techBox = document.getElementById('techBox');
+            techBox.style.borderRightWidth = currentLang === 'en' ? '0' : '4px';
+            techBox.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
         }
     </script>
 </body>
 </html>
+

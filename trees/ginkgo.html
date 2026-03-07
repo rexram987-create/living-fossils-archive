@@ -6,7 +6,7 @@
     <title>מחקר מעמיק: גינקו דו-אונתי | The Eternal Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* S25 Ultra Optimized - Premium Deep Dark Edition */
+        /* אופטימיזציה ל-S25 Ultra - מצב כהה עמוק AMOLED */
         :root {
             --amoled-black: #000000;
             --card-gray: #0f172a;
@@ -60,7 +60,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Image Zoom Modal */
+        /* מודל הגדלת תמונה */
         #imageModal {
             display: none;
             position: fixed;
@@ -101,27 +101,27 @@
 
     <!-- Modal עבור הגדלת תמונה -->
     <div id="imageModal" onclick="this.style.display='none'">
-        <img src="../images/ginkgo.webp" alt="גינקו מוגדל" id="modalImg">
+        <img src="../images/ginkgo.png" alt="Ginkgo Enlarge" id="modalImg">
         <div class="absolute top-10 right-10 text-white text-5xl cursor-pointer">&times;</div>
     </div>
 
-    <!-- Language Toggle -->
+    <!-- כפתור החלפת שפה -->
     <div class="fixed top-6 left-6 z-50">
-        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-lg active:scale-95">EN</button>
+        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-xl active:scale-95">EN</button>
     </div>
 
     <!-- Header -->
     <header class="pt-16 px-6 text-center mb-6">
         <a href="../index.html" id="backBtn" class="text-emerald-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
         <h1 id="fossilName" class="text-4xl font-extrabold text-white">גינקו דו-אונתי (Ginkgo)</h1>
-        <p class="text-emerald-600 font-mono mt-2 italic">Ginkgo biloba</p>
+        <p class="text-emerald-600 font-mono mt-2 italic" id="scientificName">Ginkgo biloba</p>
     </header>
 
     <main class="px-6 space-y-8 max-w-2xl mx-auto">
         
-        <!-- תמונה עם אפשרות הגדלה -->
+        <!-- תמונה ראשית -->
         <div class="fossil-hero-container group" onclick="document.getElementById('imageModal').style.display='flex'">
-            <img src="../images/ginkgo.webp" alt="עלי גינקו" class="fossil-hero-img shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]" onerror="this.src='https://via.placeholder.com/800x450/000000/10b981?text=Ginkgo+Image+Not+Found'">
+            <img src="../images/ginkgo.png" alt="עלי גינקו" class="fossil-hero-img shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]" onerror="this.src='https://via.placeholder.com/800x450/000000/10b981?text=Ginkgo+Image+Not+Found'">
             <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center space-x-2 space-x-reverse">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
                 <span class="text-[10px] text-emerald-400 font-bold uppercase" id="labelZoom">לחץ להגדלה</span>
@@ -130,10 +130,7 @@
 
         <!-- Section 1: Discovery Details -->
         <section class="glass-card rounded-[2rem] p-8 border-r-4 border-emerald-500" id="discoverCard">
-            <h2 class="text-xl font-bold text-emerald-400 mb-6 flex items-center" id="discoverTitle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                פרטי התיעוד והזיהוי
-            </h2>
+            <h2 class="text-xl font-bold text-emerald-400 mb-6 flex items-center" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
             <div class="space-y-4 text-slate-300">
                 <p><span class="font-bold text-white" id="labelScientist">החוקר המתעד (למערב):</span> <span id="valScientist">אנגלברט קמפר (1651–1716)</span></p>
                 <p><span class="font-bold text-white" id="labelYear">שנת תיעוד ראשונה:</span> <span id="valYear">1690 (נצפה לראשונה ביפן על ידי קמפר)</span></p>
@@ -142,37 +139,24 @@
             </div>
         </section>
 
-        <!-- New Section: Discovery Circumstances & China-Japan Connection -->
+        <!-- Section: Discovery Circumstances -->
         <section class="glass-card rounded-[2rem] p-8" id="originCard">
             <h2 class="text-xl font-bold text-emerald-400 mb-6 flex items-center" id="originTitle">נסיבות הגילוי והקשר הגיאוגרפי</h2>
             <div class="space-y-5 text-slate-300 leading-relaxed">
-                <p id="originDesc1">
-                    למרות שהגינקו מזוהה לעיתים קרובות עם יפן, מקורו הביולוגי היחיד הוא בסין. עצי הגינקו הפראיים האחרונים בעולם שרדו בבידוד ב**הרי טיאנמו** שבמחוז ג'ג'יאנג. משם הם הופצו ליפן ולקוריאה לפני מאות שנים על ידי נזירים בודהיסטים שראו בהם עצים מקודשים.
-                </p>
+                <p id="originDesc1">למרות שהגינקו מזוהה לעיתים קרובות עם יפן, מקורו הביולוגי היחיד הוא בסין. עצי הגינקו הפראיים האחרונים בעולם שרדו בבידוד ב**הרי טיאנמו** שבמחוז ג'ג'יאנג. משם הם הופצו ליפן ולקוריאה לפני מאות שנים על ידי נזירים בודהיסטים שראו בהם עצים מקודשים בעלי סגולות מרפא ותזונה.</p>
                 <div class="highlight-box p-5 rounded-xl">
-                    <p id="originDesc2" class="text-sm">
-                        החוקר **אנגלברט קמפר** נחשף לעץ לראשונה בשנת 1690 בזמן ששהה ב**נגסאקי, יפן**. קמפר, שעבד עבור חברת הודו המזרחית ההולנדית, תיעד את העץ בגנים של מקדשים מקומיים. מכיוון שהדיווח המערבי הראשון הגיע מיפן, נוצר בלבול היסטורי לגבי מולדת העץ, אך מחקרים גנטיים מודרניים אישרו כי כל עצי הגינקו בעולם מוצאם מהאוכלוסייה הסינית העתיקה.
-                    </p>
+                    <p id="originDesc2" class="text-sm">החוקר הגרמני **אנגלברט קמפר**, שעבד כרופא עבור חברת הודו המזרחית ההולנדית, היה האירופאי הראשון שתיעד את העץ בשנת **1690** בזמן ששהה ב**נגסאקי, יפן**. קמפר צייר ותיאר את העץ בגנים של מקדשים מקומיים. מכיוון שהדיווח המערבי הראשון הגיע מיפן, נוצר בלבול היסטורי ארוך שנים לגבי מולדת העץ, אך מחקרים גנטיים מודרניים אישרו סופית כי כל עצי הגינקו בעולם מוצאם מאותה אוכלוסייה סינית עתיקה ששרדה את עידני הקרח.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Physical Specs & Lifespan -->
+        <!-- Section 2: Physical Specs -->
         <section class="glass-card rounded-[2rem] p-8 border-r-4 border-amber-600" id="specsCard">
             <h2 class="text-xl font-bold text-amber-400 mb-6 flex items-center" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
             <div class="grid grid-cols-1 gap-6 text-slate-300">
-                <div class="flex items-center space-x-4 space-x-reverse">
-                    <span class="text-amber-500 text-xl">📏</span>
-                    <p><span class="font-bold text-white" id="labelSize">גובה ממוצע:</span> <span id="valSize">20–35 מטרים</span></p>
-                </div>
-                <div class="flex items-center space-x-4 space-x-reverse">
-                    <span class="text-amber-500 text-xl">🌳</span>
-                    <p><span class="font-bold text-white" id="labelWeight">היקף גזע:</span> <span id="valWeight">עד 9 מטרים</span></p>
-                </div>
-                <div class="flex items-center space-x-4 space-x-reverse">
-                    <span class="text-amber-500 text-xl">⏳</span>
-                    <p><span class="font-bold text-white" id="labelLifespan">תוחלת חיים:</span> <span id="valLifespan">מעל 1,000 שנים (תועד עד 3,500)</span></p>
-                </div>
+                <p><span class="font-bold text-white" id="labelSize">גובה ממוצע:</span> <span id="valSize">20–35 מטרים</span></p>
+                <p><span class="font-bold text-white" id="labelWeight">היקף גזע:</span> <span id="valWeight">עד 9 מטרים</span></p>
+                <p><span class="font-bold text-white" id="labelLifespan">תוחלת חיים:</span> <span id="valLifespan">מעל 1,000 שנים (תועד עד 3,500)</span></p>
             </div>
         </section>
 
@@ -181,31 +165,29 @@
             <h2 class="text-xl font-bold text-emerald-400 mb-8" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
             <div class="space-y-8">
                 <div class="etymology-part">
-                    <h3 class="text-emerald-300 font-bold text-lg">Ginkgo (גינקו)</h3>
+                    <h3 class="text-emerald-300 font-bold text-lg" id="etym1_head">Ginkgo (גינקו)</h3>
                     <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym1_src">מקור: יפנית (Gin-kyo / 銀杏)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym1_def">משמעות: משמש כסוף (Silver Apricot). המילה 銀 (Gin) פירושה כסף, והמילה 杏 (Kyo) פירושה משמש. השם מתייחס למראה הזרעים המכוסים בשכבה לבנה-כסופה המזכירה פרי משמש.</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym1_def">משמעות: משמש כסוף (Silver Apricot). המילה **銀 (Gin)** פירושה כסף, והמילה **杏 (Kyo)** פירושה משמש. השם מתייחס למראה הזרעים המכוסים בשכבה לבנה-כסופה המזכירה פרי משמש קטן.</p>
                 </div>
                 <div class="etymology-part">
-                    <h3 class="text-emerald-300 font-bold text-lg">Bi-loba (דו-אונתי)</h3>
+                    <h3 class="text-emerald-300 font-bold text-lg" id="etym2_head">Bi-loba (דו-אונתי)</h3>
                     <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: לטינית (bis = פעמיים, lobus = אונה)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym2_def">משמעות: בעל שתי אונות. השם המדעי מתאר את צורתם הייחודית של עלי המניפה, אשר לרוב מחולקים לשני חלקים (אונות) מרכזיים.</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym2_def">משמעות: בעל שתי אונות. השם המדעי מתאר את צורתם הייחודית של עלי המניפה, אשר לרוב מחולקים לשני חלקים (אונות) מרכזיים על ידי חריץ עמוק.</p>
                 </div>
-                <div class="bg-emerald-900/15 p-6 rounded-2xl border border-emerald-800/40 text-sm italic text-slate-300" id="etymTotal">
-                    משמעות השם המלאה: "משמש כסוף בעל שתי אונות", שם המשלב את המראה המטעה של הזרעים (הנראים כפרי אך מבחינה בוטנית הם זרעים חשופים) עם המורפולוגיה הבלתי משתנה של העלים.
-                </div>
+                <div class="bg-emerald-900/15 p-6 rounded-2xl border border-emerald-800/40 text-sm italic text-slate-300" id="etymTotal">משמעות השם המלאה: "משמש כסוף בעל שתי אונות", שם המשלב את המראה המטעה של הזרעים עם המורפולוגיה הבלתי משתנה של העלים שנשמרה במשך כ-200 מיליון שנה.</div>
             </div>
         </section>
 
-        <!-- Section 4: Survival & Resilience -->
+        <!-- Section 4: Survival & Evolution -->
         <section class="glass-card rounded-[2rem] p-8 border-b-2 border-emerald-500/30">
             <h2 class="text-xl font-bold text-emerald-400 mb-6" id="surviveTitle">סיבת ההישרדות וחוסן ביולוגי</h2>
             <div class="space-y-6 text-slate-300 leading-relaxed">
                 <p id="surviveText">הגינקו הוא דוגמה חיה ל"סטזיס" (Stasis) אבולוציוני – מצב שבו המין שומר על תכונותיו כמעט ללא שינוי לאורך מאות מיליוני שנים. חוסנו נובע ממנגנוני הגנה כימיים מורכבים במיוחד המגנים עליו מפני חרקים, פטריות וחיידקים.</p>
                 <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">הישגי חוסן יוצאי דופן:</h4>
                 <ul class="space-y-5 text-sm text-emerald-100/80" id="achieveList">
-                    <li class="flex items-start gap-3"><span class="text-emerald-500">•</span><span>יכולת לייצר כימיקלים נוגדי חמצון המונעים הזדקנות תאים וריקבון פנימי.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-emerald-500">•</span><span>עמידות קיצונית לזיהום אוויר, קרינה רדיואקטיבית ומתכות כבדות (היה מהראשונים להתחדש לאחר הפיצוץ בהירושימה).</span></li>
-                    <li class="flex items-start gap-3"><span class="text-emerald-500">•</span><span>מערכת גנטית המאפשרת התחדשות מתמדת של רקמות ללא ירידה ביעילות המערכת החיסונית עם הגיל.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-emerald-500">•</span><span id="ach1">יכולת לייצר כימיקלים נוגדי חמצון וטרפנואידים המונעים הזדקנות תאים וריקבון פנימי.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-emerald-500">•</span><span id="ach2">עמידות קיצונית לזיהום אוויר, קרינה רדיואקטיבית ומתכות כבדות (היה מהראשונים להתחדש לאחר הפיצוץ בהירושימה ב-1945).</span></li>
+                    <li class="flex items-start gap-3"><span class="text-emerald-500">•</span><span id="ach3">מערכת גנטית המאפשרת התחדשות מתמדת של רקמות ללא ירידה ביעילות המערכת החיסונית עם הגיל.</span></li>
                 </ul>
             </div>
         </section>
@@ -219,65 +201,43 @@
         let currentLang = 'he';
         const content = {
             he: {
-                name: 'גינקו דו-אונתי (Ginkgo)',
-                back: '← חזרה לארכיון',
-                labelZoom: 'לחץ להגדלה',
-                discoverTitle: 'פרטי התיעוד והזיהוי',
-                lScientist: 'החוקר המתעד (למערב):',
-                vScientist: 'אנגלברט קמפר (1651–1716)',
-                lYear: 'שנת תיעוד ראשונה:',
-                vYear: '1690 (נצפה לראשונה ביפן על ידי קמפר)',
-                lLocation: 'מקור ביולוגי עתיק:',
-                vLocation: 'מחוז ג\'ג\'יאנג, סין (הרי טיאנמו)',
-                lStatus: 'סטטוס אבולוציוני:',
-                vStatus: 'המין היחיד שנותר במערכת הגינקואים (Ginkgophyta)',
+                name: 'גינקו דו-אונתי (Ginkgo)', back: '← חזרה לארכיון', labelZoom: 'לחץ להגדלה',
+                discoverTitle: 'פרטי התיעוד והזיהוי', lScientist: 'החוקר המתעד (למערב):', vScientist: 'אנגלברט קמפר (1651–1716)',
+                lYear: 'שנת תיעוד ראשונה:', vYear: '1690 (נצפה לראשונה ביפן על ידי קמפר)',
+                lLocation: 'מקור ביולוגי עתיק:', vLocation: 'מחוז ג\'ג\'יאנג, סין (הרי טיאנמו)',
+                lStatus: 'סטטוס אבולוציוני:', vStatus: 'המין היחיד שנותר במערכת הגינקואים (Ginkgophyta)',
                 originTitle: 'נסיבות הגילוי והקשר הגיאוגרפי',
-                originDesc1: 'למרות שהגינקו מזוהה עם יפן, מקורו הוא בסין. עצי הגינקו הפראיים האחרונים שרדו בהרי טיאנמו, ומשם הופצו ליפן על ידי נזירים.',
-                originDesc2: 'החוקר אנגלברט קמפר נחשף לעץ בשנת 1690 בנגסאקי, יפן. בשל כך נוצר בלבול לגבי מולדת העץ, אך מוצאו הוא סיני.',
-                specsTitle: 'מאופיינים פיזיים ותוחלת חיים',
-                lLifespan: 'תוחלת חיים:',
-                vLifespan: 'מעל 1,000 שנים (תועד עד 3,500)',
-                etymTitle: 'ניתוח אטימולוגי נרחב',
-                etymTotal: 'משמעות השם המלאה: "משמש כסוף בעל שתי אונות".',
-                surTitle: 'סיבת ההישרדות וחוסן ביולוגי',
-                surText: 'הגינקו שרד בזכות מנגנוני הגנה כימיים מורכבים המגנים עליו מפני מזיקים ופטריות.',
+                originDesc1: 'למרות שהגינקו מזוהה לעיתים קרובות עם יפן, מקורו הביולוגי היחיד הוא בסין. עצי הגינקו הפראיים האחרונים בעולם שרדו בבידוד בהרי טיאנמו, ומשם הופצו ליפן על ידי נזירים בודהיסטים שראו בהם עצים מקודשים.',
+                originDesc2: 'החוקר אנגלברט קמפר נחשף לעץ בשנת 1690 בנגסאקי, יפן. קמפר, שעבד עבור חברת הודו המזרחית ההולנדית, תיעד את העץ בגנים של מקדשים מקומיים. מכיוון שהדיווח המערבי הראשון הגיע מיפן, נוצר בלבול היסטורי לגבי מולדת העץ, אך מוצאו הוא סיני עתיק.',
+                specsTitle: 'מאופיינים פיזיים ותוחלת חיים', lSize: 'גובה ממוצע:', vSize: '20–35 מטרים', lWeight: 'היקף גזע:', vWeight: 'עד 9 מטרים', lLifespan: 'תוחלת חיים:', vLifespan: 'מעל 1,000 שנים (תועד עד 3,500)',
+                etymTitle: 'ניתוח אטימולוגי נרחב', etym1head: 'Ginkgo (גינקו)', etym1src: 'מקור: יפנית (Gin-kyo / 銀杏)', etym1def: 'משמעות: משמש כסוף (Silver Apricot). המילה 銀 פירושה כסף, והמילה 杏 פירושה משמש. מתייחס למראה הזרעים הכסופים.',
+                etym2head: 'Bi-loba (דו-אונתי)', etym2src: 'מקור: לטינית (bis = פעמיים, lobus = אונה)', etym2def: 'משמעות: בעל שתי אונות. מתאר את צורת עלי המניפה המחולקים לשני חלקים מרכזיים.',
+                etymTotal: 'משמעות השם המלאה: "משמש כסוף בעל שתי אונות", שילוב של מראה הזרע ומורפולוגיית העלה שנשמרה במשך כ-200 מיליון שנה.',
+                surTitle: 'סיבת ההישרדות וחוסן ביולוגי', surText: 'הגינקו שרד מאות מיליוני שנים בזכות מנגנוני הגנה כימיים מורכבים במיוחד המגנים עליו מפני חרקים ופטריות.',
                 lAchieve: 'הישגי חוסן יוצאי דופן:',
-                achieve: [
-                    'יכולת לייצר כימיקלים נוגדי חמצון המונעים הזדקנות תאים.',
-                    'עמידות קיצונית לזיהום אוויר, קרינה ומתכות כבדות.',
-                    'מערכת גנטית המאפשרת התחדשות מתמדת של רקמות.'
-                ],
+                ach1: 'יכולת לייצר כימיקלים נוגדי חמצון המונעים הזדקנות תאים וריקבון פנימי.',
+                ach2: 'עמידות קיצונית לזיהום אוויר, קרינה ומתכות כבדות (שרד את הפיצוץ בהירושימה).',
+                ach3: 'מערכת גנטית המאפשרת התחדשות מתמדת של רקמות ללא ירידה ביעילות המערכת החיסונית.',
                 navHome: 'בית', btn: 'EN', dir: 'rtl'
             },
             en: {
-                name: 'Ginkgo Biloba',
-                back: '← Back to Archive',
-                labelZoom: 'Click to Enlarge',
-                discoverTitle: 'Identification & Records',
-                lScientist: 'Identifying Scientist:',
-                vScientist: 'Engelbert Kaempfer (1651–1716)',
-                lYear: 'Year Documented:',
-                vYear: '1690 (First observed in Japan)',
-                lLocation: 'Biological Origin:',
-                vLocation: 'Zhejiang, China (Tianmu Mts)',
-                lStatus: 'Evolutionary Status:',
-                vStatus: 'Sole survivor of Ginkgophyta division',
-                originTitle: 'Discovery & Geographical Context',
-                originDesc1: 'While often associated with Japan, Ginkgo is native to China. The last wild trees survived in the Tianmu Mountains and were spread by monks.',
-                originDesc2: 'Engelbert Kaempfer discovered the tree in 1690 in Nagasaki, Japan. This led to historical confusion, but modern genetics confirm its Chinese origin.',
-                specsTitle: 'Physical Traits & Lifespan',
-                lLifespan: 'Lifespan:',
-                vLifespan: 'Over 1,000 years (up to 3,500 recorded)',
-                etymTitle: 'Detailed Etymology',
-                etymTotal: 'Full Meaning: "Two-lobed Silver Apricot".',
-                surTitle: 'Survival & Resilience',
-                surText: 'Ginkgo survived due to complex chemical defenses against pests and fungi.',
-                lAchieve: 'Exceptional Resilience:',
-                achieve: [
-                    'Synthesis of antioxidants preventing cell decay.',
-                    'Extreme resistance to pollution, radiation, and heavy metals.',
-                    'Genetic system allowing constant tissue regeneration.'
-                ],
+                name: 'Ginkgo Biloba', back: '← Back to Archive', labelZoom: 'Click to Enlarge',
+                discoverTitle: 'Identification & Scientific Records', lScientist: 'Identifying Scientist:', vScientist: 'Engelbert Kaempfer (1651–1716)',
+                lYear: 'Year Documented:', vYear: '1690 (First western observation in Japan)',
+                lLocation: 'Biological Origin:', vLocation: 'Zhejiang Province, China (Tianmu Mts)',
+                lStatus: 'Evolutionary Status:', vStatus: 'Sole survivor of the Ginkgophyta division',
+                originTitle: 'Discovery Circumstances & Geographical Context',
+                originDesc1: 'Although Ginkgo is frequently associated with Japan, its only biological origin is China. The last wild populations survived in isolation in the Tianmu Mountains. From there, they were spread to Japan and Korea centuries ago by Buddhist monks who regarded them as sacred trees with medicinal and nutritional properties.',
+                originDesc2: 'German scholar Engelbert Kaempfer, working as a physician for the Dutch East India Company, was the first European to document the tree in 1690 while stationed in Nagasaki, Japan. Kaempfer illustrated and described the tree in temple gardens. Since the first Western report came from Japan, a long-standing historical confusion arose regarding its homeland, but modern genetic research confirms all Ginkgo trees originate from that ancient Chinese population.',
+                specsTitle: 'Physical Characteristics & Lifespan', lSize: 'Average Height:', vSize: '20–35 meters (65–115 ft)', lWeight: 'Trunk Girth:', vWeight: 'Up to 9 meters (30 ft)', lLifespan: 'Lifespan:', vLifespan: 'Over 1,000 years (recorded up to 3,500)',
+                etymTitle: 'Detailed Etymological Analysis', etym1head: 'Ginkgo (Etymology)', etym1src: 'Source: Japanese (Gin-kyo / 銀杏)', etym1def: 'Meaning: Silver Apricot. The word 銀 (Gin) means silver, and 杏 (Kyo) means apricot. This refers to the appearance of the seeds covered in a silvery-white layer.',
+                etym2head: 'Bi-loba (Etymology)', etym2src: 'Source: Latin (bis = twice, lobus = lobe)', etym2def: 'Meaning: Two-lobed. The scientific name describes the unique fan-shaped leaves, which are typically split into two primary lobes by a deep notch.',
+                etymTotal: 'Full Meaning: "Two-lobed Silver Apricot", combining the deceptive appearance of the seeds with the invariant leaf morphology preserved for 200 million years.',
+                surTitle: 'Survival & Biological Resilience', surText: 'The Ginkgo has survived hundreds of millions of years due to its sophisticated chemical defense mechanisms against pests, fungi, and bacteria.',
+                lAchieve: 'Exceptional Resilience Achievements:',
+                ach1: 'Ability to produce antioxidants and terpenoids that prevent cellular aging and internal decay.',
+                ach2: 'Extreme resistance to air pollution, radiation, and heavy metals (was among the first to regrow after Hiroshima in 1945).',
+                ach3: 'Unique genetic system allowing constant tissue regeneration without the typical decline of the immune system with age.',
                 navHome: 'HOME', btn: 'HE', dir: 'ltr'
             }
         };
@@ -301,16 +261,27 @@
             document.getElementById('originDesc1').innerText = data.originDesc1;
             document.getElementById('originDesc2').innerText = data.originDesc2;
             document.getElementById('specsTitle').innerText = data.specsTitle;
+            document.getElementById('labelSize').innerText = data.lSize;
+            document.getElementById('valSize').innerText = data.vSize;
+            document.getElementById('labelWeight').innerText = data.lWeight;
+            document.getElementById('valWeight').innerText = data.vWeight;
             document.getElementById('labelLifespan').innerText = data.lLifespan;
             document.getElementById('valLifespan').innerText = data.vLifespan;
             document.getElementById('etymTitle').innerText = data.etymTitle;
+            document.getElementById('etym1_head').innerText = data.etym1head;
+            document.getElementById('etym1_src').innerText = data.etym1src;
+            document.getElementById('etym1_def').innerText = data.etym1def;
+            document.getElementById('etym2_head').innerText = data.etym2head;
+            document.getElementById('etym2_def').innerText = data.etym2def;
             document.getElementById('etymTotal').innerText = data.etymTotal;
             document.getElementById('surviveTitle').innerText = data.surTitle;
             document.getElementById('surviveText').innerText = data.surText;
             document.getElementById('labelAchieve').innerText = data.lAchieve;
+            document.getElementById('ach1').innerText = data.ach1;
+            document.getElementById('ach2').innerText = data.ach2;
+            document.getElementById('ach3').innerText = data.ach3;
             document.getElementById('navHome').innerText = data.navHome;
             document.getElementById('langBtn').innerText = data.btn;
-            document.getElementById('achieveList').innerHTML = data.achieve.map(item => `<li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">•</span><span>${item}</span></li>`).join('');
             document.documentElement.dir = data.dir;
             document.documentElement.lang = currentLang;
             const cards = [document.getElementById('discoverCard'), document.getElementById('specsCard')];

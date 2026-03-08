@@ -45,39 +45,41 @@
             padding-left: 1.25rem;
         }
 
-        .fossil-hero-container {
+        /* Holographic Hero Image Replacement */
+        .hologram-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 2rem;
+            background: radial-gradient(circle at 50% 50%, #7c2d12 0%, #020617 100%);
+            border: 1px solid rgba(249, 115, 22, 0.2);
             position: relative;
-            cursor: zoom-in;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 20px 40px -10px rgba(249, 115, 22, 0.15);
             margin-bottom: 2.5rem;
         }
 
-        .fossil-hero-img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            border-radius: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .hologram-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(249, 115, 22, 0.05) 1px, transparent 1px);
+            background-size: 100% 4px;
+            pointer-events: none;
         }
 
-        /* Image Zoom Modal */
-        #imageModal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
+        .hologram-icon {
+            font-size: 6rem;
+            filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.8));
+            animation: float 4s ease-in-out infinite;
         }
 
-        #imageModal img {
-            max-width: 100%;
-            max-height: 85vh;
-            border-radius: 1.5rem;
-            box-shadow: 0 0 60px rgba(249, 115, 22, 0.25);
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         h1, h2, h3 {
@@ -99,12 +101,6 @@
 </head>
 <body class="min-h-screen flex flex-col pb-24 text-justify">
 
-    <!-- Modal עבור הגדלת תמונה -->
-    <div id="imageModal" onclick="this.style.display='none'">
-        <img src="../images/leatherback.png" alt="Leatherback Enlarge" id="modalImg">
-        <div class="absolute top-10 right-10 text-white text-5xl cursor-pointer">&times;</div>
-    </div>
-
     <!-- Language Toggle -->
     <div class="fixed top-6 left-6 z-50">
         <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-orange-500 hover:bg-orange-500 hover:text-white transition-all shadow-xl active:scale-95">EN</button>
@@ -112,19 +108,19 @@
 
     <!-- Header -->
     <header class="pt-16 px-6 text-center mb-6">
-        <a href="../index.html" id="backBtn" class="text-orange-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
+        <a href="index.html" id="backBtn" class="text-orange-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
         <h1 id="fossilName" class="text-4xl font-extrabold text-white">צב גלד (Leatherback)</h1>
         <p class="text-orange-500 font-mono mt-2 italic" id="scientificName">Dermochelys coriacea</p>
     </header>
 
     <main class="px-6 space-y-8 max-w-2xl mx-auto">
         
-        <!-- Hero Image Section -->
-        <div class="fossil-hero-container group" onclick="document.getElementById('imageModal').style.display='flex'">
-            <img src="../images/leatherback.png" alt="צב גלד" class="fossil-hero-img shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]" onerror="this.src='https://via.placeholder.com/800x450/000000/f97316?text=Leatherback+Image+Not+Found'">
-            <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center space-x-2 space-x-reverse">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
-                <span class="text-[10px] text-orange-400 font-bold uppercase" id="labelZoom">לחץ להגדלה</span>
+        <!-- Hologram Hero Section -->
+        <div class="hologram-container">
+            <div class="hologram-icon">🐢</div>
+            <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-orange-500/30 flex items-center space-x-2 space-x-reverse">
+                <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                <span class="text-[10px] text-orange-400 font-bold uppercase tracking-widest" id="heroLabel">הדמיית ארכיון פעילה</span>
             </div>
         </div>
 
@@ -132,121 +128,142 @@
         <section class="glass-card rounded-[2rem] p-8 border-r-4 border-orange-500" id="discoverCard">
             <h2 class="text-xl font-bold text-orange-400 mb-6 flex items-center" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
             <div class="space-y-4 text-slate-300">
-                <p><span class="font-bold text-white" id="labelScientist">החוקר המזהה:</span> <span id="valScientist">דומניקו ונדלי (1735–1816)</span></p>
+                <p><span class="font-bold text-white" id="labelScientist">החוקר המזהה:</span> <span id="valScientist">דומניקו ונדלי (1735–1816) וקרל לינאוס (1707–1778)</span></p>
                 <p><span class="font-bold text-white" id="labelYear">שנת זיהוי מדעי:</span> <span id="valYear">1761 (התיאור המדעי הרשמי הראשון)</span></p>
-                <p><span class="font-bold text-white" id="labelLocation">מיקום הגילוי:</span> <span id="valLocation">חופי הים התיכון (איטליה)</span></p>
-                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">הנציג האחרון של משפחת ה-Dermochelyidae</span></p>
+                <p><span class="font-bold text-white" id="labelLocation">מיקום הגילוי המקורי:</span> <span id="valLocation">חוף אוסטיה, הים התיכון (איטליה)</span></p>
+                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">הנציג האחרון והיחיד של משפחת ה-Dermochelyidae</span></p>
             </div>
         </section>
 
-        <!-- Section: Discovery Circumstances -->
+        <!-- Section 2: Discovery Circumstances -->
         <section class="glass-card rounded-[2rem] p-8" id="originCard">
             <h2 class="text-xl font-bold text-orange-400 mb-6 flex items-center" id="originTitle">נסיבות הגילוי והקשר ההיסטורי</h2>
             <div class="space-y-5 text-slate-300 leading-relaxed">
-                <p id="originDesc1">זיהויו המדעי של צב הגלד כמין ייחודי התבסס על צב ענק שנלכד בשנת 1760 בחוף אוסטיה שליד רומא. הצב נשלח ל**דומניקו ונדלי**, פרופסור לתולדות הטבע באוניברסיטת פדובה, שנדהם ממראהו של הזוחל העצום והשונה מכל צב אחר שהכיר בשל שריונו הגמיש.</p>
+                <p id="originDesc1">זיהויו המדעי של צב הגלד כמין ייחודי ונפרד התבסס על פרט ענק שנלכד בשנת 1760 בחוף אוסטיה שליד רומא. הצב העצום נשלח ל**דומניקו ונדלי**, פרופסור לתולדות הטבע באוניברסיטת פדובה. ונדלי נדהם ממראהו של הזוחל האדיר, שהיה שונה לחלוטין מכל צב ים או יבשה שהיה מוכר למדע באותה תקופה.</p>
                 <div class="highlight-box p-5 rounded-xl">
-                    <p id="originDesc2" class="text-sm">ונדלי היה הראשון להבין שהצב הזה אינו מציית לחוקי האנטומיה המוכרים של צבים אחרים; במקום שריון קרני קשיח העשוי לוחיות (Scutes), הוא היה מכוסה בעור עבה וגמיש דמוי גלד. ונדלי תיאר את הממצא במכתב מפורט ל**קרל לינאוס**, אבי שיטת המיון המדעית, ובכך הכניס את צב הגלד רשמית לדפי ההיסטוריה המדעית. המין נחשב למאובן חי מאחר שמשפחתו קיימת מזה כ-110 מיליון שנה, כמעט ללא שינוי מבני מהותי מאז עידן הקרטיקון.</p>
+                    <p id="originDesc2" class="text-sm">ונדלי היה הראשון להבין שהצב הזה אינו מציית לחוקי האנטומיה הקלאסיים; במקום שריון גרמי קשיח העשוי מלוחיות קרן (Scutes), גבו היה מכוסה בעור עבה, סיבי וגמיש דמוי גלד או גומי מחוספס. ונדלי מיהר לתאר את הממצא יוצא הדופן במכתב מפורט ששלח ל**קרל לינאוס**, אבי שיטת המיון המדעית המודרנית. לינאוס, שהכיר בחשיבות התגלית, העניק לצב את שמו הרשמי בשנת 1766. צב הגלד נחשב ל"מאובן חי" קלאסי: משפחתו התפצלה משאר צבי הים לפני כ-110 מיליון שנה, והוא שרד את אירוע ההכחדה של סוף הקרטיקון כמעט ללא שינוי מבני מהותי.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Physical Specs (Expanded) -->
+        <!-- Section 3: Physical Specs -->
         <section class="glass-card rounded-[2rem] p-8 border-r-4 border-red-600" id="specsCard">
             <h2 class="text-xl font-bold text-red-400 mb-6 flex items-center" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
             <div class="space-y-6 text-slate-300 leading-relaxed">
                 <div class="grid grid-cols-1 gap-4">
-                    <p id="specSize"><span class="font-bold text-white">אורך מקסימלי:</span> זהו הצב הגדול בעולם, המגיע לאורך של עד 2.2 מטרים. סנפיריו הקדמיים יכולים להגיע למוטת רוחב של 2.7 מטרים, מה שהופך אותו לשחיין מהיר ועוצמתי במיוחד.</p>
-                    <p id="specWeight"><span class="font-bold text-white">משקל מקסימלי:</span> משקלו הממוצע נע בין 600 ל-900 קילוגרם, אך תועד פרט חריג שהגיע למשקל של 916 קילוגרם בחוף ויילס.</p>
-                    <p id="specLife"><span class="font-bold text-white">תוחלת חיים:</span> מוערכת ב-50 עד 100 שנים בטבע. בניגוד לצבי יבשה, קצב המטבוליזם שלו גבוה יחסית בשל גודלו והאנרגיה המושקעת בנדידה.</p>
+                    <p id="specSize"><span class="font-bold text-white">אורך וממדים:</span> זהו הצב (והזוחל הלא-תניני) הגדול בעולם. אורכו מגיע עד ל-2.2 מטרים. סנפיריו הקדמיים עצומים ויכולים להגיע למוטת רוחב של 2.7 מטרים, מה שהופך אותו לשחיין המהיר ביותר מבין הזוחלים (עד 35 קמ"ש).</p>
+                    <p id="specWeight"><span class="font-bold text-white">משקל מקסימלי:</span> משקלו הממוצע נע בין 600 ל-900 קילוגרם. פרט שיא היסטורי שנשטף לחוף בוויילס בשנת 1988 הגיע למשקל מפלצתי של 916 קילוגרם.</p>
+                    <p id="specLife"><span class="font-bold text-white">תוחלת חיים:</span> מוערכת ב-50 עד 100 שנים בטבע. בניגוד לצבי יבשה ענקיים החיים בהילוך איטי, צב הגלד משקיע כמויות אדירות של אנרגיה במסעות נדידה טרנס-אוקיאניים (לעיתים מעל 16,000 ק"מ בשנה).</p>
                 </div>
-                <p id="specBody" class="text-sm border-t border-white/5 pt-4">מבנה גופו הידרודינמי בצורת טיפה, והוא היחיד מבין צבי הים שאין לו שריון גרמי קשיח. עורו השחור זרוע בנקודות לבנות או ורודות, המאפשרות הסוואה מסוימת במים עמוקים.</p>
+                <p id="specBody" class="text-sm border-t border-white/5 pt-4">מבנה גופו הידרודינמי מושלם, מזכיר בצורתו טיפת מים. עורו השחור כפחם זרוע בנקודות לבנות או ורודות, המשמשות לא רק כהסוואה במעמקים אלא מהוות מעין "טביעת אצבע" ייחודית לכל פרט (במיוחד בכתם הוורוד שעל קודקוד ראשם).</p>
             </div>
         </section>
 
-        <!-- Section 3: Detailed Etymology -->
+        <!-- Section 4: Diet and Ecology -->
+        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-teal-600" id="ecoCard">
+            <h2 class="text-xl font-bold text-teal-400 mb-6 flex items-center" id="ecoTitle">תזונה, מדוזות וסכנות מודרניות</h2>
+            <div class="space-y-4 text-slate-300 leading-relaxed">
+                <p id="ecoDesc1">צב הגלד פיתח התמחות תזונתית נדירה: הוא ניזון כמעט אך ורק ממדוזות (ג'לטיבור). למרות שערכן התזונתי של המדוזות נמוך מאוד (הן מורכבות בעיקר ממים), הצב מפצה על כך באכילת כמויות אדירות – הוא עשוי לצרוך מדוזות השוות ל-70% ממשקל גופו ביום אחד! תיאבון זה הופך אותו לטורף-על ימי בעל חשיבות אקולוגית עצומה בשליטה על התפוצצות אוכלוסיות מדוזות באוקיינוסים.</p>
+                <p id="ecoDesc2">למרבה הטרגדיה, האבולוציה המושלמת של צב הגלד לא הכינה אותו לסכנות מעשה ידי אדם. שקיות פלסטיק ובלונים צפים נראים מתחת למים בדיוק כמו מדוזות. צבי גלד רבים בולעים את הפלסטיק בשוגג; מכיוון שמערכת העיכול שלהם בנויה כך שדבר אינו יכול לצאת חזרה החוצה, הפלסטיק גורם לחסימת מעיים קטלנית, ומהווה את אחד האיומים הגדולים ביותר על הישרדות המין במאה ה-21.</p>
+            </div>
+        </section>
+
+        <!-- Section 5: Detailed Etymology -->
         <section class="glass-card rounded-[2rem] p-8" id="etymCard">
             <h2 class="text-xl font-bold text-orange-400 mb-8" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
             <div class="space-y-8">
                 <div class="etymology-part">
-                    <h3 class="text-orange-300 font-bold text-lg" id="etym1_head">Dermochelys (דמו-קליס)</h3>
-                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym1_src">מקור: יוונית עתיקה (derma + chelys)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym1_def">**Derma** פירושו עור, ו-**Chelys** פירושו צב. השם מתייחס לעובדה המהפכנית שהשריון שלו אינו עשוי מלוחיות קרן קשיחות אלא מכוסה בשכבת עור עבה וגמישה המזכירה גומי קשיח.</p>
+                    <h3 class="text-orange-300 font-bold text-lg mb-1" id="etym1_head">Dermochelys (דמו-קליס)</h3>
+                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym1_src">מקור: יוונית עתיקה (derma = עור + chelys = צב)</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym1_def"><span class="font-bold text-white">משמעות: "צב העור".</span> השם מתייחס למוזרוּת האנטומית המהפכנית שלו. בשונה מכל שאר הצבים בעולם (יבשה וים כאחד) ששריונם בנוי מעצמות שהתאחו ללוחיות קשיחות וחשופות, שריונו של צב זה חסר לוחיות לחלוטין ומכוסה כולו בשכבת עור עבה, חלקה ושחורה.</p>
                 </div>
                 <div class="etymology-part">
-                    <h3 class="text-orange-300 font-bold text-lg" id="etym2_head">Coriacea (קוריאציה)</h3>
-                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: לטינית (corium)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym2_def">משמעות: דמוי עור מעובד או גלד (Leathery). השם מתאר את המרקם הייחודי והקשיח של הרקמה הסיבית הגמישה העוטפת את לוחיות העצם הזעירות המרכיבות את שריונו.</p>
+                    <h3 class="text-orange-300 font-bold text-lg mb-1" id="etym2_head">Coriacea (קוריאציה)</h3>
+                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: לטינית (corium = עור מעובד/גלד)</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym2_def"><span class="font-bold text-white">משמעות: "דמוי גלד או עור מעובד" (Leathery).</span> השם מתאר במדויק את המרקם הייחודי של גבו. מתחת לעור החלק מסתתרת רקמת חיבור סיבית ועבה מאוד (המרגישה כמו גומי קשיח או צמיג), ובתוכה משובצות אלפי עצמות זעירות המשתלבות יחד כמו פסיפס.</p>
                 </div>
-                <div class="bg-orange-900/15 p-6 rounded-2xl border border-orange-800/40 text-sm italic text-slate-300" id="etymTotal">משמעות השם המלאה: "צב בעל שריון דמוי גלד", שם המגדיר במדויק את ההבדל האבולוציוני המרכזי בינו לבין שאר צבי הים המודרניים ששמרו על שריון גרמי קשיח.</div>
+                <div class="bg-orange-900/15 p-6 rounded-2xl border border-orange-800/40 text-sm italic text-slate-300" id="etymTotal"><span class="font-bold text-white">משמעות השם המלאה:</span> "צב עור דמוי-גלד". זהו שם כפול המדגיש את ההבדל האבולוציוני הדרמטי ביותר בינו לבין שאר צבי הים המודרניים, הבדל שאפשר לו לכבוש את מעמקי האוקיינוס.</div>
             </div>
         </section>
 
-        <!-- Section 4: Survival & Evolution -->
-        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-orange-500/30">
+        <!-- Section 6: Survival & Evolution -->
+        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-orange-500/30 mb-8">
             <h2 class="text-xl font-bold text-orange-400 mb-6" id="surviveTitle">סיבת ההישרדות והישגים אבולוציוניים</h2>
             <div class="space-y-6 text-slate-300 leading-relaxed">
-                <p id="surviveText">צב הגלד שרד בזכות יכולת נדידה קיצונית וצלילה לעומקים אדירים של מעל 1,000 מטר. הוא פיתח מנגנוני ויסות חום מתקדמים המאפשרים לו לשרוד במים קרים בהם זוחלים אחרים אינם יכולים לתפקד.</p>
-                <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">הישגים אנטומיים ייחודיים:</h4>
+                <p id="surviveText">צב הגלד שרד לאורך עידנים גיאולוגיים סוערים בזכות שבירת הגבולות הפיזיולוגיים של עולם הזוחלים. הוא פיתח יכולות של יונק ימי, המאפשרות לו לנדוד למרחקים עצומים, לצלול לעומקים מחרידים ולצוד במים קפואים לחלוטין שבהם זוחלים אחרים משתתקים וטובעים.</p>
+                <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">הישגים אנטומיים יוצאי דופן:</h4>
                 <ul class="space-y-5 text-sm text-orange-100/80" id="achieveList">
-                    <li class="flex items-start gap-3"><span class="text-orange-500">•</span><span id="ach1">**שריון גמיש:** בנוי מאלפי לוחיות עצם זעירות המשובצות ברקמה סיבית, מה שמאפשר לשריון להידחס תחת לחצי מים עצומים במעמקים מבלי להיסדק.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-orange-500">•</span><span id="ach2">**גיגנטותרמיה:** יכולת לשמור על חום גוף גבוה מטמפרטורת המים הסובבים בזכות גודלו העצום, שכבת שומן מבודדת עבה ומערכת זרימת דם נגד-כיוונית.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-orange-500">•</span><span id="ach3">**קוצי גרון (Papillae):** קוצים גמישים הפונים פנימה לאורך כל הוושט, המונעים מטרף חלקלק (כמו מדוזות) לברוח בזמן שהצב פולט עודפי מי ים מהקיבה.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-orange-500 mt-1">•</span><span id="ach1"><span class="font-bold text-white">שריון גמיש לצלילות עומק:</span> בשונה משריון קשיח שיישבר לרסיסים בעומק רב, מבנה ה"גלד" שלו נועד להידחס פנימה תחת לחץ עצום. הודות לכך, צב הגלד מסוגל לצלול לעומק מדהים של 1,280 מטרים בחיפוש אחר מדוזות!</span></li>
+                    <li class="flex items-start gap-3"><span class="text-orange-500 mt-1">•</span><span id="ach2"><span class="font-bold text-white">גיגנטותרמיה (דם חם למחצה):</span> תופעה נדירה בזוחלים. בזכות מסת הגוף האדירה שלו, שכבת שומן מבודדת, ומערכת כלי דם מתוחכמת המחממת את הדם החוזר מהסנפירים, הוא שומר על חום גוף של עד 18 מעלות מעל טמפרטורת המים, מה שמאפשר לו לשחות במימי החוג הארקטי.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-orange-500 mt-1">•</span><span id="ach3"><span class="font-bold text-white">מערכת קוצי גרון (Papillae):</span> מכיוון שלמדוזה אין ערך קלורי רב, הצב חייב לבלוע אותה ולפלוט את מי הים החוצה. לכן, הוושט שלו מרופדת כולה באלפי קוצים חדים וגמישים הפונים פנימה לכיוון הקיבה. הם פועלים כשסתום חד-כיווני המונע מהמדוזה (ועד פלסטיק) לברוח.</span></li>
                 </ul>
             </div>
         </section>
     </main>
 
     <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-2xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
-        <a href="../index.html" class="flex flex-col items-center text-orange-500 transition-transform active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span></a>
+        <a href="index.html" class="flex flex-col items-center text-orange-500 transition-transform active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span></a>
     </nav>
 
     <script>
         let currentLang = 'he';
         const content = {
             he: {
-                name: 'צב גלד (Leatherback)', back: '← חזרה לארכיון', labelZoom: 'לחץ להגדלה',
-                discoverTitle: 'פרטי התיעוד והזיהוי', lScientist: 'החוקר המזהה:', vScientist: 'דומניקו ונדלי (1735–1816)',
-                lYear: 'שנת זיהוי מדעי:', vYear: '1761 (התיאור הרשמי הראשון)',
-                lLocation: 'מיקום הגילוי:', vLocation: 'חופי הים התיכון (איטליה)',
-                lStatus: 'סטטוס אבולוציוני:', vStatus: 'הנציג האחרון של משפחת ה-Dermochelyidae',
+                name: 'צב גלד (Leatherback)', back: '← חזרה לארכיון', heroLabel: 'הדמיית ארכיון פעילה',
+                discoverTitle: 'פרטי התיעוד והזיהוי', lScientist: 'החוקר המזהה:', vScientist: 'דומניקו ונדלי (1735–1816) וקרל לינאוס (1707–1778)',
+                lYear: 'שנת זיהוי מדעי:', vYear: '1761 (התיאור המדעי הרשמי הראשון)',
+                lLocation: 'מיקום הגילוי המקורי:', vLocation: 'חוף אוסטיה, הים התיכון (איטליה)',
+                lStatus: 'סטטוס אבולוציוני:', vStatus: 'הנציג האחרון והיחיד של משפחת ה-Dermochelyidae',
                 originTitle: 'נסיבות הגילוי והקשר ההיסטורי',
-                originDesc1: 'הזיהוי המדעי של צב הגלד כמין ייחודי התבסס על צב ענק שנלכד בשנת 1760 בחוף אוסטיה שליד רומא. הצב נשלח לוונדלי בפדובה, שהיה הראשון לזהות את השריון הייחודי.',
-                originDesc2: 'ונדלי הבין שהצב מכוסה בעור עבה וגמיש ולא בשריון קשיח כפי שהיה מוכר עד אז. הוא תיאר זאת במכתב לקרל לינאוס ובכך ביסס את המין במדע. המין קיים כמעט ללא שינוי כ-110 מיליון שנה.',
-                specsTitle: 'מאופיינים פיזיים ותוחלת חיים', 
-                specSize: '<span class="font-bold text-white">אורך מקסימלי:</span> זהו הצב הגדול בעולם, המגיע לאורך של עד 2.2 מטרים. סנפיריו הקדמיים יכולים להגיע למוטת רוחב של 2.7 מטרים.',
-                specWeight: '<span class="font-bold text-white">משקל מקסימלי:</span> משקלו הממוצע נע בין 600 ל-900 קילוגרם, אך תועד פרט חריג שהגיע למשקל של 916 קילוגרם.',
-                specLife: '<span class="font-bold text-white">תוחלת חיים:</span> מוערכת ב-50 עד 100 שנים בטבע. בניגוד לצבי יבשה, קצב המטבוליזם שלו גבוה יחסית.',
-                specBody: 'מבנה גופו הידרודינמי בצורת טיפה, והוא היחיד מבין צבי הים שאין לו שריון גרמי קשיח. עורו השחור זרוע בנקודות לבנות או ורודות.',
-                etymTitle: 'ניתוח אטימולוגי נרחב', etym1head: 'Dermochelys (דמו-קליס)', etym1def: 'עור (Derma) + צב (Chelys). מתייחס לשכבת העור העוטפת את המבנה הגרמי הפנימי של השריון.', etym2head: 'Coriacea (קוריאציה)', etym2def: 'דמוי גלד או עור מעובד (Corium). מתאר את המרקם הקשיח והגמיש של הרקמה הסיבית.',
-                etymTotal: 'משמעות השם המלאה: "צב בעל שריון דמוי גלד", שם המגדיר במדויק את ההבדל האבולוציוני המרכזי שלו.',
-                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים', surText: 'שרד בזכות יכולת נדידה וצלילה לעומקים קיצוניים של מעל 1,000 מטר.',
-                lAchieve: 'הישגים אנטומיים ייחודיים:', 
-                ach1: 'שריון גמיש הבנוי מלוחיות זעירות המאפשרות דחיסה תחת לחץ מים עצום.',
-                ach2: 'גיגנטותרמיה: יכולת שמירה על חום גוף גבוה במים קרים בזכות מסת גוף ושומן.',
-                ach3: 'קוצי גרון (Papillae) המונעים מטרף חלקלק לברוח בזמן פליטת עודפי מים.',
+                originDesc1: 'זיהויו המדעי של צב הגלד כמין ייחודי ונפרד התבסס על פרט ענק שנלכד בשנת 1760 בחוף אוסטיה שליד רומא. הצב העצום נשלח ל<span class="font-bold text-white">דומניקו ונדלי</span>, פרופסור לתולדות הטבע באוניברסיטת פדובה. ונדלי נדהם ממראהו של הזוחל האדיר, שהיה שונה לחלוטין מכל צב ים או יבשה שהיה מוכר למדע באותה תקופה.',
+                originDesc2: 'ונדלי היה הראשון להבין שהצב הזה אינו מציית לחוקי האנטומיה הקלאסיים; במקום שריון גרמי קשיח העשוי מלוחיות קרן (Scutes), גבו היה מכוסה בעור עבה, סיבי וגמיש דמוי גלד או גומי מחוספס. ונדלי מיהר לתאר את הממצא במכתב מפורט ששלח ל<span class="font-bold text-white">קרל לינאוס</span>, אבי שיטת המיון המדעית. לינאוס העניק לצב את שמו הרשמי בשנת 1766. צב הגלד נחשב ל"מאובן חי" שמשפחתו קיימת כ-110 מיליון שנה ושרדה את הכחדת הדינוזאורים.',
+                specsTitle: 'מאפיינים פיזיים ותוחלת חיים',
+                specSize: '<span class="font-bold text-white">אורך וממדים:</span> זהו הצב (והזוחל הלא-תניני) הגדול בעולם. אורכו מגיע עד ל-2.2 מטרים. סנפיריו הקדמיים עצומים ויכולים להגיע למוטת רוחב של 2.7 מטרים, מה שהופך אותו לשחיין המהיר ביותר מבין הזוחלים (עד 35 קמ"ש).',
+                specWeight: '<span class="font-bold text-white">משקל מקסימלי:</span> משקלו הממוצע נע בין 600 ל-900 קילוגרם. פרט שיא היסטורי שנשטף לחוף בוויילס בשנת 1988 הגיע למשקל מפלצתי של 916 קילוגרם.',
+                specLife: '<span class="font-bold text-white">תוחלת חיים:</span> מוערכת ב-50 עד 100 שנים בטבע. בניגוד לצבי יבשה ענקיים החיים בהילוך איטי, צב הגלד משקיע כמויות אדירות של אנרגיה במסעות נדידה טרנס-אוקיאניים (לעיתים מעל 16,000 ק"מ בשנה).',
+                specBody: 'מבנה גופו הידרודינמי מושלם, מזכיר בצורתו טיפת מים. עורו השחור כפחם זרוע בנקודות לבנות או ורודות, המשמשות לא רק כהסוואה במעמקים אלא מהוות מעין "טביעת אצבע" ייחודית לכל פרט.',
+                ecoTitle: 'תזונה, מדוזות וסכנות מודרניות',
+                ecoDesc1: 'צב הגלד פיתח התמחות תזונתית נדירה: הוא ניזון כמעט אך ורק ממדוזות (ג\'לטיבור). למרות שערכן התזונתי נמוך מאוד, הצב מפצה על כך באכילת כמויות אדירות – הוא עשוי לצרוך מדוזות השוות ל-70% ממשקל גופו ביום אחד! תיאבון זה הופך אותו לטורף-על ימי בעל חשיבות אקולוגית עצומה בשליטה על התפוצצות מדוזות.',
+                ecoDesc2: 'למרבה הטרגדיה, האבולוציה המושלמת שלו לא הכינה אותו לסכנות מעשה ידי אדם. שקיות פלסטיק ובלונים צפים נראים מתחת למים בדיוק כמו מדוזות. צבי גלד בולעים את הפלסטיק בשוגג, וגורמים לחסימת מעיים קטלנית המהווה את אחד האיומים הגדולים על הישרדות המין.',
+                etymTitle: 'ניתוח אטימולוגי נרחב',
+                etym1head: 'Dermochelys (דמו-קליס)', etym1src: 'מקור: יוונית עתיקה (derma = עור + chelys = צב)', etym1def: '<span class="font-bold text-white">משמעות: "צב העור".</span> השם מתייחס למוזרוּת האנטומית המהפכנית שלו. בשונה מכל שאר הצבים בעולם ששריונם בנוי מלוחיות קשיחות, שריונו חסר לוחיות לחלוטין ומכוסה בשכבת עור עבה, חלקה ושחורה.',
+                etym2head: 'Coriacea (קוריאציה)', etym2src: 'מקור: לטינית (corium = עור מעובד/גלד)', etym2def: '<span class="font-bold text-white">משמעות: "דמוי גלד או עור מעובד" (Leathery).</span> השם מתאר במדויק את המרקם הייחודי של גבו. מתחת לעור מסתתרת רקמת חיבור סיבית ועבה (המרגישה כמו גומי קשיח), ובתוכה משובצות אלפי עצמות זעירות המשתלבות יחד כפסיפס.',
+                etymTotal: '<span class="font-bold text-white">משמעות השם המלאה:</span> "צב עור דמוי-גלד". זהו שם כפול המדגיש את ההבדל האבולוציוני הדרמטי ביותר בינו לבין שאר צבי הים המודרניים.',
+                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים',
+                surText: 'צב הגלד שרד לאורך עידנים סוערים בזכות שבירת הגבולות הפיזיולוגיים של עולם הזוחלים. הוא פיתח יכולות של יונק ימי, המאפשרות לו לנדוד למרחקים עצומים ולצלול לעומקים אדירים.',
+                lAchieve: 'הישגים אנטומיים יוצאי דופן:',
+                ach1: '<span class="font-bold text-white">שריון גמיש לצלילות עומק:</span> בשונה משריון קשיח שיישבר לרסיסים בעומק רב, מבנה ה"גלד" שלו נועד להידחס פנימה תחת לחץ עצום, המאפשר צלילה לעומק מדהים של 1,280 מטרים.',
+                ach2: '<span class="font-bold text-white">גיגנטותרמיה (דם חם למחצה):</span> בזכות מסת הגוף האדירה שלו ושכבת השומן, הוא שומר על חום גוף של עד 18 מעלות מעל טמפרטורת המים, מה שמאפשר לו לשחות במימי החוג הארקטי.',
+                ach3: '<span class="font-bold text-white">מערכת קוצי גרון (Papillae):</span> הוושט שלו מרופדת באלפי קוצים חדים הפונים פנימה לקיבה. הם פועלים כשסתום חד-כיווני המונע מהמדוזה החלקלקה (או פלסטיק) לברוח החוצה.',
                 navHome: 'בית', btn: 'EN', dir: 'rtl'
             },
             en: {
-                name: 'Leatherback Turtle', back: '← Back to Archive', labelZoom: 'Click to Enlarge',
-                discoverTitle: 'Scientific Identification & Records', lScientist: 'Identifying Scientist:', vScientist: 'Domenico Vandelli (1735–1816)',
+                name: 'Leatherback Turtle', back: '← Back to Archive', heroLabel: 'Archive Simulation Active',
+                discoverTitle: 'Scientific Identification & Records', lScientist: 'Identifying Scientists:', vScientist: 'Domenico Vandelli (1735–1816) & Carl Linnaeus (1707–1778)',
                 lYear: 'Year Identified:', vYear: '1761 (First official scientific description)',
-                lLocation: 'Discovery Location:', vLocation: 'Mediterranean Coast (Italy)',
-                lStatus: 'Evolutionary Status:', vStatus: 'Last surviving member of the Dermochelyidae family',
+                lLocation: 'Discovery Location:', vLocation: 'Beach of Ostia, Mediterranean (Italy)',
+                lStatus: 'Evolutionary Status:', vStatus: 'The sole surviving member of the Dermochelyidae family',
                 originTitle: 'Discovery Circumstances & Historical Context',
-                originDesc1: 'The scientific identification of the Leatherback as a unique species was based on a massive specimen caught in 1760 at the beach of Ostia, near Rome. The turtle was sent to Domenico Vandelli, a professor of natural history at the University of Padua, who was stunned by the massive reptile\'s unique flexible shell.',
-                originDesc2: 'Vandelli was the first to realize that this turtle did not follow known anatomical rules of other sea turtles; instead of a hard, keratinized shell made of scutes, it was covered in thick, flexible leathery skin. Vandelli described these findings in a detailed letter to Carl Linnaeus, the father of modern taxonomy, officially entering the Leatherback into scientific history. The species is a living fossil, with its lineage existing for 110 million years with minimal structural change since the Cretaceous era.',
-                specsTitle: 'Physical Characteristics & Lifespan', 
-                specSize: '<span class="font-bold text-white">Maximum Length:</span> It is the largest turtle in the world, reaching lengths of up to 2.2 meters (7.2 ft). Its front flippers can reach a span of 2.7 meters, making it a powerful swimmer.',
-                specWeight: '<span class="font-bold text-white">Maximum Weight:</span> Average weight ranges between 600 to 900 kg, though an exceptional specimen reached 916 kg (2,019 lbs) on a Welsh beach.',
-                specLife: '<span class="font-bold text-white">Lifespan:</span> Estimated between 50 to 100 years in the wild. Unlike land tortoises, its metabolism is relatively high due to its size and migratory energy costs.',
-                specBody: 'Its body structure is hydrodynamic and teardrop-shaped, being the only sea turtle lacking a hard bony shell. Its black skin is often dappled with white or pink spots for deep-sea camouflage.',
-                etymTitle: 'Detailed Etymological Analysis', etym1head: 'Dermochelys (Scientific)', etym1def: 'From Ancient Greek: Derma (skin) + Chelys (turtle). This refers to the revolutionary fact that its carapace lacks traditional bony scutes and is instead covered by flexible skin.', etym2head: 'Coriacea (Scientific)', etym2def: 'From Latin: Corium (leather or hide). Describing the unique, tough, and flexible texture of the fibrous tissue wrapping the tiny bone plates of its shell.',
-                etymTotal: 'Full Meaning: "Leathery shell turtle", a name that precisely defines the primary evolutionary difference between it and other modern sea turtles that retained a hard shell.',
-                surTitle: 'Survival & Evolutionary Achievements', surText: 'The Leatherback survived due to its extreme migratory capabilities and ability to dive to depths exceeding 1,000 meters in search of prey.',
+                originDesc1: 'The scientific identification of the Leatherback as a distinct species was based on a massive specimen caught in 1760 at the beach of Ostia near Rome. The enormous turtle was sent to <span class="font-bold text-white">Domenico Vandelli</span>, a professor of natural history at the University of Padua. Vandelli was astounded by the mighty reptile, which was entirely different from any sea or land turtle known to science at the time.',
+                originDesc2: 'Vandelli was the first to realize this turtle defied classical anatomical rules; instead of a hard carapace made of keratin scutes, its back was covered in thick, fibrous, and flexible leathery skin resembling tough rubber. He rushed to send a detailed letter to <span class="font-bold text-white">Carl Linnaeus</span>, the father of modern taxonomy, who officially named it in 1766. It is considered a true "living fossil", with its family existing for ~110 million years, surviving the dinosaur extinction.',
+                specsTitle: 'Physical Characteristics & Lifespan',
+                specSize: '<span class="font-bold text-white">Length & Dimensions:</span> It is the largest turtle (and non-crocodilian reptile) in the world. Its length reaches up to 2.2 meters. Its massive front flippers can span 2.7 meters across, making it the fastest swimming reptile (up to 35 km/h).',
+                specWeight: '<span class="font-bold text-white">Maximum Weight:</span> Average weight ranges from 600 to 900 kg. A historical record-breaking specimen washed ashore in Wales in 1988 reached a monstrous weight of 916 kg (2,019 lbs).',
+                specLife: '<span class="font-bold text-white">Lifespan:</span> Estimated at 50 to 100 years in the wild. Unlike giant land tortoises that live at a slow pace, the Leatherback expends massive energy on trans-oceanic migrations (sometimes over 16,000 km annually).',
+                specBody: 'Its perfectly hydrodynamic body is shaped like a teardrop. Its pitch-black skin is dotted with white or pink spots, which serve as deep-sea camouflage and act as a unique "fingerprint" for each individual.',
+                ecoTitle: 'Diet, Jellyfish & Modern Threats',
+                ecoDesc1: 'The Leatherback has a rare dietary specialization: it feeds almost exclusively on jellyfish (gelatinivore). Though jellyfish have very low nutritional value, the turtle compensates by eating massive quantities—consuming up to 70% of its body weight in a single day! This appetite makes it a crucial apex predator in controlling global jellyfish blooms.',
+                ecoDesc2: 'Tragically, its flawless evolution did not prepare it for man-made dangers. Floating plastic bags and balloons look exactly like jellyfish underwater. Leatherbacks mistakenly swallow the plastic, causing fatal intestinal blockages, which remains one of the greatest threats to the species\' survival.',
+                etymTitle: 'Detailed Etymological Analysis',
+                etym1head: 'Dermochelys (Scientific)', etym1src: 'Source: Ancient Greek (derma = skin + chelys = turtle)', etym1def: '<span class="font-bold text-white">Meaning: "Skin Turtle".</span> Refers to its revolutionary anatomical oddity. Unlike all other turtles in the world whose shells are made of fused hard scutes, its shell lacks scutes entirely and is covered in smooth, thick black skin.',
+                etym2head: 'Coriacea (Scientific)', etym2src: 'Source: Latin (corium = leather/hide)', etym2def: '<span class="font-bold text-white">Meaning: "Leathery".</span> Accurately describes the unique texture of its back. Beneath the skin hides a thick, fibrous connective tissue (feeling like hard rubber), embedded with thousands of tiny bone plates interlocking like a mosaic.',
+                etymTotal: '<span class="font-bold text-white">Full Meaning:</span> "Leathery Skin Turtle." A dual name emphasizing the dramatic evolutionary difference between it and modern sea turtles.',
+                surTitle: 'Survival & Evolutionary Achievements',
+                surText: 'The Leatherback survived turbulent geological eras by breaking the physiological boundaries of reptiles. It developed marine-mammal-like abilities, allowing it to migrate vast distances and dive to terrifying depths.',
                 lAchieve: 'Unique Anatomical Achievements:',
-                ach1: 'Flexible Carapace: Built from thousands of tiny bone plates embedded in fibrous tissue, allowing the shell to compress under immense deep-sea pressure without cracking.',
-                ach2: 'Gigantothermy: The ability to maintain a high body temperature relative to surrounding freezing water due to its massive size, fat insulation, and counter-current heat exchange.',
-                ach3: 'Esophageal Papillae: Flexible, inward-pointing spines throughout the esophagus that prevent slippery prey (like jellyfish) from escaping while excess seawater is expelled.',
+                ach1: '<span class="font-bold text-white">Flexible Carapace for Deep Dives:</span> Unlike a hard shell that would shatter under extreme depth, its "leathery" structure compresses under massive pressure, enabling dives to an astonishing 1,280 meters.',
+                ach2: '<span class="font-bold text-white">Gigantothermy (Warm-bloodedness):</span> Thanks to its massive body mass and insulating fat layer, it maintains a core temperature up to 18°C higher than the water, allowing it to swim in Arctic waters.',
+                ach3: '<span class="font-bold text-white">Esophageal Papillae:</span> Its throat is lined with thousands of sharp spines pointing inward to the stomach. They act as a one-way valve to prevent slippery jellyfish (or plastic) from escaping.',
                 navHome: 'HOME', btn: 'HE', dir: 'ltr'
             }
         };
@@ -256,7 +273,8 @@
             const data = content[currentLang];
             document.getElementById('fossilName').innerText = data.name;
             document.getElementById('backBtn').innerText = data.back;
-            document.getElementById('labelZoom').innerText = data.labelZoom;
+            document.getElementById('heroLabel').innerText = data.heroLabel;
+            
             document.getElementById('discoverTitle').innerText = data.discoverTitle;
             document.getElementById('labelScientist').innerText = data.lScientist;
             document.getElementById('valScientist').innerText = data.vScientist;
@@ -266,35 +284,54 @@
             document.getElementById('valLocation').innerText = data.vLocation;
             document.getElementById('labelStatus').innerText = data.lStatus;
             document.getElementById('valStatus').innerText = data.vStatus;
+            
             document.getElementById('originTitle').innerText = data.originTitle;
-            document.getElementById('originDesc1').innerText = data.originDesc1;
-            document.getElementById('originDesc2').innerText = data.originDesc2;
+            document.getElementById('originDesc1').innerHTML = data.originDesc1;
+            document.getElementById('originDesc2').innerHTML = data.originDesc2;
+            
             document.getElementById('specsTitle').innerText = data.specsTitle;
             document.getElementById('specSize').innerHTML = data.specSize;
             document.getElementById('specWeight').innerHTML = data.specWeight;
             document.getElementById('specLife').innerHTML = data.specLife;
             document.getElementById('specBody').innerText = data.specBody;
+
+            document.getElementById('ecoTitle').innerText = data.ecoTitle;
+            document.getElementById('ecoDesc1').innerHTML = data.ecoDesc1;
+            document.getElementById('ecoDesc2').innerHTML = data.ecoDesc2;
+            
             document.getElementById('etymTitle').innerText = data.etymTitle;
             document.getElementById('etym1_head').innerText = data.etym1head;
-            document.getElementById('etym1_def').innerText = data.etym1def;
+            document.getElementById('etym1_src').innerText = data.etym1src;
+            document.getElementById('etym1_def').innerHTML = data.etym1def;
             document.getElementById('etym2_head').innerText = data.etym2head;
-            document.getElementById('etym2_def').innerText = data.etym2def;
-            document.getElementById('etymTotal').innerText = data.etymTotal;
+            document.getElementById('etym2_src').innerText = data.etym2src;
+            document.getElementById('etym2_def').innerHTML = data.etym2def;
+            document.getElementById('etymTotal').innerHTML = data.etymTotal;
+            
             document.getElementById('surviveTitle').innerText = data.surTitle;
             document.getElementById('surviveText').innerText = data.surText;
             document.getElementById('labelAchieve').innerText = data.lAchieve;
-            document.getElementById('ach1').innerText = data.ach1;
-            document.getElementById('ach2').innerText = data.ach2;
-            document.getElementById('ach3').innerText = data.ach3;
+            document.getElementById('ach1').innerHTML = data.ach1;
+            document.getElementById('ach2').innerHTML = data.ach2;
+            document.getElementById('ach3').innerHTML = data.ach3;
+            
             document.getElementById('navHome').innerText = data.navHome;
             document.getElementById('langBtn').innerText = data.btn;
             document.documentElement.dir = data.dir;
             document.documentElement.lang = currentLang;
-            const card = document.getElementById('discoverCard');
-            card.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            card.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+            
+            const card1 = document.getElementById('discoverCard');
+            card1.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
+            card1.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+
+            const card3 = document.getElementById('specsCard');
+            card3.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
+            card3.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+
+            const card4 = document.getElementById('ecoCard');
+            card4.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
+            card4.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
         }
     </script>
 </body>
 </html>
-

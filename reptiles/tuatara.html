@@ -45,39 +45,41 @@
             padding-left: 1.25rem;
         }
 
-        .fossil-hero-container {
+        /* Holographic Hero Image Replacement */
+        .hologram-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 2rem;
+            background: radial-gradient(circle at 50% 50%, #78350f 0%, #020617 100%);
+            border: 1px solid rgba(245, 158, 11, 0.2);
             position: relative;
-            cursor: zoom-in;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 20px 40px -10px rgba(245, 158, 11, 0.15);
             margin-bottom: 2.5rem;
         }
 
-        .fossil-hero-img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            border-radius: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .hologram-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(245, 158, 11, 0.05) 1px, transparent 1px);
+            background-size: 100% 4px;
+            pointer-events: none;
         }
 
-        /* Image Zoom Modal */
-        #imageModal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
+        .hologram-icon {
+            font-size: 6rem;
+            filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.8));
+            animation: float 4s ease-in-out infinite;
         }
 
-        #imageModal img {
-            max-width: 100%;
-            max-height: 85vh;
-            border-radius: 1.5rem;
-            box-shadow: 0 0 60px rgba(245, 158, 11, 0.25);
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         h1, h2, h3 {
@@ -99,12 +101,6 @@
 </head>
 <body class="min-h-screen flex flex-col pb-24 text-justify">
 
-    <!-- Modal עבור הגדלת תמונה -->
-    <div id="imageModal" onclick="this.style.display='none'">
-        <img src="../images/tuatara.png" alt="Tuatara Enlarge" id="modalImg">
-        <div class="absolute top-10 right-10 text-white text-5xl cursor-pointer">&times;</div>
-    </div>
-
     <!-- Language Toggle -->
     <div class="fixed top-6 left-6 z-50">
         <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-amber-500 hover:bg-amber-500 hover:text-white transition-all shadow-xl active:scale-95">EN</button>
@@ -112,19 +108,19 @@
 
     <!-- Header -->
     <header class="pt-16 px-6 text-center mb-6">
-        <a href="../index.html" id="backBtn" class="text-amber-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
+        <a href="index.html" id="backBtn" class="text-amber-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
         <h1 id="fossilName" class="text-4xl font-extrabold text-white">טואטרה (Tuatara)</h1>
         <p class="text-amber-500 font-mono mt-2 italic" id="scientificName">Sphenodon punctatus</p>
     </header>
 
     <main class="px-6 space-y-8 max-w-2xl mx-auto">
         
-        <!-- Hero Image -->
-        <div class="fossil-hero-container group" onclick="document.getElementById('imageModal').style.display='flex'">
-            <img src="../images/tuatara.png" alt="טואטרה" class="fossil-hero-img shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]" onerror="this.src='https://via.placeholder.com/800x450/000000/f59e0b?text=Tuatara+Image+Not+Found'">
-            <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center space-x-2 space-x-reverse">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
-                <span class="text-[10px] text-amber-400 font-bold uppercase" id="labelZoom">לחץ להגדלה</span>
+        <!-- Hologram Hero Section -->
+        <div class="hologram-container">
+            <div class="hologram-icon">🦎</div>
+            <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-amber-500/30 flex items-center space-x-2 space-x-reverse">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest" id="heroLabel">הדמיית ארכיון פעילה</span>
             </div>
         </div>
 
@@ -132,121 +128,142 @@
         <section class="glass-card rounded-[2rem] p-8 border-r-4 border-amber-500" id="discoverCard">
             <h2 class="text-xl font-bold text-amber-400 mb-6 flex items-center" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
             <div class="space-y-4 text-slate-300">
-                <p><span class="font-bold text-white" id="labelScientist">החוקר המזהה:</span> <span id="valScientist">ג'ון אדוארד גריי (1800–1875)</span></p>
-                <p><span class="font-bold text-white" id="labelYear">שנת זיהוי מדעי:</span> <span id="valYear">1831 (זוהה כסוג נפרד וייחודי מלטאות)</span></p>
-                <p><span class="font-bold text-white" id="labelLocation">מיקום הגילוי:</span> <span id="valLocation">איי ניו זילנד (למשל איי מצר קוק)</span></p>
-                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">הנציג האחרון מסדרת הרינקוצפליה (Rhynchocephalia)</span></p>
+                <p><span class="font-bold text-white" id="labelScientist">החוקרים המזהים:</span> <span id="valScientist">ג'ון אדוארד גריי (1800–1875) ואלברט גינתר (1830–1914)</span></p>
+                <p><span class="font-bold text-white" id="labelYear">שנת זיהוי מדעי:</span> <span id="valYear">1831 (זוהה לראשונה) ו-1867 (סווג כסדרה נפרדת)</span></p>
+                <p><span class="font-bold text-white" id="labelLocation">מיקום תפוצה עיקרי:</span> <span id="valLocation">איי ניו זילנד (איים מבודדים כמו איי מצר קוק וסטפן איילנד)</span></p>
+                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">הנציג החי היחיד והאחרון מסדרת הרינקוצפליה (Rhynchocephalia)</span></p>
             </div>
         </section>
 
-        <!-- Section: Discovery Circumstances -->
+        <!-- Section 2: Discovery Circumstances -->
         <section class="glass-card rounded-[2rem] p-8" id="originCard">
             <h2 class="text-xl font-bold text-amber-400 mb-6 flex items-center" id="originTitle">נסיבות הגילוי והקשר ההיסטורי</h2>
             <div class="space-y-5 text-slate-300 leading-relaxed">
-                <p id="originDesc1">הגילוי המדעי של הטואטרה היה תהליך הדרגתי שהחל עם הגעת דגימות ראשונות למערב מניו זילנד המבודדת. בתחילה, מדענים נטו לחשוב שמדובר בלטאה רגילה ממשפחת החרדוניים בשל המראה החיצוני הדומה, אך בחינה אנטומית מעמיקה חשפה עולם שונה לחלוטין שהתקיים בנפרד במשך מיליוני שנים.</p>
+                <p id="originDesc1">הגילוי המדעי של הטואטרה היה תהליך הדרגתי שחשף את אחד הסודות הגדולים של עולם החי. עם הגעת הדגימות הראשונות מניו זילנד המבודדת לאירופה, מדענים נטו לחשוב שמדובר בלטאה רגילה ממשפחת החרדוניים בשל המראה החיצוני הדומה. אולם, בחינה אנטומית מעמיקה חשפה יצור שהזמן שכח, עולם שונה לחלוטין שהתקיים בנפרד במשך מאות מיליוני שנים.</p>
                 <div class="highlight-box p-5 rounded-xl">
-                    <p id="originDesc2" class="text-sm">בשנת **1831**, החוקר **ג'ון אדוארד גריי** מהמוזיאון הבריטי בחן גולגולת של היצור והבין כי מדובר במין שאינו דומה לשום זוחל אחר המוכר למדע. רק בשנת **1867**, אלברט גינתר פרסם מחקר מקיף שאישר סופית כי הטואטרה אינו לטאה כלל, אלא השריד החי היחיד של שושלת עתיקה (Sphenodontia) שהתפצלה מיתר הזוחלים לפני כ-250 מיליון שנה. רוב הדגימות המוקדמות הגיעו מאיים מבודדים כמו **סטפן איילנד**, שם המין שרד ללא הפרעה.</p>
+                    <p id="originDesc2" class="text-sm">בשנת **1831**, החוקר **ג'ון אדוארד גריי** מהמוזיאון הבריטי בחן גולגולת של היצור והבין כי מדובר במין שאינו דומה לשום זוחל אחר המוכר למדע. פריצת הדרך האמיתית הגיעה בשנת **1867**, כאשר הזואולוג **אלברט גינתר** פרסם מחקר מקיף שאישר סופית כי הטואטרה **אינו לטאה כלל**. הוא הוכיח כי זהו השריד החי היחיד של שושלת עתיקה שהתפצלה מיתר הזוחלים (קשקשאים) לפני כ-250 מיליון שנה, ופרחה בתור הטריאס. בעוד קרובי משפחתה נכחדו יחד עם הדינוזאורים, הטואטרה שרדה בבידוד הגיאוגרפי המושלם של ניו זילנד, הרחק מיונקים יבשתיים טורפים.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Physical Specs -->
+        <!-- Section 3: Physical Specs -->
         <section class="glass-card rounded-[2rem] p-8 border-r-4 border-orange-600" id="specsCard">
             <h2 class="text-xl font-bold text-orange-400 mb-6 flex items-center" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
             <div class="space-y-6 text-slate-300 leading-relaxed">
                 <div class="grid grid-cols-1 gap-4">
-                    <p id="specSize"><span class="font-bold text-white">אורך מקסימלי:</span> זכרים מגיעים עד 80 סנטימטרים, בעוד הנקבות קטנות יותר ומגיעות לכ-45 סנטימטרים. צבעם נע בין ירוק-זית לחום עמוק.</p>
-                    <p id="specWeight"><span class="font-bold text-white">משקל מקסימלי:</span> עד 1.3 קילוגרם לזכר בוגר. הם מתאפיינים בגדילה איטית מאוד שנמשכת עשורים.</p>
-                    <p id="specLife"><span class="font-bold text-white">תוחלת חיים:</span> מעל 100 שנים בטבע. תועדו מקרים של פרטים שהתרבו בהצלחה גם בגיל 80 ומעלה, מה שמעיד על קצב הזדקנות ביולוגי איטי במיוחד.</p>
+                    <p id="specSize"><span class="font-bold text-white">אורך וממדים:</span> קיימת דו-צורתיות זוויגית – זכרים מגיעים עד לאורך של 80 סנטימטרים, בעוד הנקבות קטנות יותר ומגיעות לכ-45 סנטימטרים. צבעם מותאם להסוואה בסבך ונע בין ירוק-זית לחום עמוק, לעיתים מנוקד בלבן (punctatus).</p>
+                    <p id="specWeight"><span class="font-bold text-white">משקל מקסימלי:</span> עד 1.3 קילוגרם לזכר בוגר. הם מתאפיינים בגדילה איטית להחריד, ומגיעים לגודלם המקסימלי רק לאחר כ-35 שנות חיים.</p>
+                    <p id="specLife"><span class="font-bold text-white">תוחלת חיים חריגה:</span> הטואטרה יכולה לחיות מעל 100 שנים בטבע ובשבי, מה שהופך אותה לאחד הזוחלים מאריכי החיים ביותר. למעשה, קצב ההזדקנות הביולוגי שלהם כה איטי, עד שתועדו מקרים של פרטים שהתרבו בהצלחה בגיל מופלג.</p>
                 </div>
-                <p id="specBody" class="text-sm border-t border-white/5 pt-4">גופו מכוסה קשקשים קטנים, ולאורך גבו עוברת שורת קוצים גמישים (Tara). אחד המאפיינים המרתקים הוא יכולתו להצמיח מחדש את זנבו במקרה של קטיעה, בדומה ללטאות, אך מבנה עמוד השדרה שלו פרימיטיבי בהרבה.</p>
+                <p id="specBody" class="text-sm border-t border-white/5 pt-4">הגוף מכוסה בקשקשים קטנים וגרגריים, ולאורך הגב והזנב עוברת שורת קוצים גמישים ובולטים (בעיקר אצל זכרים המשמשים לתצוגת ראווה). בדומה ללטאות, הטואטרה מסוגלת להצמיח מחדש את זנבה אם נקטע (אוטוטומיה), תהליך שעשוי לקחת מספר שנים, אך מבנה עמוד השדרה והצלעות שלה פרימיטיבי וקרוב יותר לזה של דגים ודו-חיים קדומים.</p>
             </div>
         </section>
 
-        <!-- Section 3: Detailed Etymology -->
+        <!-- Section 4: Reproduction & Slow Development -->
+        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-rose-600" id="ecoCard">
+            <h2 class="text-xl font-bold text-rose-400 mb-6 flex items-center" id="ecoTitle">רבייה והתפתחות אבולוציונית איטית</h2>
+            <div class="space-y-4 text-slate-300 leading-relaxed">
+                <p id="ecoDesc1">הטואטרה מחזיקה בשיא שלילי של קצב רבייה: זהו קצב הרבייה האיטי ביותר מבין כל הזוחלים בעולם. הנקבה מזדווגת ומטילה ביצים רק פעם ב-2 עד 5 שנים. ההדגרה בבטן האדמה נמשכת בין 11 ל-16 חודשים (תקופת ההדגרה הארוכה ביותר הידועה בזוחלים), ורק לאחריה בוקעים הצעירים.</p>
+                <p id="ecoDesc2">אחד הסיפורים ההיסטוריים והמפורסמים ביותר הנוגעים לרביית המין התרחש בשנת 2009, כאשר טואטרה בשם **"הנרי"** – תושב מוזיאון בניו זילנד – הפך לאב גאה ל-11 גורים בפעם הראשונה בחייו, כשהוא בגיל מוערך של **111 שנים**. בנוסף, למין זה יש מנגנון **קביעת מין תלוית-טמפרטורה (TSD)**. ביצים שמוקרנות בטמפרטורה שמעל 21 מעלות צלזיוס יניבו זכרים, ומתחת לכך נקבות. משמעות הדבר היא שההתחממות הגלובלית מהווה איום קיומי מוחשי על המין, שכן היא עלולה להוביל לבקיעה של זכרים בלבד ולהכחדת האוכלוסייה.</p>
+            </div>
+        </section>
+
+        <!-- Section 5: Detailed Etymology -->
         <section class="glass-card rounded-[2rem] p-8" id="etymCard">
             <h2 class="text-xl font-bold text-amber-400 mb-8" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
             <div class="space-y-8">
                 <div class="etymology-part">
-                    <h3 class="text-amber-300 font-bold text-lg" id="etym1_head">Tuatara (מקור מאורי)</h3>
+                    <h3 class="text-amber-300 font-bold text-lg mb-1" id="etym1_head">Tuatara (מקור השם המקומי)</h3>
                     <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym1_src">שפה: מאורית (Te Reo Māori)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym1_def">השם מורכב מהמילים **Tua** (גב או צד אחורי) ו-**Tara** (קוצים או פסגות). המונח מתאר במדויק את שורת הקוצים המשוננת לאורך גבו וראשו של הזוחל המזכירה פסגות הרים משוננות.</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym1_def"><span class="font-bold text-white">משמעות: "פסגות על הגב".</span> השם מורכב מהמילים **Tua** (גב או צד אחורי) ו-**Tara** (קוצים, קרניים או פסגות). המונח, שניתן על ידי הילידים המאורים של ניו זילנד, מתאר בצורה מושלמת ופואטית את שורת הקוצים המשוננת לאורך גבו וראשו של הזכרים, המזכירה רכס של פסגות הרים משוננות.</p>
                 </div>
                 <div class="etymology-part">
-                    <h3 class="text-amber-300 font-bold text-lg" id="etym2_head">Sphenodon (שם מדעי)</h3>
-                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: יוונית (sphen = טריז, odon = שן)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym2_def">משמעות: שן בצורת טריז. השם מתייחס למבנה הייחודי של שיניו, שהן למעשה בליטות של עצם הלסת עצמה ולא שיניים נפרדות בתוך מכתשים, תכונה פרימיטיבית שאינה קיימת בזוחלים מודרניים.</p>
+                    <h3 class="text-amber-300 font-bold text-lg mb-1" id="etym2_head">Sphenodon punctatus (שם מדעי)</h3>
+                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: יוונית (Sphen = טריז, Odon = שן) + לטינית (Punctatus = מנוקד)</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym2_def"><span class="font-bold text-white">משמעות: "שן טריז מנוקדת".</span> השם (Sphenodon) מתייחס לאחד המאפיינים הפרימיטיביים והייחודיים ביותר של היצור – מבנה שיניו. בניגוד לרוב בעלי החיים ששיניהם ממוקמות בתוך מכתשים בלסת, שיני הטואטרה הן למעשה חתיכות מחודדות (דמויות טריז) של עצם הלסת עצמה, ללא שורש נפרד. התוספת "punctatus" מתארת את הנקודות הבהירות הפזורות על עורו.</p>
                 </div>
-                <div class="bg-amber-900/15 p-6 rounded-2xl border border-amber-800/40 text-sm italic text-slate-300" id="etymTotal">משמעות השם המלאה משלבת את המראה החיצוני המרשים ("פסגות על הגב") עם המבנה האנטומי העתיק והייחודי של שיניו, שנותר ללא שינוי מעידן הדינוזאורים.</div>
+                <div class="bg-amber-900/15 p-6 rounded-2xl border border-amber-800/40 text-sm italic text-slate-300" id="etymTotal"><span class="font-bold text-white">משמעות השם המלאה:</span> משלבת את המראה החיצוני המרשים שזיהו ילידי המקום ("פסגות על הגב"), יחד עם התיאור המדעי לאנטומיה העתיקה של שיניו (שן טריז) שנותרה ללא שינוי מעידן הדינוזאורים.</div>
             </div>
         </section>
 
-        <!-- Section 4: Survival & Evolution -->
-        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-amber-500/30">
+        <!-- Section 6: Survival & Evolution -->
+        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-amber-500/30 mb-8">
             <h2 class="text-xl font-bold text-amber-400 mb-6" id="surviveTitle">סיבת ההישרדות והישגים אבולוציוניים</h2>
             <div class="space-y-6 text-slate-300 leading-relaxed">
-                <p id="surviveText">הטואטרה שרד בזכות בידוד גיאוגרפי קיצוני באיי ניו זילנד, הרחק מיונקים טורפים. הוא פיתח סובלנות נדירה לטמפרטורות נמוכות וקצב חילוף חומרים איטי במיוחד, המאפשר לו לשרוד בתנאים שבהם זוחלים אחרים נכשלים.</p>
-                <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">הישגים אנטומיים ייחודיים:</h4>
+                <p id="surviveText">הטואטרה שרדה אך ורק בזכות "סירת ההצלה" הגיאולוגית של ניו זילנד, שהתנתקה מיבשת-העל גונדוונה לפני כ-80 מיליון שנה, בטרם התפתחו יונקים טורפים (טורפי ניו זילנד היו בעיקר ציפורים). במקביל, המין פיתח סובלנות קיצונית ונדירה לטמפרטורות נמוכות וקצב חילוף חומרים איטי במיוחד, המאפשר לו לפעול ולשגשג באקלים קר (מתחת ל-10 מעלות צלזיוס) שבו זוחלים מודרניים קופאים למוות.</p>
+                <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">הישגים אנטומיים יוצאי דופן:</h4>
                 <ul class="space-y-5 text-sm text-amber-100/80" id="achieveList">
-                    <li class="flex items-start gap-3"><span class="text-amber-500">•</span><span id="ach1">**עין שלישית (Parietal eye):** איבר חישה מורכב בחלק העליון של הראש, הכולל עדשה, קרנית ורשתית, המשמש לוויסות השעון הביולוגי והקליטה של אור שמש.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-amber-500">•</span><span id="ach2">**מערכת שיניים כפולה:** שתי שורות שיניים בלסת העליונה שביניהן נסגרת שורה אחת מהלסת התחתונה, מנגנון חיתוך עוצמתי שאין לשום זוחל אחר בעולם.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-amber-500">•</span><span id="ach3">**חילוף חומרים איטי:** יכולת לשרוד שבועות ללא מזון, וקצב נשימה שיכול לרדת לאחת לדקה בזמן מנוחה, מה שתורם לאריכות חייו המופלגת.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-500 mt-1">•</span><span id="ach1"><span class="font-bold text-white">העין השלישית (Parietal eye):</span> לטואטרה יש עין שלישית ממשית הממוקמת בפדחת הראש, מתחת לקשקשים. יש לה עדשה, קרנית, רשתית וחיבור עצבי למוח. למרות שהיא אינה מייצרת תמונה מלאה, היא רגישה לאור ולשינויי טמפרטורה, ומשמשת לוויסות השעון הביולוגי, ספיגת ויטמין D, וכוונון מחזורי השינה והרבייה.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-500 mt-1">•</span><span id="ach2"><span class="font-bold text-white">מערכת שיניים "מסורית" כפולה:</span> מבנה הלסת שלה יחיד במינו בעולם החולייתנים: יש לה שתי שורות של שיניים בלסת העליונה, ושורה אחת בלסת התחתונה הנסגרת בדיוק ביניהן. בעת הלעיסה, הלסת התחתונה נעה קדימה ואחורה, ויוצרת פעולת חיתוך עוצמתית הדוחסת וטוחנת יחדיו חרקים, ביצים ואף ציפורים קטנות.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-500 mt-1">•</span><span id="ach3"><span class="font-bold text-white">שמיעה ללא אוזניים ומטבוליזם קפוא:</span> למרות שאין לה פתחי אוזניים חיצוניים או עור התוף (תכונה קדומה), היא מסוגלת לשמוע תדרים נמוכים דרך ויברציות בעצמות הלסת. בנוסף, חילוף החומרים שלה כה איטי, עד שבזמן מנוחה או קור עז היא עשויה לנשום רק פעם אחת בשעה, יכולת התורמת לאריכות חייה הפנומנלית.</span></li>
                 </ul>
             </div>
         </section>
     </main>
 
     <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-2xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
-        <a href="../index.html" class="flex flex-col items-center text-amber-500 transition-transform active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span></a>
+        <a href="index.html" class="flex flex-col items-center text-amber-500 transition-transform active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span></a>
     </nav>
 
     <script>
         let currentLang = 'he';
         const content = {
             he: {
-                name: 'טואטרה (Tuatara)', back: '← חזרה לארכיון', labelZoom: 'לחץ להגדלה',
-                discoverTitle: 'פרטי התיעוד והזיהוי', lScientist: 'החוקר המזהה:', vScientist: 'ג\'ון אדוארד גריי (1800–1875)',
-                lYear: 'שנת זיהוי מדעי:', vYear: '1831 (זוהה כסוג נפרד)',
-                lLocation: 'מיקום הגילוי:', vLocation: 'איי ניו זילנד (למשל איי מצר קוק)',
-                lStatus: 'סטטוס אבולוציוני:', vStatus: 'הנציג האחרון מסדרת הרינקוצפליה',
+                name: 'טואטרה (Tuatara)', back: '← חזרה לארכיון', heroLabel: 'הדמיית ארכיון פעילה',
+                discoverTitle: 'פרטי התיעוד והזיהוי', lScientist: 'החוקרים המזהים:', vScientist: 'ג\'ון אדוארד גריי (1800–1875) ואלברט גינתר (1830–1914)',
+                lYear: 'שנת זיהוי מדעי:', vYear: '1831 (זוהה לראשונה) ו-1867 (סווג כסדרה נפרדת)',
+                lLocation: 'מיקום תפוצה עיקרי:', vLocation: 'איי ניו זילנד (איים מבודדים כמו איי מצר קוק וסטפן איילנד)',
+                lStatus: 'סטטוס אבולוציוני:', vStatus: 'הנציג החי היחיד והאחרון מסדרת הרינקוצפליה',
                 originTitle: 'נסיבות הגילוי והקשר ההיסטורי',
-                originDesc1: 'הגילוי המדעי של הטואטרה היה תהליך הדרגתי שהחל עם הגעת דגימות מניו זילנד המבודדת. בתחילה נחשב בטעות ללטאה רגילה בשל דמיון חיצוני.',
-                originDesc2: 'ב-1831 ג\'ון אדוארד גריי הבין שמדובר במין ייחודי. ב-1867 אלברט גינתר אישר שמדובר בשושלת עתיקה (Sphenodontia) שאינה קשורה ללטאות ושרדה מעידן הדינוזאורים.',
-                specsTitle: 'מאופיינים פיזיים ותוחלת חיים', 
-                specSize: '<span class="font-bold text-white">אורך מקסימלי:</span> זכרים מגיעים עד 80 סנטימטרים, בעוד הנקבות קטנות יותר ומגיעות לכ-45 סנטימטרים. צבעם נע בין ירוק-זית לחום עמוק.',
-                specWeight: '<span class="font-bold text-white">משקל מקסימלי:</span> עד 1.3 קילוגרם לזכר בוגר. הם מתאפיינים בגדילה איטית מאוד שנמשכת עשורים.',
-                specLife: '<span class="font-bold text-white">תוחלת חיים:</span> מעל 100 שנים בטבע. תועדו מקרים של פרטים שהתרבו בהצלחה גם בגיל 80 ומעלה.',
-                specBody: 'גופו מכוסה קשקשים קטנים, ולאורך גבו עוברת שורת קוצים גמישים (Tara). אחד המאפיינים המרתקים הוא יכולתו להצמיח מחדש את זנבו במקרה של קטיעה.',
-                etymTitle: 'ניתוח אטימולוגי נרחב', etym1head: 'Tuatara (מקור מאורי)', etym1def: 'גב (Tua) + קוצים (Tara). מתאר את שורת הקוצים לאורך גבו המזכירה פסגות הרים.', etym2head: 'Sphenodon (שם מדעי)', etym2def: 'שן טריז (יוונית). מתייחס למבנה הייחודי של שיניו המחוברות לעצם הלסת.',
-                etymTotal: 'משמעות השם המלאה משלבת את המראה המרשים ("פסגות על הגב") עם המבנה האנטומי העתיק של שיניו.',
-                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים', surText: 'הטואטרה שרד בזכות בידוד גיאוגרפי בניו זילנד ועמידות לקור קיצוני.',
-                lAchieve: 'הישגים אנטומיים ייחודיים:', 
-                ach1: '**עין שלישית (Parietal eye):** איבר חישה לוויסות השעון הביולוגי.',
-                ach2: '**מערכת שיניים כפולה:** מנגנון חיתוך עוצמתי ויחיד במינו.',
-                ach3: '**חילוף חומרים איטי:** הישרדות ללא מזון והארכת תוחלת החיים.',
+                originDesc1: 'הגילוי המדעי של הטואטרה היה תהליך הדרגתי שחשף עולם שהזמן שכח. בתחילה נחשב בטעות ללטאה רגילה ממשפחת החרדוניים בשל דמיון חיצוני מטעה, אך בחינה מעמיקה שינתה הכל.',
+                originDesc2: 'ב-1831, החוקר <span class="font-bold text-white">ג\'ון אדוארד גריי</span> זיהה כי מדובר במין ייחודי. הפריצה הגיעה ב-1867, כאשר הזואולוג <span class="font-bold text-white">אלברט גינתר</span> אישר שהטואטרה אינה לטאה כלל! אלא השריד האחרון לשושלת עתיקה שהתפצלה מיתר הזוחלים לפני כ-250 מיליון שנה, וקרוביה נכחדו עם הדינוזאורים.',
+                specsTitle: 'מאפיינים פיזיים ותוחלת חיים', 
+                specSize: '<span class="font-bold text-white">אורך וממדים:</span> זכרים מגיעים עד 80 סנטימטרים, בעוד הנקבות קטנות יותר (עד 45 ס"מ). צבעם נע בין ירוק-זית לחום, לרוב מנוקד בלבן (punctatus).',
+                specWeight: '<span class="font-bold text-white">משקל מקסימלי:</span> עד 1.3 ק"ג לזכר. גדלים לאט מאוד ומגיעים לגודלם המקסימלי רק לאחר כ-35 שנים.',
+                specLife: '<span class="font-bold text-white">תוחלת חיים חריגה:</span> למעלה מ-100 שנים בטבע ובשבי. קצב ההזדקנות איטי כל כך, שפרטים מסוימים ממשיכים להתרבות גם בגיל מופלג.',
+                specBody: 'הגוף מכוסה קשקשים קטנים, ולאורך הגב שורת קוצים גמישים לתצוגת ראווה. למרות יכולתה להצמיח זנב שנקטע כמו לטאה, מבנה השלד שלה קרוב יותר לדו-חיים קדומים.',
+                ecoTitle: 'רבייה והתפתחות אבולוציונית איטית',
+                ecoDesc1: 'הטואטרה מחזיקה בשיא שלילי: קצב הרבייה האיטי ביותר בזוחלים. הנקבה מטילה ביצים רק פעם ב-2 עד 5 שנים, וההדגרה באדמה נמשכת 11 עד 16 חודשים – הארוכה ביותר הידועה.',
+                ecoDesc2: 'ב-2009, טואטרה מפורסם בשם <span class="font-bold text-white">"הנרי"</span> הפך לאב לראשונה בגיל המופלג של 111 שנים. בנוסף, מין הילוד נקבע לפי הטמפרטורה בקן: מעל 21 מעלות יבקעו רק זכרים, מה שהופך את ההתחממות הגלובלית לאיום קיומי שיכול לגרום להכחדת המין.',
+                etymTitle: 'ניתוח אטימולוגי נרחב', 
+                etym1head: 'Tuatara (מקור השם המקומי)', etym1src: 'שפה: מאורית (Te Reo Māori)', etym1def: '<span class="font-bold text-white">משמעות: "פסגות על הגב".</span> מורכב מ-Tua (גב) ו-Tara (קוצים/פסגות). ניתן על ידי ילידי ניו זילנד ומתאר את שורת הקוצים המשוננת על גבו המזכירה רכס הרים.', 
+                etym2head: 'Sphenodon punctatus (שם מדעי)', etym2src: 'מקור: יוונית (Sphen = טריז, Odon = שן) + לטינית (Punctatus = מנוקד)', etym2def: '<span class="font-bold text-white">משמעות: "שן טריז מנוקדת".</span> בניגוד לרוב בעלי החיים, שיניו אינן ממוקמות בתוך מכתשים, אלא הן בליטות מחודדות דמויות טריז של עצם הלסת עצמה. התוספת punctatus מתארת את הנקודות הבהירות על עורו.',
+                etymTotal: '<span class="font-bold text-white">משמעות השם המלאה:</span> משלבת את המראה המרשים ("פסגות על הגב") יחד עם התיאור המדעי לאנטומיה העתיקה של שיניו שנותרה כשהייתה מעידן הדינוזאורים.',
+                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים', 
+                surText: 'הישרדותה התאפשרה רק בזכות "סירת ההצלה" של ניו זילנד שהתנתקה מהיבשות לפני הופעת יונקים טורפים. במקביל, הטואטרה פיתחה סובלנות לקור קיצוני (מתחת ל-10 מעלות) שבו זוחלים אחרים קופאים.',
+                lAchieve: 'הישגים אנטומיים יוצאי דופן:', 
+                ach1: '<span class="font-bold text-white">העין השלישית (Parietal eye):</span> עין ממשית הממוקמת בפדחת (עם עדשה ורשתית) המוסתרת תחת הקשקשים. היא קולטת אור ומשמשת לוויסות השעון הביולוגי וספיגת ויטמין D.',
+                ach2: '<span class="font-bold text-white">מערכת שיניים "מסורית" כפולה:</span> מבנה לסת יחיד במינו בעולם: שתי שורות שיניים בלסת העליונה, ושורה אחת בתחתונה הנסגרת ביניהן, ליצירת כוח חיתוך עוצמתי השובר קונכיות ועצמות.',
+                ach3: '<span class="font-bold text-white">שמיעה ללא אוזניים ומטבוליזם קפוא:</span> חסרת פתחי אוזניים אך שומעת דרך ויברציות הלסת. בזמן מנוחה בקור, קצב חילוף החומרים כה איטי שהיא עשויה לנשום רק פעם אחת בשעה.',
                 navHome: 'בית', btn: 'EN', dir: 'rtl'
             },
             en: {
-                name: 'Tuatara', back: '← Back to Archive', labelZoom: 'Click to Enlarge',
-                discoverTitle: 'Scientific Identification & Records', lScientist: 'Identifying Scientist:', vScientist: 'John Edward Gray (1800–1875)',
-                lYear: 'Year Identified:', vYear: '1831 (Identified as unique genus)',
-                lLocation: 'Discovery Location:', vLocation: 'New Zealand islands (e.g. Cook Strait)',
-                lStatus: 'Evolutionary Status:', vStatus: 'Last survivor of Rhynchocephalia order',
+                name: 'Tuatara', back: '← Back to Archive', heroLabel: 'Archive Simulation Active',
+                discoverTitle: 'Scientific Identification & Records', lScientist: 'Identifying Scientists:', vScientist: 'John Edward Gray (1800–1875) & Albert Günther (1830–1914)',
+                lYear: 'Year Identified:', vYear: '1831 (Initial ID) and 1867 (Classified as distinct order)',
+                lLocation: 'Primary Distribution:', vLocation: 'New Zealand islands (isolated islands like Cook Strait and Stephen Island)',
+                lStatus: 'Evolutionary Status:', vStatus: 'The sole living representative of the order Rhynchocephalia',
                 originTitle: 'Discovery Circumstances & Historical Context',
-                originDesc1: 'The scientific discovery of the Tuatara was a gradual process following the arrival of the first specimens from isolated New Zealand. Initially, scientists mistook it for a common lizard of the Agamidae family due to its similar appearance, but deep anatomical study revealed a world existing separately for millions of years.',
-                originDesc2: 'In 1831, John Edward Gray of the British Museum examined a skull and realized it belonged to a species unlike any other known reptile. By 1867, Albert Günther finally confirmed it was not a lizard at all, but the sole living remnant of an ancient lineage (Sphenodontia) that diverged 250 million years ago, surviving since the age of dinosaurs. Early samples came from isolated spots like Stephen Island.',
+                originDesc1: 'The scientific discovery of the Tuatara was a gradual process that revealed a world time had forgotten. Initially, European scientists mistook the early specimens for a common lizard of the Agamidae family due to deceptive external similarities. However, deep anatomical study changed everything.',
+                originDesc2: 'In 1831, <span class="font-bold text-white">John Edward Gray</span> recognized it as a unique species. The true breakthrough came in 1867, when zoologist <span class="font-bold text-white">Albert Günther</span> confirmed the Tuatara is <span class="font-bold text-white">not a lizard at all!</span> It is the last surviving member of an ancient lineage that diverged from other reptiles 250 million years ago, surviving in perfect geographical isolation while its relatives perished with the dinosaurs.',
                 specsTitle: 'Physical Characteristics & Lifespan', 
-                specSize: '<span class="font-bold text-white">Maximum Length:</span> Males reach up to 80 cm (31 in), while females are smaller, reaching about 45 cm. Their color ranges from olive green to deep brown.',
-                specWeight: '<span class="font-bold text-white">Maximum Weight:</span> Up to 1.3 kg (2.9 lbs) for a mature male. They are characterized by extremely slow growth continuing for decades.',
-                specLife: '<span class="font-bold text-white">Lifespan:</span> Over 100 years in the wild. Some individuals have been recorded breeding successfully at 80+ years of age, indicating a very slow biological clock.',
-                specBody: 'Its body is covered in small scales, with a row of flexible spines (Tara) running along its back. A fascinating trait is its ability to regrow its tail if lost, though its spinal structure is far more primitive than modern lizards.',
-                etymTitle: 'Detailed Etymological Analysis', etym1head: 'Tuatara (Māori Origin)', etym1def: 'The name is derived from the Māori words Tua (back) and Tara (spines or peaks). It accurately describes the serrated row of spines along its back resembling mountain peaks.', etym2head: 'Sphenodon (Scientific Name)', etym2def: 'Meaning: Wedge-tooth (Greek). Referring to its unique dental structure where teeth are projections of the jaw bone rather than separate sockets, a rare primitive trait.',
-                etymTotal: 'The full meaning combines its impressive external appearance ("Peaks on the back") with its ancient anatomical tooth structure, unchanged since the dinosaur era.',
-                surTitle: 'Survival & Evolutionary Achievements', surText: 'The Tuatara survived due to extreme geographical isolation in NZ and unique tolerance for cold climates where other reptiles fail.',
+                specSize: '<span class="font-bold text-white">Dimensions:</span> Exhibits sexual dimorphism – males grow up to 80 cm (31 in), while females are smaller (up to 45 cm). Their color ranges from olive green to brown, often spotted white (punctatus).',
+                specWeight: '<span class="font-bold text-white">Maximum Weight:</span> Up to 1.3 kg for a male. They grow incredibly slowly, reaching maximum size only after about 35 years.',
+                specLife: '<span class="font-bold text-white">Exceptional Lifespan:</span> Can live well over 100 years in the wild and captivity. Their biological aging is so slow that some individuals continue to reproduce successfully at very advanced ages.',
+                specBody: 'Covered in small scales with a row of flexible spines running down the back for display. Though capable of regrowing a lost tail like a lizard, its skeletal structure is far more primitive, resembling early amphibians.',
+                ecoTitle: 'Reproduction & Slow Evolutionary Development',
+                ecoDesc1: 'The Tuatara holds a negative record: the slowest reproduction rate of all reptiles. Females mate and lay eggs only once every 2 to 5 years. Soil incubation lasts 11 to 16 months – the longest known incubation period.',
+                ecoDesc2: 'In 2009, a famous Tuatara named <span class="font-bold text-white">"Henry"</span> became a first-time father at the estimated age of 111. Furthermore, gender is determined by incubation temperature (TSD): above 21°C yields only males. This makes global warming a tangible existential threat that could lead to an all-male population and extinction.',
+                etymTitle: 'Detailed Etymological Analysis', 
+                etym1head: 'Tuatara (Māori Origin)', etym1src: 'Source: Māori language (Te Reo Māori)', etym1def: '<span class="font-bold text-white">Meaning: "Peaks on the back".</span> Derived from Tua (back) and Tara (spines/peaks). Named by the indigenous Māori of New Zealand, perfectly describing the serrated row of spines on its back resembling a mountain ridge.', 
+                etym2head: 'Sphenodon punctatus (Scientific Name)', etym2src: 'Source: Greek (Sphen = wedge, Odon = tooth) + Latin (Punctatus = spotted)', etym2def: '<span class="font-bold text-white">Meaning: "Spotted wedge-tooth".</span> Unlike most animals, their teeth are not set in sockets; they are wedge-like, sharpened projections of the jawbone itself. "Punctatus" refers to the light spots scattered on its skin.',
+                etymTotal: '<span class="font-bold text-white">Full Meaning:</span> Combines its impressive visual appearance ("Peaks on the back") with the precise scientific description of its ancient, socket-less tooth anatomy unchanged since the age of dinosaurs.',
+                surTitle: 'Survival & Evolutionary Achievements', 
+                surText: 'Survival was only possible because New Zealand acted as a geological "lifeboat," detaching from the supercontinent before predatory mammals evolved. Concurrently, it developed a rare tolerance for extreme cold (below 10°C) where other modern reptiles freeze to death.',
                 lAchieve: 'Unique Anatomical Achievements:',
-                ach1: '**Parietal eye (Third eye):** A complex sensory organ on top of the head with lens and retina, used for biological clock regulation.',
-                ach2: '**Double row of teeth:** Two rows in the upper jaw and one in the lower, creating a powerful shearing mechanism found in no other living reptile.',
-                ach3: '**Slow metabolic rate:** Ability to survive for weeks without food and breathing once per minute at rest, contributing to its extreme longevity.',
+                ach1: '<span class="font-bold text-white">The Third Eye (Parietal eye):</span> A literal third eye on the top of its head (with lens and retina) hidden under scales. It senses light and regulates the biological clock and Vitamin D absorption.',
+                ach2: '<span class="font-bold text-white">Double "Saw" Tooth System:</span> A jaw structure unique among vertebrates: two rows of teeth in the upper jaw and one row in the lower jaw that fits perfectly between them, creating a powerful shearing force.',
+                ach3: '<span class="font-bold text-white">Earless Hearing & Frozen Metabolism:</span> Lacks external ear openings but hears low frequencies through jaw bone vibrations. At rest in cold weather, its metabolism is so slow it may breathe only once per hour.',
                 navHome: 'HOME', btn: 'HE', dir: 'ltr'
             }
         };
@@ -256,7 +273,8 @@
             const data = content[currentLang];
             document.getElementById('fossilName').innerText = data.name;
             document.getElementById('backBtn').innerText = data.back;
-            document.getElementById('labelZoom').innerText = data.labelZoom;
+            document.getElementById('heroLabel').innerText = data.heroLabel;
+            
             document.getElementById('discoverTitle').innerText = data.discoverTitle;
             document.getElementById('labelScientist').innerText = data.lScientist;
             document.getElementById('valScientist').innerText = data.vScientist;
@@ -266,35 +284,54 @@
             document.getElementById('valLocation').innerText = data.vLocation;
             document.getElementById('labelStatus').innerText = data.lStatus;
             document.getElementById('valStatus').innerText = data.vStatus;
+            
             document.getElementById('originTitle').innerText = data.originTitle;
-            document.getElementById('originDesc1').innerText = data.originDesc1;
-            document.getElementById('originDesc2').innerText = data.originDesc2;
+            document.getElementById('originDesc1').innerHTML = data.originDesc1;
+            document.getElementById('originDesc2').innerHTML = data.originDesc2;
+            
             document.getElementById('specsTitle').innerText = data.specsTitle;
             document.getElementById('specSize').innerHTML = data.specSize;
             document.getElementById('specWeight').innerHTML = data.specWeight;
             document.getElementById('specLife').innerHTML = data.specLife;
             document.getElementById('specBody').innerText = data.specBody;
+
+            document.getElementById('ecoTitle').innerText = data.ecoTitle;
+            document.getElementById('ecoDesc1').innerHTML = data.ecoDesc1;
+            document.getElementById('ecoDesc2').innerHTML = data.ecoDesc2;
+            
             document.getElementById('etymTitle').innerText = data.etymTitle;
             document.getElementById('etym1_head').innerText = data.etym1head;
-            document.getElementById('etym1_def').innerText = data.etym1def;
+            document.getElementById('etym1_src').innerText = data.etym1src;
+            document.getElementById('etym1_def').innerHTML = data.etym1def;
             document.getElementById('etym2_head').innerText = data.etym2head;
-            document.getElementById('etym2_def').innerText = data.etym2def;
-            document.getElementById('etymTotal').innerText = data.etymTotal;
+            document.getElementById('etym2_src').innerText = data.etym2src;
+            document.getElementById('etym2_def').innerHTML = data.etym2def;
+            document.getElementById('etymTotal').innerHTML = data.etymTotal;
+            
             document.getElementById('surviveTitle').innerText = data.surTitle;
             document.getElementById('surviveText').innerText = data.surText;
             document.getElementById('labelAchieve').innerText = data.lAchieve;
             document.getElementById('ach1').innerHTML = data.ach1;
             document.getElementById('ach2').innerHTML = data.ach2;
             document.getElementById('ach3').innerHTML = data.ach3;
+            
             document.getElementById('navHome').innerText = data.navHome;
             document.getElementById('langBtn').innerText = data.btn;
             document.documentElement.dir = data.dir;
             document.documentElement.lang = currentLang;
-            const card = document.getElementById('discoverCard');
-            card.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            card.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+            
+            const card1 = document.getElementById('discoverCard');
+            card1.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
+            card1.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+
+            const card3 = document.getElementById('specsCard');
+            card3.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
+            card3.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+
+            const card4 = document.getElementById('ecoCard');
+            card4.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
+            card4.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
         }
     </script>
 </body>
 </html>
-

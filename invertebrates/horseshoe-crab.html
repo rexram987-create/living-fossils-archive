@@ -6,352 +6,284 @@
     <title>מחקר מעמיק: סרטן הפרסה | The Eternal Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* S25 Ultra Optimized - Premium Deep Dark Edition */
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
         :root {
-            --amoled-black: #000000;
-            --card-gray: #0f172a;
-            --accent-blue: #3b82f6;
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
+            --bg-body: #030712; /* Very dark background */
+            --bg-card: #0a1122; /* Main card background */
+            --bg-pill: #132342; /* Stats pill background */
+            --border-card: #1d365d;
+            --text-accent: #3b82f6; /* Blue-500 */
         }
 
         body {
-            background-color: var(--amoled-black);
-            color: var(--text-main);
+            background-color: var(--bg-body);
+            color: #e2e8f0;
             font-family: system-ui, -apple-system, sans-serif;
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
-            line-height: 1.6;
-            transition: all 0.3s ease;
+            line-height: 1.7;
         }
 
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
-        }
-
-        .etymology-part {
-            border-right: 3px solid var(--accent-blue);
-            padding-right: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        [dir="ltr"] .etymology-part {
-            border-right: 0;
-            border-left: 3px solid var(--accent-blue);
-            padding-right: 0;
-            padding-left: 1.25rem;
-        }
-
-        /* Holographic Hero Image Replacement */
-        .hologram-container {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border-radius: 2rem;
-            background: radial-gradient(circle at 50% 50%, #1e3a8a 0%, #020617 100%);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            position: relative;
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
             overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 20px 40px -10px rgba(59, 130, 246, 0.15);
-            margin-bottom: 2.5rem;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        .hologram-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-            background-size: 100% 4px;
-            pointer-events: none;
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
         }
 
-        .hologram-icon {
-            font-size: 6rem;
-            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.8));
-            animation: float 4s ease-in-out infinite;
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(59, 130, 246, 0.15);
         }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        h1, h2, h3 {
-            color: #f8fafc;
-            letter-spacing: -0.01em;
-        }
-
-        .highlight-box {
-            background: linear-gradient(to left, rgba(59, 130, 246, 0.1), transparent);
-            border-right: 2px solid var(--accent-blue);
-        }
-
-        [dir="ltr"] .highlight-box {
-            background: linear-gradient(to right, rgba(59, 130, 246, 0.1), transparent);
-            border-right: 0;
-            border-left: 2px solid var(--accent-blue);
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col pb-24 text-justify">
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
 
-    <!-- Language Toggle -->
-    <div class="fixed top-6 left-6 z-50">
-        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-blue-500 hover:bg-blue-500 hover:text-white transition-all shadow-xl active:scale-95">EN</button>
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-blue-400 hover:bg-blue-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
     </div>
 
-    <!-- Header -->
-    <header class="pt-16 px-6 text-center mb-6">
-        <a href="index.html" id="backBtn" class="text-blue-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
-        <h1 id="fossilName" class="text-4xl font-extrabold text-white">סרטן הפרסה (Horseshoe Crab)</h1>
-        <p class="text-blue-500 font-mono mt-2 italic" id="scientificName">Limulus polyphemus</p>
-    </header>
-
-    <main class="px-6 space-y-8 max-w-2xl mx-auto">
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
         
-        <!-- Hologram Hero Section -->
-        <div class="hologram-container">
-            <div class="hologram-icon">🦀</div>
-            <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-blue-500/30 flex items-center space-x-2 space-x-reverse">
-                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                <span class="text-[10px] text-blue-400 font-bold uppercase tracking-widest" id="heroLabel">הדמיית ארכיון פעילה</span>
+        <!-- Hero Image -->
+        <!-- שימוש בתמונה המדויקת עם H גדולה מגיטהאב -->
+        <img src="https://github.com/rexram987-create/living-fossils-archive/blob/main/images/Horseshoe-crab.png?raw=true" alt="סרטן הפרסה" class="hero-img" onerror="this.src='https://via.placeholder.com/800x450/0a1122/3b82f6?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: דם כחול, 10 עיניים ומערכת נשימה פרימיטיבית</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">סרטן הפרסה</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Limulus polyphemus</p>
+                <p id="ui_trans" class="text-blue-400 font-bold italic pt-2">"פזלן בעל חרב מזדקרת"</p>
             </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">מעל 450<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>קיטלוג</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1758<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>מירבי</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 60<br>ס"מ<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תוחלת<br>חיים</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">כ-20<br>שנים<br>&nbsp;</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">העובדה הראשונה והמפתיעה ביותר לגבי סרטן הפרסה היא שהוא <span class="font-bold text-white">כלל איננו סרטן</span>. הוא משתייך לתת-מערכת בעלי הכליצרות (Chelicerata), מה שהופך אותו לקרוב משפחה רחוק של עכבישים ועקרבים, ולא של סרטנים מודרניים. הוא מצויד בשריון עבה המחולק לשלושה חלקים, ובלא פחות מ-<span class="font-bold text-white">10 עיניים וחיישני אור</span> הפזורים על פני גופו וזנבו, המאפשרים לו לנווט באוקיינוס למרות ראייה פרימיטיבית. הוא נושם באמצעות איברים עתיקים הנקראים "זימי ספר" (Book gills) – מדפים רחבים המזכירים דפי ספר ומשמשים גם לשחייה.</p>
+                    
+                    <p id="sec1_p2">אך הפלא האמיתי והמפורסם ביותר שלו הוא <span class="font-bold text-white">דמו הכחול</span>. בניגוד ליונקים שדמם מכיל המוגלובין המבוסס על ברזל, דמו של סרטן הפרסה מכיל <span class="font-bold text-white">המוציאנין (Hemocyanin)</span>, חלבון מבוסס נחושת שהופך לכחול בחשיפה לחמצן. לדם זה יש יכולת חיסונית פנומנלית: הוא מכיל תאים הנקראים אמיבוציטים, אשר מזהים רעלנים של חיידקים ומיד נקרשים סביבם כדי לכלוא את הזיהום. יצור זה שרד לא פחות מחמש הכחדות המוניות שונות, הרבה לפני הדינוזאורים, מה שהופך אותו לאחד השורדים הגדולים ביותר של כדור הארץ.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-blue-300 text-base mb-1">Xiphosura (שם הסדרה):</h3>
+                        <p id="sec2_desc1">מורכב מיוונית עתיקה: **Xiphos** שמשמעותו <span class="font-bold text-white">חרב</span>, ו-**Oura** שמשמעותה <span class="font-bold text-white">זנב</span>. שם זה מתאר את זנבו הדק והארוך (הטֶלסוֹן). למרות מראהו המאיים כחרב, הזנב אינו ארסי ואינו משמש לדקירה, אלא כהגה כיוון בשחייה וככלי שעוזר ליצור להתהפך חזרה אם נפל על גבו.</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-blue-300 text-base mb-1">Limulus (שם הסוג):</h3>
+                        <p id="sec2_desc2">מקורו במילה הלטינית "Limulus" שפירושה <span class="font-bold text-white">"אלכסון קטן" או "פזלן קל"</span>. השם ניתן לו על ידי החוקר הדני אוטו פרידריך מולר, ומתייחס למיקום האלכסוני של עיניו המורכבות על השריון העליון.</p>
+                    </div>
+                    <div class="bg-blue-900/20 p-4 rounded-xl border-r-2 border-blue-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-blue-200">שם עממי (Horseshoe Crab): הוענק לו בשל שריון הראש (הפרוסומה) הגדול שלו, שצורתו מזכירה במדויק פרסת סוס.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-blue-400 font-bold text-base mb-4 inline-block border-b border-blue-900/50 pb-1">תיעוד ותרומה רפואית:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">קיטלוג היסטורי:</span> <span id="sec3_v1">המין סווג לראשונה באופן מדעי ומסודר על ידי הטקסונום השוודי המפורסם קארולוס לינאוס (Carl Linnaeus) בשנת 1758.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">תעשיית התרופות (LAL):</span> <span id="sec3_v2">בשנות ה-70 גילה המדע כי הדם הכחול שלו הוא כלי רפואי חסר תחליף. התמצית המופקת מדמו (LAL) משמשת את כל תעשיית התרופות בעולם (כולל חיסונים נגד קורונה) כדי לבדוק האם ציוד רפואי או תרופות נגועים בחיידקים, תוך הקרשה מיידית בתגובה לרעלן.</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">מאמצי שימור:</span> <span id="sec3_v3">כדי להשיג את התמצית, נלכדים מאות אלפי פרטים מדי שנה, נשאב מהם דם, והם מוחזרים לאוקיינוס. התהליך מוביל לתמותה באחוזים מסוימים, מה שמציב את המין בסכנה ומאיץ פיתוח של חלופות סינתטיות במעבדה.</span></p>
+                </div>
+            </section>
+
         </div>
-
-        <!-- Section 1: Discovery Details -->
-        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-blue-500" id="discoverCard">
-            <h2 class="text-xl font-bold text-blue-400 mb-6 flex items-center" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
-            <div class="space-y-4 text-slate-300">
-                <p><span class="font-bold text-white" id="labelScientist">החוקר המזהה:</span> <span id="valScientist">קרל לינאוס (1707–1778)</span></p>
-                <p><span class="font-bold text-white" id="labelYear">שנת זיהוי מדעי:</span> <span id="valYear">1758 (פורסם בספרו Systema Naturae)</span></p>
-                <p><span class="font-bold text-white" id="labelLocation">מיקום תפוצה עיקרי:</span> <span id="valLocation">חופי האוקיינוס האטלנטי של צפון אמריקה ומפרץ מקסיקו</span></p>
-                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">קיים כמעט ללא שינוי מעידן האורדוביק (כ-450 מיליון שנה)</span></p>
-            </div>
-        </section>
-
-        <!-- Section 2: Discovery Circumstances -->
-        <section class="glass-card rounded-[2rem] p-8" id="originCard">
-            <h2 class="text-xl font-bold text-blue-400 mb-6 flex items-center" id="originTitle">נסיבות הגילוי והקשר ההיסטורי</h2>
-            <div class="space-y-5 text-slate-300 leading-relaxed">
-                <p id="originDesc1">הרבה לפני שסרטן הפרסה תועד מדעית באירופה, הוא היה מוכר היטב לילידי אמריקה (האינדיאנים), שהשתמשו בשריונו הקשיח כדילוי למים, ובזנבו (הטלסון) כחוד לחניתות הציד שלהם. תיעודו המדעי הרשמי בוצע על ידי הבוטנאי והזואולוג השוודי הנודע <span class="font-bold text-white">קרל לינאוס</span> במהדורה העשירית והקנונית של ספרו ב-1758. לינאוס התבסס על שלדים חיצוניים ודגימות שיובאו לאירופה על ידי סוחרים שראו ביצור המשוריין פלא פרהיסטורי אקזוטי.</p>
-                <div class="highlight-box p-5 rounded-xl">
-                    <p id="originDesc2" class="text-sm">בתחילה סווג המין בטעות תחת מחלקת הסרטנים (Crustaceans), אך במאה ה-19 מחקרים אנטומיים הוכיחו כי הוא למעשה שייך לתת-מערכת בעלי כליצרות (Chelicerata), כלומר, הוא קרוב משפחה קדום של העכבישים והעקרבים. סרטן הפרסה נחשב ל"שורד האולטימטיבי" של כדור הארץ: הוא שרד בהצלחה את כל <span class="font-bold text-white">חמש ההכחדות ההמוניות הגדולות</span>, כולל הכחדת הפרם-טריאס (בה נכחדו 95% מהמינים הימיים) וזו שהכחידה את הדינוזאורים.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: The Blue Blood Miracle -->
-        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-indigo-500" id="bloodCard">
-            <h2 class="text-xl font-bold text-indigo-400 mb-6 flex items-center" id="bloodTitle">נס הדם הכחול (LAL)</h2>
-            <div class="space-y-4 text-slate-300 leading-relaxed">
-                <p id="bloodDesc1">סוד ההישרדות האמיתי של סרטן הפרסה – וזה שהופך אותו לקריטי לאנושות – טמון בדם שלו. בניגוד ליונקים שדמם מכיל ברזל (המוגלובין) המעניק לו צבע אדום, דמו של סרטן הפרסה מכיל נחושת (המוציאנין), מה שמעניק לו צבע <span class="font-bold text-indigo-300">כחול עמוק ובוהק</span> כאשר הוא נחשף לחמצן.</p>
-                <p id="bloodDesc2">אך הפלא אינו רק בצבע. הדם מכיל תאים מיוחדים הנקראים <span class="font-bold text-white">אמבוציטים</span>. תאים אלו רגישים באופן קיצוני לרעלנים שמייצרים חיידקי גראם-שליליים (Endotoxins). ברגע שהאמבוציט מזהה רעלן, ולו בכמות מזערית של אחד לטריליון, הוא מפריש ג'ל שיוצר קריש באופן מיידי, לוכד את החיידק ומונע ממנו להתפשט. תמצית זו נקראת **LAL (Limulus amebocyte lysate)**. כיום, <span class="font-bold text-white">כל חיסון, תרופת עירוי או שתל רפואי בעולם המודרני</span> חייב לעבור בדיקת סטריליות באמצעות דם של סרטן פרסה בטרם יאושר לשימוש בבני אדם.</p>
-            </div>
-        </section>
-
-        <!-- Section 4: Physical Specs -->
-        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-cyan-600" id="specsCard">
-            <h2 class="text-xl font-bold text-cyan-400 mb-6 flex items-center" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
-            <div class="space-y-6 text-slate-300 leading-relaxed">
-                <div class="grid grid-cols-1 gap-4">
-                    <p id="specSize"><span class="font-bold text-white">אורך וממדים:</span> עד 60 סנטימטרים מקצה הראש ועד קצה הזנב. במין זה מתקיימת דו-צורתיות זוויגית מובהקת: הנקבות גדולות וכבדות משמעותית מהזכרים (לעיתים בכ-30% יותר).</p>
-                    <p id="specWeight"><span class="font-bold text-white">משקל מקסימלי:</span> יכול להגיע עד 5 קילוגרם בשיא הבגרות, כאשר רוב המשקל נובע משריון הכיטין הקשיח.</p>
-                    <p id="specLife"><span class="font-bold text-white">תוחלת חיים:</span> מוערכת ב-20 עד 40 שנים בטבע. מאחר ואין להם עצמות פנימיות שניתן לתארך, הגיל נקבע לרוב על פי בלאי השריון ומספר הנשלים שעבר היצור (סרטן פרסה משיל את שריונו כ-16 פעמים עד הגיעו לבגרות).</p>
-                </div>
-                <p id="specBody" class="text-sm border-t border-white/5 pt-4">גופו מחולק לשלושה חלקים עיקריים: ה**פרוסומה** (שריון הראש החלק דמוי הפרסה, הדוחף את המים ומאפשר לו להתחפר), ה**אופיסטומה** (החלק המרכזי עם הקוצים המגינים), וה**טלסון** (הזנב הקשיח. למרות מראהו המאיים, הוא אינו מכיל ארס ומשמש אך ורק כהגה ניווט וכמנוף להיפוך הגוף במקרה שגלים הופכים אותו על גבו).</p>
-            </div>
-        </section>
-
-        <!-- Section 5: Reproduction & Ecology -->
-        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-amber-600" id="ecoCard">
-            <h2 class="text-xl font-bold text-amber-400 mb-6 flex items-center" id="ecoTitle">מחזור רבייה והשפעה אקולוגית</h2>
-            <div class="space-y-4 text-slate-300 leading-relaxed">
-                <p id="ecoDesc">בעונת האביב, במהלך לילות של ירח מלא וירח חסר (כאשר הגאות בשיאה), מתרחש אחד המראות המרהיבים בטבע: עשרות אלפי סרטני פרסה עולים מן המצולות אל החופים החוליים כדי להזדווג. הנקבה חופרת גומות בחול ומטילה בהן בין 60,000 ל-120,000 ביצים. תופעה זו חיונית למערכת האקולוגית הגלובלית: הביצים העשירות בחלבון משמשות כמקור אנרגיה קריטי למינים רבים של ציפורים נודדות, כמו החופית האדמונית (Red Knot), שעוצרות בחופים אלו כדי לאגור כוח למסען הארוך מהקוטב הדרומי לקוטב הצפוני.</p>
-            </div>
-        </section>
-
-        <!-- Section 6: Detailed Etymology -->
-        <section class="glass-card rounded-[2rem] p-8" id="etymCard">
-            <h2 class="text-xl font-bold text-blue-400 mb-8" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
-            <div class="space-y-8">
-                <div class="etymology-part">
-                    <h3 class="text-blue-300 font-bold text-lg mb-1" id="etym1_head">Limulus (לימולוס)</h3>
-                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym1_src">מקור: לטינית (limulus)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym1_def"><span class="font-bold text-white">משמעות: "מעט עקום", "מלוכסן" או "פזול".</span> המונח מתייחס למיקום ולמבנה הייחודי של העיניים המורכבות הממוקמות בצידי שריון הראש שלו. מיקום זה מעניק לסרטן שדה ראייה רחב כמעט של 360 מעלות, אך במבט מלפנים גורם לו להיראות כאילו הוא פוזל הצידה.</p>
-                </div>
-                <div class="etymology-part">
-                    <h3 class="text-blue-300 font-bold text-lg mb-1" id="etym2_head">Polyphemus (פוליפמוס)</h3>
-                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: מיתולוגיה יוונית (Polyphemus)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym2_def"><span class="font-bold text-white">משמעות: הקיקלופ מרובה העוצמה.</span> על שם הענק בעל העין האחת מהאודיסיאה של הומרוס. השם ניתן לו מכיוון שמלבד עיניו הצידיות, יש לו שתי עיניים פשוטות צמודות זו לזו במרכז חזית השריון, שנראות מרחוק כעין אחת גדולה ומרכזית.</p>
-                </div>
-                <div class="bg-blue-900/15 p-6 rounded-2xl border border-blue-800/40 text-sm italic text-slate-300" id="etymTotal"><span class="font-bold text-white">משמעות השם המלאה:</span> "הקיקלופ המלוכסן". שם ציורי המשלב את המורפולוגיה החזותית המוזרה של מערכת הראייה המורכבת שלו (הכוללת סך הכל 10 עיניים וחיישני אור הפזורים על פני גופו וזנבו).</div>
-            </div>
-        </section>
-
-        <!-- Section 7: Survival & Evolution -->
-        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-blue-500/30 mb-8">
-            <h2 class="text-xl font-bold text-blue-400 mb-6" id="surviveTitle">סיבת ההישרדות והישגים אבולוציוניים</h2>
-            <div class="space-y-6 text-slate-300 leading-relaxed">
-                <p id="surviveText">סרטן הפרסה הוא מודל של "עיצוב הנדסי מושלם" של הטבע. הוא שרד מאות מיליוני שנים בזכות יכולת הסתגלות קיצונית למגוון רחב של תנאי מליחות, טמפרטורה, ואפילו תקופות של שנה שלמה ללא מזון. צורת השריון שלו, הדומה למחרשה או כיפה אווירודינמית, מאפשרת למים לזרום מעליו ולהצמיד אותו לקרקעית הים, מה שמקשה מאוד על טורפים להפוך אותו ולפגוע בבטנו הרכה.</p>
-                <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">הישגים ביולוגיים יוצאי דופן:</h4>
-                <ul class="space-y-5 text-sm text-blue-100/80" id="achieveList">
-                    <li class="flex items-start gap-3"><span class="text-blue-500 mt-1">•</span><span id="ach1"><span class="font-bold text-white">דם כחול מגלה רעלנים:</span> המערכת החיסונית המהירה והיעילה ביותר בעולם החי נגד חיידקים, אשר הפכה לאבן היסוד של בטיחות התרופות המודרנית.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-blue-500 mt-1">•</span><span id="ach2"><span class="font-bold text-white">מערכת ראייה רב-מוקדית (10 עיניים):</span> כוללת עיניים מורכבות לראיית עצמים, עיניים פשוטות לזיהוי אור, חיישני קרינת אולטרה-סגול (UV), ואפילו חיישני אור קטנים בזנב, המאפשרים לו לנווט במדויק בחושך בהתאם לאור הירח והכוכבים.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-blue-500 mt-1">•</span><span id="ach3"><span class="font-bold text-white">רגליים כפולות-תפקיד:</span> ששת זוגות הרגליים בבטנו משמשות גם להליכה על הקרקעית, גם ללכידת תולעים ורכיכות, וגם מצוידות בבסיסן בבליטות קשיחות ("Gnathomere") המשמשות לריסוק וטחינת המזון לפני בליעתו, שכן אין לו לסתות או שיניים בפיו.</span></li>
-                </ul>
-            </div>
-        </section>
     </main>
 
-    <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-2xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
-        <a href="index.html" class="flex flex-col items-center text-blue-500 transition-transform active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span></a>
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="../turtles/leatherback.html" class="text-slate-400 hover:text-blue-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: צב גלד</span>
+        </a>
+        <a href="../index.html" class="text-blue-400 hover:text-blue-300 transition-colors text-sm font-bold bg-blue-900/20 px-5 py-2.5 rounded-full border border-blue-800/30 shadow-lg">
+            <span id="navNext">חזרה לארכיון</span> <span>&larr;</span>
+        </a>
     </nav>
 
     <script>
         let currentLang = 'he';
         const content = {
             he: {
-                name: 'סרטן הפרסה (Horseshoe Crab)', back: '← חזרה לארכיון', heroLabel: 'הדמיית ארכיון פעילה',
-                discoverTitle: 'פרטי התיעוד והזיהוי', lScientist: 'החוקר המזהה:', vScientist: 'קרל לינאוס (1707–1778)',
-                lYear: 'שנת זיהוי מדעי:', vYear: '1758 (פורסם בספרו Systema Naturae)',
-                lLocation: 'מיקום תפוצה עיקרי:', vLocation: 'חופי האוקיינוס האטלנטי של צפון אמריקה ומפרץ מקסיקו',
-                lStatus: 'סטטוס אבולוציוני:', vStatus: 'קיים כמעט ללא שינוי מעידן האורדוביק (כ-450 מיליון שנה)',
-                originTitle: 'נסיבות הגילוי והקשר ההיסטורי',
-                originDesc1: 'הרבה לפני שסרטן הפרסה תועד מדעית באירופה, הוא היה מוכר היטב לילידי אמריקה (האינדיאנים), שהשתמשו בשריונו כדילוי למים, ובזנבו (הטלסון) כחוד לחניתות הציד שלהם. תיעודו המדעי הרשמי בוצע על ידי <span class="font-bold text-white">קרל לינאוס</span> ב-1758, בהתבסס על שלדים שייובאו לאירופה כפלא פרהיסטורי אקזוטי.',
-                originDesc2: 'בתחילה סווג בטעות כסרטן, אך בהמשך התגלה כקרוב משפחה קדום של העכבישים והעקרבים. סרטן הפרסה נחשב ל"שורד האולטימטיבי": הוא שרד את כל <span class="font-bold text-white">חמש ההכחדות ההמוניות הגדולות</span>, כולל הכחדת הדינוזאורים.',
-                bloodTitle: 'נס הדם הכחול (LAL)',
-                bloodDesc1: 'סוד ההישרדות של סרטן הפרסה טמון בדם שלו. בניגוד ליונקים שדמם מכיל ברזל, דמו מכיל נחושת (המוציאנין), המעניקה לו צבע <span class="font-bold text-indigo-300">כחול עמוק ובוהק</span> כאשר הוא נחשף לחמצן.',
-                bloodDesc2: 'הדם מכיל תאים מיוחדים (<span class="font-bold text-white">אמבוציטים</span>) שרגישים באופן קיצוני לרעלני חיידקים. ברגע של זיהוי, הם מפרישים ג\'ל שיוצר קריש באופן מיידי ולוכד את החיידק. תמצית זו (LAL) משמשת כיום לבדיקת סטריליות של <span class="font-bold text-white">כל חיסון ושתל רפואי בעולם המודרני</span> לפני אישורו לבני אדם.',
-                specsTitle: 'מאפיינים פיזיים ותוחלת חיים', 
-                specSize: '<span class="font-bold text-white">אורך וממדים:</span> עד 60 ס"מ מקצה הראש לזנב. הנקבות גדולות וכבדות משמעותית מהזכרים (בכ-30%).',
-                specWeight: '<span class="font-bold text-white">משקל מקסימלי:</span> יכול להגיע עד 5 ק"ג בשיא הבגרות, רובו נובע משריון הכיטין הקשיח.',
-                specLife: '<span class="font-bold text-white">תוחלת חיים:</span> מוערכת ב-20 עד 40 שנים בטבע. בהיעדר עצמות לתיארוך, הגיל נקבע על פי בלאי השריון (משיל שריון כ-16 פעמים עד הבגרות).',
-                specBody: 'גופו מחולק ל-3 חלקים: הפרוסומה (שריון הראש החלק), האופיסטומה (המרכז הקוצני), והטלסון (הזנב הקשיח שאינו מכיל ארס ומשמש רק להיפוך הגוף).',
-                ecoTitle: 'מחזור רבייה והשפעה אקולוגית',
-                ecoDesc: 'באביב, בלילות של ירח מלא וירח חסר, רבבות סרטנים עולים לחופים להזדווג. הנקבה מטילה רבבות ביצים בחול. ביצים אלו מהוות מקור אנרגיה קריטי לציפורים נודדות רבות שעוצרות במסען הארוך לאגור כוח מהחלבון העשיר.',
-                etymTitle: 'ניתוח אטימולוגי נרחב', 
-                etym1head: 'Limulus (לימולוס)', etym1src: 'מקור: לטינית (limulus)', etym1def: '<span class="font-bold text-white">משמעות: "מעט עקום" או "מלוכסן".</span> מתייחס למיקום הייחודי של העיניים המורכבות בצידי שריון הראש, מה שמעניק לו מראה פוזל הצידה.', 
-                etym2head: 'Polyphemus (פוליפמוס)', etym2src: 'מקור: מיתולוגיה יוונית (Polyphemus)', etym2def: '<span class="font-bold text-white">משמעות: הקיקלופ מרובה העוצמה.</span> נקרא כך כי מלבד העיניים הצידיות, יש לו זוג עיניים מרכזיות צמודות שנראות מרחוק כעין אחת גדולה.',
-                etymTotal: '<span class="font-bold text-white">משמעות השם המלאה:</span> "הקיקלופ המלוכסן". שם המשלב את המורפולוגיה החזותית המוזרה של מערכת הראייה שלו (הכוללת סך הכל 10 עיניים).',
-                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים', 
-                surText: 'עיצוב הנדסי מושלם: צורת השריון הדמוית כיפה מצמידה אותו לקרקעית הים בזרמים חזקים, ומקשה על טורפים להפוך אותו. הוא מסוגל לשרוד עד שנה שלמה ללא מזון בתנאים קיצוניים.',
-                lAchieve: 'הישגים ביולוגיים יוצאי דופן:', 
-                ach1: '<span class="font-bold text-white">דם כחול מגלה רעלנים:</span> המערכת החיסונית המהירה בעולם החי, המהווה אבן יסוד בבטיחות התרופות המודרנית.',
-                ach2: '<span class="font-bold text-white">מערכת ראייה רב-מוקדית (10 עיניים):</span> חיישנים מיוחדים לאור, אולטרה-סגול ואור הירח מאפשרים ניווט מדויק במצולות ובחופים בלילה.',
-                ach3: '<span class="font-bold text-white">רגליים כפולות-תפקיד:</span> רגלי ההליכה משמשות גם ללכידת טרף, ובבסיסן ישנן בליטות קשיחות ("Gnathomere") המשמשות לריסוק וטחינת המזון, שכן אין לו שיניים.',
-                navHome: 'בית', btn: 'EN', dir: 'rtl'
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: דם כחול, 10 עיניים ומערכת נשימה פרימיטיבית',
+                ui_title: 'סרטן הפרסה',
+                ui_sci: 'Limulus polyphemus',
+                ui_trans: '"פזלן בעל חרב מזדקרת"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'מעל 450<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>קיטלוג', stat2_val: '<br>1758<br>&nbsp;',
+                stat3_lbl: 'אורך<br>מירבי', stat3_val: 'עד 60<br>ס"מ<br>&nbsp;',
+                stat4_lbl: 'תוחלת<br>חיים', stat4_val: 'כ-20<br>שנים<br>&nbsp;',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'העובדה הראשונה והמפתיעה ביותר לגבי סרטן הפרסה היא שהוא <span class="font-bold text-white">כלל איננו סרטן</span>. הוא משתייך לתת-מערכת בעלי הכליצרות (Chelicerata), מה שהופך אותו לקרוב משפחה רחוק של עכבישים ועקרבים, ולא של סרטנים מודרניים. הוא מצויד בשריון עבה המחולק לשלושה חלקים, ובלא פחות מ-<span class="font-bold text-white">10 עיניים וחיישני אור</span> הפזורים על פני גופו וזנבו, המאפשרים לו לנווט באוקיינוס למרות ראייה פרימיטיבית. הוא נושם באמצעות איברים עתיקים הנקראים "זימי ספר" (Book gills) – מדפים רחבים המזכירים דפי ספר ומשמשים גם לשחייה.',
+                sec1_p2: 'אך הפלא האמיתי והמפורסם ביותר שלו הוא <span class="font-bold text-white">דמו הכחול</span>. בניגוד ליונקים שדמם מכיל המוגלובין המבוסס על ברזל, דמו של סרטן הפרסה מכיל <span class="font-bold text-white">המוציאנין (Hemocyanin)</span>, חלבון מבוסס נחושת שהופך לכחול בחשיפה לחמצן. לדם זה יש יכולת חיסונית פנומנלית: הוא מכיל תאים הנקראים אמיבוציטים, אשר מזהים רעלנים של חיידקים ומיד נקרשים סביבם כדי לכלוא את הזיהום. יצור זה שרד לא פחות מחמש הכחדות המוניות שונות, הרבה לפני הדינוזאורים, מה שהופך אותו לאחד השורדים הגדולים ביותר של כדור הארץ.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Xiphosura (שם הסדרה):', sec2_desc1: 'מורכב מיוונית עתיקה: **Xiphos** שמשמעותו <span class="font-bold text-white">חרב</span>, ו-**Oura** שמשמעותה <span class="font-bold text-white">זנב</span>. שם זה מתאר את זנבו הדק והארוך (הטֶלסוֹן). למרות מראהו המאיים כחרב, הזנב אינו ארסי ואינו משמש לדקירה, אלא כהגה כיוון בשחייה וככלי שעוזר ליצור להתהפך חזרה אם נפל על גבו.',
+                sec2_sub2: 'Limulus (שם הסוג):', sec2_desc2: 'מקורו במילה הלטינית "Limulus" שפירושה <span class="font-bold text-white">"אלכסון קטן" או "פזלן קל"</span>. השם ניתן לו על ידי החוקר הדני אוטו פרידריך מולר, ומתייחס למיקום האלכסוני של עיניו המורכבות על השריון העליון.',
+                sec2_total: 'שם עממי (Horseshoe Crab): הוענק לו בשל שריון הראש (הפרוסומה) הגדול שלו, שצורתו מזכירה במדויק פרסת סוס.',
+                sec3_title: 'תיעוד ותרומה רפואית:',
+                sec3_l1: 'קיטלוג היסטורי:', sec3_v1: 'המין סווג לראשונה באופן מדעי ומסודר על ידי הטקסונום השוודי המפורסם קארולוס לינאוס (Carl Linnaeus) בשנת 1758.',
+                sec3_l2: 'תעשיית התרופות (LAL):', sec3_v2: 'בשנות ה-70 גילה המדע כי הדם הכחול שלו הוא כלי רפואי חסר תחליף. התמצית המופקת מדמו (LAL) משמשת את כל תעשיית התרופות בעולם (כולל חיסונים נגד קורונה) כדי לבדוק האם ציוד רפואי או תרופות נגועים בחיידקים, תוך הקרשה מיידית בתגובה לרעלן.',
+                sec3_l3: 'מאמצי שימור:', sec3_v3: 'כדי להשיג את התמצית, נלכדים מאות אלפי פרטים מדי שנה, נשאב מהם דם, והם מוחזרים לאוקיינוס. התהליך מוביל לתמותה באחוזים מסוימים, מה שמציב את המין בסכנה ומאיץ פיתוח של חלופות סינתטיות במעבדה.',
+                navPrev: 'הקודם: צב גלד', navNext: 'חזרה לארכיון', btn: 'EN', dir: 'rtl'
             },
             en: {
-                name: 'Horseshoe Crab', back: '← Back to Archive', heroLabel: 'Archive Simulation Active',
-                discoverTitle: 'Scientific Identification & Records', lScientist: 'Identifying Scientist:', vScientist: 'Carl Linnaeus (1707–1778)',
-                lYear: 'Year Identified:', vYear: '1758 (Published in Systema Naturae)',
-                lLocation: 'Primary Distribution:', vLocation: 'Atlantic coast of North America and Gulf of Mexico',
-                lStatus: 'Evolutionary Status:', vStatus: 'Existing virtually unchanged since the Ordovician period (~450M years)',
-                originTitle: 'Discovery Circumstances & Historical Context',
-                originDesc1: 'Long before being scientifically documented in Europe, the Horseshoe Crab was well-known to Native Americans, who used its hard shell to bail water and its tail (telson) as spearheads. Official scientific documentation was done by <span class="font-bold text-white">Carl Linnaeus</span> in 1758, based on specimens brought to Europe as exotic prehistoric marvels.',
-                originDesc2: 'Initially misclassified as a crustacean, 19th-century anatomical studies proved it belongs to the subphylum Chelicerata, making it an ancient relative of spiders and scorpions. It is Earth\'s "ultimate survivor," having successfully endured all <span class="font-bold text-white">five major mass extinctions</span>, including the one that killed the dinosaurs.',
-                bloodTitle: 'The Blue Blood Miracle (LAL)',
-                bloodDesc1: 'The true secret to its survival—and its critical importance to humanity—lies in its blood. Unlike mammals that use iron (hemoglobin), its blood uses copper (hemocyanin), turning a <span class="font-bold text-indigo-300">bright, deep blue</span> when exposed to oxygen.',
-                bloodDesc2: 'The blood contains special cells called <span class="font-bold text-white">amoebocytes</span> that are extremely sensitive to bacterial endotoxins. Upon detection, they instantly release a gel that clots, trapping the bacteria. This extract, known as LAL, is used today to test the sterility of <span class="font-bold text-white">every vaccine, IV drug, and medical implant in the modern world</span>.',
-                specsTitle: 'Physical Characteristics & Lifespan', 
-                specSize: '<span class="font-bold text-white">Dimensions:</span> Up to 60 cm from head to tail tip. Features strong sexual dimorphism: females are significantly larger and heavier than males (up to 30%).',
-                specWeight: '<span class="font-bold text-white">Maximum Weight:</span> Can reach up to 5 kg at maturity, mostly due to the heavy chitin armor.',
-                specLife: '<span class="font-bold text-white">Lifespan:</span> Estimated at 20-40 years in the wild. Lacking internal bones, age is determined by shell wear and molts (it molts about 16 times before maturity).',
-                specBody: 'Divided into 3 main parts: Prosoma (smooth head shield), Opisthosoma (spined middle), and Telson (the rigid tail, which contains no venom and is used only for steering and flipping over).',
-                ecoTitle: 'Reproduction & Ecological Impact',
-                ecoDesc: 'During spring, on nights of the full and new moon, tens of thousands of crabs emerge onto sandy beaches to mate. The protein-rich eggs they bury are a critical energy source for migratory birds, such as the Red Knot, fueling their long journey from the South to the North Pole.',
-                etymTitle: 'Detailed Etymological Analysis', 
-                etym1head: 'Limulus (Prefix)', etym1src: 'Source: Latin (limulus)', etym1def: '<span class="font-bold text-white">Meaning: "Slightly askew" or "cross-eyed".</span> Refers to the unique placement of the compound eyes on the sides of its head shield, giving it an askew appearance from the front.', 
-                etym2head: 'Polyphemus (Suffix)', etym2src: 'Source: Greek Mythology (Polyphemus)', etym2def: '<span class="font-bold text-white">Meaning: The powerful Cyclops.</span> Named because, in addition to its side eyes, it has two simple central eyes close together that look like a single giant eye from a distance.',
-                etymTotal: '<span class="font-bold text-white">Full Meaning:</span> "The Askew Cyclops". A descriptive name combining the strange visual morphology of its complex system (which includes a total of 10 eyes and light sensors).',
-                surTitle: 'Survival & Evolutionary Achievements', 
-                surText: 'A model of nature\'s "perfect engineering." Its dome-shaped armor pins it to the seafloor in strong currents and prevents predators from easily flipping it over. It can even survive up to a year without food under extreme conditions.',
-                lAchieve: 'Unique Biological Achievements:',
-                ach1: '<span class="font-bold text-white">Toxin-detecting Blue Blood:</span> The fastest and most efficient immune system against bacteria, forming the cornerstone of modern medical safety.',
-                ach2: '<span class="font-bold text-white">Multi-focal Vision (10 Eyes):</span> Includes compound eyes, simple light detectors, UV sensors, and even tail photoreceptors, allowing precise navigation by moonlight in total darkness.',
-                ach3: '<span class="font-bold text-white">Dual-purpose Legs:</span> The walking legs also capture prey, and their spiky bases (gnathobases) are used to crush and grind food before swallowing, as the crab lacks a jaw or teeth.',
-                navHome: 'HOME', btn: 'HE', dir: 'ltr'
+                back: '← Back',
+                ui_feature: 'Unique feature: Blue blood, 10 eyes, and a primitive respiratory system',
+                ui_title: 'Horseshoe Crab',
+                ui_sci: 'Limulus polyphemus',
+                ui_trans: '"Sword-tailed squinter"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: 'Over 450<br>Million<br>Years',
+                stat2_lbl: 'Classified<br>In', stat2_val: '<br>1758<br>&nbsp;',
+                stat3_lbl: 'Max<br>Length', stat3_val: 'Up to 60<br>cm<br>&nbsp;',
+                stat4_lbl: 'Lifespan<br>Span', stat4_val: 'Approx 20<br>Years<br>&nbsp;',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The first and most surprising fact about the Horseshoe Crab is that it is <span class="font-bold text-white">not a crab at all</span>. It belongs to the subphylum Chelicerata, making it a distant relative of spiders and scorpions, rather than modern crustaceans. It is equipped with a thick shell divided into three parts, and no less than <span class="font-bold text-white">10 eyes and light sensors</span> scattered across its body and tail, allowing it to navigate the ocean despite primitive vision. It breathes using ancient organs called "book gills"—broad flaps resembling the pages of a book, which are also used for swimming.',
+                sec1_p2: 'But its true and most famous marvel is its <span class="font-bold text-white">blue blood</span>. Unlike mammals whose blood contains iron-based hemoglobin, the horseshoe crab\'s blood contains <span class="font-bold text-white">Hemocyanin</span>, a copper-based protein that turns blue when exposed to oxygen. This blood has phenomenal immune capabilities: it contains cells called amebocytes, which detect bacterial toxins and immediately clot around them to trap the infection. This creature has survived no fewer than five different mass extinctions, long before the dinosaurs, making it one of Earth\'s greatest survivors.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Xiphosura (Order Name):', sec2_desc1: 'Composed of ancient Greek: **Xiphos** meaning <span class="font-bold text-white">sword</span>, and **Oura** meaning <span class="font-bold text-white">tail</span>. This name describes its long, thin tail (the telson). Despite its menacing sword-like appearance, the tail is not venomous and is not used for stabbing, but rather as a rudder for swimming and a tool to help the creature flip over if stuck on its back.',
+                sec2_sub2: 'Limulus (Genus Name):', sec2_desc2: 'Originates from the Latin word "Limulus" meaning <span class="font-bold text-white">"little oblique" or "slightly squinting"</span>. The name was given by Danish naturalist Otto Friedrich Müller, referring to the diagonal placement of its compound eyes on the upper shell.',
+                sec2_total: 'Common Name: Granted due to its large head shield (prosoma), whose shape precisely resembles a horse\'s shoe.',
+                sec3_title: 'Documentation & Medical Contribution:',
+                sec3_l1: 'Historical Classification:', sec3_v1: 'The species was first scientifically and systematically classified by the famous Swedish taxonomist Carl Linnaeus in 1758.',
+                sec3_l2: 'The Pharmaceutical Industry (LAL):', sec3_v2: 'In the 1970s, science discovered its blue blood is an irreplaceable medical tool. The extract from its blood (LAL) is used by the global pharmaceutical industry (including for COVID vaccines) to test if medical equipment or drugs are contaminated with bacteria, clotting instantly in reaction to toxins.',
+                sec3_l3: 'Conservation Efforts:', sec3_v3: 'To obtain the extract, hundreds of thousands of individuals are caught annually, bled, and returned to the ocean. The process leads to a certain percentage of mortality, endangering the species and accelerating the development of synthetic laboratory alternatives.',
+                navPrev: 'Prev: Leatherback', navNext: 'Back to Archive', btn: 'HE', dir: 'ltr'
             }
         };
 
         function toggleLanguage() {
             currentLang = currentLang === 'he' ? 'en' : 'he';
-            const data = content[currentLang];
-            document.getElementById('fossilName').innerText = data.name;
-            document.getElementById('backBtn').innerText = data.back;
-            document.getElementById('heroLabel').innerText = data.heroLabel;
+            const d = content[currentLang];
             
-            document.getElementById('discoverTitle').innerText = data.discoverTitle;
-            document.getElementById('labelScientist').innerText = data.lScientist;
-            document.getElementById('valScientist').innerText = data.vScientist;
-            document.getElementById('labelYear').innerText = data.lYear;
-            document.getElementById('valYear').innerText = data.vYear;
-            document.getElementById('labelLocation').innerText = data.lLocation;
-            document.getElementById('valLocation').innerText = data.vLocation;
-            document.getElementById('labelStatus').innerText = data.lStatus;
-            document.getElementById('valStatus').innerText = data.vStatus;
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
             
-            document.getElementById('originTitle').innerText = data.originTitle;
-            document.getElementById('originDesc1').innerHTML = data.originDesc1;
-            document.getElementById('originDesc2').innerHTML = data.originDesc2;
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
             
-            document.getElementById('bloodTitle').innerText = data.bloodTitle;
-            document.getElementById('bloodDesc1').innerHTML = data.bloodDesc1;
-            document.getElementById('bloodDesc2').innerHTML = data.bloodDesc2;
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
             
-            document.getElementById('specsTitle').innerText = data.specsTitle;
-            document.getElementById('specSize').innerHTML = data.specSize;
-            document.getElementById('specWeight').innerHTML = data.specWeight;
-            document.getElementById('specLife').innerHTML = data.specLife;
-            document.getElementById('specBody').innerText = data.specBody;
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerText = d.sec2_total;
             
-            document.getElementById('ecoTitle').innerText = data.ecoTitle;
-            document.getElementById('ecoDesc').innerHTML = data.ecoDesc;
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
             
-            document.getElementById('etymTitle').innerText = data.etymTitle;
-            document.getElementById('etym1_head').innerText = data.etym1head;
-            document.getElementById('etym1_src').innerText = data.etym1src;
-            document.getElementById('etym1_def').innerHTML = data.etym1def;
-            document.getElementById('etym2_head').innerText = data.etym2head;
-            document.getElementById('etym2_src').innerText = data.etym2src;
-            document.getElementById('etym2_def').innerHTML = data.etym2def;
-            document.getElementById('etymTotal').innerHTML = data.etymTotal;
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
             
-            document.getElementById('surviveTitle').innerText = data.surTitle;
-            document.getElementById('surviveText').innerText = data.surText;
-            document.getElementById('labelAchieve').innerText = data.lAchieve;
-            document.getElementById('ach1').innerHTML = data.ach1;
-            document.getElementById('ach2').innerHTML = data.ach2;
-            document.getElementById('ach3').innerHTML = data.ach3;
-            
-            document.getElementById('navHome').innerText = data.navHome;
-            document.getElementById('langBtn').innerText = data.btn;
-            document.documentElement.dir = data.dir;
+            document.documentElement.dir = d.dir;
             document.documentElement.lang = currentLang;
-            
-            const card1 = document.getElementById('discoverCard');
-            card1.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            card1.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
 
-            const card2 = document.getElementById('bloodCard');
-            card2.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            card2.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
-
-            const card3 = document.getElementById('specsCard');
-            card3.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            card3.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
-
-            const card4 = document.getElementById('ecoCard');
-            card4.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            card4.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
         }
     </script>
 </body>
 </html>
+
 

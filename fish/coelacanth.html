@@ -6,330 +6,283 @@
     <title>מחקר מעמיק: צילקנת | The Eternal Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* S25 Ultra Optimized - Premium Deep Dark AMOLED Edition */
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
         :root {
-            --amoled-black: #000000;
-            --card-gray: #0f172a;
-            --accent-teal: #14b8a6;
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
+            --bg-body: #030712; /* Very dark background */
+            --bg-card: #0a1122; /* Main card background */
+            --bg-pill: #132342; /* Stats pill background */
+            --border-card: #1d365d;
+            --text-accent: #60a5fa; /* Blue-400 */
         }
 
         body {
-            background-color: var(--amoled-black);
-            color: var(--text-main);
+            background-color: var(--bg-body);
+            color: #e2e8f0;
             font-family: system-ui, -apple-system, sans-serif;
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
-            line-height: 1.6;
-            transition: all 0.3s ease;
+            line-height: 1.7;
         }
 
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
-        }
-
-        .etymology-part {
-            border-right: 3px solid var(--accent-teal);
-            padding-right: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        [dir="ltr"] .etymology-part {
-            border-right: 0;
-            border-left: 3px solid var(--accent-teal);
-            padding-right: 0;
-            padding-left: 1.25rem;
-        }
-
-        /* Holographic Hero Image Replacement */
-        .hologram-container {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border-radius: 2rem;
-            background: radial-gradient(circle at 50% 50%, #0f2e2e 0%, #020617 100%);
-            border: 1px solid rgba(20, 184, 166, 0.2);
-            position: relative;
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
             overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 20px 40px -10px rgba(20, 184, 166, 0.1);
-            margin-bottom: 2.5rem;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        .hologram-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(rgba(20, 184, 166, 0.05) 1px, transparent 1px);
-            background-size: 100% 4px;
-            pointer-events: none;
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
         }
 
-        .hologram-icon {
-            font-size: 6rem;
-            filter: drop-shadow(0 0 20px rgba(20, 184, 166, 0.6));
-            animation: float 4s ease-in-out infinite;
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(96, 165, 250, 0.15);
         }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        h1, h2, h3 {
-            color: #f8fafc;
-            letter-spacing: -0.01em;
-        }
-
-        .highlight-box {
-            background: linear-gradient(to left, rgba(20, 184, 166, 0.1), transparent);
-            border-right: 2px solid var(--accent-teal);
-        }
-
-        [dir="ltr"] .highlight-box {
-            background: linear-gradient(to right, rgba(20, 184, 166, 0.1), transparent);
-            border-right: 0;
-            border-left: 2px solid var(--accent-teal);
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col pb-24 text-justify">
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
 
-    <!-- Language Toggle -->
-    <div class="fixed top-6 left-6 z-50">
-        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-teal-500 hover:bg-teal-500 hover:text-white transition-all shadow-xl active:scale-95">EN</button>
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-blue-400 hover:bg-blue-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
     </div>
 
-    <!-- Header -->
-    <header class="pt-16 px-6 text-center mb-6">
-        <a href="index.html" id="backBtn" class="text-teal-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
-        <h1 id="fossilName" class="text-4xl font-extrabold text-white">צילקנת (Coelacanth)</h1>
-        <p class="text-teal-600 font-mono mt-2 italic" id="scientificName">Latimeria chalumnae</p>
-    </header>
-
-    <main class="px-6 space-y-8 max-w-2xl mx-auto">
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
         
-        <!-- Hologram Hero Section -->
-        <div class="hologram-container">
-            <div class="hologram-icon">🐟</div>
-            <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-teal-500/30 flex items-center space-x-2 space-x-reverse">
-                <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
-                <span class="text-[10px] text-teal-400 font-bold uppercase tracking-widest" id="heroLabel">הדמיית ארכיון פעילה</span>
+        <!-- Hero Image -->
+        <img src="https://github.com/rexram987-create/living-fossils-archive/blob/main/images/coelacanth.png?raw=true" alt="צילקנת" class="hero-img" onerror="this.src='https://via.placeholder.com/800x450/0a1122/60a5fa?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: סנפירים בשרניים החלולים בבסיסם</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">צילקנת</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Latimeria chalumnae</p>
+                <p id="ui_trans" class="text-blue-400 font-bold italic pt-2">"קוץ חלול"</p>
             </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>חיים</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">מעל 66<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>גילוי</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1938<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>משוער</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 2.0<br>מטרים<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">משקל<br>מירבי</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 95<br>ק"ג<br>&nbsp;</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">הצילקנת הוא טורף מעמקים המשתייך לקבוצת דגי גרם עתיקה, ונחשב לאחת מהתגליות הזואולוגיות המסעירות ביותר. במשך שנים רבות סברו מדענים כי הוא נכחד יחד עם הדינוזאורים לפני כ-66 מיליון שנה, עד שנתגלה במקרה חי ונושם. הוא מכוסה ב<span class="font-bold text-white">קשקשי "קוסמואיד" עבים</span> המעניקים לו הגנה של שריון, וצבעו הכחול-עמוק מנומר בנקודות לבנות המשמשות כטביעת אצבע ייחודית לכל פרט לצורך הסוואה במערות וולקניות חשוכות.</p>
+                    
+                    <p id="sec1_p2">המאפיין המפריד והחשוב ביותר שלו הוא ה<span class="font-bold text-white">סנפירים הבשרניים (Lobe-finned)</span>. בניגוד לדגים מודרניים, סנפיריו הזוגיים נתמכים על ידי מבנה עצמות הדומה לגפיים של חולייתני יבשה קדומים. מבנה זה מאפשר לו "לצעד" בתוך המים בתנועות מוצלבות. בנוסף, הוא מצויד ב<span class="font-bold text-white">מפרק תוך-גולגולתי</span> ייחודי המאפשר לו להרים את החלק העליון של ראשו כדי לינוק את טרפו בעוצמה, וב<span class="font-bold text-white">איבר רוסטרלי</span> בחרטום המשמש לחישה חשמלית של טרף באפלה המוחלטת. תוחלת חייו מרשימה ויכולה להגיע עד 100 שנים.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-blue-300 text-base mb-1">Coela (צילו):</h3>
+                        <p id="sec2_desc1">מקורו במילה היוונית העתיקה "koilos" שמשמעותה <span class="font-bold text-white">חלול</span>. המונח מתייחס למבנה המורפולוגי הפרימיטיבי של קרני הסנפירים שלו, שהן חלולות בבסיסן – מאפיין שזוהה תחילה במאובנים, הרבה לפני שהמין החי נתגלה.</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-blue-300 text-base mb-1">Acanth (קנת):</h3>
+                        <p id="sec2_desc2">מקורו במילה היוונית "akantha" שמשמעותה <span class="font-bold text-white">קוץ או עמוד שדרה</span>. השם משלים את התיאור האנטומי הקדום שלו.</p>
+                    </div>
+                    <div class="bg-blue-900/20 p-4 rounded-xl border-r-2 border-blue-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-blue-200">המשמעות המלאה: "קוץ חלול".</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-blue-400 font-bold text-base mb-4 inline-block border-b border-blue-900/50 pb-1">פרטי הגילוי ההיסטורי:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">התגלית:</span> <span id="sec3_v1">ב-22 בדצמבר 1938, האוצרת מרג'ורי קורטני-לטימר (Marjorie Courtenay-Latimer) מצאה דג מוזר ברשתות דייגים. היא העבירה את הדג במונית ושלחה שרטוט לפרופ' ג'.ל.ב. סמית' שזיהה אותו מיד.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">מיקום:</span> <span id="sec3_v2">שפך נהר הצ'אלומנה, איסט לונדון (דרום אפריקה).</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">המשמעות:</span> <span id="sec3_v3">התגלית הוכיחה ששושלות עתיקות יכולות לשרוד ב"רפוגיה" (מקלטים טבעיים עמוקים) כמעט ללא שינוי. סמית' תיאר את החוויה: "כמו למצוא דינוזאור חי הולך ברחוב".</span></p>
+                </div>
+            </section>
+
         </div>
-
-        <!-- Section 1: Discovery Details -->
-        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-teal-500" id="discoverCard">
-            <h2 class="text-xl font-bold text-teal-400 mb-6 flex items-center" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
-            <div class="space-y-4 text-slate-300">
-                <p><span class="font-bold text-white" id="labelScientist">שם המגלה:</span> <span id="valScientist">מרג'ורי קורטני-לטימר (1907–2004)</span></p>
-                <p><span class="font-bold text-white" id="labelConfirm">זיהוי מדעי:</span> <span id="valConfirm">פרופ' ג'.ל.ב. סמית' (1897–1968)</span></p>
-                <p><span class="font-bold text-white" id="labelYear">שנת גילוי מחדש:</span> <span id="valYear">1938</span></p>
-                <p><span class="font-bold text-white" id="labelEra">עידן גיאולוגי מקורי:</span> <span id="valEra">תקופת הדבון (לפני כ-400 מיליון שנה). נחשב לנכחד לפני 66 מיליון שנה.</span></p>
-                <p><span class="font-bold text-white" id="labelLocation">מיקום הגילוי:</span> <span id="valLocation">איסט לונדון, דרום אפריקה (שפך נהר הצ'אלומנה)</span></p>
-            </div>
-        </section>
-
-        <!-- Section 2: Discovery Circumstances (Expanded) -->
-        <section class="glass-card rounded-[2rem] p-8" id="originCard">
-            <h2 class="text-xl font-bold text-teal-400 mb-6 flex items-center" id="originTitle">נסיבות הגילוי והקשר ההיסטורי</h2>
-            <div class="space-y-5 text-slate-300 leading-relaxed">
-                <p id="originDesc1">גילויו מחדש של הצילקנת נחשב לאחת התגליות הזואולוגיות החשובות, הדרמטיות והמרגשות ביותר של המאה ה-20. ב-22 בדצמבר 1938, ימים ספורים לפני חג המולד, <span class="font-bold text-white">מרג'ורי קורטני-לטימר</span>, אוצרת צעירה במוזיאון קטן בדרום אפריקה, הוזעקה לנמל המקומי על ידי קפטן ספינת מכמורת. בין ערימת כרישים ודגי מאכל, עיניה קלטו "דג כחול ומרשים ביותר", שאורכו כמטר וחצי, בעל קשקשים נוקשים וסנפירים בשרניים שנראו כמו רגליים קטנות.</p>
-                <div class="highlight-box p-5 rounded-xl">
-                    <p id="originDesc2" class="text-sm">למרות שנהג המונית סירב בתחילה להסיע את הדג המצחין, מרג'ורי התעקשה והביאה אותו למוזיאון. בהיעדר מתקני קירור מתאימים ופורמלין לשימור איברים פנימיים, היא נאלצה להעבירו לפוחלץ מקומי, אך לא לפני שהכינה שרטוט מדויק מלווה בהערות ושלחה אותו לכימאי ומומחה הדגים <span class="font-bold text-white">פרופ' ג'.ל.ב. סמית'</span>. כשסמית' קיבל את המכתב, הוא נדהם. הוא זיהה מיד שמדובר ביצור שנחשב לנכחד מאז סוף תקופת הקרטיקון (יחד עם הדינוזאורים). הוא הגדיר את הרגע כהלם מוחלט: "הייתי פחות מופתע אילו ראיתי דינוזאור הולך ברחוב". השם המדעי, <span class="italic text-teal-300">Latimeria chalumnae</span>, הוענק לו לאות כבוד לתושייתה של קורטני-לטימר ולנהר שבו נתפס.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: The Second Discovery -->
-        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-indigo-500" id="indoCard">
-            <h2 class="text-xl font-bold text-indigo-400 mb-6 flex items-center" id="indoTitle">התגלית השנייה: הצילקנת האינדונזי (1997)</h2>
-            <div class="space-y-4 text-slate-300 leading-relaxed">
-                <p id="indoDesc">במשך קרוב ל-60 שנה, המדענים היו משוכנעים שהצילקנת אנדמי (ייחודי) אך ורק לחופי מזרח אפריקה. אולם, בשנת 1997 נרשמה רעידת אדמה מדעית נוספת. מארק ארדמן, ביולוג ימי אמריקאי ששהה בירח דבש באינדונזיה, טייל בשוק דגים מקומי ולפתע הבחין בצילקנת מונח על דוכן המכירה. הזן החדש, שקיבל את השם <span class="italic text-indigo-300">Latimeria menadoensis</span>, נבדל מהזן האפריקאי בצבעו החום (לעומת כחול) ובמספר הבדלים גנטיים, והוכיח שתפוצתו של המאובן החי רחבה ממה שדמיינו.</p>
-            </div>
-        </section>
-
-        <!-- Section 4: Physical Specs (Deepened) -->
-        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-emerald-600" id="specsCard">
-            <h2 class="text-xl font-bold text-emerald-400 mb-6 flex items-center" id="specsTitle">מאפיינים פיזיים ומחזור חיים</h2>
-            <div class="space-y-6 text-slate-300 leading-relaxed">
-                <div class="grid grid-cols-1 gap-4">
-                    <p id="specSize"><span class="font-bold text-white">ממדים:</span> הצילקנת יכול להגיע לאורך של עד 2 מטרים ולמשקל של כ-95 קילוגרם. גופו מכוסה קשקשי "קוסמואיד" קשיחים במיוחד, שריד אנטומי מימי קדם המשמש כשריון יעיל נגד טריפה.</p>
-                    <p id="specLife"><span class="font-bold text-white">תוחלת חיים:</span> מחקרים צרפתיים מקיפים משנת 2021, שבחנו את טבעות הגידול על קשקשי הדג (בדומה לטבעות גזע בעצים), גילו כי הצילקנת גדל בקצב איטי להחריד ויכול לחיות עד <span class="text-emerald-300 font-bold">100 שנים</span>. הוא מגיע לבגרות מינית מאוחרת מאוד, בגיל 40 עד 50.</p>
-                    <p id="specRepro"><span class="font-bold text-white">היריון ורבייה:</span> זהו אחד הנתונים המדהימים ביותר שהתגלו. הצילקנת מתרבה בשיטת "השרצה פנימית" (Ovoviviparous) – הביצים המופרות בוקעות בתוך בטן האם. תקופת ההיריון שלו מוערכת בלא פחות מ-<span class="text-emerald-300 font-bold">5 שנים</span>, תקופת ההיריון הארוכה ביותר הידועה בכל ממלכת החולייתנים.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 5: Detailed Etymology -->
-        <section class="glass-card rounded-[2rem] p-8" id="etymCard">
-            <h2 class="text-xl font-bold text-teal-400 mb-8" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
-            <div class="space-y-8">
-                <div class="etymology-part">
-                    <h3 class="text-teal-300 font-bold text-lg mb-1" id="etym1_head">Coela (צילו / קילי)</h3>
-                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym1_src">מקור: יוונית עתיקה (koilos / κοῖλος)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym1_def"><span class="font-bold text-white">משמעות: חלול (Hollow).</span> המונח מתייחס למבנה המורפולוגי הייחודי של קרני הסנפירים שלו, שהן חלולות בבסיסן. מאחר והצילקנת זוהה לראשונה ממאובנים בשנת 1839 (מאה שנים לפני שנתגלה פרט חי!), זהו המאפיין הבולט ביותר שזיהו הפלאונטולוגים בסלע.</p>
-                </div>
-                <div class="etymology-part">
-                    <h3 class="text-teal-300 font-bold text-lg mb-1" id="etym2_head">Acanth (קנת)</h3>
-                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: יוונית עתיקה (akantha / ἄκανθα)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym2_def"><span class="font-bold text-white">משמעות: קוץ או עמוד שדרה (Thorn/Spine).</span> השם ניתן בשל הקשיחות יוצאת הדופן של קרני הסנפיר הגביות, המעניקות לדג מראה משוריין, נוקשה ופרהיסטורי.</p>
-                </div>
-                <div class="bg-teal-900/15 p-6 rounded-2xl border border-teal-800/40 text-sm italic text-slate-300" id="etymTotal"><span class="font-bold text-white">משמעות השם המלאה:</span> "קוץ חלול". שם זה מהווה תיאור מדעי מדויק של אנטומיה פרימיטיבית שנותרה כמעט ללא שינוי מהותי מעידן הדבון (לפני כ-400 מיליון שנה), ומשמר בתוכו את ההיסטוריה המדעית של החקר הפלאונטולוגי.</div>
-            </div>
-        </section>
-
-        <!-- Section 6: Survival & Evolution -->
-        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-teal-500/30 mb-8">
-            <h2 class="text-xl font-bold text-teal-400 mb-6" id="surviveTitle">סיבת ההישרדות והישגים אבולוציוניים</h2>
-            <div class="space-y-6 text-slate-300 leading-relaxed">
-                <p id="surviveText">הצילקנת הוא שורד אולטימטיבי משום שמצא "רפוגיה" אולטימטיבית: מערות תת-ימיות וולקניות בעומקים של 150 עד 700 מטרים. בעומקים אלו הסביבה אינה משתנה, הטמפרטורה קבועה, והיעדר תחרות טורפת משמעותית איפשר לדג קצב חילוף חומרים איטי במיוחד. ללא לחץ סביבתי שיאלץ אותו להשתנות, האבולוציה המורפולוגית שלו פשוט נכנסה לקיפאון.</p>
-                <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">מאפיינים אבולוציוניים ייחודיים:</h4>
-                <ul class="space-y-5 text-sm text-teal-100/80" id="achieveList">
-                    <li class="flex items-start gap-3"><span class="text-teal-500 mt-1">•</span><span id="ach1"><span class="font-bold text-white">סנפירים בשרניים (Lobe-fins):</span> בעלי מבנה פנימי של עצם ושריר המקביל במדויק לעצמות הזרוע והירך שלנו. דגים אלו הם ה"דודנים" של האב הקדמון שעלה ליבשה, והם מסוגלים להניע את סנפיריהם בתנועת הליכה מוצלבת, ממש כמו סוס הולך במים.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-teal-500 mt-1">•</span><span id="ach2"><span class="font-bold text-white">איבר רוסטרלי (Rostral Organ):</span> איבר חישה ייחודי הממוקם בחרטום ומלא בחומר ג'לטיני. הוא משמש כגלאי חשמלי (Electroreception) לזיהוי שדות חשמליים חלשים שמפיק טרף המסתתר בקרקעית האוקיינוס, יכולת קריטית בחשיכה מוחלטת.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-teal-500 mt-1">•</span><span id="ach3"><span class="font-bold text-white">מפרק תוך-גולגולתי ומיתר גב:</span> בניגוד לכל שאר החולייתנים הבוגרים בעלי עמוד שדרה גרמי, לצילקנת יש צינור חלול גמיש המכונה "נוטוקורד" (Notochord) המלא בנוזל בלחץ. בנוסף, יש לו מפרק בתוך הגולגולת המאפשר לו לפתוח את פיו כלפי מעלה, מגדיל את כוח השאיבה שלו.</span></li>
-                </ul>
-            </div>
-        </section>
     </main>
 
-    <!-- Navigation -->
-    <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-2xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
-        <a href="index.html" class="flex flex-col items-center text-teal-500 transition-transform active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span></a>
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="../index.html" class="text-slate-400 hover:text-blue-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">חזרה לארכיון</span>
+        </a>
+        <a href="alligatorgar.html" class="text-blue-400 hover:text-blue-300 transition-colors text-sm font-bold bg-blue-900/20 px-5 py-2.5 rounded-full border border-blue-800/30 shadow-lg">
+            <span id="navNext">הבא: אליגטורגאר</span> <span>&larr;</span>
+        </a>
     </nav>
 
     <script>
         let currentLang = 'he';
         const content = {
             he: {
-                name: 'צילקנת (Coelacanth)', back: '← חזרה לארכיון', heroLabel: 'הדמיית ארכיון פעילה',
-                discoverTitle: 'פרטי התיעוד והזיהוי', lScientist: 'שם המגלה:', vScientist: 'מרג\'ורי קורטני-לטימר (1907–2004)',
-                lConfirm: 'זיהוי מדעי:', vConfirm: 'פרופ\' ג\'.ל.ב. סמית\' (1897–1968)',
-                lYear: 'שנת גילוי מחדש:', vYear: '1938',
-                lEra: 'עידן גיאולוגי מקורי:', vEra: 'תקופת הדבון (לפני כ-400 מיליון שנה). נחשב לנכחד לפני 66 מיליון שנה.',
-                lLocation: 'מיקום הגילוי:', vLocation: 'איסט לונדון, דרום אפריקה (שפך נהר הצ\'אלומנה)',
-                originTitle: 'נסיבות הגילוי והקשר ההיסטורי',
-                originDesc1: 'גילויו מחדש של הצילקנת נחשב לאחת התגליות הזואולוגיות החשובות, הדרמטיות והמרגשות ביותר של המאה ה-20. ב-22 בדצמבר 1938, ימים ספורים לפני חג המולד, <span class="font-bold text-white">מרג\'ורי קורטני-לטימר</span>, אוצרת צעירה במוזיאון קטן בדרום אפריקה, הוזעקה לנמל המקומי. בין ערימת כרישים ודגי מאכל, עיניה קלטו "דג כחול ומרשים ביותר", שאורכו כמטר וחצי, בעל קשקשים נוקשים וסנפירים בשרניים שנראו כמו רגליים קטנות.',
-                originDesc2: 'למרות שנהג המונית סירב בתחילה להסיע את הדג המצחין, מרג\'ורי התעקשה. בהיעדר מתקני קירור מתאימים, היא נאלצה להעבירו לפוחלץ מקומי, אך שלחה שרטוט למומחה הדגים <span class="font-bold text-white">פרופ\' ג\'.ל.ב. סמית\'</span>. סמית\' נדהם וזיהה יצור שנחשב לנכחד מאז הדינוזאורים: "הייתי פחות מופתע אילו ראיתי דינוזאור הולך ברחוב". השם המדעי, <span class="italic text-teal-300">Latimeria chalumnae</span>, הוענק לו לאות כבוד לתושייתה ולנהר שבו נתפס.',
-                indoTitle: 'התגלית השנייה: הצילקנת האינדונזי (1997)',
-                indoDesc: 'במשך קרוב ל-60 שנה, המדענים היו משוכנעים שהצילקנת אנדמי אך ורק לחופי מזרח אפריקה. אולם, בשנת 1997 נרשמה רעידת אדמה מדעית נוספת. מארק ארדמן, ביולוג ימי אמריקאי, טייל בשוק דגים באינדונזיה והבחין בצילקנת. הזן החדש (<span class="italic text-indigo-300">Latimeria menadoensis</span>) נבדל בצבעו החום והוכיח שתפוצתו רחבה ממה שדמיינו.',
-                specsTitle: 'מאפיינים פיזיים ומחזור חיים', 
-                specSize: '<span class="font-bold text-white">ממדים:</span> יכול להגיע לאורך של עד 2 מטרים ולמשקל של כ-95 קילוגרם. גופו מכוסה קשקשי "קוסמואיד" קשיחים במיוחד, שריד אנטומי המשמש כשריון נגד טריפה.',
-                specLife: '<span class="font-bold text-white">תוחלת חיים:</span> מחקרים צרפתיים מקיפים מ-2021 גילו כי הצילקנת גדל בקצב איטי ויכול לחיות עד <span class="text-emerald-300 font-bold">100 שנים</span>. מגיע לבגרות מינית רק בגיל 40-50.',
-                specRepro: '<span class="font-bold text-white">היריון ורבייה:</span> מתרבה בשיטת "השרצה פנימית" (Ovoviviparous) - הביצים בוקעות בתוך האם. תקופת ההיריון נמשכת עד <span class="text-emerald-300 font-bold">5 שנים</span>, התקופה הארוכה ביותר בממלכת החולייתנים.',
-                etymTitle: 'ניתוח אטימולוגי נרחב', 
-                etym1head: 'Coela (צילו / קילי)', etym1src: 'מקור: יוונית עתיקה (koilos / κοῖλος)', etym1def: '<span class="font-bold text-white">משמעות: חלול (Hollow).</span> מתייחס למבנה הייחודי של קרני הסנפירים שלו, שהן חלולות בבסיסן. מאפיין זה זוהה ממאובנים בשנת 1839, מאה שנים לפני גילוי הדג החי.', 
-                etym2head: 'Acanth (קנת)', etym2src: 'מקור: יוונית עתיקה (akantha / ἄκανθα)', etym2def: '<span class="font-bold text-white">משמעות: קוץ או עמוד שדרה (Thorn/Spine).</span> ניתן בשל הקשיחות יוצאת הדופן של קרני הסנפיר הגביות, המעניקות לדג מראה משוריין ונוקשה.',
-                etymTotal: '<span class="font-bold text-white">משמעות השם המלאה:</span> "קוץ חלול". תיאור מדעי מדויק של אנטומיה שנותרה כמעט ללא שינוי מעידן הדבון (לפני 400 מיליון שנה).',
-                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים', 
-                surText: 'הצילקנת שרד ב"רפוגיה": מערות וולקניות עמוקות. היעדר תחרות טורפת משמעותית איפשר קצב חילוף חומרים איטי, וללא לחץ סביבתי האבולוציה המורפולוגית שלו נכנסה לקיפאון.',
-                lAchieve: 'מאפיינים אבולוציוניים ייחודיים:', 
-                ach1: '<span class="font-bold text-white">סנפירים בשרניים (Lobe-fins):</span> בעלי מבנה פנימי של עצם ושריר המקביל לעצמות הידיים והרגליים שלנו. מאפשר להם "ללכת" במים בתנועה מוצלבת.',
-                ach2: '<span class="font-bold text-white">איבר רוסטרלי (Rostral Organ):</span> גלאי חשמלי ייחודי בחרטום המזהה שדות חשמליים שמפיק טרף, קריטי לציד בחשיכה מוחלטת.',
-                ach3: '<span class="font-bold text-white">מפרק תוך-גולגולתי ומיתר גב:</span> בעל "נוטוקורד" (צינור גמיש) במקום עמוד שדרה גרמי מלא, ומפרק גולגולת המאפשר פתיחת פה כלפי מעלה להגברת כוח השאיבה.',
-                navHome: 'בית', btn: 'EN', dir: 'rtl'
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: סנפירים בשרניים החלולים בבסיסם',
+                ui_title: 'צילקנת',
+                ui_sci: 'Latimeria chalumnae',
+                ui_trans: '"קוץ חלול"',
+                stat1_lbl: 'תקופת<br>חיים', stat1_val: 'מעל 66<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>גילוי', stat2_val: '<br>1938<br>&nbsp;',
+                stat3_lbl: 'אורך<br>משוער', stat3_val: 'עד 2.0<br>מטרים<br>&nbsp;',
+                stat4_lbl: 'משקל<br>מירבי', stat4_val: 'עד 95<br>ק"ג<br>&nbsp;',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'הצילקנת הוא טורף מעמקים המשתייך לקבוצת דגי גרם עתיקה, ונחשב לאחת מהתגליות הזואולוגיות המסעירות ביותר. במשך שנים רבות סברו מדענים כי הוא נכחד יחד עם הדינוזאורים לפני כ-66 מיליון שנה, עד שנתגלה במקרה חי ונושם. הוא מכוסה ב<span class="font-bold text-white">קשקשי "קוסמואיד" עבים</span> המעניקים לו הגנה של שריון, וצבעו הכחול-עמוק מנומר בנקודות לבנות המשמשות כטביעת אצבע ייחודית לכל פרט לצורך הסוואה במערות וולקניות חשוכות.',
+                sec1_p2: 'המאפיין המפריד והחשוב ביותר שלו הוא ה<span class="font-bold text-white">סנפירים הבשרניים (Lobe-finned)</span>. בניגוד לדגים מודרניים, סנפיריו הזוגיים נתמכים על ידי מבנה עצמות הדומה לגפיים של חולייתני יבשה קדומים. מבנה זה מאפשר לו "לצעד" בתוך המים בתנועות מוצלבות. בנוסף, הוא מצויד ב<span class="font-bold text-white">מפרק תוך-גולגולתי</span> ייחודי המאפשר לו להרים את החלק העליון של ראשו כדי לינוק את טרפו בעוצמה, וב<span class="font-bold text-white">איבר רוסטרלי</span> בחרטום המשמש לחישה חשמלית של טרף באפלה המוחלטת. תוחלת חייו מרשימה ויכולה להגיע עד 100 שנים.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Coela (צילו):', sec2_desc1: 'מקורו במילה היוונית העתיקה "koilos" שמשמעותה <span class="font-bold text-white">חלול</span>. המונח מתייחס למבנה המורפולוגי הפרימיטיבי של קרני הסנפירים שלו, שהן חלולות בבסיסן – מאפיין שזוהה תחילה במאובנים, הרבה לפני שהמין החי נתגלה.',
+                sec2_sub2: 'Acanth (קנת):', sec2_desc2: 'מקורו במילה היוונית "akantha" שמשמעותה <span class="font-bold text-white">קוץ או עמוד שדרה</span>. השם משלים את התיאור האנטומי הקדום שלו.',
+                sec2_total: 'המשמעות המלאה: "קוץ חלול".',
+                sec3_title: 'פרטי הגילוי ההיסטורי:',
+                sec3_l1: 'התגלית:', sec3_v1: 'ב-22 בדצמבר 1938, האוצרת מרג\'ורי קורטני-לטימר (Marjorie Courtenay-Latimer) מצאה דג מוזר ברשתות דייגים. היא העבירה את הדג במונית ושלחה שרטוט לפרופ\' ג\'.ל.ב. סמית\' שזיהה אותו מיד.',
+                sec3_l2: 'מיקום:', sec3_v2: 'שפך נהר הצ\'אלומנה, איסט לונדון (דרום אפריקה).',
+                sec3_l3: 'המשמעות:', sec3_v3: 'התגלית הוכיחה ששושלות עתיקות יכולות לשרוד ב"רפוגיה" (מקלטים טבעיים עמוקים) כמעט ללא שינוי. סמית\' תיאר את החוויה: "כמו למצוא דינוזאור חי הולך ברחוב".',
+                navPrev: 'חזרה לארכיון', navNext: 'הבא: אליגטורגאר', btn: 'EN', dir: 'rtl'
             },
             en: {
-                name: 'Coelacanth', back: '← Back to Archive', heroLabel: 'Archive Simulation Active',
-                discoverTitle: 'Scientific Identification & Records', lScientist: 'Discoverer:', vScientist: 'Marjorie Courtenay-Latimer (1907–2004)',
-                lConfirm: 'Scientific ID:', vConfirm: 'Prof. J.L.B. Smith (1897–1968)',
-                lYear: 'Rediscovery Year:', vYear: '1938',
-                lEra: 'Original Geological Era:', vEra: 'Devonian Period (~400M years ago). Thought extinct 66M years ago.',
-                lLocation: 'Discovery Location:', vLocation: 'East London, South Africa (Chalumna River mouth)',
-                originTitle: 'Discovery Circumstances & Historical Context',
-                originDesc1: 'The rediscovery of the Coelacanth is widely regarded as one of the most significant and dramatic zoological events of the 20th century. On December 22, 1938, <span class="font-bold text-white">Marjorie Courtenay-Latimer</span>, a young museum curator, was called to the local docks. Among a pile of sharks, she spotted a "most beautiful blue fish", about 1.5 meters long, with heavily armored scales and fleshy fins that looked like small legs.',
-                originDesc2: 'Despite a taxi driver initially refusing to transport the smelly fish, Marjorie persisted. Lacking proper preservation facilities, she took it to a taxidermist but sent a detailed sketch to <span class="font-bold text-white">Prof. J.L.B. Smith</span>. Smith was astounded, recognizing a creature believed to have vanished with the dinosaurs. He famously stated: "I would hardly have been more surprised if I met a dinosaur on the street." The scientific name, <span class="italic text-teal-300">Latimeria chalumnae</span>, honors Marjorie and the river where it was caught.',
-                indoTitle: 'The Second Discovery: Indonesian Coelacanth (1997)',
-                indoDesc: 'For nearly 60 years, scientists believed the Coelacanth was strictly endemic to the East African coast. However, in 1997, another scientific earthquake occurred. Mark Erdmann, an American marine biologist on his honeymoon, spotted a Coelacanth in an Indonesian fish market. This new species (<span class="italic text-indigo-300">Latimeria menadoensis</span>) is distinguished by its brownish color, proving the living fossil\'s range was much wider than imagined.',
-                specsTitle: 'Physical Characteristics & Life Cycle', 
-                specSize: '<span class="font-bold text-white">Dimensions:</span> Can reach lengths of 2 meters and weigh up to 95 kg. Covered in thick "cosmoid" scales, an ancient anatomical armor against predation.',
-                specLife: '<span class="font-bold text-white">Lifespan:</span> Comprehensive 2021 French studies analyzing growth rings on their scales revealed they grow extremely slowly and can live up to <span class="text-emerald-300 font-bold">100 years</span>, reaching maturity around age 40-50.',
-                specRepro: '<span class="font-bold text-white">Gestation & Reproduction:</span> Coelacanths are ovoviviparous (eggs hatch inside the mother). Their gestation period is estimated to last up to <span class="text-emerald-300 font-bold">5 years</span>, the longest known in any vertebrate.',
-                etymTitle: 'Detailed Etymological Analysis', 
-                etym1head: 'Coela (Prefix)', etym1src: 'Source: Ancient Greek (koilos / κοῖλος)', etym1def: '<span class="font-bold text-white">Meaning: Hollow.</span> Refers to the unique structure of its fin rays, which are hollow at the base. This feature was identified from fossils in 1839, a century before the living fish was found.', 
-                etym2head: 'Acanth (Suffix)', etym2src: 'Source: Ancient Greek (akantha / ἄκανθα)', etym2def: '<span class="font-bold text-white">Meaning: Thorn or Spine.</span> Named for the exceptional rigidity of its dorsal fin rays, giving the fish a stiff, prehistoric armored appearance.',
-                etymTotal: '<span class="font-bold text-white">Full Meaning:</span> "Hollow Spine". A precise scientific description of an anatomy that has remained fundamentally unchanged since the Devonian period (~400M years ago).',
-                surTitle: 'Survival & Evolutionary Achievements', 
-                surText: 'The Coelacanth survived in deep volcanic caves (150-700m). The lack of significant predators allowed for a very slow metabolism, and without environmental pressure, its morphological evolution simply froze in time.',
-                lAchieve: 'Unique Evolutionary Features:',
-                ach1: '<span class="font-bold text-white">Fleshy Lobe-fins:</span> Contain a bone and muscle structure parallel to our own arm and leg bones, allowing them to "walk" in the water using alternating movements.',
-                ach2: '<span class="font-bold text-white">Rostral Organ:</span> A specialized electro-receptor in the snout used to detect weak electrical fields of hidden prey in total darkness.',
-                ach3: '<span class="font-bold text-white">Intracranial Joint & Notochord:</span> Retains a fluid-filled flexible tube (Notochord) instead of a solid spine, and features a joint in its skull allowing the upper jaw to open upwards, increasing suction force.',
-                navHome: 'HOME', btn: 'HE', dir: 'ltr'
+                back: '← Back',
+                ui_feature: 'Unique feature: Fleshy lobe-fins hollow at the base',
+                ui_title: 'Coelacanth',
+                ui_sci: 'Latimeria chalumnae',
+                ui_trans: '"Hollow Spine"',
+                stat1_lbl: 'Lived<br>For', stat1_val: 'Over 66<br>Million<br>Years',
+                stat2_lbl: 'Discovered<br>In', stat2_val: '<br>1938<br>&nbsp;',
+                stat3_lbl: 'Estimated<br>Length', stat3_val: 'Up to 2.0<br>Meters<br>&nbsp;',
+                stat4_lbl: 'Max<br>Weight', stat4_val: 'Up to 95<br>kg<br>&nbsp;',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The Coelacanth is a deep-sea predator belonging to an ancient group of bony fishes, considered one of the most thrilling zoological discoveries. For many years, scientists believed it went extinct alongside the dinosaurs about 66 million years ago, until it was accidentally found alive. It is covered in thick <span class="font-bold text-white">"cosmoid" scales</span> that provide armor-like protection, and its deep blue color is speckled with white dots that serve as a unique fingerprint for each individual, used for camouflage in dark volcanic caves.',
+                sec1_p2: 'Its most separating and important feature is its <span class="font-bold text-white">fleshy lobe-fins</span>. Unlike modern fish, its paired fins are supported by a bone structure similar to the limbs of early terrestrial vertebrates. This structure allows it to "walk" through the water with cross-step movements. Additionally, it is equipped with a unique <span class="font-bold text-white">intracranial joint</span> that allows it to lift the upper part of its head to forcefully suction its prey, and a <span class="font-bold text-white">rostral organ</span> in the snout used for electroreception of prey in absolute darkness. Its lifespan is impressive and can reach up to 100 years.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Coela (Hollow):', sec2_desc1: 'Originates from the ancient Greek word "koilos" meaning <span class="font-bold text-white">hollow</span>. The term refers to the primitive morphological structure of its fin rays, which are hollow at the base – a characteristic first identified in fossils, long before the living species was discovered.',
+                sec2_sub2: 'Acanth (Spine):', sec2_desc2: 'Originates from the Greek word "akantha" meaning <span class="font-bold text-white">thorn or spine</span>. The name completes its ancient anatomical description.',
+                sec2_total: 'Full Meaning: "Hollow Spine".',
+                sec3_title: 'Historical Discovery Details:',
+                sec3_l1: 'The Discovery:', sec3_v1: 'On December 22, 1938, curator Marjorie Courtenay-Latimer found a strange fish in fishermen\'s nets. She transported the fish via taxi and sent a sketch to Prof. J.L.B. Smith who identified it immediately.',
+                sec3_l2: 'Location:', sec3_v2: 'Chalumna River mouth, East London (South Africa).',
+                sec3_l3: 'Significance:', sec3_v3: 'The discovery proved that ancient lineages can survive in deep "refugia" (natural deep shelters) almost unchanged. Smith described the experience: "Like finding a living dinosaur walking down the street".',
+                navPrev: 'Back to Archive', navNext: 'Next: Alligator Gar', btn: 'HE', dir: 'ltr'
             }
         };
 
         function toggleLanguage() {
             currentLang = currentLang === 'he' ? 'en' : 'he';
-            const data = content[currentLang];
-            document.getElementById('fossilName').innerText = data.name;
-            document.getElementById('backBtn').innerText = data.back;
-            document.getElementById('heroLabel').innerText = data.heroLabel;
-            document.getElementById('discoverTitle').innerText = data.discoverTitle;
-            document.getElementById('labelScientist').innerText = data.lScientist;
-            document.getElementById('valScientist').innerText = data.vScientist;
-            document.getElementById('labelConfirm').innerText = data.lConfirm;
-            document.getElementById('valConfirm').innerText = data.vConfirm;
-            document.getElementById('labelYear').innerText = data.lYear;
-            document.getElementById('valYear').innerText = data.vYear;
-            document.getElementById('labelEra').innerText = data.lEra;
-            document.getElementById('valEra').innerText = data.vEra;
-            document.getElementById('labelLocation').innerText = data.lLocation;
-            document.getElementById('valLocation').innerText = data.vLocation;
+            const d = content[currentLang];
             
-            document.getElementById('originTitle').innerText = data.originTitle;
-            document.getElementById('originDesc1').innerHTML = data.originDesc1;
-            document.getElementById('originDesc2').innerHTML = data.originDesc2;
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
             
-            document.getElementById('indoTitle').innerText = data.indoTitle;
-            document.getElementById('indoDesc').innerHTML = data.indoDesc;
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
             
-            document.getElementById('specsTitle').innerText = data.specsTitle;
-            document.getElementById('specSize').innerHTML = data.specSize;
-            document.getElementById('specLife').innerHTML = data.specLife;
-            document.getElementById('specRepro').innerHTML = data.specRepro;
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
             
-            document.getElementById('etymTitle').innerText = data.etymTitle;
-            document.getElementById('etym1_head').innerText = data.etym1head;
-            document.getElementById('etym1_src').innerText = data.etym1src;
-            document.getElementById('etym1_def').innerHTML = data.etym1def;
-            document.getElementById('etym2_head').innerText = data.etym2head;
-            document.getElementById('etym2_src').innerText = data.etym2src;
-            document.getElementById('etym2_def').innerHTML = data.etym2def;
-            document.getElementById('etymTotal').innerHTML = data.etymTotal;
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerText = d.sec2_total;
             
-            document.getElementById('surviveTitle').innerText = data.surTitle;
-            document.getElementById('surviveText').innerText = data.surText;
-            document.getElementById('labelAchieve').innerText = data.lAchieve;
-            document.getElementById('ach1').innerHTML = data.ach1;
-            document.getElementById('ach2').innerHTML = data.ach2;
-            document.getElementById('ach3').innerHTML = data.ach3;
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
             
-            document.getElementById('navHome').innerText = data.navHome;
-            document.getElementById('langBtn').innerText = data.btn;
-            document.documentElement.dir = data.dir;
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
             document.documentElement.lang = currentLang;
-            
-            const card = document.getElementById('discoverCard');
-            card.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            card.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
 
-            const indoCard = document.getElementById('indoCard');
-            indoCard.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            indoCard.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
-
-            const specsCard = document.getElementById('specsCard');
-            specsCard.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            specsCard.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
         }
     </script>
 </body>
 </html>
+
 

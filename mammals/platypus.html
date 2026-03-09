@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: פלטיפוס | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Premium Deep Dark Edition */
+        :root {
+            --amoled-black: #000000;
+            --card-gray: #0f172a;
+            --accent-purple: #a855f7;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            background-color: var(--amoled-black);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
+        }
+
+        .etymology-part {
+            border-right: 3px solid var(--accent-purple);
+            padding-right: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        [dir="ltr"] .etymology-part {
+            border-right: 0;
+            border-left: 3px solid var(--accent-purple);
+            padding-right: 0;
+            padding-left: 1.25rem;
+        }
+
+        .fossil-hero-container {
+            position: relative;
+            cursor: zoom-in;
+            margin-bottom: 2.5rem;
+        }
+
+        .fossil-hero-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #imageModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        #imageModal img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 1.5rem;
+            box-shadow: 0 0 60px rgba(168, 85, 247, 0.25);
+        }
+
+        h1, h2, h3 {
+            color: #f8fafc;
+            letter-spacing: -0.01em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(to left, rgba(168, 85, 247, 0.1), transparent);
+            border-right: 2px solid var(--accent-purple);
+        }
+
+        [dir="ltr"] .highlight-box {
+            background: linear-gradient(to right, rgba(168, 85, 247, 0.1), transparent);
+            border-right: 0;
+            border-left: 2px solid var(--accent-purple);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pb-24 text-justify">
+
+    <div id="imageModal" onclick="this.style.display='none'">
+        <img src="https://github.com/rexram987-create/living-fossils-archive/blob/main/images/platypus.png?raw=true" alt="Platypus Enlarge" id="modalImg">
+        <div class="absolute top-10 right-10 text-white text-5xl cursor-pointer">&times;</div>
+    </div>
+
+    <div class="fixed top-6 left-6 z-50">
+        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-purple-500 hover:bg-purple-500 hover:text-white transition-all shadow-xl active:scale-95">EN</button>
+    </div>
+
+    <header class="pt-16 px-6 text-center mb-6">
+        <a href="../index.html" id="backBtn" class="text-purple-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
+        <h1 id="fossilName" class="text-4xl font-extrabold text-white">פלטיפוס / ברווזן (Platypus)</h1>
+        <p class="text-purple-500 font-mono mt-2 italic" id="scientificName">Ornithorhynchus anatinus</p>
+    </header>
+
+    <main class="px-6 space-y-8 max-w-2xl mx-auto">
+        
+        <div class="fossil-hero-container group" onclick="document.getElementById('imageModal').style.display='flex'">
+            <!-- קישור גיטהאב ישיר לתמונה -->
+            <img src="https://github.com/rexram987-create/living-fossils-archive/blob/main/images/platypus.png?raw=true" alt="פלטיפוס" class="fossil-hero-img shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]" onerror="this.src='https://via.placeholder.com/800x450/000000/a855f7?text=Platypus+Image+Not+Found'">
+            <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center space-x-2 space-x-reverse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                <span class="text-[10px] text-purple-400 font-bold uppercase" id="labelZoom">לחץ להגדלה</span>
+            </div>
+        </div>
+
+        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-purple-500" id="discoverCard">
+            <h2 class="text-xl font-bold text-purple-400 mb-6 flex items-center" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
+            <div class="space-y-4 text-slate-300">
+                <p><span class="font-bold text-white" id="labelScientist">החוקר המזהה:</span> <span id="valScientist">ג'ורג' שו (1751–1813)</span></p>
+                <p><span class="font-bold text-white" id="labelYear">שנת זיהוי מדעי:</span> <span id="valYear">1799 (פורסם ב-Naturalist's Miscellany)</span></p>
+                <p><span class="font-bold text-white" id="labelLocation">מיקום הגילוי:</span> <span id="valLocation">מזרח אוסטרליה (ניו סאות' ויילס)</span></p>
+                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">הנציג האחרון של משפחת ה-Ornithorhynchidae, שושלת שהתפצלה לפני 166 מיליון שנה</span></p>
+            </div>
+        </section>
+
+        <section class="glass-card rounded-[2rem] p-8" id="originCard">
+            <h2 class="text-xl font-bold text-purple-400 mb-6 flex items-center" id="originTitle">נסיבות הגילוי וה"הונאה" הגדולה</h2>
+            <div class="space-y-5 text-slate-300 leading-relaxed">
+                <p id="originDesc1">כאשר הגיעו הדגימות והפוחלצים הראשונים של הפלטיפוס מאוסטרליה לבריטניה בשנת 1798 על ידי קפטן ג'ון האנטר, הקהילה המדעית הייתה המומה לחלוטין. רוב המדענים היו בטוחים שמדובר בהונאה מתוחכמת של פחלצנים אסייתים – פרקטיקה שהייתה נפוצה אז – שבה נתפר מקור של ברווז לגוף של יונק דמוי בונה.</p>
+                <div class="highlight-box p-5 rounded-xl">
+                    <p id="originDesc2" class="text-sm">החוקר הבריטי **ג'ורג' שו**, שקיבל את העור של החיה לבדיקה, היה כה ספקן עד שלקח זוג מספריים וניסה למצוא את התפרים המחברים בין המקור לפרווה. לאחר שבחן את הרקמות, נאלץ להודות שמדובר ביצור אמיתי. הגילוי שבר את כל מוסכמות המיון של קארולוס לינאוס; היצור הפגין תכונות של עופות (מקור), זוחלים (הטלת ביצים, ארס) ויונקים (פרווה והנקת צאצאים), מה שהפך אותו ל"פרנקנשטיין" של עולם הטבע ולחלון חי לאבולוציה המוקדמת של היונקים.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-fuchsia-600" id="specsCard">
+            <h2 class="text-xl font-bold text-fuchsia-400 mb-6 flex items-center" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
+            <div class="space-y-6 text-slate-300 leading-relaxed">
+                <div class="grid grid-cols-1 gap-4">
+                    <p id="specSize"><span class="font-bold text-white">אורך מקסימלי:</span> כ-50 סנטימטרים מהמקור ועד קצה הזנב. הזכרים גדולים מעט מהנקבות. גופם שטוח, הידרודינמי, ומותאם במלואו לחיים במים.</p>
+                    <p id="specWeight"><span class="font-bold text-white">משקל:</span> נע בין 0.7 ל-2.4 קילוגרם. משקלו משתנה בצורה דרסטית בין העונות, בהתאם לכמות השומן שהוא מצליח לאגור בזנבו.</p>
+                    <p id="specLife"><span class="font-bold text-white">תוחלת חיים:</span> חי כ-12 שנים בטבע בסביבת נהרות ואגמים, אך תועדו פרטים שחיו עד 17 שנים בתנאי שבי וטיפול מסור.</p>
+                </div>
+                <p id="specBody" class="text-sm border-t border-white/5 pt-4">**תגלית הפרווה הזוהרת:** מחקר פורץ דרך משנת 2020 גילה כי פרוותו החומה והצפופה של הפלטיפוס, שאוטמת אותו לחלוטין ממים, היא **ביופלואורסצנטית**. תחת תאורת אולטרה-סגול (UV), הפרווה בולעת את הקרינה ופולטת אור זוהר בצבע ירוק-טורקיז (Cyan), תופעה שסיבתה האבולוציונית עדיין נחקרת.</p>
+            </div>
+        </section>
+
+        <section class="glass-card rounded-[2rem] p-8" id="etymCard">
+            <h2 class="text-xl font-bold text-purple-400 mb-8" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
+            <div class="space-y-8">
+                <div class="etymology-part">
+                    <h3 class="text-purple-300 font-bold text-lg" id="etym1_head">Platypus (פלטיפוס)</h3>
+                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym1_src">מקור: יוונית עתיקה (platys + pous)</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym1_def">המילה **Platys** משמעותה שטוח או רחב, והמילה **Pous** משמעותה רגל. השם הוענק לו בשל כפות הרגליים הרחבות והשטוחות שלו, המצוידות בקרומי שחייה נמתחים ההופכים אותו לשחיין וצוללן יוצא מן הכלל.</p>
+                </div>
+                <div class="etymology-part">
+                    <h3 class="text-purple-300 font-bold text-lg" id="etym2_head">Ornithorhynchus (שם מדעי)</h3>
+                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: יוונית עתיקה (ornitho + rhynchos)</p>
+                    <p class="text-slate-200 leading-relaxed" id="etym2_def">**Ornitho** משמעותו ציפור או עוף, ו-**Rhynchos** משמעותו חרטום או מקור. השם מתייחס ישירות למאפיין הבולט ביותר שלו: חרטום גמיש, רך ודמוי גומי הנראה בדיוק כמו מקור של ברווז.</p>
+                </div>
+                <div class="bg-purple-900/15 p-6 rounded-2xl border border-purple-800/40 text-sm italic text-slate-300" id="etymTotal">משמעות השם המלאה: "בעל מקור ציפור ורגליים שטוחות", הגדרה ויזואלית ומדויקת המשקפת את המראה ההיברידי והמוזר שלו.</div>
+            </div>
+        </section>
+
+        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-purple-500/30">
+            <h2 class="text-xl font-bold text-purple-400 mb-6" id="surviveTitle">סיבת ההישרדות והישגים אבולוציוניים</h2>
+            <div class="space-y-6 text-slate-300 leading-relaxed">
+                <p id="surviveText">הפלטיפוס שרד בזכות התאמה לנישה אקולוגית מאוד ספציפית: צייד לילי במים מתוקים של יבשת אוסטרליה, שהייתה מבודדת משאר העולם במשך עשרות מיליוני שנים. בידוד זה חסך ממנו תחרות מול יונקי שליה מתקדמים יותר.</p>
+                <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">הישגים ביולוגיים יוצאי דופן:</h4>
+                <ul class="space-y-5 text-sm text-purple-100/80" id="achieveList">
+                    <li class="flex items-start gap-3"><span class="text-purple-500">•</span><span id="ach1">**ראיית חשמל (Electroreception):** הפלטיפוס צולל כשעיניו, אוזניו ונחיריו אטומים לחלוטין. במקום זאת, יש לו כ-40,000 קולטנים חשמליים ומכניים במקורו, המאפשרים לו לזהות תנועות שרירים זעירות של סרטנים ותולעים בבוץ שעל קרקעית הנהר.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-purple-500">•</span><span id="ach2">**ארס קטלני:** אחד היונקים הארסיים הבודדים בעולם. לזכרים יש דורבן חלול בקרסול רגלם האחורית המחובר לבלוטת ארס. הארס מיוצר בעיקר בעונת הרבייה לקרבות טריטוריה, והוא גורם לכאב משתק ועמיד למורפיום בבני אדם, ויכול להרוג חיות קטנות כגון כלבים.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-purple-500">•</span><span id="ach3">**רבייה של יונק ביב (Monotreme):** הוכחה חיה לשלב המעבר האבולוציוני מזוחלים ליונקים. הוא מטיל ביצים בעלות קליפה דמוית קלף, ולאחר הבקיעה, הנקבה מניקה את הגורים. אין לה פטמות – החלב מופרש דרך נקבוביות העור אל פרוות הבטן, והגורים מלקקים אותו משם.</span></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-2xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
+        <a href="../index.html" class="flex flex-col items-center text-purple-500 transition-transform active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span></a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                name: 'פלטיפוס / ברווזן (Platypus)', back: '← חזרה לארכיון', labelZoom: 'לחץ להגדלה',
+                discoverTitle: 'פרטי התיעוד והזיהוי', lScientist: 'החוקר המזהה:', vScientist: 'ג\'ורג\' שו (1751–1813)',
+                lYear: 'שנת זיהוי מדעי:', vYear: '1799 (פורסם ב-Naturalist\'s Miscellany)',
+                lLocation: 'מיקום הגילוי:', vLocation: 'מזרח אוסטרליה (ניו סאות\' ויילס)',
+                lStatus: 'סטטוס אבולוציוני:', vStatus: 'הנציג האחרון של משפחת ה-Ornithorhynchidae (התפצלה לפני 166 מיליון שנה)',
+                originTitle: 'נסיבות הגילוי וה"הונאה" הגדולה',
+                originDesc1: 'כאשר הגיעו הדגימות והפוחלצים הראשונים של הפלטיפוס מאוסטרליה לבריטניה בשנת 1798 על ידי קפטן ג\'ון האנטר, הקהילה המדעית הייתה המומה לחלוטין. רוב המדענים היו בטוחים שמדובר בהונאה מתוחכמת של פחלצנים אסייתים, שבה נתפר מקור של ברווז לגוף של יונק דמוי בונה.',
+                originDesc2: 'החוקר הבריטי ג\'ורג\' שו היה כה ספקן עד שלקח זוג מספריים וניסה למצוא את התפרים המחברים בין המקור לפרווה. לאחר שבחן את הרקמות, נאלץ להודות שמדובר ביצור אמיתי. הגילוי שבר את כל מוסכמות המיון, שכן היצור הפגין תכונות של עופות (מקור), זוחלים (הטלת ביצים) ויונקים (הנקה), והפך לחלון חי לאבולוציה של היונקים.',
+                specsTitle: 'מאפיינים פיזיים ותוחלת חיים', 
+                specSize: '<span class="font-bold text-white">אורך מקסימלי:</span> כ-50 סנטימטרים מהמקור ועד קצה הזנב. הזכרים גדולים מעט מהנקבות. גופם שטוח, הידרודינמי, ומותאם במלואו למים.',
+                specWeight: '<span class="font-bold text-white">משקל:</span> נע בין 0.7 ל-2.4 קילוגרם. משקלו משתנה בצורה דרסטית בין העונות, בהתאם לכמות השומן בזנב.',
+                specLife: '<span class="font-bold text-white">תוחלת חיים:</span> חי כ-12 שנים בטבע בסביבת נהרות ואגמים, אך תועדו פרטים שחיו עד 17 שנים בתנאי שבי.',
+                specBody: '**תגלית הפרווה הזוהרת:** מחקר משנת 2020 גילה כי פרוותו של הפלטיפוס היא ביופלואורסצנטית. תחת קרינת אולטרה-סגול (UV), היא פולטת אור זוהר בצבע ירוק-טורקיז.',
+                etymTitle: 'ניתוח אטימולוגי נרחב', etym1head: 'Platypus (פלטיפוס)', etym1def: 'המילה Platys משמעותה שטוח, ו-Pous משמעותה רגל (יוונית). השם הוענק לו בשל כפות הרגליים הרחבות והשטוחות שלו, המצוידות בקרומי שחייה נמתחים.', etym2head: 'Ornithorhynchus (שם מדעי)', etym2def: 'Ornitho משמעותו ציפור, ו-Rhynchos משמעותו חרטום (יוונית). השם מתייחס ישירות למאפיין הבולט ביותר שלו: חרטום רך ודמוי גומי הנראה כמקור של ברווז.',
+                etymTotal: 'משמעות השם המלאה: "בעל מקור ציפור ורגליים שטוחות", הגדרה ויזואלית ומדויקת המשקפת את המראה ההיברידי והמוזר שלו.',
+                surTitle: 'סיבת ההישרדות והישגים אבולוציוניים', surText: 'הפלטיפוס שרד בזכות התאמה לנישה אקולוגית ספציפית: צייד לילי במים מתוקים של יבשת אוסטרליה המבודדת, מה שחסך ממנו תחרות מול יונקי שליה מתקדמים.',
+                lAchieve: 'הישגים ביולוגיים יוצאי דופן:', 
+                ach1: '**ראיית חשמל (Electroreception):** הפלטיפוס צולל בעיניים עצומות. יש לו כ-40,000 קולטנים חשמליים במקור המאפשרים לזהות תנועות שרירים של טרף בבוץ.',
+                ach2: '**ארס קטלני:** לזכרים דורבן חלול בקרסול המחובר לבלוטת ארס. הארס גורם לכאב משתק ועמיד למורפיום בבני אדם, ומיועד לקרבות טריטוריה בעונת הרבייה.',
+                ach3: '**רבייה של יונק ביב:** הוכחה חיה לשלב מעבר. הנקבה מטילה ביצים דמויות קלף, ומניקה את הגורים ללא פטמות – החלב מופרש דרך העור והגורים מלקקים אותו.',
+                navHome: 'בית', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                name: 'Platypus', back: '← Back to Archive', labelZoom: 'Click to Enlarge',
+                discoverTitle: 'Scientific Identification & Records', lScientist: 'Identifying Scientist:', vScientist: 'George Shaw (1751–1813)',
+                lYear: 'Year Identified:', vYear: '1799 (Published in Naturalist\'s Miscellany)',
+                lLocation: 'Discovery Location:', vLocation: 'Eastern Australia (New South Wales)',
+                lStatus: 'Evolutionary Status:', vStatus: 'Last survivor of the Ornithorhynchidae family (diverged 166m years ago)',
+                originTitle: 'Discovery Circumstances & The Great "Hoax"',
+                originDesc1: 'When the first specimens and pelts of the Platypus arrived in Britain from Australia in 1798 via Captain John Hunter, the scientific community was utterly baffled. Most scientists were convinced it was an elaborate hoax by Asian taxidermists—a common practice at the time—created by stitching a duck\'s bill onto the body of a beaver-like mammal.',
+                originDesc2: 'British naturalist George Shaw, who received the pelt for examination, was so skeptical that he took a pair of scissors to the skin, trying to find the stitches connecting the bill to the fur. After examining the tissues, he had to admit the creature was real. This discovery shattered the taxonomic conventions of the era; the creature exhibited traits of birds (bill), reptiles (laying eggs, venom), and mammals (fur and nursing), making it a living window into early mammalian evolution.',
+                specsTitle: 'Physical Characteristics & Lifespan', 
+                specSize: '<span class="font-bold text-white">Maximum Length:</span> Approximately 50 cm (20 in) from bill to tail tip. Males are slightly larger than females. Their flat, hydrodynamic bodies are fully adapted for aquatic life.',
+                specWeight: '<span class="font-bold text-white">Weight:</span> Ranges from 0.7 to 2.4 kg (1.5–5.3 lbs). Its weight changes drastically between seasons, depending on the fat stored in its tail.',
+                specLife: '<span class="font-bold text-white">Lifespan:</span> Lives about 12 years in the wild within river and lake environments, though specimens have lived up to 17 years in captivity.',
+                specBody: '**The Glowing Fur Discovery:** A groundbreaking 2020 study revealed that the dense, waterproof brown fur of the Platypus is **biofluorescent**. Under ultraviolet (UV) light, the fur absorbs the radiation and emits a glowing cyan (turquoise-green) light, an evolutionary phenomenon still being researched.',
+                etymTitle: 'Detailed Etymological Analysis', etym1head: 'Platypus (Etymology)', etym1def: 'The word Platys means flat or broad, and Pous means foot (Greek). The name was bestowed due to its wide, flat feet equipped with retractable webbing, making it an exceptional swimmer and diver.', etym2head: 'Ornithorhynchus (Scientific)', etym2def: 'Ornitho means bird, and Rhynchos means snout or bill (Greek). The name directly refers to its most prominent feature: a flexible, soft, rubbery snout that looks exactly like a duck\'s bill.',
+                etymTotal: 'Full Meaning: "Bird-snouted with flat feet", a precise visual definition reflecting its bizarre, hybrid-like appearance.',
+                surTitle: 'Survival & Evolutionary Achievements', surText: 'The Platypus survived by adapting to a highly specific ecological niche: a nocturnal freshwater hunter in the isolated continent of Australia, which spared it from competing with advanced placental mammals.',
+                lAchieve: 'Exceptional Biological Achievements:',
+                ach1: '**Electroreception:** The platypus dives with its eyes, ears, and nostrils completely sealed. Instead, it relies on ~40,000 electro-mechanoreceptors in its bill to detect tiny muscle twitches of crustaceans and worms hidden in the muddy riverbed.',
+                ach2: '**Lethal Venom:** One of the few venomous mammals in the world. Males possess a hollow spur on their hind ankles connected to a venom gland. Used primarily for territorial battles during mating season, the venom causes excruciating, morphine-resistant pain in humans and can be fatal to small animals.',
+                ach3: '**Monotreme Reproduction:** Living proof of the evolutionary transition from reptiles to mammals. Females lay leathery, parchment-like eggs. Upon hatching, the mother nurses the young, but lacks nipples—milk is secreted through skin pores onto her abdominal fur, where the babies lap it up.',
+                navHome: 'HOME', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const data = content[currentLang];
+            document.getElementById('fossilName').innerText = data.name;
+            document.getElementById('backBtn').innerText = data.back;
+            document.getElementById('labelZoom').innerText = data.labelZoom;
+            document.getElementById('discoverTitle').innerText = data.discoverTitle;
+            document.getElementById('labelScientist').innerText = data.lScientist;
+            document.getElementById('valScientist').innerText = data.vScientist;
+            document.getElementById('labelYear').innerText = data.lYear;
+            document.getElementById('valYear').innerText = data.vYear;
+            document.getElementById('labelLocation').innerText = data.lLocation;
+            document.getElementById('valLocation').innerText = data.vLocation;
+            document.getElementById('labelStatus').innerText = data.lStatus;
+            document.getElementById('valStatus').innerText = data.vStatus;
+            document.getElementById('originTitle').innerText = data.originTitle;
+            document.getElementById('originDesc1').innerText = data.originDesc1;
+            document.getElementById('originDesc2').innerText = data.originDesc2;
+            document.getElementById('specsTitle').innerText = data.specsTitle;
+            document.getElementById('specSize').innerHTML = data.specSize;
+            document.getElementById('specWeight').innerHTML = data.specWeight;
+            document.getElementById('specLife').innerHTML = data.specLife;
+            document.getElementById('specBody').innerHTML = data.specBody;
+            document.getElementById('etymTitle').innerText = data.etymTitle;
+            document.getElementById('etym1_head').innerText = data.etym1head;
+            document.getElementById('etym1_def').innerText = data.etym1def;
+            document.getElementById('etym2_head').innerText = data.etym2head;
+            document.getElementById('etym2_def').innerText = data.etym2def;
+            document.getElementById('etymTotal').innerText = data.etymTotal;
+            document.getElementById('surviveTitle').innerText = data.surTitle;
+            document.getElementById('surviveText').innerText = data.surText;
+            document.getElementById('labelAchieve').innerText = data.lAchieve;
+            document.getElementById('ach1').innerHTML = data.ach1;
+            document.getElementById('ach2').innerHTML = data.ach2;
+            document.getElementById('ach3').innerHTML = data.ach3;
+            document.getElementById('navHome').innerText = data.navHome;
+            document.getElementById('langBtn').innerText = data.btn;
+            document.documentElement.dir = data.dir;
+            document.documentElement.lang = currentLang;
+            const card = document.getElementById('discoverCard');
+            card.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
+            card.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+        }
+    </script>
+</body>
+</html>

@@ -3,309 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>מחקר מעמיק: גינקו דו-אונתי | The Eternal Archive</title>
+    <title>מחקר מעמיק: עץ הגינקו | The Eternal Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* S25 Ultra Optimized - Premium Deep Dark Edition */
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
         :root {
-            --amoled-black: #000000;
-            --card-gray: #0f172a;
-            --accent-emerald: #10b981;
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
+            --bg-body: #030712; /* Very dark background */
+            --bg-card: #0a1122; /* Main card background */
+            --bg-pill: #132342; /* Stats pill background */
+            --border-card: #1d365d;
+            --text-accent: #34d399; /* Emerald-400 */
         }
 
         body {
-            background-color: var(--amoled-black);
-            color: var(--text-main);
+            background-color: var(--bg-body);
+            color: #e2e8f0;
             font-family: system-ui, -apple-system, sans-serif;
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
-            line-height: 1.6;
-            transition: all 0.3s ease;
+            line-height: 1.7;
         }
 
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
-        }
-
-        .etymology-part {
-            border-right: 3px solid var(--accent-emerald);
-            padding-right: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        [dir="ltr"] .etymology-part {
-            border-right: 0;
-            border-left: 3px solid var(--accent-emerald);
-            padding-right: 0;
-            padding-left: 1.25rem;
-        }
-
-        /* Holographic Hero Image Replacement */
-        .hologram-container {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border-radius: 2rem;
-            background: radial-gradient(circle at 50% 50%, #064e3b 0%, #020617 100%);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            position: relative;
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
             overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 20px 40px -10px rgba(16, 185, 129, 0.15);
-            margin-bottom: 2.5rem;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        .hologram-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px);
-            background-size: 100% 4px;
-            pointer-events: none;
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(52, 211, 153, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
         }
 
-        .hologram-icon {
-            font-size: 6rem;
-            filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.8));
-            animation: float 4s ease-in-out infinite;
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(52, 211, 153, 0.15);
         }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        h1, h2, h3 {
-            color: #f8fafc;
-            letter-spacing: -0.01em;
-        }
-
-        .highlight-box {
-            background: linear-gradient(to left, rgba(16, 185, 129, 0.1), transparent);
-            border-right: 2px solid var(--accent-emerald);
-        }
-
-        [dir="ltr"] .highlight-box {
-            background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
-            border-right: 0;
-            border-left: 2px solid var(--accent-emerald);
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col pb-24 text-justify">
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
 
-    <!-- Language Toggle -->
-    <div class="fixed top-6 left-6 z-50">
-        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 border border-white/10 px-5 py-2.5 rounded-full text-xs font-bold text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-xl active:scale-95">EN</button>
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-emerald-400 hover:bg-emerald-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
     </div>
 
-    <!-- Header -->
-    <header class="pt-16 px-6 text-center mb-6">
-        <a href="index.html" id="backBtn" class="text-emerald-500 text-sm mb-4 inline-block hover:underline">← חזרה לארכיון</a>
-        <h1 id="fossilName" class="text-4xl font-extrabold text-white">גינקו דו-אונתי (Ginkgo)</h1>
-        <p class="text-emerald-500 font-mono mt-2 italic" id="scientificName">Ginkgo biloba</p>
-    </header>
-
-    <main class="px-6 space-y-8 max-w-2xl mx-auto">
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
         
-        <!-- Hologram Hero Section -->
-        <div class="hologram-container">
-            <div class="hologram-icon">🌿</div>
-            <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-full border border-emerald-500/30 flex items-center space-x-2 space-x-reverse">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest" id="heroLabel">הדמיית ארכיון פעילה</span>
+        <!-- Hero Image -->
+        <img src="https://github.com/rexram987-create/living-fossils-archive/blob/main/images/ginkgo.png?raw=true" alt="גינקו דו אונתי" class="hero-img" onerror="this.src='https://via.placeholder.com/800x450/0a1122/34d399?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: שריד אחרון למערכת צמחים שלמה ועמידות לקרינה</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">גינקו דו-אונתי</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Ginkgo biloba</p>
+                <p id="ui_trans" class="text-emerald-400 font-bold italic pt-2">"משמש כסף בעל שתי אונות"</p>
             </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">מעל 270<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>סיווג</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1771<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">גובה<br>מירבי</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 50<br>מטרים<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תוחלת<br>חיים</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">מעל 3000<br>שנים<br>&nbsp;</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ובוטנית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">עץ הגינקו הוא "מאובן חי" בוטני יוצא דופן. הוא המין היחיד ששרד ממערכת הגינקואיים (Ginkgophyta), מערכת שלמה של צמחים ששגשגה בעידן הדינוזאורים והגיעה לשיאה בתור היורה, אך נכחדה כולה לבדו. עליו דמויי-המניפה הם בעלי מבנה ורידים ייחודי שמתפצל לשניים (דיכוטומי), תכונה פרימיטיבית נדירה ביותר בעצים מודרניים. העץ הוא <span class="font-bold text-white">דו-ביתי (Dioecious)</span>, כלומר ישנם עצים זכריים (המייצרים אבקנים) ועצים נקביים (המייצרים זרעים) נפרדים לחלוטין.</p>
+                    
+                    <p id="sec1_p2">הפלא האמיתי של הגינקו הוא החוסן הביולוגי הכמעט בלתי-מנוצח שלו. הוא פיתח מנגנוני הגנה כימיים מורכבים ההופכים אותו לעמיד בפני חרקים, מחלות פטרייתיות, זיהום אוויר עירוני קיצוני, ואפילו נזקי כפור. קליפת העץ העבה שלו מכילה חומרים המעכבים בעירה ומונעים אש, ויש לו יכולת נדירה להצמיח שורשי אוויר דמויי-נטיפים (הנקראים ביפנית "Chichi") כדי להתאושש מטראומות פיזיות. תכונות אלו מאפשרות לפרטים בודדים לחיות למעלה מ-3,000 שנים.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-emerald-300 text-base mb-1">Ginkgo (גינקו - הטעות ההיסטורית):</h3>
+                        <p id="sec2_desc1">שם זה הוא תוצאה של שגיאת כתיב היסטורית. מקור השם הוא בהגייה היפנית "Gin kyo" (שנגזרה מהסינית yin-xíng), שמשמעותה <span class="font-bold text-white">"משמש כסף" (Silver apricot)</span>, על שום מראה הזרעים הכסופים של העץ הנקבי. החוקר הגרמני אנגלברט קמפפר (Engelbert Kaempfer), שתיעד את העץ ב-1690, איית זאת בטעות עם 'g' בסוף (Ginkgo) במקום 'y'. קרל לינאוס קיבע את הטעות בשמו המדעי הרשמי ב-1771.</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-emerald-300 text-base mb-1">biloba (דו-אונתי):</h3>
+                        <p id="sec2_desc2">מורכב משתי מילים בלטינית: "Bi" שמשמעותו <span class="font-bold text-white">שניים</span>, ו-"loba" שמשמעותה <span class="font-bold text-white">אונות</span>. הפירוש מתאר במדויק את המבנה המפוצל לשניים, האופייני והסימטרי של עלי המניפה של העץ.</p>
+                    </div>
+                    <div class="bg-emerald-900/20 p-4 rounded-xl border-r-2 border-emerald-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-emerald-200">המשמעות המלאה: "משמש כסף בעל שתי אונות".</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-emerald-400 font-bold text-base mb-4 inline-block border-b border-emerald-900/50 pb-1">היסטוריית שימור והישרדות אטומית:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">שימור במקדשים:</span> <span id="sec3_v1">העץ נכחד כמעט לחלוטין בטבע במהלך עידן הקרח. הוא שרד רק בכיסים הרריים קטנים בסין, שם נזירים בודהיסטים ודאואיסטים טיפחו ושימרו אותו כעץ קדוש במקדשיהם במשך אלפי שנים, מה שמנע את הכחדתו הסופית.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">הנס של הירושימה (Hibakujumoku):</span> <span id="sec3_v2">ההוכחה המדהימה ביותר לחוסנו התרחשה באוגוסט 1945. שישה עצי גינקו עמדו במרחק של קילומטרים ספורים ממוקד הפיצוץ האטומי בהירושימה. למרות שנחרכו, איבדו את כל עליהם ונחשפו לקרינה קטלנית, הם לבלבו מחדש באביב הבא. הם זכו לתואר הכבוד "חיבאקוג'ומוקו" (עצים שורדי פצצה) ועומדים שם כסמל לתקווה עד היום.</span></p>
+                </div>
+            </section>
+
         </div>
-
-        <!-- Section 1: Discovery Details -->
-        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-emerald-500" id="discoverCard">
-            <h2 class="text-xl font-bold text-emerald-400 mb-6 flex items-center" id="discoverTitle">פרטי התיעוד והזיהוי</h2>
-            <div class="space-y-4 text-slate-300">
-                <p><span class="font-bold text-white" id="labelScientist">החוקרים המזהים (במערב):</span> <span id="valScientist">אנגלברט קמפר (1651–1716) וקרל לינאוס (1707–1778)</span></p>
-                <p><span class="font-bold text-white" id="labelYear">שנת זיהוי מדעית:</span> <span id="valYear">תועד ב-1690, סווג מדעית ב-1771 (Mantissa Plantarum)</span></p>
-                <p><span class="font-bold text-white" id="labelLocation">מקור ביולוגי עתיק:</span> <span id="valLocation">מחוז ג'ג'יאנג, סין (הרי טיאנמו)</span></p>
-                <p><span class="font-bold text-white" id="labelStatus">סטטוס אבולוציוני:</span> <span id="valStatus">המין היחיד שנותר במערכת הגינקואים (Ginkgophyta)</span></p>
-            </div>
-        </section>
-
-        <!-- Section 2: Discovery Circumstances -->
-        <section class="glass-card rounded-[2rem] p-8" id="originCard">
-            <h2 class="text-xl font-bold text-emerald-400 mb-6 flex items-center" id="originTitle">נסיבות הגילוי והקשר הגיאוגרפי</h2>
-            <div class="space-y-5 text-slate-300 leading-relaxed">
-                <p id="originDesc1">למרות שהגינקו מזוהה לעיתים קרובות עם תרבות יפן, מקורו הביולוגי והפראי היחיד הוא בסין. עצי הגינקו הפראיים האחרונים בעולם שרדו את עידני הקרח בבידוד בעמקים העמוקים של **הרי טיאנמו**. משם, הם הופצו ליפן ולקוריאה לפני מאות שנים על ידי נזירים בודהיסטים, שנטעו אותם סביב מקדשים כעצים מקודשים בעלי סגולות רוחניות ורפואיות.</p>
-                <div class="highlight-box p-5 rounded-xl">
-                    <p id="originDesc2" class="text-sm">החוקר הגרמני **אנגלברט קמפר**, שעבד כרופא עבור חברת הודו המזרחית ההולנדית, היה האירופאי הראשון שתיעד את העץ בשנת **1690** בזמן ששהה בנגסאקי. כמאה ושמונים שנה מאוחר יותר, הבוטניקה הייחודית של הגינקו (שנראה כמו שילוב בלתי אפשרי בין שרך לעץ מחטני) הכתה בתדהמה את הקהילה המדעית. למעשה, צ'ארלס דרווין עצמו השתמש בעץ הגינקו כאחת הדוגמאות המרכזיות כשטבע את המונח **"מאובן חי"** (Living Fossil), שכן צורתו זהה לחלוטין למאובנים בני 270 מיליון שנה.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: Physical Specs -->
-        <section class="glass-card rounded-[2rem] p-8 border-r-4 border-amber-600" id="specsCard">
-            <h2 class="text-xl font-bold text-amber-400 mb-6 flex items-center" id="specsTitle">מאפיינים פיזיים ותוחלת חיים</h2>
-            <div class="space-y-6 text-slate-300 leading-relaxed">
-                <div class="grid grid-cols-1 gap-4">
-                    <p id="specSize"><span class="font-bold text-white">גובה ממוצע:</span> עצי גינקו בוגרים מגיעים לגובה של 20 עד 35 מטרים, עם צמרת זוויתית רחבה ההופכת פירמידלית עם השנים.</p>
-                    <p id="specDio"><span class="font-bold text-white">מיניות (דו-ביתיות):</span> הגינקו הוא "דו-ביתי" (Dioecious), כלומר ישנם עצי זכר ועצי נקבה נפרדים. העצים הנקביים מפיקים זרעים בשרניים המוכרים לשמצה בשל ריחם העז והדוחה (המזכיר חמאה עופשה או קיא), הנובע מריכוז גבוה של **חומצה בוטירית** שנועדה למשוך דינוזאורים אוכלי-נבלות לשם הפצת הזרעים בעבר הרחוק.</p>
-                    <p id="specLife"><span class="font-bold text-white">תוחלת חיים:</span> זהו אחד האורגניזמים מאריכי הימים ביותר בכדור הארץ, עם תוחלת חיים ממוצעת של מעל 1,000 שנים. העץ אינו חווה "הזדקנות" תאית – מבחינה ביולוגית, תאי הגזע של עץ בן אלף שנה בריאים ופעילים בדיוק כמו אלו של שתיל צעיר.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Detailed Etymology -->
-        <section class="glass-card rounded-[2rem] p-8" id="etymCard">
-            <h2 class="text-xl font-bold text-emerald-400 mb-8" id="etymTitle">ניתוח אטימולוגי נרחב</h2>
-            <div class="space-y-8">
-                <div class="etymology-part">
-                    <h3 class="text-emerald-300 font-bold text-lg mb-1" id="etym1_head">Ginkgo (גינקו)</h3>
-                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym1_src">מקור: שיבוש של יפנית (Ginkjo מתוך 銀杏 / Ginnan)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym1_def"><span class="font-bold text-white">משמעות: משמש כסוף (Silver Apricot).</span> המילה **銀 (Gin)** פירושה כסף, והמילה **杏 (Kyo/An)** פירושה משמש. השם מתייחס לזרעים (שאינם פירות אמיתיים) המכוסים בשכבה לבנה-כסופה דמוית כפור. האיות החריג 'Ginkgo' נוצר כנראה משגיאת כתיב בספרו של קמפר (שהתכוון לכתוב Ginkjo), שגיאה שהונצחה מדעית על ידי לינאוס.</p>
-                </div>
-                <div class="etymology-part">
-                    <h3 class="text-emerald-300 font-bold text-lg mb-1" id="etym2_head">Bi-loba (דו-אונתי)</h3>
-                    <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-3" id="etym2_src">מקור: לטינית (bis = פעמיים, lobus = אונה)</p>
-                    <p class="text-slate-200 leading-relaxed" id="etym2_def"><span class="font-bold text-white">משמעות: בעל שתי אונות.</span> השם המדעי מתאר את צורתם היפהפייה והייחודית של העלים דמויי-המניפה, שלרוב מחולקים לשני חלקים (אונות) מרכזיים על ידי חריץ עמוק המפריד ביניהם במרכז העלה.</p>
-                </div>
-                <div class="bg-emerald-900/15 p-6 rounded-2xl border border-emerald-800/40 text-sm italic text-slate-300" id="etymTotal"><span class="font-bold text-white">משמעות השם המלאה:</span> "משמש כסוף בעל שתי אונות". זהו שילוב פואטי של מראה הזרע החשוף העתיק עם מורפולוגיית העלים הבלתי משתנה, ששרדה בסטטוס קוו אבולוציוני במשך מאות מיליוני שנים.</div>
-            </div>
-        </section>
-
-        <!-- Section 5: Survival & Resilience -->
-        <section class="glass-card rounded-[2rem] p-8 border-b-2 border-emerald-500/30 mb-8">
-            <h2 class="text-xl font-bold text-emerald-400 mb-6" id="surviveTitle">סיבת ההישרדות וחוסן ביולוגי</h2>
-            <div class="space-y-6 text-slate-300 leading-relaxed">
-                <p id="surviveText">הגינקו הוא שריד מתקופה שבה צמחים החלו לפתח זרעים. באופן מדהים, בניגוד לעצים מודרניים, הפרייה בגינקו מתבצעת על ידי **תאי זרע שוחים בעלי שוטון (Motile sperm)**, תכונה אבולוציונית עתיקה המשותפת לו ולשרכים וטחבים הקדומים ממנו בהרבה. חוסנו נובע ממפעל כימי פנימי המגן עליו כמעט מכל סכנה אפשרית.</p>
-                <h4 class="text-white font-bold text-sm uppercase" id="labelAchieve">הישגים ביולוגיים יוצאי דופן:</h4>
-                <ul class="space-y-5 text-sm text-emerald-100/80" id="achieveList">
-                    <li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">•</span><span id="ach1"><span class="font-bold text-white">עמידות הירושימה (Hibakujumoku):</span> הגינקו הפך לסמל חי של שלום ועמידות לאחר שב-6 באוגוסט 1945 הוטלה פצצת האטום על הירושימה. שישה עצי גינקו שרדו בעמידה במרחק של קילומטרים ספורים ממוקד הפיצוץ העוצמתי, בעוד כל סביבתם הושמדה, והם התאוששו, לבלבו וממשיכים לצמוח עד היום ללא פגיעה גנטית משמעותית.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">•</span><span id="ach2"><span class="font-bold text-white">לוחמה כימית טבעית:</span> העץ מייצר חומרים כימיים ייחודיים הנקראים "גינקולידים" (Ginkgolides) ופלבנואידים, הפועלים כחומרי הדברה טבעיים. הם דוחים חרקים הרסניים ומונעים כליל התפתחות של פטריות, עובש וריקבון בתוך העצה.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">•</span><span id="ach3"><span class="font-bold text-white">היעדר זקנה חיסונית:</span> מחקרים הראו כי המערכת החיסונית של הגינקו אינה נחלשת עם הגיל. יכולתו להילחם בזיהומים ולסנתז תרכובות הגנה נשארת בשיא יעילותה גם לאחר אלף שנות חיים, תופעה כמעט חסרת תקדים בטבע.</span></li>
-                </ul>
-            </div>
-        </section>
     </main>
 
-    <!-- Bottom Navigation Bar -->
-    <nav class="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-2xl border-t border-white/5 py-4 px-10 flex justify-around items-center z-50">
-        <a href="index.html" class="flex flex-col items-center text-emerald-500 transition-transform active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="text-[10px] mt-1 font-bold uppercase tracking-widest" id="navHome">בית</span></a>
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="../mammals/platypus.html" class="text-slate-400 hover:text-emerald-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: פלטיפוס</span>
+        </a>
+        <a href="../reptiles/tuatara.html" class="text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-bold bg-emerald-900/20 px-5 py-2.5 rounded-full border border-emerald-800/30 shadow-lg">
+            <span id="navNext">הבא: טואטרה</span> <span>&larr;</span>
+        </a>
     </nav>
 
     <script>
         let currentLang = 'he';
         const content = {
             he: {
-                name: 'גינקו דו-אונתי (Ginkgo)', back: '← חזרה לארכיון', heroLabel: 'הדמיית ארכיון פעילה',
-                discoverTitle: 'פרטי התיעוד והזיהוי', lScientist: 'החוקרים המזהים (במערב):', vScientist: 'אנגלברט קמפר (1651–1716) וקרל לינאוס (1707–1778)',
-                lYear: 'שנת זיהוי מדעית:', vYear: 'תועד ב-1690, סווג מדעית ב-1771',
-                lLocation: 'מקור ביולוגי עתיק:', vLocation: 'מחוז ג\'ג\'יאנג, סין (הרי טיאנמו)',
-                lStatus: 'סטטוס אבולוציוני:', vStatus: 'המין היחיד שנותר במערכת הגינקואים (Ginkgophyta)',
-                originTitle: 'נסיבות הגילוי והקשר הגיאוגרפי',
-                originDesc1: 'למרות שהגינקו מזוהה לעיתים קרובות עם יפן, מקורו הביולוגי והפראי היחיד הוא בסין. עצי הגינקו הפראיים האחרונים שרדו בהרי טיאנמו בסין, ומשם הופצו ליפן ולקוריאה לפני מאות שנים על ידי נזירים בודהיסטים כעצים מקודשים.',
-                originDesc2: 'החוקר <span class="font-bold text-white">אנגלברט קמפר</span> היה האירופאי הראשון שתיעד את העץ ב-1690 ביפן. הבוטניקה שלו כה ייחודית, עד ש<span class="font-bold text-white">צ\'ארלס דרווין</span> השתמש בעץ זה כדוגמה מרכזית כשטבע את המונח "מאובן חי" בגלל זהותו למאובנים בני 270 מיליון שנה.',
-                specsTitle: 'מאפיינים פיזיים ותוחלת חיים', 
-                specSize: '<span class="font-bold text-white">גובה ממוצע:</span> עצי גינקו בוגרים מגיעים לגובה של 20 עד 35 מטרים, עם צמרת זוויתית רחבה.',
-                specDio: '<span class="font-bold text-white">מיניות (דו-ביתיות):</span> הגינקו הוא "דו-ביתי" (עצי זכר ועצי נקבה נפרדים). העצים הנקביים מפיקים זרעים שריחם עז ודוחה בגלל <span class="font-bold text-white">חומצה בוטירית</span>, שנועדה בעבר למשוך דינוזאורים אוכלי-נבלות.',
-                specLife: '<span class="font-bold text-white">תוחלת חיים:</span> אחד האורגניזמים מאריכי הימים ביותר (מעל 1,000 שנים). העץ אינו חווה "הזדקנות" תאית ותאי הגזע שלו נשארים צעירים לנצח.',
-                etymTitle: 'ניתוח אטימולוגי נרחב', 
-                etym1head: 'Ginkgo (גינקו)', etym1src: 'מקור: שיבוש של יפנית (Ginkjo מתוך 銀杏)', etym1def: '<span class="font-bold text-white">משמעות: משמש כסוף (Silver Apricot).</span> מורכב מ-Gin (כסף) ו-Kyo (משמש). מתייחס למראה הזרעים המכוסים בשכבה כסופה. האיות נגרם כנראה משגיאת כתיב היסטורית של קמפר.', 
-                etym2head: 'Bi-loba (דו-אונתי)', etym2src: 'מקור: לטינית (bis = פעמיים, lobus = אונה)', etym2def: '<span class="font-bold text-white">משמעות: בעל שתי אונות.</span> מתאר את עלי המניפה המחולקים לרוב לשני חלקים על ידי חריץ עמוק באמצע.',
-                etymTotal: '<span class="font-bold text-white">משמעות השם המלאה:</span> "משמש כסוף בעל שתי אונות", שילוב יפהפה של מראה הזרע החשוף העתיק עם מורפולוגיית העלה הבלתי משתנה.',
-                surTitle: 'סיבת ההישרדות וחוסן ביולוגי', 
-                surText: 'באופן מדהים, ההפריה בגינקו מתבצעת על ידי <span class="font-bold text-white">תאי זרע שוחים (Motile sperm)</span> – תכונה פרימיטיבית המשותפת לשרכים. חוסנו העיקרי נובע ממפעל כימי פנימי המגן עליו.',
-                lAchieve: 'הישגים ביולוגיים יוצאי דופן:', 
-                ach1: '<span class="font-bold text-white">עמידות הירושימה (Hibakujumoku):</span> שישה עצי גינקו שרדו פיצוץ אטומי במרחק קילומטרים ספורים בהירושימה ב-1945, התאוששו וממשיכים לצמוח עד היום ללא פגיעה גנטית משמעותית.',
-                ach2: '<span class="font-bold text-white">לוחמה כימית טבעית:</span> מייצר כימיקלים ("גינקולידים") המשמשים כחומרי הדברה טבעיים נגד פטריות, עובש וחרקים מזיקים.',
-                ach3: '<span class="font-bold text-white">היעדר זקנה חיסונית:</span> המערכת החיסונית של הגינקו אינה נחלשת עם הגיל, ופועלת ביעילות גם כשהעץ חוגג 1,000 שנות חיים.',
-                navHome: 'בית', btn: 'EN', dir: 'rtl'
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: שריד אחרון למערכת צמחים שלמה ועמידות לקרינה',
+                ui_title: 'גינקו דו-אונתי',
+                ui_sci: 'Ginkgo biloba',
+                ui_trans: '"משמש כסף בעל שתי אונות"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'מעל 270<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>סיווג', stat2_val: '<br>1771<br>&nbsp;',
+                stat3_lbl: 'גובה<br>מירבי', stat3_val: 'עד 50<br>מטרים<br>&nbsp;',
+                stat4_lbl: 'תוחלת<br>חיים', stat4_val: 'מעל 3000<br>שנים<br>&nbsp;',
+                sec1_title: 'ייחודיות מדעית ובוטנית:',
+                sec1_p1: 'עץ הגינקו הוא "מאובן חי" בוטני יוצא דופן. הוא המין היחיד ששרד ממערכת הגינקואיים (Ginkgophyta), מערכת שלמה של צמחים ששגשגה בעידן הדינוזאורים והגיעה לשיאה בתור היורה, אך נכחדה כולה לבדו. עליו דמויי-המניפה הם בעלי מבנה ורידים ייחודי שמתפצל לשניים (דיכוטומי), תכונה פרימיטיבית נדירה ביותר בעצים מודרניים. העץ הוא <span class="font-bold text-white">דו-ביתי (Dioecious)</span>, כלומר ישנם עצים זכריים (המייצרים אבקנים) ועצים נקביים (המייצרים זרעים) נפרדים לחלוטין.',
+                sec1_p2: 'הפלא האמיתי של הגינקו הוא החוסן הביולוגי הכמעט בלתי-מנוצח שלו. הוא פיתח מנגנוני הגנה כימיים מורכבים ההופכים אותו לעמיד בפני חרקים, מחלות פטרייתיות, זיהום אוויר עירוני קיצוני, ואפילו נזקי כפור. קליפת העץ העבה שלו מכילה חומרים המעכבים בעירה ומונעים אש, ויש לו יכולת נדירה להצמיח שורשי אוויר דמויי-נטיפים (הנקראים ביפנית "Chichi") כדי להתאושש מטראומות פיזיות. תכונות אלו מאפשרות לפרטים בודדים לחיות למעלה מ-3,000 שנים.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Ginkgo (גינקו - הטעות ההיסטורית):', sec2_desc1: 'שם זה הוא תוצאה של שגיאת כתיב היסטורית. מקור השם הוא בהגייה היפנית "Gin kyo" (שנגזרה מהסינית yin-xíng), שמשמעותה <span class="font-bold text-white">"משמש כסף" (Silver apricot)</span>, על שום מראה הזרעים הכסופים של העץ הנקבי. החוקר הגרמני אנגלברט קמפפר (Engelbert Kaempfer), שתיעד את העץ ב-1690, איית זאת בטעות עם \'g\' בסוף (Ginkgo) במקום \'y\'. קרל לינאוס קיבע את הטעות בשמו המדעי הרשמי ב-1771.',
+                sec2_sub2: 'biloba (דו-אונתי):', sec2_desc2: 'מורכב משתי מילים בלטינית: "Bi" שמשמעותו <span class="font-bold text-white">שניים</span>, ו-"loba" שמשמעותה <span class="font-bold text-white">אונות</span>. הפירוש מתאר במדויק את המבנה המפוצל לשניים, האופייני והסימטרי של עלי המניפה של העץ.',
+                sec2_total: 'המשמעות המלאה: "משמש כסף בעל שתי אונות".',
+                sec3_title: 'היסטוריית שימור והישרדות אטומית:',
+                sec3_l1: 'שימור במקדשים:', sec3_v1: 'העץ נכחד כמעט לחלוטין בטבע במהלך עידן הקרח. הוא שרד רק בכיסים הרריים קטנים בסין, שם נזירים בודהיסטים ודאואיסטים טיפחו ושימרו אותו כעץ קדוש במקדשיהם במשך אלפי שנים, מה שמנע את הכחדתו הסופית.',
+                sec3_l2: 'הנס של הירושימה (Hibakujumoku):', sec3_v2: 'ההוכחה המדהימה ביותר לחוסנו התרחשה באוגוסט 1945. שישה עצי גינקו עמדו במרחק של קילומטרים ספורים ממוקד הפיצוץ האטומי בהירושימה. למרות שנחרכו, איבדו את כל עליהם ונחשפו לקרינה קטלנית, הם לבלבו מחדש באביב הבא. הם זכו לתואר הכבוד "חיבאקוג\'ומוקו" (עצים שורדי פצצה) ועומדים שם כסמל לתקווה עד היום.',
+                navPrev: 'הקודם: פלטיפוס', navNext: 'הבא: טואטרה', btn: 'EN', dir: 'rtl'
             },
             en: {
-                name: 'Ginkgo Biloba', back: '← Back to Archive', heroLabel: 'Archive Simulation Active',
-                discoverTitle: 'Scientific Identification & Records', lScientist: 'Western Discoverers:', vScientist: 'Engelbert Kaempfer (1651–1716) & Carl Linnaeus (1707–1778)',
-                lYear: 'Scientific Documentation:', vYear: 'Observed in 1690, classified in 1771',
-                lLocation: 'Ancient Biological Origin:', vLocation: 'Zhejiang Province, China (Tianmu Mts)',
-                lStatus: 'Evolutionary Status:', vStatus: 'The sole surviving species of the Ginkgophyta division',
-                originTitle: 'Discovery Circumstances & Geographical Context',
-                originDesc1: 'Although Ginkgo is frequently associated with Japanese culture, its only true wild biological origin is China. The last wild trees survived the ice ages isolated in the Tianmu Mountains. From there, Buddhist monks spread them to Japan and Korea centuries ago as sacred medicinal trees.',
-                originDesc2: 'German scholar <span class="font-bold text-white">Engelbert Kaempfer</span> was the first European to document the tree in 1690 in Japan. Its unique botany was so astonishing that <span class="font-bold text-white">Charles Darwin</span> himself used the Ginkgo as a prime example when coining the term "Living Fossil," due to its absolute identity to 270-million-year-old fossils.',
-                specsTitle: 'Physical Characteristics & Lifespan', 
-                specSize: '<span class="font-bold text-white">Average Height:</span> Mature trees reach 20–35 meters, with a broad, angular crown.',
-                specDio: '<span class="font-bold text-white">Dioecious Nature:</span> Ginkgos have separate male and female trees. The females produce fleshy seeds notorious for a strong, rancid odor caused by <span class="font-bold text-white">butyric acid</span>, an evolutionary trait likely meant to attract scavenging dinosaurs to disperse the seeds.',
-                specLife: '<span class="font-bold text-white">Exceptional Lifespan:</span> A true immortal of the plant kingdom, averaging over 1,000 years. The tree does not experience cellular "aging"; the stem cells of an ancient tree remain as viable as those of a young sapling.',
-                etymTitle: 'Detailed Etymological Analysis', 
-                etym1head: 'Ginkgo (Etymology)', etym1src: 'Source: Misspelling of Japanese (Ginkjo from 銀杏)', etym1def: '<span class="font-bold text-white">Meaning: Silver Apricot.</span> From Gin (silver) and Kyo (apricot). Refers to the seeds covered in a silvery-white frosty layer. The unusual spelling "Ginkgo" was likely a historical typo by Kaempfer that was later cemented by Linnaeus.', 
-                etym2head: 'Bi-loba (Etymology)', etym2src: 'Source: Latin (bis = twice, lobus = lobe)', etym2def: '<span class="font-bold text-white">Meaning: Two-lobed.</span> Describes the beautiful and unique fan-shaped leaves, which are typically divided into two primary lobes by a deep central notch.',
-                etymTotal: '<span class="font-bold text-white">Full Meaning:</span> "Two-lobed Silver Apricot." A poetic combination of its ancient naked seed appearance and the unchanging leaf morphology that has survived for millions of years.',
-                surTitle: 'Survival & Biological Resilience', 
-                surText: 'Incredibly, fertilization in Ginkgo is achieved via <span class="font-bold text-white">motile sperm</span>—a primitive evolutionary trait shared with ferns. Its main resilience, however, comes from its internal chemical factory.',
-                lAchieve: 'Exceptional Biological Achievements:',
-                ach1: '<span class="font-bold text-white">Hiroshima Survival (Hibakujumoku):</span> Six Ginkgo trees survived the atomic blast in Hiroshima in 1945. Though just kilometers from the epicenter, they recovered, budded, and continue to thrive today without significant genetic damage.',
-                ach2: '<span class="font-bold text-white">Natural Chemical Warfare:</span> The tree synthesizes unique chemicals called "Ginkgolides" and flavonoids that act as natural pesticides, repelling insects and preventing fungal or mold decay in the wood.',
-                ach3: '<span class="font-bold text-white">No Immune Senescence:</span> Research shows that the Ginkgo\'s immune system does not weaken with age. It remains just as efficient at fighting off diseases at 1,000 years old as it is at 10 years old.',
-                navHome: 'HOME', btn: 'HE', dir: 'ltr'
+                back: '← Back',
+                ui_feature: 'Unique feature: Sole survivor of a plant division & radiation resistant',
+                ui_title: 'Ginkgo Tree',
+                ui_sci: 'Ginkgo biloba',
+                ui_trans: '"Two-lobed silver apricot"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: 'Over 270<br>Million<br>Years',
+                stat2_lbl: 'Classified<br>In', stat2_val: '<br>1771<br>&nbsp;',
+                stat3_lbl: 'Max<br>Height', stat3_val: 'Up to 50<br>Meters<br>&nbsp;',
+                stat4_lbl: 'Lifespan<br>Span', stat4_val: 'Over 3000<br>Years<br>&nbsp;',
+                sec1_title: 'Botanical & Scientific Uniqueness:',
+                sec1_p1: 'The Ginkgo tree is an extraordinary botanical "living fossil". It is the sole surviving species of the Ginkgophyta division, an entire system of plants that thrived during the age of the dinosaurs and peaked in the Jurassic period, but went extinct leaving only this tree behind. Its fan-shaped leaves feature a unique vein structure that splits in two (dichotomous), a highly rare primitive trait in modern trees. The tree is <span class="font-bold text-white">Dioecious</span>, meaning there are completely separate male trees (producing pollen) and female trees (producing seeds).',
+                sec1_p2: 'The true marvel of the Ginkgo is its almost invincible biological resilience. It has developed complex chemical defense mechanisms making it highly resistant to insects, fungal diseases, extreme urban air pollution, and even frost damage. Its thick bark contains fire-retardant substances, and it has a rare ability to grow stalactite-like aerial roots (called "Chichi" in Japanese) to recover from severe physical trauma. These traits allow individual trees to live for over 3,000 years.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Ginkgo (The Historical Typo):', sec2_desc1: 'This name is the result of a historical spelling error. The origin is the Japanese pronunciation "Gin kyo" (derived from Chinese yin-xíng), meaning <span class="font-bold text-white">"Silver apricot"</span>, due to the appearance of the silvery seeds of the female tree. German explorer Engelbert Kaempfer, who documented the tree in 1690, mistakenly spelled it with a \'g\' at the end (Ginkgo) instead of a \'y\'. Carl Linnaeus cemented this typo in its official scientific name in 1771.',
+                sec2_sub2: 'biloba (Two-lobed):', sec2_desc2: 'Composed of two Latin words: "Bi" meaning <span class="font-bold text-white">two</span>, and "loba" meaning <span class="font-bold text-white">lobes</span>. The meaning accurately describes the typical, symmetrical split-in-two structure of the tree\'s fan leaves.',
+                sec2_total: 'Full Meaning: "Two-lobed silver apricot".',
+                sec3_title: 'Conservation History & Atomic Survival:',
+                sec3_l1: 'Temple Conservation:', sec3_v1: 'The tree became almost entirely extinct in the wild during the ice ages. It survived only in small mountainous pockets in China, where Buddhist and Daoist monks cultivated and preserved it as a sacred tree in their temples for millennia, preventing its final extinction.',
+                sec3_l2: 'The Miracle of Hiroshima (Hibakujumoku):', sec3_v2: 'The most stunning proof of its resilience occurred in August 1945. Six Ginkgo trees stood just a few kilometers from the atomic blast epicenter in Hiroshima. Despite being severely scorched, losing all their leaves, and being exposed to lethal radiation, they budded again the following spring. They earned the honorable title "Hibakujumoku" (survivor trees) and stand there as symbols of hope to this day.',
+                navPrev: 'Prev: Platypus', navNext: 'Next: Tuatara', btn: 'HE', dir: 'ltr'
             }
         };
 
         function toggleLanguage() {
             currentLang = currentLang === 'he' ? 'en' : 'he';
-            const data = content[currentLang];
-            document.getElementById('fossilName').innerText = data.name;
-            document.getElementById('backBtn').innerText = data.back;
-            document.getElementById('heroLabel').innerText = data.heroLabel;
+            const d = content[currentLang];
             
-            document.getElementById('discoverTitle').innerText = data.discoverTitle;
-            document.getElementById('labelScientist').innerText = data.lScientist;
-            document.getElementById('valScientist').innerText = data.vScientist;
-            document.getElementById('labelYear').innerText = data.lYear;
-            document.getElementById('valYear').innerText = data.vYear;
-            document.getElementById('labelLocation').innerText = data.lLocation;
-            document.getElementById('valLocation').innerText = data.vLocation;
-            document.getElementById('labelStatus').innerText = data.lStatus;
-            document.getElementById('valStatus').innerText = data.vStatus;
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
             
-            document.getElementById('originTitle').innerText = data.originTitle;
-            document.getElementById('originDesc1').innerHTML = data.originDesc1;
-            document.getElementById('originDesc2').innerHTML = data.originDesc2;
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
             
-            document.getElementById('specsTitle').innerText = data.specsTitle;
-            document.getElementById('specSize').innerHTML = data.specSize;
-            document.getElementById('specDio').innerHTML = data.specDio;
-            document.getElementById('specLife').innerHTML = data.specLife;
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
             
-            document.getElementById('etymTitle').innerText = data.etymTitle;
-            document.getElementById('etym1_head').innerText = data.etym1head;
-            document.getElementById('etym1_src').innerText = data.etym1src;
-            document.getElementById('etym1_def').innerHTML = data.etym1def;
-            document.getElementById('etym2_head').innerText = data.etym2head;
-            document.getElementById('etym2_src').innerText = data.etym2src;
-            document.getElementById('etym2_def').innerHTML = data.etym2def;
-            document.getElementById('etymTotal').innerHTML = data.etymTotal;
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerText = d.sec2_total;
             
-            document.getElementById('surviveTitle').innerText = data.surTitle;
-            document.getElementById('surviveText').innerHTML = data.surText;
-            document.getElementById('labelAchieve').innerText = data.lAchieve;
-            document.getElementById('ach1').innerHTML = data.ach1;
-            document.getElementById('ach2').innerHTML = data.ach2;
-            document.getElementById('ach3').innerHTML = data.ach3;
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
             
-            document.getElementById('navHome').innerText = data.navHome;
-            document.getElementById('langBtn').innerText = data.btn;
-            document.documentElement.dir = data.dir;
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
             document.documentElement.lang = currentLang;
-            
-            const card1 = document.getElementById('discoverCard');
-            card1.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            card1.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
 
-            const card3 = document.getElementById('specsCard');
-            card3.style.borderRightWidth = currentLang === 'he' ? '4px' : '0';
-            card3.style.borderLeftWidth = currentLang === 'en' ? '4px' : '0';
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
         }
     </script>
 </body>
 </html>
+
+

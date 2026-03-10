@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: עגולשון שחור-גחון | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
+            --border-card: #1d365d;
+            --text-accent: #10b981; /* Emerald-500 (Nature/Amphibian vibe) */
+            --text-accent-secondary: #ef4444; /* Red-500 (For the "painted" belly) */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.7;
+        }
+
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(16, 185, 129, 0.15);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-emerald-400 hover:bg-emerald-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
+    </div>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
+        
+        <!-- Hero Image (עם הקישור המדויק באותיות קטנות וחלון צף) -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/hulapaintedfrog.png" alt="עגולשון שחור גחון" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/10b981?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: שריד פרהיסטורי ישראלי, "חזר מהמתים"</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">עגולשון שחור-גחון</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Latonia nigriventer</p>
+                <p id="ui_trans" class="text-emerald-400 font-bold italic pt-2">"לטוניה שחורת-בטן"</p>
+            </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">כ-32<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>גילוי</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight">1940<br><span class="text-[9px] text-emerald-400">(גילוי מחדש 2011)</span></span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>מירבי</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 8<br>ס"מ<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">מצב<br>שימור</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight text-red-400">בסכנת<br>הכחדה<br>חמורה</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">העגולשון שחור-הגחון הוא לא סתם מין נדיר, הוא הוגדר על ידי הקהילה המדעית הבינלאומית כאחד מסיפורי ה"תחייה" (Lazarus taxon) הגדולים של המאה ה-21. במשך עשרות שנים נחשב למין אנדמי (בלעדי) שנכחד לחלוטין בעקבות ייבוש ימת החולה. אולם, עם גילויו מחדש, הגיעה הפתעה אבולוציונית מסעירה עוד יותר: מבדיקות DNA וסריקות CT של השלד התברר שהוא אינו שייך לסוג המודרני "עגולשון" (Discoglossus) כפי שחשבו בתחילה, אלא הוא למעשה <span class="font-bold text-white">השריד החי היחיד בעולם</span> לסוג הפרימיטיבי "לטוניה" (Latonia), קבוצת דו-חיים פרהיסטורית ששגשגה באירופה במשך עשרות מיליוני שנים (מאז תקופת האוליגוקן) ונחשבה לנכחדת לחלוטין כבר מיליון שנה.</p>
+                    
+                    <p id="sec1_p2">מבחינה פיזית, יש לו התאמות מיוחדות השונות מצפרדעים מודרניות. שמו נגזר ממבנה לשונו: בניגוד לרוב הצפרדעים שיש להן לשון ארוכה השלופה החוצה ללכידת חרקים, לעגולשון יש לשון עגולה, עבה ומחוברת ברובה לקרקעית הפה, ולכן אינו מסוגל "לזרוק" אותה החוצה. בנוסף, הוא מתאפיין בצבעי אזהרה בולטים: בעוד גבו בצבע חום-חלודה המסווה אותו בבוץ, גחונו צבוע בשחור עמוק המעוטר בנקודות וכתמים בצבע לבן או צהוב-כתום עז, מראה מרשים שהקנה לו את שמו האנגלי "הצפרדע המצוירת" (Painted Frog).</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-emerald-300 text-base mb-1">Latonia (לטוניה - שם הסוג):</h3>
+                        <p id="sec2_desc1">שם הסוג מגיע מהמיתולוגיה הרומית, שבה **לטונה** (Latona) היא המקבילה לאלה היוונית לטו – אלת האימהות, ההגנה והצניעות. במקור (בשנת 1940) הוא סווג בטעות כ-*Discoglossus* (שפירושו "לשון דיסקוס" ביוונית), אך שמו שונה ל-Latonia לאחר הגילוי מחדש ב-2011, כשהוכח שהוא המין החי היחיד מסוג פרהיסטורי זה.</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-emerald-300 text-base mb-1">nigriventer (ניגריוונטר - שם המין):</h3>
+                        <p id="sec2_desc2">מורכב משתי מילים בלטינית: **Nigri** שפירושו <span class="font-bold text-white">שחור</span>, ו-**Venter** שפירושו <span class="font-bold text-white">בטן או גחון</span>. השם מתאר במדויק את המאפיין החזותי הבולט ביותר שלו – הבטן השחורה והמנוקדת המבדילה אותו מכל דו-חי אחר באזור.</p>
+                    </div>
+                    <div class="bg-emerald-900/20 p-4 rounded-xl border-r-2 border-emerald-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-emerald-200">השם העברי המלא (עֲגֻלָּשׁוֹן שְׁחוֹר-גָּחוֹן): זהו הלחם של "עגול" + "לשון", שמתאר את הלשון העגולה והמחוברת לחיך שאינה ניתנת לשליפה, בשילוב תיאור גוון הגחון (הבטן) הייחודי שלו.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-emerald-400 font-bold text-base mb-4 inline-block border-b border-emerald-900/50 pb-1">תולדות הגילוי וה"חזרה מהמתים":</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">גילוי ראשוני (1940):</span> <span id="sec3_v1">העגולשון נתגלה לראשונה בשנת 1940 על ידי הזואולוג היינריך מנדלסון ופרופ' היינץ שטייניץ. נאספו אז רק שלושה פרטים בוגרים.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">הכחדה (1996):</span> <span id="sec3_v2">עם ייבוש ימת החולה בשנות ה-50 נהרס בית הגידול הטבעי שלו. מאחר ולא נצפה מאז 1955, הוא הוכרז רשמית ב-1996 על ידי איגוד השימור העולמי (IUCN) כדו-חי הראשון בעולם שנכחד לחלוטין.</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">נס מטאורולוגי (2011):</span> <span id="sec3_v3">ב-15 בנובמבר 2011, במהלך סיור שגרתי של פקח רשות הטבע והגנים (יורם מלכה) בשמורת החולה המחודשת, נמצא לפתע פרט חי! התגלית הכתה גלים בעולם המדע. מאז נמצאה אוכלוסייה קטנה ומבודדת, וכיום מושקעים מאמצים אדירים לשימור והרחבת בית הגידול של המאובן החי הלאומי שלנו.</span></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="../fish/lungfish.html" class="text-slate-400 hover:text-emerald-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: דג הריאות</span>
+        </a>
+        <a href="../index.html" class="text-emerald-500 hover:text-emerald-400 transition-colors text-sm font-bold bg-emerald-900/20 px-5 py-2.5 rounded-full border border-emerald-800/30 shadow-lg">
+            <span id="navNext">חזרה לארכיון</span> <span>&larr;</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: שריד פרהיסטורי ישראלי, "חזר מהמתים"',
+                ui_title: 'עגולשון שחור-גחון',
+                ui_sci: 'Latonia nigriventer',
+                ui_trans: '"לטוניה שחורת-בטן"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'כ-32<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>גילוי', stat2_val: '1940<br><span class="text-[9px] text-emerald-400">(גילוי מחדש 2011)</span>',
+                stat3_lbl: 'אורך<br>מירבי', stat3_val: 'עד 8<br>ס"מ<br>&nbsp;',
+                stat4_lbl: 'מצב<br>שימור', stat4_val: 'בסכנת<br>הכחדה<br>חמורה',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'העגולשון שחור-הגחון הוא לא סתם מין נדיר, הוא הוגדר על ידי הקהילה המדעית הבינלאומית כאחד מסיפורי ה"תחייה" (Lazarus taxon) הגדולים של המאה ה-21. במשך עשרות שנים נחשב למין אנדמי (בלעדי) שנכחד לחלוטין בעקבות ייבוש ימת החולה. אולם, עם גילויו מחדש, הגיעה הפתעה אבולוציונית מסעירה עוד יותר: מבדיקות DNA וסריקות CT של השלד התברר שהוא אינו שייך לסוג המודרני "עגולשון" (Discoglossus) כפי שחשבו בתחילה, אלא הוא למעשה <span class="font-bold text-white">השריד החי היחיד בעולם</span> לסוג הפרימיטיבי "לטוניה" (Latonia), קבוצת דו-חיים פרהיסטורית ששגשגה באירופה במשך עשרות מיליוני שנים (מאז תקופת האוליגוקן) ונחשבה לנכחדת לחלוטין כבר מיליון שנה.',
+                sec1_p2: 'מבחינה פיזית, יש לו התאמות מיוחדות השונות מצפרדעים מודרניות. שמו נגזר ממבנה לשונו: בניגוד לרוב הצפרדעים שיש להן לשון ארוכה השלופה החוצה ללכידת חרקים, לעגולשון יש לשון עגולה, עבה ומחוברת ברובה לקרקעית הפה, ולכן אינו מסוגל "לזרוק" אותה החוצה. בנוסף, הוא מתאפיין בצבעי אזהרה בולטים: בעוד גבו בצבע חום-חלודה המסווה אותו בבוץ, גחונו צבוע בשחור עמוק המעוטר בנקודות וכתמים בצבע לבן או צהוב-כתום עז, מראה מרשים שהקנה לו את שמו האנגלי "הצפרדע המצוירת" (Painted Frog).',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Latonia (לטוניה - שם הסוג):', sec2_desc1: 'שם הסוג מגיע מהמיתולוגיה הרומית, שבה **לטונה** (Latona) היא המקבילה לאלה היוונית לטו – אלת האימהות, ההגנה והצניעות. במקור (בשנת 1940) הוא סווג בטעות כ-*Discoglossus* (שפירושו "לשון דיסקוס" ביוונית), אך שמו שונה ל-Latonia לאחר הגילוי מחדש ב-2011, כשהוכח שהוא המין החי היחיד מסוג פרהיסטורי זה.',
+                sec2_sub2: 'nigriventer (ניגריוונטר - שם המין):', sec2_desc2: 'מורכב משתי מילים בלטינית: **Nigri** שפירושו <span class="font-bold text-white">שחור</span>, ו-**Venter** שפירושו <span class="font-bold text-white">בטן או גחון</span>. השם מתאר במדויק את המאפיין החזותי הבולט ביותר שלו – הבטן השחורה והמנוקדת המבדילה אותו מכל דו-חי אחר באזור.',
+                sec2_total: 'השם העברי המלא (עֲגֻלָּשׁוֹן שְׁחוֹר-גָּחוֹן): זהו הלחם של "עגול" + "לשון", שמתאר את הלשון העגולה והמחוברת לחיך שאינה ניתנת לשליפה, בשילוב תיאור גוון הגחון (הבטן) הייחודי שלו.',
+                sec3_title: 'תולדות הגילוי וה"חזרה מהמתים":',
+                sec3_l1: 'גילוי ראשוני (1940):', sec3_v1: 'העגולשון נתגלה לראשונה בשנת 1940 על ידי הזואולוג היינריך מנדלסון ופרופ\' היינץ שטייניץ. נאספו אז רק שלושה פרטים בוגרים.',
+                sec3_l2: 'הכחדה (1996):', sec3_v2: 'עם ייבוש ימת החולה בשנות ה-50 נהרס בית הגידול הטבעי שלו. מאחר ולא נצפה מאז 1955, הוא הוכרז רשמית ב-1996 על ידי איגוד השימור העולמי (IUCN) כדו-חי הראשון בעולם שנכחד לחלוטין.',
+                sec3_l3: 'נס מטאורולוגי (2011):', sec3_v3: 'ב-15 בנובמבר 2011, במהלך סיור שגרתי של פקח רשות הטבע והגנים (יורם מלכה) בשמורת החולה המחודשת, נמצא לפתע פרט חי! התגלית הכתה גלים בעולם המדע. מאז נמצאה אוכלוסייה קטנה ומבודדת, וכיום מושקעים מאמצים אדירים לשימור והרחבת בית הגידול של המאובן החי הלאומי שלנו.',
+                navPrev: 'הקודם: דג הריאות', navNext: 'חזרה לארכיון', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                back: '← Back',
+                ui_feature: 'Unique feature: Israeli prehistoric relic, returned from the "dead"',
+                ui_title: 'Hula Painted Frog',
+                ui_sci: 'Latonia nigriventer',
+                ui_trans: '"Black-bellied Latonia"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: '~32<br>Million<br>Years',
+                stat2_lbl: 'Discovered<br>In', stat2_val: '1940<br><span class="text-[9px] text-emerald-400">(Rediscovered 2011)</span>',
+                stat3_lbl: 'Max<br>Length', stat3_val: 'Up to 8<br>cm<br>&nbsp;',
+                stat4_lbl: 'Conservation<br>Status', stat4_val: 'Critically<br>Endangered<br>&nbsp;',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The Hula Painted Frog is not just a rare species; it is recognized by the international scientific community as one of the greatest "Lazarus taxon" (resurrection) stories of the 21st century. For decades, it was considered an endemic species that had completely gone extinct following the draining of Lake Hula. However, with its rediscovery, an even more thrilling evolutionary surprise emerged: DNA testing and CT scans of the skeleton revealed that it does not belong to the modern genus "Discoglossus" as initially thought. Instead, it is actually the <span class="font-bold text-white">only living survivor in the world</span> of the primitive genus "Latonia", a prehistoric amphibian group that thrived in Europe for tens of millions of years (since the Oligocene epoch) and was thought to have been completely extinct for a million years.',
+                sec1_p2: 'Physically, it has special adaptations that differ from modern frogs. Its Hebrew name is derived from the structure of its tongue: unlike most frogs that possess a long tongue flipped outwards to catch insects, the Hula Painted Frog has a round, thick tongue mostly attached to the floor of its mouth, rendering it incapable of "throwing" it out. Additionally, it features striking warning colors: while its back is a rust-brown that camouflages it in the mud, its belly is painted in deep black adorned with bright white or yellow-orange spots—a striking appearance that earned it the English name "Painted Frog".',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Latonia (Genus Name):', sec2_desc1: 'The genus name originates from Roman mythology, where **Latona** is the equivalent of the Greek goddess Leto—the goddess of motherhood, protection, and modesty. Originally (in 1940) it was mistakenly classified as *Discoglossus* (meaning "disc-tongue" in Greek), but its name was changed to Latonia after the 2011 rediscovery, when it was proven to be the sole living species of this prehistoric genus.',
+                sec2_sub2: 'nigriventer (Species Name):', sec2_desc2: 'Composed of two Latin words: **Nigri** meaning <span class="font-bold text-white">black</span>, and **Venter** meaning <span class="font-bold text-white">belly or abdomen</span>. The name accurately describes its most prominent visual feature—the black and spotted belly that distinguishes it from any other amphibian in the region.',
+                sec2_total: 'Full Hebrew Name (Agulashon Shkhor-Gachon): A portmanteau of "Agul" (Round) + "Lashon" (Tongue), describing the round tongue attached to the palate that cannot be extended, combined with a description of its unique belly color.',
+                sec3_title: 'History of Discovery and "Resurrection":',
+                sec3_l1: 'Initial Discovery (1940):', sec3_v1: 'The frog was first discovered in 1940 by zoologist Heinrich Mendelssohn and Prof. Heinz Steinitz. Only three adult specimens were collected at the time.',
+                sec3_l2: 'Extinction (1996):', sec3_v2: 'With the draining of Lake Hula in the 1950s, its natural habitat was destroyed. Since it hadn\'t been seen since 1955, it was officially declared in 1996 by the IUCN as the first amphibian in the world to become completely extinct.',
+                sec3_l3: 'Meteorological Miracle (2011):', sec3_v3: 'On November 15, 2011, during a routine patrol by Nature and Parks Authority ranger (Yoram Malka) in the restored Hula Nature Reserve, a living specimen was suddenly found! The discovery sent shockwaves through the scientific world. Since then, a small, isolated population has been located, and tremendous efforts are currently invested in preserving and expanding the habitat of our national living fossil.',
+                navPrev: 'Prev: Lungfish', navNext: 'Back to Archive', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const d = content[currentLang];
+            
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
+            
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
+            
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
+            
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerHTML = d.sec2_total;
+            
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
+            
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
+            document.documentElement.lang = currentLang;
+
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
+        }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: דג הריאות האוסטרלי | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
+            --border-card: #1d365d;
+            --text-accent: #059669; /* Emerald-600 */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.7;
+        }
+
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(5, 150, 105, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(5, 150, 105, 0.15);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-emerald-500 hover:bg-emerald-600 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
+    </div>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
+        
+        <!-- Hero Image (עם הקישור המדויק באותיות קטנות וחלון צף) -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/australianlungfish.png" alt="דג ריאות אוסטרלי" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/059669?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: ריאה אחת תפקודית וגנום הענק ביותר בטבע</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">דג ריאות אוסטרלי</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Neoceratodus forsteri</p>
+                <p id="ui_trans" class="text-emerald-500 font-bold italic pt-2">"שן קרן חדשה של פורסטר"</p>
+            </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">כ-380<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>סיווג</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1870<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>מירבי</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 1.5<br>מטרים<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">משקל<br>מירבי</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 43<br>ק"ג<br>&nbsp;</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">דג הריאות האוסטרלי נחשב ל"גרסה חיה" של מעבר האבולוציה מהמים ליבשה. בניגוד לשאר מיני דגי הריאות (באפריקה ודרום אמריקה) שיש להם זוג ריאות, למין האוסטרלי יש <span class="font-bold text-white">ריאה אחת בלבד</span>, שהיא למעשה שלפוחית שחייה שהתפתחה לאיבר נשימה יעיל. למרות שיש לו גם זימים, כשהמים שבהם הוא חי הופכים דלים בחמצן (למשל בעונות בצורת או בבריכות בוץ עומדות), הוא עולה אל פני המים, פוער את פיו ובולע אוויר אטמוספרי. הקול שהוא משמיע בעת פליטת האוויר מזכיר נשיפה של לווייתן קטן.</p>
+                    
+                    <p id="sec1_p2">מבחינה פיזית, יש לו גוף גלילי ומוצק המכוסה בקשקשים ענקיים וקשים המזכירים שריון. סנפיריו מיוחדים במינם – הם <span class="font-bold text-white">סנפירים בשרניים (Lobe-finned)</span> הנתמכים על ידי עצם מרכזית (בדומה לצילקנת ולגפיים של חיות יבשה). תגלית מדעית מדהימה משנת 2021 חשפה שלדג הריאות האוסטרלי יש את <span class="font-bold text-white">הגנום (ה-DNA) הגדול ביותר שתועד אי פעם בבעל חיים</span>. גנום זה גדול פי 14 מזה של האדם, וכולל 43 מיליארד זוגות בסיסים, מה שמסביר כיצד הוא אגר כל כך הרבה "מידע אבולוציוני" שאיפשר לו לשרוד כמעט ללא שינוי מאז תקופת הדבון.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-emerald-500 text-base mb-1">Neoceratodus (שם הסוג):</h3>
+                        <p id="sec2_desc1">שם הסוג מורכב מיוונית עתיקה: **Neo** שמשמעותו <span class="font-bold text-white">חדש</span>, ו-**Ceratodus** שמשמעותו <span class="font-bold text-white">שן-קרן (Horn-tooth)</span>. השם "Ceratodus" היה שייך במקור לסוג של דגי ריאות נכחדים שהיו מוכרים רק ממאובני שיניים שלהם ברחבי העולם. כשהתגלה המין החי באוסטרליה, ושיניו (המשמשות למחיצת קונכיות וצדפות) נמצאו זהות לאותם מאובנים קדומים, הוא זכה לקידומת "Neo" (הגרסה ה"חדשה" והחיה של המאובן).</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-emerald-500 text-base mb-1">forsteri (שם המין):</h3>
+                        <p id="sec2_desc2">ניתן כאות הוקרה וכהנצחה לפוליטיקאי והאינטלקטואל האוסטרלי **ויליאם ר. פורסטר** (William Forster), שמימן את המשלחת המדעית ושלח את הדגימות הראשונות למוזיאון בסידני לצורך זיהוי.</p>
+                    </div>
+                    <div class="bg-emerald-900/20 p-4 rounded-xl border-r-2 border-emerald-600 mt-4">
+                        <p id="sec2_total" class="font-bold text-emerald-200">השם העממי (Australian Lungfish): פשוט ומתאר את תכונתו המרכזית – דג הנושם באמצעות ריאות, והוא אנדמי אך ורק למערכות הנהרות המבודדות של מזרח אוסטרליה (במיוחד נהר מרי).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-emerald-500 font-bold text-base mb-4 inline-block border-b border-emerald-900/50 pb-1">תולדות הגילוי ואקולוגיה מבודדת:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">תגלית מרעישה (1870):</span> <span id="sec3_v1">לפני שנת 1870, מדענים היו בטוחים שקבוצת דגי ה-Ceratodus נכחדה יחד עם הדינוזאורים. כשהחוקר ג'ררד קרפט (Gerard Krefft) קיבל את הדגימה מנהר מרי בקווינסלנד וזיהה את "מאובן השיניים" בתוך פיו של דג חי, הקהילה המדעית הבינלאומית הוכתה בתדהמה.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">"הסבא מתושלח" (Methuselah):</span> <span id="sec3_v2">הדג ידוע בתוחלת חיים ארוכה במיוחד. פרט מפורסם אחד בשם "מתושלח", שנתפס באוסטרליה ב-1938 והובא לאקווריום בסן פרנסיסקו, חי בשבי למעלה מ-90 שנה (ונחשב לדג המבוגר ביותר בשבי בעולם עד מותו).</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">חוסן סביבתי:</span> <span id="sec3_v3">למרות עמידותו הפיזיולוגית, הוא שורד בטבע אך ורק במספר נהרות בודדים בקווינסלנד, אוסטרליה, בשל דרישות רבייה ספציפיות בצמחיית מים. כיום הוא מין מוגן ומצוי בסכנה בשל בניית סכרים המפריעים לתהליך הרבייה שלו.</span></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="frilledshark.html" class="text-slate-400 hover:text-emerald-500 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: חסחוסן צלופחי</span>
+        </a>
+        <a href="../index.html" class="text-emerald-500 hover:text-emerald-400 transition-colors text-sm font-bold bg-emerald-900/20 px-5 py-2.5 rounded-full border border-emerald-800/30 shadow-lg">
+            <span id="navNext">חזרה לארכיון</span> <span>&larr;</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: ריאה אחת תפקודית וגנום הענק ביותר בטבע',
+                ui_title: 'דג ריאות אוסטרלי',
+                ui_sci: 'Neoceratodus forsteri',
+                ui_trans: '"שן קרן חדשה של פורסטר"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'כ-380<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>סיווג', stat2_val: '<br>1870<br>&nbsp;',
+                stat3_lbl: 'אורך<br>מירבי', stat3_val: 'עד 1.5<br>מטרים<br>&nbsp;',
+                stat4_lbl: 'משקל<br>מירבי', stat4_val: 'עד 43<br>ק"ג<br>&nbsp;',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'דג הריאות האוסטרלי נחשב ל"גרסה חיה" של מעבר האבולוציה מהמים ליבשה. בניגוד לשאר מיני דגי הריאות (באפריקה ודרום אמריקה) שיש להם זוג ריאות, למין האוסטרלי יש <span class="font-bold text-white">ריאה אחת בלבד</span>, שהיא למעשה שלפוחית שחייה שהתפתחה לאיבר נשימה יעיל. למרות שיש לו גם זימים, כשהמים שבהם הוא חי הופכים דלים בחמצן (למשל בעונות בצורת או בבריכות בוץ עומדות), הוא עולה אל פני המים, פוער את פיו ובולע אוויר אטמוספרי. הקול שהוא משמיע בעת פליטת האוויר מזכיר נשיפה של לווייתן קטן.',
+                sec1_p2: 'מבחינה פיזית, יש לו גוף גלילי ומוצק המכוסה בקשקשים ענקיים וקשים המזכירים שריון. סנפיריו מיוחדים במינם – הם <span class="font-bold text-white">סנפירים בשרניים (Lobe-finned)</span> הנתמכים על ידי עצם מרכזית (בדומה לצילקנת ולגפיים של חיות יבשה). תגלית מדעית מדהימה משנת 2021 חשפה שלדג הריאות האוסטרלי יש את <span class="font-bold text-white">הגנום (ה-DNA) הגדול ביותר שתועד אי פעם בבעל חיים</span>. גנום זה גדול פי 14 מזה של האדם, וכולל 43 מיליארד זוגות בסיסים, מה שמסביר כיצד הוא אגר כל כך הרבה "מידע אבולוציוני" שאיפשר לו לשרוד כמעט ללא שינוי מאז תקופת הדבון.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Neoceratodus (שם הסוג):', sec2_desc1: 'שם הסוג מורכב מיוונית עתיקה: **Neo** שמשמעותו <span class="font-bold text-white">חדש</span>, ו-**Ceratodus** שמשמעותו <span class="font-bold text-white">שן-קרן (Horn-tooth)</span>. השם "Ceratodus" היה שייך במקור לסוג של דגי ריאות נכחדים שהיו מוכרים רק ממאובני שיניים שלהם ברחבי העולם. כשהתגלה המין החי באוסטרליה, ושיניו (המשמשות למחיצת קונכיות וצדפות) נמצאו זהות לאותם מאובנים קדומים, הוא זכה לקידומת "Neo" (הגרסה ה"חדשה" והחיה של המאובן).',
+                sec2_sub2: 'forsteri (שם המין):', sec2_desc2: 'ניתן כאות הוקרה וכהנצחה לפוליטיקאי והאינטלקטואל האוסטרלי **ויליאם ר. פורסטר** (William Forster), שמימן את המשלחת המדעית ושלח את הדגימות הראשונות למוזיאון בסידני לצורך זיהוי.',
+                sec2_total: 'השם העממי (Australian Lungfish): פשוט ומתאר את תכונתו המרכזית – דג הנושם באמצעות ריאות, והוא אנדמי אך ורק למערכות הנהרות המבודדות של מזרח אוסטרליה (במיוחד נהר מרי).',
+                sec3_title: 'תולדות הגילוי ואקולוגיה מבודדת:',
+                sec3_l1: 'תגלית מרעישה (1870):', sec3_v1: 'לפני שנת 1870, מדענים היו בטוחים שקבוצת דגי ה-Ceratodus נכחדה יחד עם הדינוזאורים. כשהחוקר ג\'ררד קרפט (Gerard Krefft) קיבל את הדגימה מנהר מרי בקווינסלנד וזיהה את "מאובן השיניים" בתוך פיו של דג חי, הקהילה המדעית הבינלאומית הוכתה בתדהמה.',
+                sec3_l2: '"הסבא מתושלח" (Methuselah):', sec3_v2: 'הדג ידוע בתוחלת חיים ארוכה במיוחד. פרט מפורסם אחד בשם "מתושלח", שנתפס באוסטרליה ב-1938 והובא לאקווריום בסן פרנסיסקו, חי בשבי למעלה מ-90 שנה (ונחשב לדג המבוגר ביותר בשבי בעולם עד מותו).',
+                sec3_l3: 'חוסן סביבתי:', sec3_v3: 'למרות עמידותו הפיזיולוגית, הוא שורד בטבע אך ורק במספר נהרות בודדים בקווינסלנד, אוסטרליה, בשל דרישות רבייה ספציפיות בצמחיית מים. כיום הוא מין מוגן ומצוי בסכנה בשל בניית סכרים המפריעים לתהליך הרבייה שלו.',
+                navPrev: 'הקודם: חסחוסן צלופחי', navNext: 'חזרה לארכיון', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                back: '← Back',
+                ui_feature: 'Unique feature: A single functional lung and the largest animal genome',
+                ui_title: 'Australian Lungfish',
+                ui_sci: 'Neoceratodus forsteri',
+                ui_trans: '"Forster\'s New Horn-tooth"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: '~380<br>Million<br>Years',
+                stat2_lbl: 'Classified<br>In', stat2_val: '<br>1870<br>&nbsp;',
+                stat3_lbl: 'Max<br>Length', stat3_val: 'Up to 1.5<br>Meters<br>&nbsp;',
+                stat4_lbl: 'Max<br>Weight', stat4_val: 'Up to 43<br>kg<br>&nbsp;',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The Australian Lungfish is considered a living representation of the evolutionary transition from water to land. Unlike other lungfish species (in Africa and South America) which have paired lungs, the Australian species has <span class="font-bold text-white">only a single lung</span>, which is actually a modified swim bladder that evolved into an efficient respiratory organ. Although it also has gills, when its aquatic habitat becomes depleted of oxygen (such as during droughts or in stagnant mud pools), it surfaces, opens its mouth, and gulps atmospheric air. The sound it makes when exhaling resembles the blow of a small whale.',
+                sec1_p2: 'Physically, it has a solid, cylindrical body covered in huge, hard, armor-like scales. Its fins are extraordinary—they are <span class="font-bold text-white">fleshy lobe-fins</span> supported by a central bone (similar to the Coelacanth and the limbs of terrestrial animals). A stunning scientific discovery in 2021 revealed that the Australian Lungfish has the <span class="font-bold text-white">largest animal genome (DNA) ever sequenced</span>. This genome is 14 times larger than the human genome, containing 43 billion base pairs, which explains how it accumulated so much "evolutionary data" allowing it to survive virtually unchanged since the Devonian period.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Neoceratodus (Genus Name):', sec2_desc1: 'The genus name is composed of ancient Greek: **Neo** meaning <span class="font-bold text-white">new</span>, and **Ceratodus** meaning <span class="font-bold text-white">horn-tooth</span>. The name "Ceratodus" originally belonged to a genus of extinct lungfish known only from fossilized teeth found worldwide. When the living species was discovered in Australia, and its teeth (used for crushing shells) were found to be identical to those ancient fossils, it was given the prefix "Neo" (the "new", living version of the fossil).',
+                sec2_sub2: 'forsteri (Species Name):', sec2_desc2: 'Given as a tribute to Australian politician and intellectual **William R. Forster**, who funded the scientific expedition and sent the first specimens to the Sydney Museum for identification.',
+                sec2_total: 'Common Name (Australian Lungfish): Simple and descriptive of its main trait—a fish that breathes using lungs, and is strictly endemic to the isolated river systems of eastern Australia (specifically the Mary River).',
+                sec3_title: 'Discovery History & Isolated Ecology:',
+                sec3_l1: 'A Shocking Discovery (1870):', sec3_v1: 'Before 1870, scientists were certain that the Ceratodus group went extinct alongside the dinosaurs. When researcher Gerard Krefft received the specimen from the Mary River in Queensland and identified the "fossil teeth" inside the mouth of a living fish, the international scientific community was stunned.',
+                sec3_l2: 'Methuselah the Grandfather:', sec3_v2: 'The fish is known for an exceptionally long lifespan. One famous individual named "Methuselah", caught in Australia in 1938 and brought to a San Francisco aquarium, lived in captivity for over 90 years (and was considered the oldest living fish in captivity until its death).',
+                sec3_l3: 'Environmental Resilience:', sec3_v3: 'Despite its physiological resilience, it survives in the wild only in a few specific rivers in Queensland, Australia, due to highly specific breeding requirements involving aquatic vegetation. Today it is a protected species, endangered by the construction of dams that interfere with its reproductive cycle.',
+                navPrev: 'Prev: Frilled Shark', navNext: 'Back to Archive', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const d = content[currentLang];
+            
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
+            
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
+            
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
+            
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerText = d.sec2_total;
+            
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
+            
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
+            document.documentElement.lang = currentLang;
+
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
+        }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

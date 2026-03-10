@@ -8,11 +8,11 @@
     <style>
         /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
         :root {
-            --bg-body: #030712; /* Very dark background */
-            --bg-card: #0a1122; /* Main card background */
-            --bg-pill: #132342; /* Stats pill background */
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
             --border-card: #1d365d;
-            --text-accent: #3b82f6; /* Blue-500 */
+            --text-accent: #3b82f6; 
         }
 
         body {
@@ -72,19 +72,23 @@
             object-fit: cover;
         }
 
-        /* Accents for different categories */
-        .hover-accent-blue:hover { border-color: #60a5fa; }
-        .hover-accent-teal:hover { border-color: #2dd4bf; }
+        /* Accents for all 15 categories */
+        .hover-accent-blue:hover { border-color: #3b82f6; }
+        .hover-accent-teal:hover { border-color: #14b8a6; }
         .hover-accent-purple:hover { border-color: #a855f7; }
-        .hover-accent-emerald:hover { border-color: #34d399; }
+        .hover-accent-emerald:hover { border-color: #10b981; }
         .hover-accent-amber:hover { border-color: #f59e0b; }
         .hover-accent-orange:hover { border-color: #f97316; }
+        .hover-accent-cyan:hover { border-color: #06b6d4; }
+        .hover-accent-red:hover { border-color: #ef4444; }
+        .hover-accent-pink:hover { border-color: #ec4899; }
+        .hover-accent-yellow:hover { border-color: #ca8a04; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative px-4 md:px-8">
 
     <!-- Top Navigation -->
-    <header class="pt-10 pb-8 max-w-4xl mx-auto w-full relative z-10">
+    <header class="pt-10 pb-8 max-w-5xl mx-auto w-full relative z-10">
         <div class="flex justify-between items-center w-full mb-8">
             <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900/80 backdrop-blur border border-white/10 px-6 py-2.5 rounded-full text-xs font-bold text-blue-400 hover:bg-blue-500 hover:text-white transition-all shadow-lg active:scale-95">EN</button>
             <a href="about.html" id="topAboutBtn" class="bg-slate-900/80 backdrop-blur border border-white/10 px-6 py-2.5 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-lg active:scale-95">אודות</a>
@@ -97,10 +101,10 @@
         </div>
     </header>
 
-    <main class="flex-grow container mx-auto max-w-3xl relative z-10">
+    <main class="flex-grow container mx-auto max-w-5xl relative z-10">
         
         <!-- Intro Section -->
-        <section class="mb-12 intro-box p-6 md:p-8" id="introBox">
+        <section class="mb-12 intro-box p-6 md:p-8 max-w-3xl mx-auto" id="introBox">
             <h2 id="introTitle" class="text-xl md:text-2xl font-bold text-blue-400 mb-5 pb-2 inline-flex items-center">מהו "מאובן חי"?</h2>
             <div id="introContent" class="space-y-6 text-slate-300 leading-relaxed text-sm md:text-base text-justify">
                 <p id="p1">המונח <span class="text-blue-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר אורגניזמים (צמחים, בעלי חיים או פטריות) הקיימים כיום ודומים דמיון מורפולוגי ופיזיולוגי מדהים למאובנים של אבותיהם הקדמונים מלפני מיליוני ולעיתים מאות מיליוני שנים. אלו הם "שורדים אולטימטיביים" שהאבולוציה החיצונית שלהם כמעט וקפאה על שמריה לאורך עידנים גיאולוגיים שלמים. הם נותרו כשרידים בודדים, מעין קפסולות זמן חיות, של שושלות מפוארות וקבוצות טקסונומיות עתיקות שנכחדו ברובן במהלך אירועי ההכחדה ההמוניים שפקדו את כדור הארץ. למרות שחומר התורשה (ה-DNA) שלהם המשיך להשתנות בקצב מסוים, צורתם ותפקודם הבסיסי נותרו עמידים באופן יוצא דופן לשינויי הסביבה.</p>
@@ -110,51 +114,99 @@
             </div>
         </section>
 
-        <!-- Categories Grid -->
+        <!-- Categories Grid (Upgraded for 15 items: 1 col on mobile, 2 on tablet, 3 on desktop) -->
         <section class="mb-16">
             <h2 id="catHeader" class="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-6 pl-2 text-center md:text-start">קטגוריות המחקר</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 
-                <!-- Coelacanth -->
+                <!-- 1. Coelacanth -->
                 <a href="fish/coelacanth.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-blue group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/coelacanth.png" alt="צילקנת" onerror="this.src='https://via.placeholder.com/150/0a1122/60a5fa?text=🐟'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catFish">דגים (צילקנת)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Coelacanthiformes</p></div>
                 </a>
                 
-                <!-- Alligator Gar -->
+                <!-- 2. Alligator Gar -->
                 <a href="fish/alligatorgar.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-teal group">
-                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/alligatorgar.png" alt="אליגטורגאר" onerror="this.src='https://via.placeholder.com/150/0a1122/2dd4bf?text=🐊'"></div>
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/alligatorgar.png" alt="אליגטורגאר" onerror="this.src='https://via.placeholder.com/150/0a1122/14b8a6?text=🐊'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catGar">דגים (אליגטורגאר)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Lepisosteiformes</p></div>
                 </a>
-                
-                <!-- Platypus -->
-                <a href="mammals/platypus.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-purple group">
-                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/platypus.png" alt="פלטיפוס" onerror="this.src='https://via.placeholder.com/150/0a1122/a855f7?text=🦦'"></div>
-                    <div><h3 class="font-bold text-lg text-white" id="catMammal">יונקים (פלטיפוס)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Monotremata</p></div>
+
+                <!-- 3. Frilled Shark (NEW) -->
+                <a href="fish/frilledshark.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-cyan group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/frilledshark.png" alt="חסחוסן צלופחי" onerror="this.src='https://via.placeholder.com/150/0a1122/06b6d4?text=🦈'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catFrilled">דגים (חסחוסן צלופחי)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Hexanchiformes</p></div>
+                </a>
+
+                <!-- 4. Australian Lungfish (NEW) -->
+                <a href="fish/lungfish.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-emerald group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/australianlungfish.png" alt="דג ריאות אוסטרלי" onerror="this.src='https://via.placeholder.com/150/0a1122/10b981?text=🐟'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catLungfish">דגים (דג ריאות)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Ceratodontiformes</p></div>
+                </a>
+
+                <!-- 5. Hula Painted Frog (NEW) -->
+                <a href="amphibians/hulafrog.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-emerald group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/hulapaintedfrog.png" alt="עגולשון שחור גחון" onerror="this.src='https://via.placeholder.com/150/0a1122/10b981?text=🐸'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catHula">דו-חיים (עגולשון)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Anura</p></div>
                 </a>
                 
-                <!-- Ginkgo -->
-                <a href="trees/ginkgo.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-emerald group">
-                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/ginkgo.png" alt="גינקו" onerror="this.src='https://via.placeholder.com/150/0a1122/34d399?text=🌿'"></div>
-                    <div><h3 class="font-bold text-lg text-white" id="catTrees">עצים (גינקו)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Ginkgophyta</p></div>
-                </a>
-                
-                <!-- Tuatara -->
+                <!-- 6. Tuatara -->
                 <a href="reptiles/tuatara.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-amber group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/tuatara.png" alt="טואטרה" onerror="this.src='https://via.placeholder.com/150/0a1122/f59e0b?text=🦎'"></div>
-                    <div><h3 class="font-bold text-lg text-white" id="catReptiles">זוחלים (טואטרה)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Rhynchocephalia</p></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catTuatara">זוחלים (טואטרה)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Rhynchocephalia</p></div>
+                </a>
+
+                <!-- 7. Komodo Dragon (NEW) -->
+                <a href="reptiles/komododragon.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-red group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/komododragon.png" alt="דרקון קומודו" onerror="this.src='https://via.placeholder.com/150/0a1122/ef4444?text=🦎'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catKomodo">זוחלים (דרקון קומודו)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Squamata</p></div>
                 </a>
                 
-                <!-- Leatherback -->
+                <!-- 8. Leatherback -->
                 <a href="turtles/leatherback.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-orange group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/leatherback.png" alt="צב גלד" onerror="this.src='https://via.placeholder.com/150/0a1122/f97316?text=🐢'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catTurtles">צבים (צב גלד)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Testudines</p></div>
                 </a>
                 
-                <!-- Horseshoe Crab (Full width on mobile, spans 2 cols if possible) -->
-                <a href="invertebrates/horseshoe-crab.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-blue group sm:col-span-2">
-                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/Horseshoe-crab.png" alt="סרטן הפרסה" onerror="this.src='https://via.placeholder.com/150/0a1122/3b82f6?text=🦀'"></div>
-                    <div><h3 class="font-bold text-lg text-white" id="catInv">חסרי חוליות (סרטן הפרסה)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Xiphosura</p></div>
+                <!-- 9. Platypus -->
+                <a href="mammals/platypus.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-purple group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/platypus.png" alt="פלטיפוס" onerror="this.src='https://via.placeholder.com/150/0a1122/a855f7?text=🦦'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catMammal">יונקים (פלטיפוס)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Monotremata</p></div>
+                </a>
+
+                <!-- 10. Echidna (NEW) -->
+                <a href="mammals/echidna.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-amber group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/shortbeakedechidna.png" alt="קיפודן נמלים" onerror="this.src='https://via.placeholder.com/150/0a1122/f59e0b?text=🦔'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catEchidna">יונקים (קיפודן נמלים)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Monotremata</p></div>
+                </a>
+
+                <!-- 11. Aardvark (NEW) -->
+                <a href="mammals/aardvark.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-pink group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/aardvark.png" alt="שנבוב" onerror="this.src='https://via.placeholder.com/150/0a1122/ec4899?text=🦡'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catAardvark">יונקים (שנבוב)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Tubulidentata</p></div>
+                </a>
+
+                <!-- 12. Pangolin (NEW) -->
+                <a href="mammals/pangolin.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-yellow group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/pangolin.png" alt="פנגולין" onerror="this.src='https://via.placeholder.com/150/0a1122/ca8a04?text=🦡'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catPangolin">יונקים (פנגולין)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Pholidota</p></div>
+                </a>
+                
+                <!-- 13. Horseshoe Crab -->
+                <a href="invertebrates/horseshoe-crab.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-blue group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/horseshoe-crab.png" alt="סרטן הפרסה" onerror="this.src='https://via.placeholder.com/150/0a1122/3b82f6?text=🦀'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catInv">חסרי חוליות (סרטן פרסה)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Xiphosura</p></div>
+                </a>
+
+                <!-- 14. Nautilus (NEW) -->
+                <a href="invertebrates/nautilus.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-amber group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/nautilus.png" alt="נאוטילוס" onerror="this.src='https://via.placeholder.com/150/0a1122/f59e0b?text=🐚'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catNautilus">חסרי חוליות (נאוטילוס)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Nautilida</p></div>
+                </a>
+
+                <!-- 15. Ginkgo -->
+                <a href="trees/ginkgo.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-emerald group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/ginkgo.png" alt="גינקו" onerror="this.src='https://via.placeholder.com/150/0a1122/34d399?text=🌿'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catTrees">עצים (גינקו)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Ginkgophyta</p></div>
                 </a>
                 
             </div>
@@ -188,7 +240,10 @@
                 p1: 'המונח <span class="text-blue-400 font-bold">"מאובן חי" (Living Fossil)</span> מתאר אורגניזמים (צמחים, בעלי חיים או פטריות) הקיימים כיום ודומים דמיון מורפולוגי ופיזיולוגי מדהים למאובנים של אבותיהם הקדמונים מלפני מיליוני ולעיתים מאות מיליוני שנים. אלו הם "שורדים אולטימטיביים" שהאבולוציה החיצונית שלהם כמעט וקפאה על שמריה לאורך עידנים גיאולוגיים שלמים. הם נותרו כשרידים בודדים, מעין קפסולות זמן חיות, של שושלות מפוארות וקבוצות טקסונומיות עתיקות שנכחדו ברובן במהלך אירועי ההכחדה ההמוניים שפקדו את כדור הארץ. למרות שחומר התורשה (ה-DNA) שלהם המשיך להשתנות בקצב מסוים, צורתם ותפקודם הבסיסי נותרו עמידים באופן יוצא דופן לשינויי הסביבה.',
                 p2: 'המונח נטבע לראשונה על ידי חוקר הטבע המפורסם <span class="text-white font-bold">צ\'ארלס דרווין (1809–1882)</span> בשנת <span class="text-white font-bold">1859</span>, בספרו המונומנטלי <span class="italic text-blue-300">"מוצא המינים" (On the Origin of Species)</span>. דרווין השתמש במושג אוקסימורוני זה כדי לתאר יצורים, כדוגמת עץ הגינקו ודג הריאות, ששרדו בסביבות גיאוגרפיות מבודדות ביותר או בנישות אקולוגיות בעלות תנאי תחרות נמוכים במיוחד. בידוד זה איפשר להם לחמוק מהלחצים האבולוציוניים האדירים שהובילו להיווצרות מינים חדשים, ובכך הם שימרו באדיקות תכונות אנטומיות עתיקות ופרימיטיביות שנעלמו לחלוטין משאר עולם החי המודרני. יצורים אלו מספקים למדענים כיום הצצה נדירה ומוחשית אל מערכות אקולוגיות פרהיסטוריות.',
                 catHeader: 'קטגוריות המחקר', topAbout: 'אודות',
-                catFish: 'דגים (צילקנת)', catGar: 'דגים (אליגטורגאר)', catMammal: 'יונקים (פלטיפוס)', catTrees: 'עצים (גינקו)', catReptiles: 'זוחלים (טואטרה)', catTurtles: 'צבים (צב גלד)', catInv: 'חסרי חוליות (סרטן הפרסה)',
+                catFish: 'דגים (צילקנת)', catGar: 'דגים (אליגטורגאר)', catFrilled: 'דגים (חסחוסן צלופחי)', catLungfish: 'דגים (דג ריאות)',
+                catHula: 'דו-חיים (עגולשון)', catTuatara: 'זוחלים (טואטרה)', catKomodo: 'זוחלים (דרקון קומודו)', catTurtles: 'צבים (צב גלד)',
+                catMammal: 'יונקים (פלטיפוס)', catEchidna: 'יונקים (קיפודן נמלים)', catAardvark: 'יונקים (שנבוב)', catPangolin: 'יונקים (פנגולין)',
+                catInv: 'חסרי חוליות (סרטן פרסה)', catNautilus: 'חסרי חוליות (נאוטילוס)', catTrees: 'עצים (גינקו)',
                 footer: 'פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג\'מיני ועל ידי רם.',
                 navHome: 'בית', navAbout: 'אודות', btn: 'EN', dir: 'rtl'
             },
@@ -198,7 +253,10 @@
                 p1: 'The term <span class="text-blue-400 font-bold">"Living Fossil"</span> describes organisms (plants, animals, or fungi) existing today that bear a striking morphological and physiological resemblance to fossils of their ancient ancestors from millions, and sometimes hundreds of millions, of years ago. These are "ultimate survivors" whose external evolution has nearly frozen in place over entire geological eons. They remain as isolated relics, living time capsules of magnificent lineages and ancient taxonomic groups that largely perished during mass extinction events that struck the Earth. Although their genetic material (DNA) continued to change at a certain pace, their basic form and function remained exceptionally resilient to environmental changes.',
                 p2: 'The term was first coined by the famous naturalist <span class="text-white font-bold">Charles Darwin (1809–1882)</span> in <span class="text-white font-bold">1859</span>, in his monumental book <span class="italic text-blue-300">"On the Origin of Species"</span>. Darwin used this oxymoronic concept to describe creatures, such as the Ginkgo tree and the lungfish, that survived in highly isolated geographical environments or ecological niches with particularly low competition. This isolation allowed them to escape the tremendous evolutionary pressures that led to the formation of new species, thereby strictly preserving ancient and primitive anatomical traits completely lost from the rest of the modern biological world. These creatures provide scientists today with a rare and tangible glimpse into prehistoric ecosystems.',
                 catHeader: 'Research Categories', topAbout: 'About',
-                catFish: 'Fish (Coelacanth)', catGar: 'Fish (Alligator Gar)', catMammal: 'Mammals (Platypus)', catTrees: 'Trees (Ginkgo)', catReptiles: 'Reptiles (Tuatara)', catTurtles: 'Turtles (Leatherback)', catInv: 'Invertebrates (Horseshoe Crab)',
+                catFish: 'Fish (Coelacanth)', catGar: 'Fish (Alligator Gar)', catFrilled: 'Fish (Frilled Shark)', catLungfish: 'Fish (Aust. Lungfish)',
+                catHula: 'Amphibians (Hula Frog)', catTuatara: 'Reptiles (Tuatara)', catKomodo: 'Reptiles (Komodo)', catTurtles: 'Turtles (Leatherback)',
+                catMammal: 'Mammals (Platypus)', catEchidna: 'Mammals (Echidna)', catAardvark: 'Mammals (Aardvark)', catPangolin: 'Mammals (Pangolin)',
+                catInv: 'Invertebrates (Horseshoe Crab)', catNautilus: 'Invertebrates (Nautilus)', catTrees: 'Trees (Ginkgo)',
                 footer: 'A dedicated research project for preserving knowledge of organisms that stood the test of time. The site was created by Gemini and Ram.',
                 navHome: 'HOME', navAbout: 'ABOUT', btn: 'HE', dir: 'ltr'
             }
@@ -214,13 +272,23 @@
             document.getElementById('p2').innerHTML = data.p2;
             document.getElementById('catHeader').innerText = data.catHeader;
             document.getElementById('topAboutBtn').innerText = data.topAbout;
+            
             document.getElementById('catFish').innerText = data.catFish;
             document.getElementById('catGar').innerText = data.catGar;
-            document.getElementById('catMammal').innerText = data.catMammal;
-            document.getElementById('catTrees').innerText = data.catTrees;
-            document.getElementById('catReptiles').innerText = data.catReptiles;
+            document.getElementById('catFrilled').innerText = data.catFrilled;
+            document.getElementById('catLungfish').innerText = data.catLungfish;
+            document.getElementById('catHula').innerText = data.catHula;
+            document.getElementById('catTuatara').innerText = data.catTuatara;
+            document.getElementById('catKomodo').innerText = data.catKomodo;
             document.getElementById('catTurtles').innerText = data.catTurtles;
+            document.getElementById('catMammal').innerText = data.catMammal;
+            document.getElementById('catEchidna').innerText = data.catEchidna;
+            document.getElementById('catAardvark').innerText = data.catAardvark;
+            document.getElementById('catPangolin').innerText = data.catPangolin;
             document.getElementById('catInv').innerText = data.catInv;
+            document.getElementById('catNautilus').innerText = data.catNautilus;
+            document.getElementById('catTrees').innerText = data.catTrees;
+            
             document.getElementById('footerText').innerText = data.footer;
             document.getElementById('navHome').innerText = data.navHome;
             document.getElementById('navAbout').innerText = data.navAbout;
@@ -237,5 +305,3 @@
     </script>
 </body>
 </html>
-
-

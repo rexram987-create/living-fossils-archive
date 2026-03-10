@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: חסחוסן צלופחי | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
+            --border-card: #1d365d;
+            --text-accent: #06b6d4; /* Cyan-500 */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.7;
+        }
+
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(6, 182, 212, 0.15);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-cyan-400 hover:bg-cyan-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
+    </div>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
+        
+        <!-- Hero Image (נתיב התמונה המעודכן שהעלית) -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/frilledshark.png" alt="חסחוסן צלופחי" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/06b6d4?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: 300 שיניים תלת-ראשיות והיריון של 3.5 שנים</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">חסחוסן צלופחי</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Chlamydoselachus anguineus</p>
+                <p id="ui_trans" class="text-cyan-400 font-bold italic pt-2">"כריש גלימה נחשי"</p>
+            </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">מעל 150<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>גילוי</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1884<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>מירבי</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 2.0<br>מטרים<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>היריון</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 42<br>חודשים<br>&nbsp;</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">החסחוסן הצלופחי נראה יותר כמו מפלצת ים מיתולוגית מאשר כריש מודרני. הוא חי במעמקי האוקיינוס (עד 1,500 מטרים מתחת לפני הים) ונחשב לאחד מהכרישים הפרימיטיביים ביותר החיים כיום. גופו ארוך וגלילי כמו של צלופח, ופיו נפתח בקצה החרטום (בניגוד לכרישים רגילים שפיהם נמצא בתחתית הראש). הלסתות שלו גמישות להדהים ויכולות להיפתח לרווחה כדי לבלוע טרף שלם שגודלו כמחצית מגופו של הכריש עצמו. פיו מצויד ב-<span class="font-bold text-white">300 שיניים חדות כתער</span>, המסודרות ב-25 שורות וצורתן מזכירה קלשון בעל שלושה חודים (תלת-ראשיות) – מלכודת מושלמת ללכידת דיונונים ודגים חלקלקים בחשיכה המוחלטת של המצולות.</p>
+                    
+                    <p id="sec1_p2">אחד ההישגים והמאפיינים המדהימים ביותר של מין זה הוא מנגנון הרבייה שלו. בשל הטמפרטורות הקפואות במעמקים וקצב חילוף החומרים האיטי שלו, לחסחוסן הצלופחי יש את <span class="font-bold text-white">תקופת ההיריון הארוכה ביותר מכל בעלי החוליות בעולם</span>, המוערכת בכ-3.5 שנים (42 חודשים)! הנקבות משריצות ולדות חיים (Ovoviviparous) לאחר שהביצים בוקעות בתוך הרחם, כאשר מספר הגורים בכל המלטה נע בין 2 ל-15.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-cyan-300 text-base mb-1">Chlamydoselachus (שם הסוג):</h3>
+                        <p id="sec2_desc1">שם המורכב מיוונית עתיקה. המילה **Chlamys** שמשמעותה <span class="font-bold text-white">גלימה או שכמייה</span>, והמילה **Selachos** שמשמעותה <span class="font-bold text-white">כריש</span>. השם ניתן לו בשל 6 זוגות זימי הנשימה הייחודיים שלו, שיש להם קצוות פרועים ובשרניים הנראים כמו צווארון תחרה או גלימה העוטפת את גרונו (מכאן גם שמו האנגלי: Frilled Shark - כריש בעל סלסולים/קפלים).</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-cyan-300 text-base mb-1">anguineus (שם המין):</h3>
+                        <p id="sec2_desc2">מקורו במילה הלטינית שמשמעותה <span class="font-bold text-white">דמוי נחש או צלופח</span>. השם מתאר במדויק את גופו הארוך, השרירי והחלקלק של הכריש, ששוחה בתנועות פתלתלות בדומה לנחש מים, בניגוד לתנועת השחייה הנוקשה של כרישים מודרניים.</p>
+                    </div>
+                    <div class="bg-cyan-900/20 p-4 rounded-xl border-r-2 border-cyan-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-cyan-200">המשמעות המלאה: "כריש גלימה נחשי". השם העברי (חסחוסן) נגזר מהמילה סחוס, כיוון ששלדו עשוי כולו סחוס חלש וקל במיוחד (חסר סידן), התאמה פיזיולוגית לציפה וחיסכון באנרגיה במעמקים.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-cyan-400 font-bold text-base mb-4 inline-block border-b border-cyan-900/50 pb-1">היסטוריית הגילוי והשרידות:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">הגילוי המקורי:</span> <span id="sec3_v1">הזואולוג הגרמני לודוויג דודרליין היה הראשון שתיעד את המין ביפן בין השנים 1879 ל-1881, אך הכתבים שלו אבדו. המין תואר רשמית למדע וקיבל את שמו בשנת 1884 על ידי האיכתיולוג האמריקאי סמואל גרמן (Samuel Garman).</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">אגדות על נחשי ים:</span> <span id="sec3_v2">גרמן, שתיאר את הכריש, האמין בזמנו שמראהו הנחשי דמוי המפלצת ופיו מלא השיניים הם המקור ההיסטורי לאגדות ולמיתוסים על "נחשי הים הגדולים" שסיפרו מלחים מבוהלים במשך מאות שנים.</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">מאובן חי מובהק:</span> <span id="sec3_v3">שושלת משפחת החסחוסניים (Chlamydoselachidae) הופיעה בתקופת היורה המאוחרת, לפני כ-150 מיליון שנה. שיניו של החסחוסן הצלופחי כמעט זהות לשיני מאובנים מתחילת תקופת הקרטיקון, מה שמעיד על הסתגלות אבולוציונית מושלמת למעמקים שבהם הזמן עמד מלכת.</span></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="../index.html" class="text-slate-400 hover:text-cyan-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">חזרה לארכיון</span>
+        </a>
+        <a href="../invertebrates/nautilus.html" class="text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-bold bg-cyan-900/20 px-5 py-2.5 rounded-full border border-cyan-800/30 shadow-lg">
+            <span id="navNext">הבא: נאוטילוס</span> <span>&larr;</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: 300 שיניים תלת-ראשיות והיריון של 3.5 שנים',
+                ui_title: 'חסחוסן צלופחי',
+                ui_sci: 'Chlamydoselachus anguineus',
+                ui_trans: '"כריש גלימה נחשי"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'מעל 150<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>גילוי', stat2_val: '<br>1884<br>&nbsp;',
+                stat3_lbl: 'אורך<br>מירבי', stat3_val: 'עד 2.0<br>מטרים<br>&nbsp;',
+                stat4_lbl: 'תקופת<br>היריון', stat4_val: 'עד 42<br>חודשים<br>&nbsp;',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'החסחוסן הצלופחי נראה יותר כמו מפלצת ים מיתולוגית מאשר כריש מודרני. הוא חי במעמקי האוקיינוס (עד 1,500 מטרים מתחת לפני הים) ונחשב לאחד מהכרישים הפרימיטיביים ביותר החיים כיום. גופו ארוך וגלילי כמו של צלופח, ופיו נפתח בקצה החרטום (בניגוד לכרישים רגילים שפיהם נמצא בתחתית הראש). הלסתות שלו גמישות להדהים ויכולות להיפתח לרווחה כדי לבלוע טרף שלם שגודלו כמחצית מגופו של הכריש עצמו. פיו מצויד ב-<span class="font-bold text-white">300 שיניים חדות כתער</span>, המסודרות ב-25 שורות וצורתן מזכירה קלשון בעל שלושה חודים (תלת-ראשיות) – מלכודת מושלמת ללכידת דיונונים ודגים חלקלקים בחשיכה המוחלטת של המצולות.',
+                sec1_p2: 'אחד ההישגים והמאפיינים המדהימים ביותר של מין זה הוא מנגנון הרבייה שלו. בשל הטמפרטורות הקפואות במעמקים וקצב חילוף החומרים האיטי שלו, לחסחוסן הצלופחי יש את <span class="font-bold text-white">תקופת ההיריון הארוכה ביותר מכל בעלי החוליות בעולם</span>, המוערכת בכ-3.5 שנים (42 חודשים)! הנקבות משריצות ולדות חיים (Ovoviviparous) לאחר שהביצים בוקעות בתוך הרחם, כאשר מספר הגורים בכל המלטה נע בין 2 ל-15.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Chlamydoselachus (שם הסוג):', sec2_desc1: 'שם המורכב מיוונית עתיקה. המילה **Chlamys** שמשמעותה <span class="font-bold text-white">גלימה או שכמייה</span>, והמילה **Selachos** שמשמעותה <span class="font-bold text-white">כריש</span>. השם ניתן לו בשל 6 זוגות זימי הנשימה הייחודיים שלו, שיש להם קצוות פרועים ובשרניים הנראים כמו צווארון תחרה או גלימה העוטפת את גרונו (מכאן גם שמו האנגלי: Frilled Shark - כריש בעל סלסולים/קפלים).',
+                sec2_sub2: 'anguineus (שם המין):', sec2_desc2: 'מקורו במילה הלטינית שמשמעותה <span class="font-bold text-white">דמוי נחש או צלופח</span>. השם מתאר במדויק את גופו הארוך, השרירי והחלקלק של הכריש, ששוחה בתנועות פתלתלות בדומה לנחש מים, בניגוד לתנועת השחייה הנוקשה של כרישים מודרניים.',
+                sec2_total: 'המשמעות המלאה: "כריש גלימה נחשי". השם העברי (חסחוסן) נגזר מהמילה סחוס, כיוון ששלדו עשוי כולו סחוס חלש וקל במיוחד (חסר סידן), התאמה פיזיולוגית לציפה וחיסכון באנרגיה במעמקים.',
+                sec3_title: 'היסטוריית הגילוי והשרידות:',
+                sec3_l1: 'הגילוי המקורי:', sec3_v1: 'הזואולוג הגרמני לודוויג דודרליין היה הראשון שתיעד את המין ביפן בין השנים 1879 ל-1881, אך הכתבים שלו אבדו. המין תואר רשמית למדע וקיבל את שמו בשנת 1884 על ידי האיכתיולוג האמריקאי סמואל גרמן (Samuel Garman).',
+                sec3_l2: 'אגדות על נחשי ים:', sec3_v2: 'גרמן, שתיאר את הכריש, האמין בזמנו שמראהו הנחשי דמוי המפלצת ופיו מלא השיניים הם המקור ההיסטורי לאגדות ולמיתוסים על "נחשי הים הגדולים" שסיפרו מלחים מבוהלים במשך מאות שנים.',
+                sec3_l3: 'מאובן חי מובהק:', sec3_v3: 'שושלת משפחת החסחוסניים (Chlamydoselachidae) הופיעה בתקופת היורה המאוחרת, לפני כ-150 מיליון שנה. שיניו של החסחוסן הצלופחי כמעט זהות לשיני מאובנים מתחילת תקופת הקרטיקון, מה שמעיד על הסתגלות אבולוציונית מושלמת למעמקים שבהם הזמן עמד מלכת.',
+                navPrev: 'חזרה לארכיון', navNext: 'הבא: נאוטילוס', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                back: '← Back',
+                ui_feature: 'Unique feature: 300 trident-shaped teeth and a 3.5-year pregnancy',
+                ui_title: 'Frilled Shark',
+                ui_sci: 'Chlamydoselachus anguineus',
+                ui_trans: '"Snake-like cloak shark"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: 'Over 150<br>Million<br>Years',
+                stat2_lbl: 'Classified<br>In', stat2_val: '<br>1884<br>&nbsp;',
+                stat3_lbl: 'Max<br>Length', stat3_val: 'Up to 2.0<br>Meters<br>&nbsp;',
+                stat4_lbl: 'Gestation<br>Period', stat4_val: 'Up to 42<br>Months<br>&nbsp;',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The Frilled Shark looks more like a mythical sea monster than a modern shark. It lives in the deep ocean (up to 1,500 meters below sea level) and is considered one of the most primitive living sharks today. Its body is long and cylindrical like an eel, and its mouth is located at the tip of its snout (unlike normal sharks whose mouths are on the underside). Its jaws are incredibly flexible and can open wide to swallow whole prey up to half the shark\'s own body length. Its mouth is armed with <span class="font-bold text-white">300 razor-sharp teeth</span>, arranged in 25 rows and shaped like three-pronged tridents—a perfect trap for catching slippery squid and fish in the absolute darkness of the abyss.',
+                sec1_p2: 'One of the most astonishing biological achievements of this species is its reproductive mechanism. Due to the freezing temperatures of the deep and its slow metabolic rate, the Frilled Shark has the <span class="font-bold text-white">longest gestation period of any vertebrate in the world</span>, estimated at about 3.5 years (42 months)! Females are ovoviviparous, giving birth to live young after the eggs hatch inside the uterus, with litter sizes ranging from 2 to 15 pups.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Chlamydoselachus (Genus Name):', sec2_desc1: 'Composed of ancient Greek. The word **Chlamys** meaning <span class="font-bold text-white">cloak or cape</span>, and **Selachos** meaning <span class="font-bold text-white">shark</span>. It was named for its 6 pairs of unique gill slits, which have fleshy, fringed edges that look like a lacy collar or a cloak wrapped around its throat (hence the common English name "Frilled" Shark).',
+                sec2_sub2: 'anguineus (Species Name):', sec2_desc2: 'Originates from the Latin word meaning <span class="font-bold text-white">snake-like or eel-like</span>. The name accurately describes the shark\'s long, muscular, and slippery body, which swims in serpentine, undulating movements similar to a water snake, contrary to the stiff swimming motion of modern sharks.',
+                sec2_total: 'Full Meaning: "Snake-like cloak shark". The Hebrew name (Chas\'chusan) is derived from the word for cartilage, as its skeleton is entirely made of exceptionally light, poorly calcified cartilage—a physiological adaptation for buoyancy and energy conservation in the deep sea.',
+                sec3_title: 'History of Discovery & Survival:',
+                sec3_l1: 'The Original Discovery:', sec3_v1: 'German zoologist Ludwig Döderlein was the first to document the species in Japan between 1879 and 1881, but his manuscripts were lost. The species was officially described to science and named in 1884 by American ichthyologist Samuel Garman.',
+                sec3_l2: 'Sea Serpent Legends:', sec3_v2: 'Garman, who described the shark, believed at the time that its monstrous, serpentine appearance and tooth-filled mouth were the historical source for the legends and myths of "great sea serpents" told by terrified sailors for centuries.',
+                sec3_l3: 'A Definitive Living Fossil:', sec3_v3: 'The lineage of the family Chlamydoselachidae appeared in the Late Jurassic period, about 150 million years ago. The teeth of the Frilled Shark are almost identical to fossilized teeth from the early Cretaceous period, demonstrating a perfect evolutionary adaptation to the deep sea where time has stood still.',
+                navPrev: 'Back to Archive', navNext: 'Next: Nautilus', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const d = content[currentLang];
+            
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
+            
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
+            
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
+            
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerHTML = d.sec2_total;
+            
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
+            
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
+            document.documentElement.lang = currentLang;
+
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
+        }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

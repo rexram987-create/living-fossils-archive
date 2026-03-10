@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: פנגולין | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
+            --border-card: #1d365d;
+            --text-accent: #ca8a04; /* Yellow-600 (Bronze/Scales tone) */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.7;
+        }
+
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(202, 138, 4, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(202, 138, 4, 0.15);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-yellow-500 hover:bg-yellow-600 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
+    </div>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
+        
+        <!-- Hero Image -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/pangolin.png" alt="פנגולין" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/ca8a04?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: שריון קשקשי קרטין ולשון ארוכה מהגוף</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">פנגולין</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Pholidota</p>
+                <p id="ui_trans" class="text-yellow-500 font-bold italic pt-2">"המתגלגל העוטה קשקשים"</p>
+            </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">פיצול<br>אבולוציוני</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">כ-60<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>קיטלוג</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1758<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>מירבי</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 1<br>מטר<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">מצב<br>שימור</span>
+                    <span id="stat4_val" class="text-xs md:text-sm font-black leading-tight text-red-500">בסכנת<br>הכחדה<br>חמורה</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">הפנגולין הוא היונק היחיד בעולם שגופו מכוסה כולו ב<span class="font-bold text-white">קשקשים גדולים וקשיחים העשויים מקרטין</span> (אותו חלבון המרכיב את השיער, הציפורניים וקרני הקרנף שלנו). קשקשים אלו מהווים כ-20% ממשקל גופו. כאשר הוא חש מאוים, הפנגולין מתכדרר במהירות לכדור מושלם, קשיח ובלתי חדיר שאפילו אריות או נמרים אינם מסוגלים לפצח. כדי להשלים את ההגנה, הוא מסוגל להתיז חומצה מסריחה מבלוטות מיוחדות ליד פי הטבעת (בדומה לבואש).</p>
+                    
+                    <p id="sec1_p2">האנטומיה הפנימית שלו חריגה לא פחות: לפנגולין אין שיניים כלל. במקום זאת, הוא משתמש בלשון ארוכה ודביקה במיוחד כדי לצוד נמלים וטרמיטים. לשון זו כה ארוכה, שכאשר היא שלופה במלואה היא <span class="font-bold text-white">ארוכה יותר מכל אורך גופו!</span> מכיוון שאין מקום בפה ללשון כה ארוכה, בסיס הלשון אינו מחובר ללוע כמו אצל רוב היונקים, אלא מחובר עמוק באזור האגן וכלוב הצלעות. את החרקים שהוא בולע הוא טוחן בתוך הקיבה השרירית שלו, בעזרת אבנים קטנות וגרגרי חול שהוא בולע במכוון – מנגנון הדומה ל"קורקבן" (זפק) של עופות ודינוזאורים.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-yellow-500 text-base mb-1">Pangolin (שם עממי בינלאומי):</h3>
+                        <p id="sec2_desc1">השם מגיע מהשפה המלאית (Malay), מהמילה **Pengguling** (פנגולינג), שמשמעותה <span class="font-bold text-white">"זה שמתגלגל" או "המתכדרר"</span>. השם מתאר במדויק את מנגנון ההגנה העיקרי של החיה – התכדררות לכדור קשקשים משוריין כשהיא נתקלת בסכנה.</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-yellow-500 text-base mb-1">Pholidota (שם הסדרה המדעית):</h3>
+                        <p id="sec2_desc2">מקורו במילה היוונית העתיקה **Pholís** שפירושה <span class="font-bold text-white">קשקש קרני (Horny scale)</span>. הפירוש המלא של שם הסדרה הוא "העוטה קשקשים".</p>
+                    </div>
+                    <div class="bg-yellow-900/20 p-4 rounded-xl border-r-2 border-yellow-600 mt-4">
+                        <p id="sec2_total" class="font-bold text-yellow-300">הטעות בסיווג ההיסטורי: בעבר (במאה ה-18) מדענים קראו לו "דוב נמלים קשקשי" (Scaly anteater) וסיווגו אותו בטעות באותה קבוצה עם דובי נמלים ועצלנים, רק בגלל שלשניהם חסרות שיניים והם אוכלים נמלים (אבולוציה מתכנסת). רק לאחר בדיקות DNA התגלה שקרובי המשפחה החיים הקרובים ביותר של הפנגולין הם בכלל סדרת הטורפים (כלבים, חתולים ודובים)!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-yellow-500 font-bold text-base mb-4 inline-block border-b border-yellow-900/50 pb-1">תולדות הגילוי ואיומי הכחדה:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">שורד קדום:</span> <span id="sec3_v1">המאובנים העתיקים ביותר של דמויי-פנגולין (כמו ה-Eomanis) נמצאו באירופה ומתוארכים לתקופת האיאוקן (לפני כ-50 מיליון שנה). לאורך עידנים אלו, מבנה השריון שלהם נותר כמעט זהה למבנה של 8 מיני הפנגולין שחיים כיום באפריקה ואסיה.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">תיעוד מדעי:</span> <span id="sec3_v2">חלק ממיני הפנגולין (כמו הפנגולין הסיני) סווגו רשמית בשנת 1758 על ידי הבוטנאי השוודי קארולוס לינאוס בספרו "מערכת הטבע" (Systema Naturae).</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">היונק המוברח בעולם:</span> <span id="sec3_v3">למרות ששרד טורפי ענק פרהיסטוריים ועידני קרח, הפנגולין נמצא כיום בסכנת הכחדה קריטית. הוא נחשב ליונק הנסחר והמוברח ביותר בעולם, עקב ציד לא חוקי המונע מאמונות טפלות ברפואה האסיאתית המסורתית, המייחסות סגולות ריפוי לקשקשי הקרטין שלו, ולשימוש בבשרו כמעדן יוקרתי.</span></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="../amphibians/hulafrog.html" class="text-slate-400 hover:text-yellow-500 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: עגולשון שחור-גחון</span>
+        </a>
+        <a href="../index.html" class="text-yellow-500 hover:text-yellow-400 transition-colors text-sm font-bold bg-yellow-900/20 px-5 py-2.5 rounded-full border border-yellow-800/30 shadow-lg">
+            <span id="navNext">חזרה לארכיון</span> <span>&larr;</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: שריון קשקשי קרטין ולשון ארוכה מהגוף',
+                ui_title: 'פנגולין',
+                ui_sci: 'Pholidota',
+                ui_trans: '"המתגלגל העוטה קשקשים"',
+                stat1_lbl: 'פיצול<br>אבולוציוני', stat1_val: 'כ-60<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>קיטלוג', stat2_val: '<br>1758<br>&nbsp;',
+                stat3_lbl: 'אורך<br>מירבי', stat3_val: 'עד 1<br>מטר<br>&nbsp;',
+                stat4_lbl: 'מצב<br>שימור', stat4_val: 'בסכנת<br>הכחדה<br>חמורה',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'הפנגולין הוא היונק היחיד בעולם שגופו מכוסה כולו ב<span class="font-bold text-white">קשקשים גדולים וקשיחים העשויים מקרטין</span> (אותו חלבון המרכיב את השיער, הציפורניים וקרני הקרנף שלנו). קשקשים אלו מהווים כ-20% ממשקל גופו. כאשר הוא חש מאוים, הפנגולין מתכדרר במהירות לכדור מושלם, קשיח ובלתי חדיר שאפילו אריות או נמרים אינם מסוגלים לפצח. כדי להשלים את ההגנה, הוא מסוגל להתיז חומצה מסריחה מבלוטות מיוחדות ליד פי הטבעת (בדומה לבואש).',
+                sec1_p2: 'האנטומיה הפנימית שלו חריגה לא פחות: לפנגולין אין שיניים כלל. במקום זאת, הוא משתמש בלשון ארוכה ודביקה במיוחד כדי לצוד נמלים וטרמיטים. לשון זו כה ארוכה, שכאשר היא שלופה במלואה היא <span class="font-bold text-white">ארוכה יותר מכל אורך גופו!</span> מכיוון שאין מקום בפה ללשון כה ארוכה, בסיס הלשון אינו מחובר ללוע כמו אצל רוב היונקים, אלא מחובר עמוק באזור האגן וכלוב הצלעות. את החרקים שהוא בולע הוא טוחן בתוך הקיבה השרירית שלו, בעזרת אבנים קטנות וגרגרי חול שהוא בולע במכוון – מנגנון הדומה ל"קורקבן" (זפק) של עופות ודינוזאורים.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Pangolin (שם עממי בינלאומי):', sec2_desc1: 'השם מגיע מהשפה המלאית (Malay), מהמילה **Pengguling** (פנגולינג), שמשמעותה <span class="font-bold text-white">"זה שמתגלגל" או "המתכדרר"</span>. השם מתאר במדויק את מנגנון ההגנה העיקרי של החיה – התכדררות לכדור קשקשים משוריין כשהיא נתקלת בסכנה.',
+                sec2_sub2: 'Pholidota (שם הסדרה המדעית):', sec2_desc2: 'מקורו במילה היוונית העתיקה **Pholís** שפירושה <span class="font-bold text-white">קשקש קרני (Horny scale)</span>. הפירוש המלא של שם הסדרה הוא "העוטה קשקשים".',
+                sec2_total: 'הטעות בסיווג ההיסטורי: בעבר (במאה ה-18) מדענים קראו לו "דוב נמלים קשקשי" (Scaly anteater) וסיווגו אותו בטעות באותה קבוצה עם דובי נמלים ועצלנים, רק בגלל שלשניהם חסרות שיניים והם אוכלים נמלים (אבולוציה מתכנסת). רק לאחר בדיקות DNA התגלה שקרובי המשפחה החיים הקרובים ביותר של הפנגולין הם בכלל סדרת הטורפים (כלבים, חתולים ודובים)!',
+                sec3_title: 'תולדות הגילוי ואיומי הכחדה:',
+                sec3_l1: 'שורד קדום:', sec3_v1: 'המאובנים העתיקים ביותר של דמויי-פנגולין (כמו ה-Eomanis) נמצאו באירופה ומתוארכים לתקופת האיאוקן (לפני כ-50 מיליון שנה). לאורך עידנים אלו, מבנה השריון שלהם נותר כמעט זהה למבנה של 8 מיני הפנגולין שחיים כיום באפריקה ואסיה.',
+                sec3_l2: 'תיעוד מדעי:', sec3_v2: 'חלק ממיני הפנגולין (כמו הפנגולין הסיני) סווגו רשמית בשנת 1758 על ידי הבוטנאי השוודי קארולוס לינאוס בספרו "מערכת הטבע" (Systema Naturae).',
+                sec3_l3: 'היונק המוברח בעולם:', sec3_v3: 'למרות ששרד טורפי ענק פרהיסטוריים ועידני קרח, הפנגולין נמצא כיום בסכנת הכחדה קריטית. הוא נחשב ליונק הנסחר והמוברח ביותר בעולם, עקב ציד לא חוקי המונע מאמונות טפלות ברפואה האסיאתית המסורתית, המייחסות סגולות ריפוי לקשקשי הקרטין שלו, ולשימוש בבשרו כמעדן יוקרתי.',
+                navPrev: 'הקודם: עגולשון שחור-גחון', navNext: 'חזרה לארכיון', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                back: '← Back',
+                ui_feature: 'Unique feature: Keratin scale armor and a tongue longer than its body',
+                ui_title: 'Pangolin',
+                ui_sci: 'Pholidota',
+                ui_trans: '"The Scaly Roller"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: '~60<br>Million<br>Years',
+                stat2_lbl: 'Classified<br>In', stat2_val: '<br>1758<br>&nbsp;',
+                stat3_lbl: 'Max<br>Length', stat3_val: 'Up to 1<br>Meter<br>&nbsp;',
+                stat4_lbl: 'Conservation<br>Status', stat4_val: 'Critically<br>Endangered<br>&nbsp;',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The Pangolin is the only mammal in the world entirely covered in <span class="font-bold text-white">large, tough keratin scales</span> (the same protein that makes up our hair, nails, and rhino horns). These scales account for about 20% of its body weight. When threatened, the pangolin quickly rolls up into a perfect, impenetrable armored ball that even lions or leopards cannot bite through. To complete its defense, it can spray a foul-smelling acid from special glands near its anus (similar to a skunk).',
+                sec1_p2: 'Its internal anatomy is just as bizarre: the pangolin has absolutely no teeth. Instead, it uses an exceptionally long, sticky tongue to hunt ants and termites. This tongue is so long that, when fully extended, it is <span class="font-bold text-white">longer than the animal\'s entire body length!</span> Since there is no room in the mouth for such a long tongue, its base is not attached to the throat like in most mammals, but is anchored deep in the pelvis and ribcage. It grinds the insects it swallows inside its muscular stomach, using small stones and sand it deliberately ingests—a mechanism similar to a bird\'s or dinosaur\'s gizzard.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Pangolin (International Common Name):', sec2_desc1: 'The name comes from the Malay language, from the word **Pengguling**, meaning <span class="font-bold text-white">"one who rolls up" or "the roller"</span>. The name accurately describes the animal\'s primary defense mechanism—curling into an armored ball of scales when facing danger.',
+                sec2_sub2: 'Pholidota (Scientific Order Name):', sec2_desc2: 'Originates from the Ancient Greek word **Pholís** meaning <span class="font-bold text-white">horny scale</span>. The full translation of the order\'s name is "the scaly ones".',
+                sec2_total: 'The Historical Classification Error: In the past (during the 18th century), scientists called it the "scaly anteater" and mistakenly classified it in the same group as anteaters and sloths, simply because both lack teeth and eat ants (convergent evolution). Only after modern DNA testing was it discovered that the pangolin\'s closest living relatives are actually the Carnivorans (dogs, cats, and bears)!',
+                sec3_title: 'Discovery History & Extinction Threats:',
+                sec3_l1: 'Ancient Survivor:', sec3_v1: 'The oldest fossils of pangolin-like creatures (such as Eomanis) were found in Europe and date back to the Eocene epoch (about 50 million years ago). Throughout these eons, their armor structure has remained almost identical to that of the 8 pangolin species living today in Africa and Asia.',
+                sec3_l2: 'Scientific Classification:', sec3_v2: 'Some pangolin species (like the Chinese pangolin) were officially classified in 1758 by Swedish botanist Carl Linnaeus in his monumental work "Systema Naturae".',
+                sec3_l3: 'The World\'s Most Trafficked Mammal:', sec3_v3: 'Despite surviving prehistoric apex predators and ice ages, the pangolin is now critically endangered. It is considered the most trafficked and smuggled mammal in the world, driven by illegal poaching fueled by superstitions in traditional Asian medicine that attribute healing properties to its keratin scales, as well as the use of its meat as a luxury delicacy.',
+                navPrev: 'Prev: Hula Painted Frog', navNext: 'Back to Archive', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const d = content[currentLang];
+            
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
+            
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
+            
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
+            
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerHTML = d.sec2_total;
+            
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
+            
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
+            document.documentElement.lang = currentLang;
+
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
+        }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

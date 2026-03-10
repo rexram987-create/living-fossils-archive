@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: נאוטילוס | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
+            --border-card: #1d365d;
+            --text-accent: #fbbf24; /* Amber-400 (מתאים לצבעי הקונכייה) */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.7;
+        }
+
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(251, 191, 36, 0.15);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-amber-400 hover:bg-amber-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
+    </div>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
+        
+        <!-- Hero Image -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/nautilus.png" alt="נאוטילוס" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/fbbf24?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: קונכיית "יחס הזהב" ומנגנון הנעה סילוני</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">נאוטילוס</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Nautilus pompilius</p>
+                <p id="ui_trans" class="text-amber-400 font-bold italic pt-2">"מלח ים נווט"</p>
+            </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">מעל 500<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>קיטלוג</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1758<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">קוטר<br>מירבי</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 25<br>ס"מ<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תוחלת<br>חיים</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 20<br>שנים<br>&nbsp;</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">הנאוטילוס הוא רכיכה ימית מדהימה המשתייכת למחלקת סילוניות (Cephalopoda). בעוד שקרובי משפחתו המודרניים (תמנונים ודיונונים) איבדו את הקונכייה החיצונית שלהם במהלך האבולוציה כדי להפוך לטורפים מהירים, הנאוטילוס הוא הסילונית היחידה ששמרה על קונכייה חיצונית שלמה. הקונכייה שלו בנויה בצורה גיאומטרית מרהיבה של <span class="font-bold text-white">ספירלה לוגריתמית</span>, המהווה את אחת הדוגמאות המושלמות בטבע ל"יחס הזהב". הקונכייה מחולקת לתאים פנימיים (Septa); הנאוטילוס עצמו גר תמיד בתא החיצוני והגדול ביותר, בעוד שאר התאים משמשים כמעין צוללת מתוחכמת.</p>
+                    
+                    <p id="sec1_p2">השליטה בציפה מתבצעת דרך צינור רקמה דק הנקרא <span class="font-bold text-white">סיפונקל (Siphuncle)</span> העובר דרך כל תאי הקונכייה. הנאוטילוס שואב או מזריק מים לתאים אלו כדי לשלוט בעומק הצלילה שלו. הוא יכול לצלול לעומקים של עד 700 מטרים ביום כדי לחמוק מטורפים, ולעלות לשוניות רדודות בלילה כדי לצוד. במקום סנפירים, הוא נע באמצעות <span class="font-bold text-white">הנעה סילונית (Jet propulsion)</span> – יניקת מים לתוך חלל הגלימה ופליטתם בלחץ דרך משפך. העיניים שלו פרימיטיביות וחסרות עדשה (פועלות כמו מצלמת נקב - Pinhole camera), והוא מסתמך בעיקר על חוש ריח יוצא דופן בעזרת כ-90 זרועות קטנות ונטולות כפתורי מציצה.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-amber-300 text-base mb-1">Nautilus (נאוטילוס):</h3>
+                        <p id="sec2_desc1">שם הסוג מגיע ישירות מהמילה היוונית העתיקה **Nautilos** (ναυτίλος), שמשמעותה <span class="font-bold text-white">מלח (Sailor)</span>. מילה זו עצמה נגזרת מהמילה **Naus** (אונייה/ספינה). היוונים הקדמונים האמינו שהיצור הציף את הקונכייה שלו על פני המים והשתמש בזרועותיו כמפרשים כדי "לשוט" ברחבי הים.</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-amber-300 text-base mb-1">Pompilius (פומפיליוס):</h3>
+                        <p id="sec2_desc2">שם המין (עבור המין הנפוץ ביותר) נגזר מהמילה היוונית **Pompilos**, שהיה שמו של דג מיתולוגי (כנראה דג נווט) שליווה ספינות והדריך אותן. הפירוש הכללי מצביע על יצור המנווט את דרכו בים באצילות.</p>
+                    </div>
+                    <div class="bg-amber-900/20 p-4 rounded-xl border-r-2 border-amber-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-amber-200">המשמעות המלאה: "מלח ים נווט". שם זה שימש השראה לשמה של הצוללת המפורסמת בספרו של ז'ול ורן "20,000 מיל מתחת למים", וכן לשמה של הצוללת הגרעינית הראשונה של ארצות הברית (USS Nautilus).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-amber-400 font-bold text-base mb-4 inline-block border-b border-amber-900/50 pb-1">היסטוריה, אמנות והישרדות:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">השורד האולטימטיבי:</span> <span id="sec3_v1">שושלת הנאוטילוס החלה בתור הקמבריון (לפני כ-500 מיליון שנה). בעוד שקרובי משפחתם, האמוניטים (Ammonites) בעלי הקונכיות המפוארות, נכחדו לחלוטין עם הדינוזאורים, הנאוטילוס שרד את כל 5 ההכחדות ההמוניות בהיסטוריה של כדור הארץ בזכות יכולתו לחיות במעמקים מבודדים.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">באמנות הרנסאנס:</span> <span id="sec3_v2">קונכיות הנאוטילוס שיגעו את האריסטוקרטיה האירופית במאה ה-16 וה-17. הן לוטשו עד לשכבת הפנינה, עוטרו בזהב ואבנים טובות, והוצגו ב"חדרי הפלאות" (Wunderkammer) כאוצרות הטבע הגדולים ביותר של התקופה.</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">קיטלוג מדעי:</span> <span id="sec3_v3">המין קיבל את שמו המדעי הרשמי על ידי קארולוס לינאוס בשנת 1758. כיום המין עומד בפני סכנה בשל דיג יתר מסחרי למטרות מסחר בקונכיות היפהפיות שלו.</span></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="../fish/frilledshark.html" class="text-slate-400 hover:text-amber-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: חסחוסן צלופחי</span>
+        </a>
+        <a href="../index.html" class="text-amber-400 hover:text-amber-300 transition-colors text-sm font-bold bg-amber-900/20 px-5 py-2.5 rounded-full border border-amber-800/30 shadow-lg">
+            <span id="navNext">חזרה לארכיון</span> <span>&larr;</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: קונכיית "יחס הזהב" ומנגנון הנעה סילוני',
+                ui_title: 'נאוטילוס',
+                ui_sci: 'Nautilus pompilius',
+                ui_trans: '"מלח ים נווט"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'מעל 500<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>קיטלוג', stat2_val: '<br>1758<br>&nbsp;',
+                stat3_lbl: 'קוטר<br>מירבי', stat3_val: 'עד 25<br>ס"מ<br>&nbsp;',
+                stat4_lbl: 'תוחלת<br>חיים', stat4_val: 'עד 20<br>שנים<br>&nbsp;',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'הנאוטילוס הוא רכיכה ימית מדהימה המשתייכת למחלקת סילוניות (Cephalopoda). בעוד שקרובי משפחתו המודרניים (תמנונים ודיונונים) איבדו את הקונכייה החיצונית שלהם במהלך האבולוציה כדי להפוך לטורפים מהירים, הנאוטילוס הוא הסילונית היחידה ששמרה על קונכייה חיצונית שלמה. הקונכייה שלו בנויה בצורה גיאומטרית מרהיבה של <span class="font-bold text-white">ספירלה לוגריתמית</span>, המהווה את אחת הדוגמאות המושלמות בטבע ל"יחס הזהב". הקונכייה מחולקת לתאים פנימיים (Septa); הנאוטילוס עצמו גר תמיד בתא החיצוני והגדול ביותר, בעוד שאר התאים משמשים כמעין צוללת מתוחכמת.',
+                sec1_p2: 'השליטה בציפה מתבצעת דרך צינור רקמה דק הנקרא <span class="font-bold text-white">סיפונקל (Siphuncle)</span> העובר דרך כל תאי הקונכייה. הנאוטילוס שואב או מזריק מים לתאים אלו כדי לשלוט בעומק הצלילה שלו. הוא יכול לצלול לעומקים של עד 700 מטרים ביום כדי לחמוק מטורפים, ולעלות לשוניות רדודות בלילה כדי לצוד. במקום סנפירים, הוא נע באמצעות <span class="font-bold text-white">הנעה סילונית (Jet propulsion)</span> – יניקת מים לתוך חלל הגלימה ופליטתם בלחץ דרך משפך. העיניים שלו פרימיטיביות וחסרות עדשה (פועלות כמו מצלמת נקב - Pinhole camera), והוא מסתמך בעיקר על חוש ריח יוצא דופן בעזרת כ-90 זרועות קטנות ונטולות כפתורי מציצה.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Nautilus (נאוטילוס):', sec2_desc1: 'שם הסוג מגיע ישירות מהמילה היוונית העתיקה **Nautilos** (ναυτίλος), שמשמעותה <span class="font-bold text-white">מלח (Sailor)</span>. מילה זו עצמה נגזרת מהמילה **Naus** (אונייה/ספינה). היוונים הקדמונים האמינו שהיצור הציף את הקונכייה שלו על פני המים והשתמש בזרועותיו כמפרשים כדי "לשוט" ברחבי הים.',
+                sec2_sub2: 'Pompilius (פומפיליוס):', sec2_desc2: 'שם המין (עבור המין הנפוץ ביותר) נגזר מהמילה היוונית **Pompilos**, שהיה שמו של דג מיתולוגי (כנראה דג נווט) שליווה ספינות והדריך אותן. הפירוש הכללי מצביע על יצור המנווט את דרכו בים באצילות.',
+                sec2_total: 'המשמעות המלאה: "מלח ים נווט". שם זה שימש השראה לשמה של הצוללת המפורסמת בספרו של ז\'ול ורן "20,000 מיל מתחת למים", וכן לשמה של הצוללת הגרעינית הראשונה של ארצות הברית (USS Nautilus).',
+                sec3_title: 'היסטוריה, אמנות והישרדות:',
+                sec3_l1: 'השורד האולטימטיבי:', sec3_v1: 'שושלת הנאוטילוס החלה בתור הקמבריון (לפני כ-500 מיליון שנה). בעוד שקרובי משפחתם, האמוניטים (Ammonites) בעלי הקונכיות המפוארות, נכחדו לחלוטין עם הדינוזאורים, הנאוטילוס שרד את כל 5 ההכחדות ההמוניות בהיסטוריה של כדור הארץ בזכות יכולתו לחיות במעמקים מבודדים.',
+                sec3_l2: 'באמנות הרנסאנס:', sec3_v2: 'קונכיות הנאוטילוס שיגעו את האריסטוקרטיה האירופית במאה ה-16 וה-17. הן לוטשו עד לשכבת הפנינה, עוטרו בזהב ואבנים טובות, והוצגו ב"חדרי הפלאות" (Wunderkammer) כאוצרות הטבע הגדולים ביותר של התקופה.',
+                sec3_l3: 'קיטלוג מדעי:', sec3_v3: 'המין קיבל את שמו המדעי הרשמי על ידי קארולוס לינאוס בשנת 1758. כיום המין עומד בפני סכנה בשל דיג יתר מסחרי למטרות מסחר בקונכיות היפהפיות שלו.',
+                navPrev: 'הקודם: חסחוסן צלופחי', navNext: 'חזרה לארכיון', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                back: '← Back',
+                ui_feature: 'Unique feature: "Golden ratio" shell and jet propulsion mechanism',
+                ui_title: 'Nautilus',
+                ui_sci: 'Nautilus pompilius',
+                ui_trans: '"Navigating Sailor"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: 'Over 500<br>Million<br>Years',
+                stat2_lbl: 'Classified<br>In', stat2_val: '<br>1758<br>&nbsp;',
+                stat3_lbl: 'Max<br>Diameter', stat3_val: 'Up to 25<br>cm<br>&nbsp;',
+                stat4_lbl: 'Lifespan<br>Span', stat4_val: 'Up to 20<br>Years<br>&nbsp;',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The Nautilus is an incredible marine mollusk belonging to the class Cephalopoda. While its modern relatives (octopuses and squids) lost their external shells during evolution to become fast predators, the Nautilus is the only cephalopod to retain a complete external shell. Its shell is built in a magnificent geometric shape of a <span class="font-bold text-white">logarithmic spiral</span>, serving as one of nature\'s most perfect examples of the "golden ratio". The shell is divided into internal chambers (septa); the Nautilus itself always lives in the outermost, largest chamber, while the other chambers function as a sophisticated submarine system.',
+                sec1_p2: 'Buoyancy control is achieved through a thin tissue tube called the <span class="font-bold text-white">Siphuncle</span>, which runs through all the shell\'s chambers. The Nautilus pumps fluid into or out of these chambers to control its diving depth. It can dive to depths of up to 700 meters during the day to evade predators, and ascend to shallow reefs at night to hunt. Instead of fins, it moves via <span class="font-bold text-white">Jet Propulsion</span>—sucking water into its mantle cavity and forcing it out under pressure through a funnel. Its eyes are primitive and lack lenses (operating like a pinhole camera), so it relies heavily on an exceptional sense of smell using about 90 small, suckerless tentacles.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Nautilus:', sec2_desc1: 'The genus name comes directly from the ancient Greek word **Nautilos** (ναυτίλος), meaning <span class="font-bold text-white">sailor</span>. This word itself is derived from **Naus** (ship). The ancient Greeks believed that the creature floated its shell on the water\'s surface and used its tentacles as sails to "sail" across the sea.',
+                sec2_sub2: 'Pompilius:', sec2_desc2: 'The species name (for the most common species) is derived from the Greek word **Pompilos**, which was the name of a mythological fish (likely a pilot fish) that accompanied and guided ships. The overall meaning points to a creature navigating its way nobly through the sea.',
+                sec2_total: 'Full Meaning: "Navigating sailor". This name inspired the famous submarine in Jules Verne\'s "20,000 Leagues Under the Sea", as well as the world\'s first operational nuclear-powered submarine (USS Nautilus).',
+                sec3_title: 'History, Art & Survival:',
+                sec3_l1: 'The Ultimate Survivor:', sec3_v1: 'The Nautilus lineage began in the Cambrian period (about 500 million years ago). While their relatives, the magnificently shelled Ammonites, went completely extinct alongside the dinosaurs, the Nautilus survived all 5 mass extinctions in Earth\'s history thanks to its ability to live in isolated depths.',
+                sec3_l2: 'In Renaissance Art:', sec3_v2: 'Nautilus shells drove the European aristocracy crazy in the 16th and 17th centuries. They were polished down to their mother-of-pearl layer, adorned with gold and precious stones, and displayed in "Cabinets of Curiosities" (Wunderkammer) as the greatest natural treasures of the era.',
+                sec3_l3: 'Scientific Classification:', sec3_v3: 'The species received its official scientific name by Carl Linnaeus in 1758. Today, the species faces threats from commercial overfishing driven by the trade of its beautiful shells.',
+                navPrev: 'Prev: Frilled Shark', navNext: 'Back to Archive', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const d = content[currentLang];
+            
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
+            
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
+            
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
+            
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerHTML = d.sec2_total;
+            
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
+            
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
+            document.documentElement.lang = currentLang;
+
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
+        }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

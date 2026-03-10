@@ -8,9 +8,9 @@
     <style>
         /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
         :root {
-            --bg-body: #030712; /* Very dark background */
-            --bg-card: #0a1122; /* Main card background */
-            --bg-pill: #132342; /* Stats pill background */
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
             --border-card: #1d365d;
             --text-accent: #f97316; /* Orange-500 */
         }
@@ -37,6 +37,12 @@
             height: 300px;
             object-fit: cover;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
         }
 
         .stat-pill {
@@ -88,11 +94,19 @@
         <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
     </div>
 
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
     <!-- Main Content Card -->
     <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
         
-        <!-- Hero Image (Updated to raw github link) -->
-        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/leatherback.png" alt="צב גלד" class="hero-img" onerror="this.src='https://via.placeholder.com/800x450/0a1122/f97316?text=Image+Not+Found'">
+        <!-- Hero Image (עם הקישור המדויק באותיות קטנות וחלון צף) -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/leatherback.png" alt="צב גלד" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/f97316?text=Image+Not+Found'">
 
         <div class="p-6 md:p-8 space-y-10">
             
@@ -281,6 +295,36 @@
                 etymTotalBox.classList.add('border-r-2');
             }
         }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>

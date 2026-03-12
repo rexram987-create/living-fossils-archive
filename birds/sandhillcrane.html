@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: עגור קנדי | ארכיון המאובנים החיים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #020617; 
+            --bg-card: #0f172a; 
+            --bg-pill: #1e293b;
+            --text-accent: #0ea5e9; 
+            --text-accent-secondary: #38bdf8;
+            --border-color: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-header {
+            color: var(--text-accent);
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .highlight-box {
+            background-color: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            border-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        /* Modal Styles */
+        #imageModal {
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #imageModal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-image {
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #imageModal.active .modal-image {
+            transform: scale(1);
+        }
+        
+        .zoomable-img {
+            cursor: zoom-in;
+            transition: opacity 0.2s ease;
+        }
+        .zoomable-img:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative font-sans selection:bg-sky-500/30">
+
+    <!-- Top Navigation -->
+    <nav class="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center relative z-10">
+        <a href="../index.html" class="nav-btn px-6 py-2 rounded-full text-sm font-medium flex items-center gap-2" data-he="<span>&rarr;</span> חזרה" data-en="<span>&larr;</span> Back">
+            <span>&rarr;</span> חזרה
+        </a>
+        <button id="langBtn" onclick="toggleLanguage()" class="nav-btn px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+            EN
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 pb-20 relative z-10">
+        
+        <!-- Zoomable Image Section -->
+        <div class="mb-12 mt-4 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl mx-auto max-w-2xl relative group">
+            <img 
+                src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/sandhillcrane.png" 
+                alt="עגור קנדי" 
+                class="w-full h-auto object-cover zoomable-img"
+                onclick="openModal(this.src, this.alt)"
+                onerror="this.src='https://via.placeholder.com/800x450/0a1122/0ea5e9?text= Sandhill+Crane'"
+            >
+            <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur px-3 py-1.5 rounded-full text-xs text-white flex items-center gap-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" data-he="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> לחץ להגדלה" data-en="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> Click to zoom">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                לחץ להגדלה
+            </div>
+        </div>
+
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <p class="text-slate-400 text-sm md:text-base mb-4 font-medium" data-he="מאפיין ייחודי: אחד ממיני הציפורים החיים העתיקים בעולם, מפורסם בריקוד החיזור שלו" data-en="Unique Feature: One of the oldest living bird species in the world, famous for its mating dance">מאפיין ייחודי: אחד ממיני הציפורים החיים העתיקים בעולם, מפורסם בריקוד החיזור שלו</p>
+            <h1 class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight" data-he="עגור קנדי" data-en="Sandhill Crane">עגור קנדי</h1>
+            <p class="text-slate-400 font-mono text-lg mb-4 tracking-widest">Gruidae</p>
+            <p class="text-sky-400 font-bold text-xl mb-8" data-he='"הרקדן העתיק של צפון אמריקה"' data-en='"The Ancient Dancer of North America"'>"הרקדן העתיק של צפון אמריקה"</p>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16 text-center">
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>דגירה" data-en="Incubation<br>Period">תקופת<br>דגירה</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 32<br>ימים' data-en='Up to 32<br>days'>עד 32<br>ימים</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="גובה<br>מירבי" data-en="Max<br>Height">גובה<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 1.2<br>מטרים' data-en='Up to 1.2<br>meters'>עד 1.2<br>מטרים</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="משקל<br>מירבי" data-en="Max<br>Weight">משקל<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 6.5<br>ק"ג' data-en='Up to 6.5<br>kg'>עד 6.5<br>ק"ג</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="שנת<br>גילוי" data-en="Discovery<br>Year">שנת<br>גילוי</span>
+                <span class="text-white font-bold text-lg leading-tight">1758</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>שושלת" data-en="Lineage<br>Period">תקופת<br>שושלת</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='מעל 2.5<br>מיליון<br>שנה' data-en='Over 2.5<br>Million<br>Years'>מעל 2.5<br>מיליון<br>שנה</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="מצב<br>שימור" data-en="Conservation<br>Status">מצב<br>שימור</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='ללא חשש<br>(יציב)' data-en='Least Concern<br>(Stable)'>ללא חשש<br>(יציב)</span>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="space-y-8 text-slate-300 text-lg leading-relaxed text-justify">
+            
+            <h2 class="section-header" data-he="ייחודיות מדעית ופיזית:" data-en="Scientific and Physical Uniqueness:">ייחודיות מדעית ופיזית:</h2>
+            <p data-he="העגור הקנדי (Sandhill Crane) הוא עוף גדול, אלגנטי ומרשים המוכר בזכות רגליו הארוכות, צווארו הדק והארוך, וכתר אדום וחשוף מנוצות המעטר את ראשו. בניגוד לאנפות (Herons) שמקפלות את צווארן לאחור בזמן תעופה, העגורים עפים כשצווארם ורגליהם מתוחים לחלוטין קדימה ואחורה, מה שמעניק להם צללית פרהיסטורית חלקה ויפהפייה בשמיים." data-en="The Sandhill Crane is a large, elegant, and impressive bird known for its long legs, long slender neck, and a featherless red crown adorning its head. Unlike herons that fold their necks back during flight, cranes fly with their necks and legs stretched fully forward and backward, giving them a sleek and beautiful prehistoric silhouette in the sky.">
+                העגור הקנדי (Sandhill Crane) הוא עוף גדול, אלגנטי ומרשים המוכר בזכות רגליו הארוכות, צווארו הדק והארוך, וכתר אדום וחשוף מנוצות המעטר את ראשו. בניגוד לאנפות (Herons) שמקפלות את צווארן לאחור בזמן תעופה, העגורים עפים כשצווארם ורגליהם מתוחים לחלוטין קדימה ואחורה, מה שמעניק להם צללית פרהיסטורית חלקה ויפהפייה בשמיים.
+            </p>
+            <p data-he="הם מפורסמים במיוחד בזכות <span class='text-sky-400 font-medium'>ריקודי החיזור המורכבים שלהם</span>, הכוללים קפיצות גבוהות באוויר, פרישת כנפיים, קידות וזריקת ענפים או עשב לאוויר, מלווים בקריאות חצוצרה רמות. קריאות אלו מהדהדות למרחקים אדירים בזכות קנה נשימה מוארך ומפותל בתוך עצם החזה שלהם, הפועל כתיבת תהודה טבעית." data-en="They are particularly famous for their <span class='text-sky-400 font-medium'>complex mating dances</span>, which include high leaps in the air, wing spreading, bowing, and throwing sticks or grass into the air, accompanied by loud trumpet-like calls. These calls echo over vast distances thanks to an elongated and coiled trachea within their sternum, acting as a natural resonance chamber.">
+                הם מפורסמים במיוחד בזכות <span class="text-sky-400 font-medium">ריקודי החיזור המורכבים שלהם</span>, הכוללים קפיצות גבוהות באוויר, פרישת כנפיים, קידות וזריקת ענפים או עשב לאוויר, מלווים בקריאות חצוצרה רמות. קריאות אלו מהדהדות למרחקים אדירים בזכות קנה נשימה מוארך ומפותל בתוך עצם החזה שלהם, הפועל כתיבת תהודה טבעית.
+            </p>
+
+            <h2 class="section-header" data-he="הרגלי תזונה:" data-en="Dietary Habits:">הרגלי תזונה:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="העגור הקנדי הוא <span class='text-sky-400 font-medium'>אוכל-כל (אומניבור) אופורטוניסט</span>, הניזון מכל הבא למקור בהתאם לעונה ולמיקומו הגיאוגרפי. הוא מבלה את רוב יומו בשיטוט באחו, בשדות חקלאיים ובביצות רדודות בחיפוש אחר מזון." data-en="The Sandhill Crane is an <span class='text-sky-400 font-medium'>opportunistic omnivore</span>, feeding on whatever is available according to the season and geographic location. It spends most of its day roaming meadows, agricultural fields, and shallow wetlands searching for food.">
+                    העגור הקנדי הוא <span class="text-sky-400 font-medium">אוכל-כל (אומניבור) אופורטוניסט</span>, הניזון מכל הבא למקור בהתאם לעונה ולמיקומו הגיאוגרפי. הוא מבלה את רוב יומו בשיטוט באחו, בשדות חקלאיים ובביצות רדודות בחיפוש אחר מזון.
+                </p>
+                <p data-he="תזונתו מבוססת בעיקר על חומר צמחי כמו שורשים, פקעות, זרעים (תירס, חיטה) ופירות יער. עם זאת, מקורו הארוך והחזק משמש כמעדר יעיל לשליפת חלבונים מן החי: הוא טורף חרקים גדולים, תולעים, חלזונות, צפרדעים, לטאות, נחשים ואף מכרסמים קטנים, אותם הוא דוקר במיומנות רבה." data-en="Its diet is primarily based on plant matter such as roots, tubers, seeds (corn, wheat), and berries. However, its long and strong beak serves as an effective hoe for extracting animal proteins: it preys on large insects, worms, snails, frogs, lizards, snakes, and even small rodents, which it skillfully stabs.">
+                    תזונתו מבוססת בעיקר על חומר צמחי כמו שורשים, פקעות, זרעים (תירס, חיטה) ופירות יער. עם זאת, מקורו הארוך והחזק משמש כמעדר יעיל לשליפת חלבונים מן החי: הוא טורף חרקים גדולים, תולעים, חלזונות, צפרדעים, לטאות, נחשים ואף מכרסמים קטנים, אותם הוא דוקר במיומנות רבה.
+                </p>
+            </div>
+
+            <h2 class="section-header" data-he="אטימולוגיה מורחבת (מקור השם):" data-en="Extended Etymology (Name Origin):">אטימולוגיה מורחבת (מקור השם):</h2>
+            
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-6">
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Antigone (שם הסוג):</h3>
+                    <p data-he="מקורו ב<strong>מיתולוגיה היוונית</strong>. אנטיגונה (Antigone) הייתה בתו של מלך טרויה (או על פי גרסאות אחרות, בתו של אדיפוס). על פי המיתוס, היא התגאתה ביופייה והשוותה עצמה לאלה הרה, שהענישה אותה והפכה אותה לחסידה או לעגור כדי שתבלה את חייה בחיפוש אחר דגים בביצות." data-en="Originates from <strong>Greek mythology</strong>. Antigone was the daughter of the King of Troy (or in other versions, Oedipus's daughter). According to myth, she boasted of her beauty and compared herself to the goddess Hera, who punished her by turning her into a stork or a crane so she would spend her life foraging in the swamps.">מקורו ב<strong>מיתולוגיה היוונית</strong>. אנטיגונה (Antigone) הייתה בתו של מלך טרויה (או על פי גרסאות אחרות, בתו של אדיפוס). על פי המיתוס, היא התגאתה ביופייה והשוותה עצמה לאלה הרה, שהענישה אותה והפכה אותה לחסידה או לעגור כדי שתבלה את חייה בחיפוש אחר דגים בביצות.</p>
+                </div>
+                
+                <hr class="border-slate-700">
+                
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">canadensis (שם המין):</h3>
+                    <p data-he="מילה בלטינית שמשמעותה פשוט <strong>&quot;מקנדה&quot;</strong>, המציינת את אזור התפוצה והגילוי העיקרי שבו המין תועד לראשונה באמריקה הצפונית." data-en="A Latin word simply meaning <strong>&quot;from Canada&quot;</strong>, denoting the primary geographic range and discovery location where the species was first documented in North America.">מילה בלטינית שמשמעותה פשוט <strong>"מקנדה"</strong>, המציינת את אזור התפוצה והגילוי העיקרי שבו המין תועד לראשונה באמריקה הצפונית.</p>
+                </div>
+
+                <hr class="border-slate-700">
+
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">עגור (Agur - השם העברי):</h3>
+                    <p data-he="מקור השם הוא <strong>מקראי</strong> (מופיע בספר ירמיהו ח', ז'). חוקרי לשון וזואולוגים מאמינים שהשם העברי (בדומה לשם בערבית 'ע'רנוק') הוא מילה אונומטופאית – כלומר, מילה שנוצרה מחיקוי <strong>צליל הטרטור והקרקור העמוק (גרר-גרר)</strong> שמשמיעות ציפורים אלו בזמן מעופן." data-en="The origin of the name is <strong>Biblical</strong> (appearing in Jeremiah 8:7). Linguists and zoologists believe the Hebrew name (similar to the Arabic 'Ghirnuq') is an onomatopoeic word – meaning, a word created by imitating the <strong>deep rattling and croaking sound (grr-grr)</strong> these birds make during flight.">מקור השם הוא <strong>מקראי</strong> (מופיע בספר ירמיהו ח', ז'). חוקרי לשון וזואולוגים מאמינים שהשם העברי (בדומה לשם בערבית 'ע'רנוק') הוא מילה אונומטופאית – כלומר, מילה שנוצרה מחיקוי <strong>צליל הטרטור והקרקור העמוק (גרר-גרר)</strong> שמשמיעות ציפורים אלו בזמן מעופן.</p>
+                </div>
+                
+                <div class="highlight-box mt-4">
+                    <p class="text-sky-100 font-medium" data-he="<span class='text-sky-400 font-bold'>Sandhill (השם האנגלי העממי):</span> נקרא על שם אזור <strong>גבעות החול (Sandhills) בנברסקה</strong>, ארה&quot;ב, המהווה את תחנת העצירה הקריטית והגדולה בעולם עבור מאות אלפי עגורים בנדידתם השנתית." data-en="<span class='text-sky-400 font-bold'>Sandhill (English Common Name):</span> Named after the <strong>Sandhills region in Nebraska</strong>, USA, which serves as the most critical and largest stopover site in the world for hundreds of thousands of cranes during their annual migration.">
+                        <span class="text-sky-400 font-bold">Sandhill (השם האנגלי העממי):</span> נקרא על שם אזור <strong>גבעות החול (Sandhills) בנברסקה</strong>, ארה"ב, המהווה את תחנת העצירה הקריטית והגדולה בעולם עבור מאות אלפי עגורים בנדידתם השנתית.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="section-header" data-he="היסטוריית הגילוי והשרידות:" data-en="History of Discovery and Survival:">היסטוריית הגילוי והשרידות:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="<strong class='text-white'>הגילוי המקורי:</strong> העגור הקנדי תואר מדעית וקוטלג לראשונה בשנת 1758 על ידי אבי הטקסונומיה המודרנית, חוקר הטבע השוודי קארל לינאוס <span class='text-sky-400 font-mono text-base'>(Carl Linnaeus, שנות חיים: 1707–1778)</span> בחיבורו Systema Naturae." data-en="<strong class='text-white'>Original Discovery:</strong> The Sandhill Crane was scientifically described and cataloged for the first time in 1758 by the father of modern taxonomy, the Swedish naturalist Carl Linnaeus <span class='text-sky-400 font-mono text-base'>(Lifespan: 1707–1778)</span> in his work Systema Naturae.">
+                    <strong class="text-white">הגילוי המקורי:</strong> העגור הקנדי תואר מדעית וקוטלג לראשונה בשנת 1758 על ידי אבי הטקסונומיה המודרנית, חוקר הטבע השוודי קארל לינאוס <span class="text-sky-400 font-mono text-base">(Carl Linnaeus, שנות חיים: 1707–1778)</span> בחיבורו Systema Naturae.
+                </p>
+                <p data-he="<strong class='text-white'>הציפור העתיקה בעולם?:</strong> בעוד שמשפחות עופות רבות הן עתיקות, העגור הקנדי מחזיק בשיא פליאונטולוגי מדהים. בנברסקה נמצא מאובן של ציפור הזהה לחלוטין באנטומיה שלה לעגור קנדי מודרני, אשר מתוארך ל-<span class='text-sky-400 font-medium'>2.5 מיליון שנים אחורה</span> (וישנם חוקרים הסבורים שמאובנים דומים בני 10 מיליון שנים שייכים גם הם לאותו המין). עובדה זו הופכת אותו לאחד ממיני העופות היחידים על כדור הארץ ששרדו כמעט ללא שום שינוי אבולוציוני מתקופת הפליוקן." data-en="<strong class='text-white'>The Oldest Bird in the World?:</strong> While many bird families are ancient, the Sandhill Crane holds an incredible paleontological record. A bird fossil completely identical in anatomy to a modern Sandhill Crane was found in Nebraska, dating back <span class='text-sky-400 font-medium'>2.5 million years</span> (and some researchers believe similar 10-million-year-old fossils belong to the same species). This fact makes it one of the only bird species on Earth to have survived with almost no evolutionary change since the Pliocene epoch.">
+                    <strong class="text-white">הציפור העתיקה בעולם?:</strong> בעוד שמשפחות עופות רבות הן עתיקות, העגור הקנדי מחזיק בשיא פליאונטולוגי מדהים. בנברסקה נמצא מאובן של ציפור הזהה לחלוטין באנטומיה שלה לעגור קנדי מודרני, אשר מתוארך ל-<span class="text-sky-400 font-medium">2.5 מיליון שנים אחורה</span> (וישנם חוקרים הסבורים שמאובנים דומים בני 10 מיליון שנים שייכים גם הם לאותו המין). עובדה זו הופכת אותו לאחד ממיני העופות היחידים על כדור הארץ ששרדו כמעט ללא שום שינוי אבולוציוני מתקופת הפליוקן.
+                </p>
+                <p data-he="<strong class='text-white'>מצב שימור:</strong> באופן כללי, מצב השימור של העגור הקנדי הוא הטוב ביותר מבין כל 15 מיני העגורים בעולם, ומספרם אף נמצא במגמת עלייה מסוימת הודות למאמצי שימור אינטנסיביים של שטחי הביצות וגבעות החול בארה&quot;ב. עם זאת, תת-מינים ספציפיים (כמו העגור הקנדי של מיסיסיפי) נמצאים בסכנת הכחדה חמורה עקב פיתוח אנושי ואובדן בית גידול." data-en="<strong class='text-white'>Conservation Status:</strong> Generally, the conservation status of the Sandhill Crane is the best among all 15 crane species in the world, and their numbers are even slightly increasing thanks to intensive conservation efforts of wetlands and the Sandhills in the US. However, specific subspecies (like the Mississippi Sandhill Crane) are critically endangered due to human development and habitat loss.">
+                    <strong class="text-white">מצב שימור:</strong> באופן כללי, מצב השימור של העגור הקנדי הוא הטוב ביותר מבין כל 15 מיני העגורים בעולם, ומספרם אף נמצא במגמת עלייה מסוימת הודות למאמצי שימור אינטנסיביים של שטחי הביצות וגבעות החול בארה"ב. עם זאת, תת-מינים ספציפיים (כמו העגור הקנדי של מיסיסיפי) נמצאים בסכנת הכחדה חמורה עקב פיתוח אנושי ואובדן בית גידול.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
+            <a href="sacredibis.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="&rarr; הקודם: מגלן קדוש" data-en="&larr; Prev: Sacred Ibis">
+                &rarr; הקודם: מגלן קדוש
+            </a>
+            <a href="tinamou.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="הבא: טינמו &larr;" data-en="Next: Tinamou &rarr;">
+                הבא: טינמו &larr;
+            </a>
+        </div>
+        
+    </main>
+
+    <!-- Fullscreen Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onclick="closeModal()">
+        <button class="absolute top-6 left-6 text-white hover:text-sky-400 p-2 rounded-full bg-slate-800/50 transition-colors" onclick="closeModal(event)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <img id="modalImage" src="" alt="" class="modal-image max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-slate-700" onclick="event.stopPropagation()">
+    </div>
+
+    <script>
+        // Language Toggle Functionality
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            
+            // Toggle HTML direction and lang
+            document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            // Update button text
+            document.getElementById('langBtn').innerText = currentLang === 'he' ? 'EN' : 'HE';
+
+            // Find all elements with translation data and update them dynamically
+            document.querySelectorAll('[data-he]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        // Modal functionality for zoomable image
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src, alt) {
+            modalImg.src = src;
+            modalImg.alt = alt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; 
+            
+            setTimeout(() => {
+                if (!modal.classList.contains('active')) {
+                    modalImg.src = '';
+                }
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
+

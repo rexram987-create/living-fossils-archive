@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: מגלן קדוש | ארכיון המאובנים החיים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #020617; 
+            --bg-card: #0f172a; 
+            --bg-pill: #1e293b;
+            --text-accent: #0ea5e9; 
+            --text-accent-secondary: #38bdf8;
+            --border-color: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-header {
+            color: var(--text-accent);
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .highlight-box {
+            background-color: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            border-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        /* Modal Styles */
+        #imageModal {
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #imageModal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-image {
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #imageModal.active .modal-image {
+            transform: scale(1);
+        }
+        
+        .zoomable-img {
+            cursor: zoom-in;
+            transition: opacity 0.2s ease;
+        }
+        .zoomable-img:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative font-sans selection:bg-sky-500/30">
+
+    <!-- Top Navigation -->
+    <nav class="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center relative z-10">
+        <a href="../index.html" class="nav-btn px-6 py-2 rounded-full text-sm font-medium flex items-center gap-2" data-he="<span>&rarr;</span> חזרה" data-en="<span>&larr;</span> Back">
+            <span>&rarr;</span> חזרה
+        </a>
+        <button id="langBtn" onclick="toggleLanguage()" class="nav-btn px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+            EN
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 pb-20 relative z-10">
+        
+        <!-- Zoomable Image Section -->
+        <div class="mb-12 mt-4 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl mx-auto max-w-2xl relative group">
+            <img 
+                src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/sacredibis.png" 
+                alt="מגלן קדוש" 
+                class="w-full h-auto object-cover zoomable-img"
+                onclick="openModal(this.src, this.alt)"
+                onerror="this.src='https://via.placeholder.com/800x450/0a1122/0ea5e9?text= Sacred+Ibis'"
+            >
+            <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur px-3 py-1.5 rounded-full text-xs text-white flex items-center gap-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" data-he="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> לחץ להגדלה" data-en="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> Click to zoom">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                לחץ להגדלה
+            </div>
+        </div>
+
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <p class="text-slate-400 text-sm md:text-base mb-4 font-medium" data-he="מאפיין ייחודי: ציפור מים בעלת מקור מעוקל כחרמש וראש חשוף, שנערצה כאל במצרים" data-en="Unique Feature: A waterbird with a sickle-curved beak and bare head, revered as a god in Egypt">מאפיין ייחודי: ציפור מים בעלת מקור מעוקל כחרמש וראש חשוף, שנערצה כאל במצרים</p>
+            <h1 class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight" data-he="מגלן קדוש" data-en="Sacred Ibis">מגלן קדוש</h1>
+            <p class="text-slate-400 font-mono text-lg mb-4 tracking-widest">Threskiornithidae</p>
+            <p class="text-sky-400 font-bold text-xl mb-8" data-he='"הציפור של האל תות"' data-en='"The Bird of the God Thoth"'>"הציפור של האל תות"</p>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16 text-center">
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>דגירה" data-en="Incubation<br>Period">תקופת<br>דגירה</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 29<br>ימים' data-en='Up to 29<br>days'>עד 29<br>ימים</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="אורך<br>מירבי" data-en="Max<br>Length">אורך<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 75<br>ס"מ' data-en='Up to 75<br>cm'>עד 75<br>ס"מ</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="משקל<br>מירבי" data-en="Max<br>Weight">משקל<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 1.5<br>ק"ג' data-en='Up to 1.5<br>kg'>עד 1.5<br>ק"ג</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="שנת<br>גילוי" data-en="Discovery<br>Year">שנת<br>גילוי</span>
+                <span class="text-white font-bold text-lg leading-tight">1790</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>שושלת" data-en="Lineage<br>Period">תקופת<br>שושלת</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='מעל 60<br>מיליון<br>שנה' data-en='Over 60<br>Million<br>Years'>מעל 60<br>מיליון<br>שנה</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="מצב<br>שימור" data-en="Conservation<br>Status">מצב<br>שימור</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='ללא חשש<br>(יציב)' data-en='Least Concern<br>(Stable)'>ללא חשש<br>(יציב)</span>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="space-y-8 text-slate-300 text-lg leading-relaxed text-justify">
+            
+            <h2 class="section-header" data-he="ייחודיות מדעית ופיזית:" data-en="Scientific and Physical Uniqueness:">ייחודיות מדעית ופיזית:</h2>
+            <p data-he="המגלן הקדוש הוא עוף מים מרשים ממשפחת הכפניים. סימן ההיכר הבולט ביותר שלו הוא הניגודיות החזותית: גופו מכוסה בנוצות לבנות כשלג, בעוד שראשו, צווארו החשוף מנוצות, רגליו ומקורו הם בצבע שחור עמוק. היעדר הנוצות בראש ובצוואר הוא התאמה אבולוציונית היגיינית מצוינת עבור עוף שנובר בבוץ עמוק, באשפה ובנבלות בחיפוש אחר מזון, וכך מונע הצטברות חיידקים וטפילים על גופו." data-en="The Sacred Ibis is a striking waterbird from the Threskiornithidae family. Its most prominent feature is its visual contrast: its body is covered in snow-white feathers, while its bare head, neck, legs, and beak are pitch black. The lack of feathers on the head and neck is an excellent hygienic evolutionary adaptation for a bird that probes deep mud, garbage, and carrion for food, thus preventing the accumulation of bacteria and parasites on its body.">
+                המגלן הקדוש הוא עוף מים מרשים ממשפחת הכפניים. סימן ההיכר הבולט ביותר שלו הוא הניגודיות החזותית: גופו מכוסה בנוצות לבנות כשלג, בעוד שראשו, צווארו החשוף מנוצות, רגליו ומקורו הם בצבע שחור עמוק. היעדר הנוצות בראש ובצוואר הוא התאמה אבולוציונית היגיינית מצוינת עבור עוף שנובר בבוץ עמוק, באשפה ובנבלות בחיפוש אחר מזון, וכך מונע הצטברות חיידקים וטפילים על גופו.
+            </p>
+            <p data-he="במצרים העתיקה, המגלן נחשב להתגלמותו הארצית של האל <strong>תות (Thoth)</strong>, אל החוכמה, הקסם, המדע והכתב. המצרים הקדמונים התרשמו ממקורו הארוך והמעוקל, שהזכיר להם את עט החרט בה השתמשו לכתיבת ההירוגליפים, וכן מהעובדה שהוא צד נחשים שהיוו איום על התושבים. כתוצאה מכך, הם חנטו מיליוני מגלנים במבוכים תת-קרקעיים כקורבנות לאלים, ממצאים שנחשפים עד היום בחפירות ארכיאולוגיות." data-en="In ancient Egypt, the ibis was considered the earthly incarnation of the god <strong>Thoth</strong>, the god of wisdom, magic, science, and writing. The ancient Egyptians were impressed by its long, curved beak, which reminded them of the stylus used for writing hieroglyphs, as well as the fact that it hunted snakes that threatened the inhabitants. Consequently, they mummified millions of ibises in subterranean labyrinths as offerings to the gods, findings that are still being discovered in archaeological excavations today.">
+                במצרים העתיקה, המגלן נחשב להתגלמותו הארצית של האל <strong>תות (Thoth)</strong>, אל החוכמה, הקסם, המדע והכתב. המצרים הקדמונים התרשמו ממקורו הארוך והמעוקל, שהזכיר להם את עט החרט בה השתמשו לכתיבת ההירוגליפים, וכן מהעובדה שהוא צד נחשים שהיוו איום על התושבים. כתוצאה מכך, הם חנטו מיליוני מגלנים במבוכים תת-קרקעיים כקורבנות לאלים, ממצאים שנחשפים עד היום בחפירות ארכיאולוגיות.
+            </p>
+
+            <h2 class="section-header" data-he="הרגלי תזונה:" data-en="Dietary Habits:">הרגלי תזונה:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="המגלן הקדוש הוא <span class='text-sky-400 font-medium'>טורף אופורטוניסט וסתגלן</span>. בסביבתו הטבעית בביצות ובגדות הנהר, הוא ניזון בעיקר מחרקים, תולעים, רכיכות, סרטנים קטנים, דגים, צפרדעים וזוחלים קטנים. יכולת ההסתגלות שלו מדהימה, והוא אינו בוחל גם באכילת נבלות." data-en="The Sacred Ibis is an <span class='text-sky-400 font-medium'>opportunistic and adaptable predator</span>. In its natural habitat in swamps and riverbanks, it feeds mainly on insects, worms, mollusks, small crustaceans, fish, frogs, and small reptiles. Its adaptability is remarkable, and it does not shy away from eating carrion.">
+                    המגלן הקדוש הוא <span class="text-sky-400 font-medium">טורף אופורטוניסט וסתגלן</span>. בסביבתו הטבעית בביצות ובגדות הנהר, הוא ניזון בעיקר מחרקים, תולעים, רכיכות, סרטנים קטנים, דגים, צפרדעים וזוחלים קטנים. יכולת ההסתגלות שלו מדהימה, והוא אינו בוחל גם באכילת נבלות.
+                </p>
+                <p data-he="כלי הנשק וכלי העבודה המרכזי שלו הוא המקור. המקור הארוך, המעוקל והרגיש למגע פועל כמעין <strong>פינצטה משוכללת</strong>, המאפשרת למגלן לנבור עמוק בתוך הבוץ או לחטט בחריצים צרים בין אבנים כדי לשלוף את טרפו מבלי לראות אותו כלל, תוך הסתמכות על חוש המישוש בלבד." data-en="Its main weapon and tool is its beak. The long, curved, and touch-sensitive beak acts as a kind of <strong>sophisticated tweezer</strong>, allowing the ibis to probe deep into the mud or dig into narrow crevices between stones to extract its prey without seeing it at all, relying solely on its sense of touch.">
+                    כלי הנשק וכלי העבודה המרכזי שלו הוא המקור. המקור הארוך, המעוקל והרגיש למגע פועל כמעין <strong>פינצטה משוכללת</strong>, המאפשרת למגלן לנבור עמוק בתוך הבוץ או לחטט בחריצים צרים בין אבנים כדי לשלוף את טרפו מבלי לראות אותו כלל, תוך הסתמכות על חוש המישוש בלבד.
+                </p>
+            </div>
+
+            <h2 class="section-header" data-he="אטימולוגיה מורחבת (מקור השם):" data-en="Extended Etymology (Name Origin):">אטימולוגיה מורחבת (מקור השם):</h2>
+            
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-6">
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Threskos (חלק ראשון בשם המדעי):</h3>
+                    <p data-he="השם המדעי *Threskiornis* מורכב מהמילה מיוונית עתיקה <strong>θρῆσκος (Threskos)</strong>, שפירושה <strong>דתי או קדוש</strong>, זכר למעמדו האלוהי בקרב המצרים הקדמונים." data-en="The scientific name *Threskiornis* is composed of the Ancient Greek word <strong>θρῆσκος (Threskos)</strong>, meaning <strong>religious or sacred</strong>, a memory of its divine status among the ancient Egyptians.">השם המדעי *Threskiornis* מורכב מהמילה מיוונית עתיקה <strong>θρῆσκος (Threskos)</strong>, שפירושה <strong>דתי או קדוש</strong>, זכר למעמדו האלוהי בקרב המצרים הקדמונים.</p>
+                </div>
+                
+                <hr class="border-slate-700">
+                
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Ornis (חלק שני בשם המדעי):</h3>
+                    <p data-he="המילה היוונית הקלאסית <strong>ὄρνις (Ornis)</strong>, שפירושה פשוט <strong>ציפור או עוף</strong>." data-en="The classical Greek word <strong>ὄρνις (Ornis)</strong>, which simply means <strong>bird</strong>.">המילה היוונית הקלאסית <strong>ὄρνις (Ornis)</strong>, שפירושה פשוט <strong>ציפור או עוף</strong>.</p>
+                </div>
+
+                <hr class="border-slate-700">
+
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Aethiopicus (שם המין):</h3>
+                    <p data-he="המילה <strong>Aethiopicus</strong> מתייחסת למוצא הגיאוגרפי של הציפור – מ<strong>אתיופיה (או באופן כללי אפריקה שמדרום לסהרה)</strong>." data-en="The word <strong>Aethiopicus</strong> refers to the bird's geographical origin – from <strong>Ethiopia (or generally sub-Saharan Africa)</strong>.">המילה <strong>Aethiopicus</strong> מתייחסת למוצא הגיאוגרפי של הציפור – מ<strong>אתיופיה (או באופן כללי אפריקה שמדרום לסהרה)</strong>.</p>
+                </div>
+                
+                <div class="highlight-box mt-4">
+                    <p class="text-sky-100 font-medium" data-he="<span class='text-sky-400 font-bold'>השם העברי (מגלן):</span> השם בעברית נגזר מהמילה <strong>מַגָּל (Sickle)</strong>, בשל הדמיון הפיזי הברור של מקורו הארוך והמעוקל כלפי מטה אל כלי הקציר החקלאי העתיק, צורה שלמעשה מאפשרת לו לשלות מזון מהבוץ." data-en="<span class='text-sky-400 font-bold'>The Hebrew Name (Maglan):</span> The Hebrew name is derived from the word <strong>Sickle (Magal)</strong>, due to the clear physical resemblance of its long, downward-curving beak to the ancient agricultural harvesting tool, a shape that effectively allows it to extract food from the mud.">
+                        <span class="text-sky-400 font-bold">השם העברי (מגלן):</span> השם בעברית נגזר מהמילה <strong>מַגָּל (Sickle)</strong>, בשל הדמיון הפיזי הברור של מקורו הארוך והמעוקל כלפי מטה אל כלי הקציר החקלאי העתיק, צורה שלמעשה מאפשרת לו לשלות מזון מהבוץ.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="section-header" data-he="היסטוריית הגילוי והשרידות:" data-en="History of Discovery and Survival:">היסטוריית הגילוי והשרידות:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="<strong class='text-white'>הגילוי המקורי:</strong> המגלן הקדוש תואר מדעית וקוטלג לראשונה בשנת 1790 על ידי האורניתולוג והרופא האנגלי המוערך ג'ון לאת'ם <span class='text-sky-400 font-mono text-base'>(John Latham, שנות חיים: 1740–1837)</span>, המכונה לעיתים 'סבא של האורניתולוגיה האוסטרלית והאפריקאית'." data-en="<strong class='text-white'>Original Discovery:</strong> The Sacred Ibis was first scientifically described and cataloged in 1790 by the esteemed English ornithologist and physician John Latham <span class='text-sky-400 font-mono text-base'>(Lifespan: 1740–1837)</span>, sometimes called the 'grandfather of Australian and African ornithology'.">
+                    <strong class="text-white">הגילוי המקורי:</strong> המגלן הקדוש תואר מדעית וקוטלג לראשונה בשנת 1790 על ידי האורניתולוג והרופא האנגלי המוערך ג'ון לאת'ם <span class="text-sky-400 font-mono text-base">(John Latham, שנות חיים: 1740–1837)</span>, המכונה לעיתים 'סבא של האורניתולוגיה האוסטרלית והאפריקאית'.
+                </p>
+                <p data-he="<strong class='text-white'>היעלמות אבסורדית ממצרים:</strong> באופן אירוני להחליט, המגלן הקדוש שנערץ במצרים העתיקה במשך אלפי שנים, <strong>נכחד לחלוטין ממצרים המודרנית בשנות ה-50 של המאה ה-19</strong>. ההיעלמות יוחסה לציד יתר, ייבוש ביצות והרחבת שטחי חקלאות על חשבון בתי הגידול הטבעיים שלו בעמק הנילוס." data-en="<strong class='text-white'>Absurd Disappearance from Egypt:</strong> Ironically, the Sacred Ibis, revered in ancient Egypt for thousands of years, <strong>became completely extinct from modern Egypt in the 1850s</strong>. The disappearance was attributed to overhunting, draining of swamps, and agricultural expansion at the expense of its natural habitats in the Nile Valley.">
+                    <strong class="text-white">היעלמות אבסורדית ממצרים:</strong> באופן אירוני להחליט, המגלן הקדוש שנערץ במצרים העתיקה במשך אלפי שנים, <strong>נכחד לחלוטין ממצרים המודרנית בשנות ה-50 של המאה ה-19</strong>. ההיעלמות יוחסה לציד יתר, ייבוש ביצות והרחבת שטחי חקלאות על חשבון בתי הגידול הטבעיים שלו בעמק הנילוס.
+                </p>
+                <p data-he="<strong class='text-white'>מצב שימור ושורשים קדומים:</strong> למרות הכחדתו במצרים, המגלן הקדוש עדיין משגשג ברחבי אפריקה שמדרום לסהרה, ובמקומות מסוימים בעולם אף נחשב למין פולש מוצלח. שושלת המגלנים (Threskiornithidae) היא עתיקה במיוחד, והתיעוד המאובן מראה שעופות מים בעלי מקור דומה שכשכו בביצות העולם כבר לפני למעלה מ-60 מיליון שנים, בסמוך לאחר הכחדת הדינוזאורים, תוך שהם משמרים את האנטומיה הייחודית שלהם לאורך העידנים." data-en="<strong class='text-white'>Conservation Status and Ancient Roots:</strong> Despite its extinction in Egypt, the Sacred Ibis still thrives throughout sub-Saharan Africa, and in some parts of the world is even considered a successful invasive species. The ibis lineage is particularly ancient, and the fossil record shows that waterbirds with similar beaks waded in the world's swamps over 60 million years ago, shortly after the dinosaur extinction, preserving their unique anatomy throughout the ages.">
+                    <strong class="text-white">מצב שימור ושורשים קדומים:</strong> למרות הכחדתו במצרים, המגלן הקדוש עדיין משגשג ברחבי אפריקה שמדרום לסהרה, ובמקומות מסוימים בעולם אף נחשב למין פולש מוצלח. שושלת המגלנים (Threskiornithidae) היא עתיקה במיוחד, והתיעוד המאובן מראה שעופות מים בעלי מקור דומה שכשכו בביצות העולם כבר לפני למעלה מ-60 מיליון שנים, בסמוך לאחר הכחדת הדינוזאורים, תוך שהם משמרים את האנטומיה הייחודית שלהם לאורך העידנים.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
+            <a href="hoatzin.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="&rarr; הקודם: הואצין" data-en="&larr; Prev: Hoatzin">
+                &rarr; הקודם: הואצין
+            </a>
+            <a href="sandhillcrane.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="הבא: עגור קנדי &larr;" data-en="Next: Sandhill Crane &rarr;">
+                הבא: עגור קנדי &larr;
+            </a>
+        </div>
+        
+    </main>
+
+    <!-- Fullscreen Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onclick="closeModal()">
+        <button class="absolute top-6 left-6 text-white hover:text-sky-400 p-2 rounded-full bg-slate-800/50 transition-colors" onclick="closeModal(event)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <img id="modalImage" src="" alt="" class="modal-image max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-slate-700" onclick="event.stopPropagation()">
+    </div>
+
+    <script>
+        // Language Toggle Functionality
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            
+            // Toggle HTML direction and lang
+            document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            // Update button text
+            document.getElementById('langBtn').innerText = currentLang === 'he' ? 'EN' : 'HE';
+
+            // Find all elements with translation data and update them dynamically
+            document.querySelectorAll('[data-he]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        // Modal functionality for zoomable image
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src, alt) {
+            modalImg.src = src;
+            modalImg.alt = alt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; 
+            
+            setTimeout(() => {
+                if (!modal.classList.contains('active')) {
+                    modalImg.src = '';
+                }
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: קזואר | ארכיון המאובנים החיים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #020617; 
+            --bg-card: #0f172a; 
+            --bg-pill: #1e293b;
+            --text-accent: #0ea5e9; 
+            --text-accent-secondary: #38bdf8;
+            --border-color: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-header {
+            color: var(--text-accent);
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .highlight-box {
+            background-color: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            border-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        /* Modal Styles */
+        #imageModal {
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #imageModal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-image {
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #imageModal.active .modal-image {
+            transform: scale(1);
+        }
+        
+        .zoomable-img {
+            cursor: zoom-in;
+            transition: opacity 0.2s ease;
+        }
+        .zoomable-img:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative font-sans selection:bg-sky-500/30">
+
+    <!-- Top Navigation -->
+    <nav class="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center relative z-10">
+        <a href="../index.html" class="nav-btn px-6 py-2 rounded-full text-sm font-medium flex items-center gap-2" data-he="<span>&rarr;</span> חזרה" data-en="<span>&larr;</span> Back">
+            <span>&rarr;</span> חזרה
+        </a>
+        <button id="langBtn" onclick="toggleLanguage()" class="nav-btn px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+            EN
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 pb-20 relative z-10">
+        
+        <!-- Zoomable Image Section -->
+        <div class="mb-12 mt-4 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl mx-auto max-w-2xl relative group">
+            <img 
+                src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/cassowary.png" 
+                alt="קזואר" 
+                class="w-full h-auto object-cover zoomable-img"
+                onclick="openModal(this.src, this.alt)"
+                onerror="this.src='https://via.placeholder.com/800x450/0a1122/0ea5e9?text= Cassowary'"
+            >
+            <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur px-3 py-1.5 rounded-full text-xs text-white flex items-center gap-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" data-he="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> לחץ להגדלה" data-en="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> Click to zoom">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                לחץ להגדלה
+            </div>
+        </div>
+
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <p class="text-slate-400 text-sm md:text-base mb-4 font-medium" data-he="מאפיין ייחודי: ציפור ענק חסרת תעופה בעלת טפרים קטלניים דמויי פגיון וקסדת קרן" data-en="Unique Feature: Huge flightless bird with deadly dagger-like claws and a keratin casque">מאפיין ייחודי: ציפור ענק חסרת תעופה בעלת טפרים קטלניים דמויי פגיון וקסדת קרן</p>
+            <h1 class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight" data-he="קזואר" data-en="Cassowary">קזואר</h1>
+            <p class="text-slate-400 font-mono text-lg mb-4 tracking-widest">Casuariidae</p>
+            <p class="text-sky-400 font-bold text-xl mb-8" data-he='"הדינוזאור החי של יערות הגשם"' data-en='"The Living Dinosaur of the Rainforest"'>"הדינוזאור החי של יערות הגשם"</p>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16 text-center">
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>דגירה" data-en="Incubation<br>Period">תקופת<br>דגירה</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 52<br>ימים' data-en='Up to 52<br>days'>עד 52<br>ימים</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="גובה<br>מירבי" data-en="Max<br>Height">גובה<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 1.8<br>מטרים' data-en='Up to 1.8<br>meters'>עד 1.8<br>מטרים</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="משקל<br>מירבי" data-en="Max<br>Weight">משקל<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 75<br>ק"ג' data-en='Up to 75<br>kg'>עד 75<br>ק"ג</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="שנת<br>גילוי" data-en="Discovery<br>Year">שנת<br>גילוי</span>
+                <span class="text-white font-bold text-lg leading-tight">1758</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>שושלת" data-en="Lineage<br>Period">תקופת<br>שושלת</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='מעל 60<br>מיליון<br>שנה' data-en='Over 60<br>Million<br>Years'>מעל 60<br>מיליון<br>שנה</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="מצב<br>שימור" data-en="Conservation<br>Status">מצב<br>שימור</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='פגיע בחלק<br>מהאזורים' data-en='Vulnerable<br>locally'>פגיע בחלק<br>מהאזורים</span>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="space-y-8 text-slate-300 text-lg leading-relaxed text-justify">
+            
+            <h2 class="section-header" data-he="ייחודיות מדעית ופיזית:" data-en="Scientific and Physical Uniqueness:">ייחודיות מדעית ופיזית:</h2>
+            <p data-he="הקזואר (Cassowary) נחשב פעמים רבות ל'ציפור המסוכנת ביותר בעולם'. זוהי ציפור עצומת ממדים וחסרת תעופה ממשפחת העופות הקדומים (עופות קראטיים), החיה בעיקר ביערות הגשם הטרופיים של צפון אוסטרליה וגינאה החדשה. גופם מכוסה בנוצות שחורות קשיחות דמויות שיער, אשר נועדו להגן עליהם מצמחייה קוצנית בעת ריצה מהירה ביער סבוך." data-en="The Cassowary is often considered the 'world's most dangerous bird'. It is a massive, flightless bird from the ancient ratite family, living primarily in the tropical rainforests of northern Australia and New Guinea. Their bodies are covered in stiff, hair-like black feathers designed to protect them from thorny vegetation while running swiftly through dense forests.">
+                הקזואר (Cassowary) נחשב פעמים רבות ל'ציפור המסוכנת ביותר בעולם'. זוהי ציפור עצומת ממדים וחסרת תעופה ממשפחת העופות הקדומים (עופות קראטיים), החיה בעיקר ביערות הגשם הטרופיים של צפון אוסטרליה וגינאה החדשה. גופם מכוסה בנוצות שחורות קשיחות דמויות שיער, אשר נועדו להגן עליהם מצמחייה קוצנית בעת ריצה מהירה ביער סבוך.
+            </p>
+            <p data-he="שני המאפיינים הבולטים ביותר שלהם הם <span class='text-sky-400 font-medium'>הקסדה (Casque)</span> שעל ראשם, העשויה מקרטין וספוגה בכלי דם וככל הנראה מסייעת בוויסות חום הגוף ובתהודה קולית, וכן <span class='text-sky-400 font-medium'>טופר אדיר דמוי פגיון באורך של כ-12 סנטימטרים</span> הממוקם על האצבע הפנימית של כל רגל. בבעיטה אחת, הקזואר מסוגל לגרום לפציעות אנושות להגנה עצמית." data-en="Their two most prominent features are the <span class='text-sky-400 font-medium'>Casque</span> on their heads, made of keratin and rich in blood vessels, likely assisting in thermal regulation and acoustic resonance, as well as a <span class='text-sky-400 font-medium'>massive 12cm dagger-like claw</span> located on the inner toe of each foot. With a single kick, the cassowary can inflict fatal injuries in self-defense.">
+                שני המאפיינים הבולטים ביותר שלהם הם <span class="text-sky-400 font-medium">הקסדה (Casque)</span> שעל ראשם, העשויה מקרטין וספוגה בכלי דם וככל הנראה מסייעת בוויסות חום הגוף ובתהודה קולית, וכן <span class="text-sky-400 font-medium">טופר אדיר דמוי פגיון באורך של כ-12 סנטימטרים</span> הממוקם על האצבע הפנימית של כל רגל. בבעיטה אחת, הקזואר מסוגל לגרום לפציעות אנושות להגנה עצמית.
+            </p>
+
+            <h2 class="section-header" data-he="הרגלי תזונה:" data-en="Dietary Habits:">הרגלי תזונה:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="למרות המוניטין המאיים שלהם, הקזוארים הם בראש ובראשונה <span class='text-sky-400 font-medium'>אוכלי פירות (Frugivores)</span>. התזונה שלהם מורכבת ממאות מינים שונים של פירות שנושרים מחופת היער אל הקרקע. עם זאת, הם נחשבים לאוכלי-כל אופורטוניסטים וישלימו את תזונתם עם פטריות, חרקים, חלזונות, ולעיתים גם בעלי חוליות קטנים כמו צפרדעים, מכרסמים ונחשים קטנים." data-en="Despite their fearsome reputation, cassowaries are primarily <span class='text-sky-400 font-medium'>Frugivores</span>. Their diet consists of hundreds of different species of fruits that fall from the forest canopy to the ground. However, they are opportunistic omnivores and will supplement their diet with fungi, insects, snails, and sometimes small vertebrates like frogs, rodents, and small snakes.">
+                    למרות המוניטין המאיים שלהם, הקזוארים הם בראש ובראשונה <span class="text-sky-400 font-medium">אוכלי פירות (Frugivores)</span>. התזונה שלהם מורכבת ממאות מינים שונים של פירות שנושרים מחופת היער אל הקרקע. עם זאת, הם נחשבים לאוכלי-כל אופורטוניסטים וישלימו את תזונתם עם פטריות, חרקים, חלזונות, ולעיתים גם בעלי חוליות קטנים כמו צפרדעים, מכרסמים ונחשים קטנים.
+                </p>
+                <p data-he="לקזואר יש תפקיד קריטי במערכת האקולוגית. מערכת העיכול שלהם קצרה ועדינה יחסית לזרעים, מה שאומר שהם בולעים פירות שלמים ומפרישים את הזרעים שלמים במקומות אחרים ביער. הם <span class='text-sky-400 font-medium'>מפיצי הזרעים (Seed dispersers) הגדולים ביותר ביערות הגשם של אוסטרליה</span>, וללא נוכחותם, מיני עצים רבים לא יכלו להתרבות." data-en="The cassowary plays a critical role in the ecosystem. Their digestive system is relatively short and gentle on seeds, meaning they swallow fruits whole and excrete the seeds intact elsewhere in the forest. They are the <span class='text-sky-400 font-medium'>largest seed dispersers in Australia's rainforests</span>, and without them, many tree species could not reproduce.">
+                    לקזואר יש תפקיד קריטי במערכת האקולוגית. מערכת העיכול שלהם קצרה ועדינה יחסית לזרעים, מה שאומר שהם בולעים פירות שלמים ומפרישים את הזרעים שלמים במקומות אחרים ביער. הם <span class="text-sky-400 font-medium">מפיצי הזרעים (Seed dispersers) הגדולים ביותר ביערות הגשם של אוסטרליה</span>, וללא נוכחותם, מיני עצים רבים לא יכלו להתרבות.
+                </p>
+            </div>
+
+            <h2 class="section-header" data-he="אטימולוגיה מורחבת (מקור השם):" data-en="Extended Etymology (Name Origin):">אטימולוגיה מורחבת (מקור השם):</h2>
+            
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-6">
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Kasu (מילת מקור 1):</h3>
+                    <p data-he="השם נגזר משפת ילידי פפואה. החלק הראשון של המילה, <strong>קאסו (Kasu)</strong>, פירושו בשפה המקומית <strong>קרן</strong>." data-en="The name derives from the native Papuan language. The first part of the word, <strong>Kasu</strong>, means <strong>horn</strong> in the local tongue.">השם נגזר משפת ילידי פפואה. החלק הראשון של המילה, <strong>קאסו (Kasu)</strong>, פירושו בשפה המקומית <strong>קרן</strong>.</p>
+                </div>
+                
+                <hr class="border-slate-700">
+                
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Weri (מילת מקור 2):</h3>
+                    <p data-he="החלק השני של המילה הפפואנית, <strong>ווארי (Weri)</strong>, משמעותו <strong>ראש</strong>. השילוב הועבר לשפה האינדונזית כ'קאסוארי' (Kasuari)." data-en="The second part of the Papuan word, <strong>Weri</strong>, means <strong>head</strong>. The combination was transferred to the Indonesian language as 'Kasuari'.">החלק השני של המילה הפפואנית, <strong>ווארי (Weri)</strong>, משמעותו <strong>ראש</strong>. השילוב הועבר לשפה האינדונזית כ'קאסוארי' (Kasuari).</p>
+                </div>
+                
+                <div class="highlight-box mt-4">
+                    <p class="text-sky-100 font-medium" data-he="<span class='text-sky-400 font-bold'>המשמעות המלאה:</span> <strong>&quot;ראש בעל קרן&quot; (Horned head).</strong><br>השם מתאר במדויק את הקסדה הבולטת דמוית הקרן שעל ראשו של הקזואר, שמשווה לו את המראה הפרהיסטורי האייקוני שלו." data-en="<span class='text-sky-400 font-bold'>Full Meaning:</span> <strong>&quot;Horned head&quot;.</strong><br>The name accurately describes the prominent horn-like casque on the cassowary's head, which gives it its iconic prehistoric appearance.">
+                        <span class="text-sky-400 font-bold">המשמעות המלאה:</span> <strong>"ראש בעל קרן" (Horned head).</strong><br>
+                        השם מתאר במדויק את הקסדה הבולטת דמוית הקרן שעל ראשו של הקזואר, שמשווה לו את המראה הפרהיסטורי האייקוני שלו.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="section-header" data-he="היסטוריית הגילוי והשרידות:" data-en="History of Discovery and Survival:">היסטוריית הגילוי והשרידות:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="<strong class='text-white'>הגילוי המקורי:</strong> הקזואר המצוי (הדרומי) תואר מדעית וקוטלג לראשונה בשנת 1758 על ידי אבי הטקסונומיה המודרנית, חוקר הטבע השוודי קארל לינאוס <span class='text-sky-400 font-mono text-base'>(Carl Linnaeus, שנות חיים: 1707–1778)</span> בחיבורו המפורסם Systema Naturae." data-en="<strong class='text-white'>Original Discovery:</strong> The Southern Cassowary was scientifically described and cataloged for the first time in 1758 by the father of modern taxonomy, the Swedish naturalist Carl Linnaeus <span class='text-sky-400 font-mono text-base'>(Lifespan: 1707–1778)</span> in his famous work Systema Naturae.">
+                    <strong class="text-white">הגילוי המקורי:</strong> הקזואר המצוי (הדרומי) תואר מדעית וקוטלג לראשונה בשנת 1758 על ידי אבי הטקסונומיה המודרנית, חוקר הטבע השוודי קארל לינאוס <span class="text-sky-400 font-mono text-base">(Carl Linnaeus, שנות חיים: 1707–1778)</span> בחיבורו המפורסם Systema Naturae.
+                </p>
+                <p data-he="<strong class='text-white'>שריד לעידן קדום:</strong> סדרת הקזואראים (Casuariiformes), הכוללת גם את האמו, קיימת על כדור הארץ למעלה מ-60 מיליון שנים, מעט לאחר הכחדת הדינוזאורים. אובדן יכולת התעופה שלהם התרחש לאורך האבולוציה משום שהם התפתחו בסביבות מבודדות נטולות טורפים יבשתיים גדולים (טרום הגעת יונקי השליה), מה שאפשר להם להשקיע אנרגיה בגדילת גוף מאסיבית ורגליים חזקות במקום בשרירי חזה לתעופה." data-en="<strong class='text-white'>Relic of an Ancient Era:</strong> The order Casuariiformes, which also includes the Emu, has existed on Earth for over 60 million years, shortly after the dinosaur extinction. Their loss of flight occurred throughout evolution because they developed in isolated environments devoid of large land predators, allowing them to invest energy in massive body growth and strong legs rather than chest muscles for flight.">
+                    <strong class="text-white">שריד לעידן קדום:</strong> סדרת הקזואראים (Casuariiformes), הכוללת גם את האמו, קיימת על כדור הארץ למעלה מ-60 מיליון שנים, מעט לאחר הכחדת הדינוזאורים. אובדן יכולת התעופה שלהם התרחש לאורך האבולוציה משום שהם התפתחו בסביבות מבודדות נטולות טורפים יבשתיים גדולים (טרום הגעת יונקי השליה), מה שאפשר להם להשקיע אנרגיה בגדילת גוף מאסיבית ורגליים חזקות במקום בשרירי חזה לתעופה.
+                </p>
+                <p data-he="<strong class='text-white'>סכנת הכחדה מקומית:</strong> למרות שבקנה מידה עולמי מצב השימור שלו נחשב ל'ללא חשש', באוסטרליה עצמה הקזואר הדרומי נמצא בסכנת הכחדה פגיעה עקב כריתת יערות, אובדן בתי גידול טרופיים, סלילת כבישים החוצים את הטריטוריות שלו, ותקיפות על ידי כלבים וחיות בית. שמירה עליהם היא קריטית להמשך קיומם של יערות הגשם עצמם." data-en="<strong class='text-white'>Local Endangerment:</strong> Although globally considered 'Least Concern', in Australia itself the Southern Cassowary is vulnerable/endangered due to deforestation, loss of tropical habitats, road construction across its territories, and attacks by domestic dogs. Protecting them is critical for the continued existence of the rainforests themselves.">
+                    <strong class="text-white">סכנת הכחדה מקומית:</strong> למרות שבקנה מידה עולמי מצב השימור שלו נחשב ל'ללא חשש', באוסטרליה עצמה הקזואר הדרומי נמצא בסכנת הכחדה פגיעה עקב כריתת יערות, אובדן בתי גידול טרופיים, סלילת כבישים החוצים את הטריטוריות שלו, ותקיפות על ידי כלבים וחיות בית. שמירה עליהם היא קריטית להמשך קיומם של יערות הגשם עצמם.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
+            <a href="megapode.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="&rarr; הקודם: מגנפוד" data-en="&larr; Prev: Megapode">
+                &rarr; הקודם: מגנפוד
+            </a>
+            <a href="hoatzin.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="הבא: הואצין &larr;" data-en="Next: Hoatzin &rarr;">
+                הבא: הואצין &larr;
+            </a>
+        </div>
+        
+    </main>
+
+    <!-- Fullscreen Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onclick="closeModal()">
+        <button class="absolute top-6 left-6 text-white hover:text-sky-400 p-2 rounded-full bg-slate-800/50 transition-colors" onclick="closeModal(event)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <img id="modalImage" src="" alt="" class="modal-image max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-slate-700" onclick="event.stopPropagation()">
+    </div>
+
+    <script>
+        // Language Toggle Functionality
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            
+            // Toggle HTML direction and lang
+            document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            // Update button text
+            document.getElementById('langBtn').innerText = currentLang === 'he' ? 'EN' : 'HE';
+
+            // Find all elements with translation data and update them dynamically
+            document.querySelectorAll('[data-he]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        // Modal functionality for zoomable image
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src, alt) {
+            modalImg.src = src;
+            modalImg.alt = alt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; 
+            
+            setTimeout(() => {
+                if (!modal.classList.contains('active')) {
+                    modalImg.src = '';
+                }
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

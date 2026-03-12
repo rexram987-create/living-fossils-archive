@@ -72,7 +72,7 @@
             object-fit: cover;
         }
 
-        /* Accents for all 15 categories */
+        /* Accents for all categories */
         .hover-accent-blue:hover { border-color: #3b82f6; }
         .hover-accent-teal:hover { border-color: #14b8a6; }
         .hover-accent-purple:hover { border-color: #a855f7; }
@@ -83,6 +83,9 @@
         .hover-accent-red:hover { border-color: #ef4444; }
         .hover-accent-pink:hover { border-color: #ec4899; }
         .hover-accent-yellow:hover { border-color: #ca8a04; }
+        /* New accents for birds */
+        .hover-accent-sky:hover { border-color: #0ea5e9; }
+        .hover-accent-indigo:hover { border-color: #6366f1; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative px-4 md:px-8">
@@ -114,7 +117,7 @@
             </div>
         </section>
 
-        <!-- Categories Grid (Upgraded for 15 items: 1 col on mobile, 2 on tablet, 3 on desktop) -->
+        <!-- Categories Grid (Upgraded for 21 items) -->
         <section class="mb-16">
             <h2 id="catHeader" class="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-6 pl-2 text-center md:text-start">קטגוריות המחקר</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -131,19 +134,19 @@
                     <div><h3 class="font-bold text-lg text-white" id="catGar">דגים (אליגטורגאר)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Lepisosteiformes</p></div>
                 </a>
 
-                <!-- 3. Frilled Shark (NEW) -->
+                <!-- 3. Frilled Shark -->
                 <a href="fish/frilledshark.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-cyan group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/frilledshark.png" alt="חסחוסן צלופחי" onerror="this.src='https://via.placeholder.com/150/0a1122/06b6d4?text=🦈'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catFrilled">דגים (חסחוסן צלופחי)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Hexanchiformes</p></div>
                 </a>
 
-                <!-- 4. Australian Lungfish (NEW) -->
+                <!-- 4. Australian Lungfish -->
                 <a href="fish/lungfish.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-emerald group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/australianlungfish.png" alt="דג ריאות אוסטרלי" onerror="this.src='https://via.placeholder.com/150/0a1122/10b981?text=🐟'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catLungfish">דגים (דג ריאות)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Ceratodontiformes</p></div>
                 </a>
 
-                <!-- 5. Hula Painted Frog (NEW) -->
+                <!-- 5. Hula Painted Frog -->
                 <a href="amphibians/hulafrog.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-emerald group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/hulapaintedfrog.png" alt="עגולשון שחור גחון" onerror="this.src='https://via.placeholder.com/150/0a1122/10b981?text=🐸'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catHula">דו-חיים (עגולשון)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Anura</p></div>
@@ -155,7 +158,7 @@
                     <div><h3 class="font-bold text-lg text-white" id="catTuatara">זוחלים (טואטרה)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Rhynchocephalia</p></div>
                 </a>
 
-                <!-- 7. Komodo Dragon (NEW) -->
+                <!-- 7. Komodo Dragon -->
                 <a href="reptiles/komododragon.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-red group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/komododragon.png" alt="דרקון קומודו" onerror="this.src='https://via.placeholder.com/150/0a1122/ef4444?text=🦎'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catKomodo">זוחלים (דרקון קומודו)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Squamata</p></div>
@@ -173,19 +176,19 @@
                     <div><h3 class="font-bold text-lg text-white" id="catMammal">יונקים (פלטיפוס)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Monotremata</p></div>
                 </a>
 
-                <!-- 10. Echidna (NEW) -->
+                <!-- 10. Echidna -->
                 <a href="mammals/echidna.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-amber group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/shortbeakedechidna.png" alt="קיפודן נמלים" onerror="this.src='https://via.placeholder.com/150/0a1122/f59e0b?text=🦔'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catEchidna">יונקים (קיפודן נמלים)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Monotremata</p></div>
                 </a>
 
-                <!-- 11. Aardvark (NEW) -->
+                <!-- 11. Aardvark -->
                 <a href="mammals/aardvark.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-pink group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/aardvark.png" alt="שנבוב" onerror="this.src='https://via.placeholder.com/150/0a1122/ec4899?text=🦡'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catAardvark">יונקים (שנבוב)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Tubulidentata</p></div>
                 </a>
 
-                <!-- 12. Pangolin (NEW) -->
+                <!-- 12. Pangolin -->
                 <a href="mammals/pangolin.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-yellow group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/pangolin.png" alt="פנגולין" onerror="this.src='https://via.placeholder.com/150/0a1122/ca8a04?text=🦡'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catPangolin">יונקים (פנגולין)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Pholidota</p></div>
@@ -197,7 +200,7 @@
                     <div><h3 class="font-bold text-lg text-white" id="catInv">חסרי חוליות (סרטן פרסה)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Xiphosura</p></div>
                 </a>
 
-                <!-- 14. Nautilus (NEW) -->
+                <!-- 14. Nautilus -->
                 <a href="invertebrates/nautilus.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-amber group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/nautilus.png" alt="נאוטילוס" onerror="this.src='https://via.placeholder.com/150/0a1122/f59e0b?text=🐚'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catNautilus">חסרי חוליות (נאוטילוס)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Nautilida</p></div>
@@ -207,6 +210,42 @@
                 <a href="trees/ginkgo.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-emerald group">
                     <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/ginkgo.png" alt="גינקו" onerror="this.src='https://via.placeholder.com/150/0a1122/34d399?text=🌿'"></div>
                     <div><h3 class="font-bold text-lg text-white" id="catTrees">עצים (גינקו)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Ginkgophyta</p></div>
+                </a>
+
+                <!-- 16. Cassowary (NEW) -->
+                <a href="birds/cassowary.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-sky group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/cassowary.png" alt="קזואר" onerror="this.src='https://via.placeholder.com/150/0a1122/0ea5e9?text=🦤'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catCassowary">עופות (קזואר)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Casuariiformes</p></div>
+                </a>
+
+                <!-- 17. Hoatzin (NEW) -->
+                <a href="birds/hoatzin.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-indigo group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/hoatzin.png" alt="הואצין" onerror="this.src='https://via.placeholder.com/150/0a1122/6366f1?text=🦤'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catHoatzin">עופות (הואצין)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Opisthocomiformes</p></div>
+                </a>
+
+                <!-- 18. Megapode (NEW) -->
+                <a href="birds/megapode.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-sky group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/megapode.png" alt="מגנפוד" onerror="this.src='https://via.placeholder.com/150/0a1122/0ea5e9?text=🦤'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catMegapode">עופות (מגנפוד)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Galliformes</p></div>
+                </a>
+
+                <!-- 19. Sacred Ibis (NEW) -->
+                <a href="birds/sacredibis.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-indigo group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/sacredibis.png" alt="מגלן קדוש" onerror="this.src='https://via.placeholder.com/150/0a1122/6366f1?text=🦤'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catIbis">עופות (מגלן קדוש)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Pelecaniformes</p></div>
+                </a>
+
+                <!-- 20. Sandhill Crane (NEW) -->
+                <a href="birds/sandhillcrane.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-sky group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/sandhillcrane.png" alt="עגור קנדי" onerror="this.src='https://via.placeholder.com/150/0a1122/0ea5e9?text=🦤'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catCrane">עופות (עגור קנדי)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Gruiformes</p></div>
+                </a>
+
+                <!-- 21. Tinamou (NEW) -->
+                <a href="birds/tinamou.html" class="category-card p-4 rounded-3xl flex items-center space-x-4 space-x-reverse hover-accent-indigo group">
+                    <div class="card-img-container ml-4"><img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/tinamou.png" alt="טינמו" onerror="this.src='https://via.placeholder.com/150/0a1122/6366f1?text=🦤'"></div>
+                    <div><h3 class="font-bold text-lg text-white" id="catTinamou">עופות (טינמו)</h3><p class="text-[10px] text-slate-500 font-mono mt-1">Tinamiformes</p></div>
                 </a>
                 
             </div>
@@ -244,6 +283,8 @@
                 catHula: 'דו-חיים (עגולשון)', catTuatara: 'זוחלים (טואטרה)', catKomodo: 'זוחלים (דרקון קומודו)', catTurtles: 'צבים (צב גלד)',
                 catMammal: 'יונקים (פלטיפוס)', catEchidna: 'יונקים (קיפודן נמלים)', catAardvark: 'יונקים (שנבוב)', catPangolin: 'יונקים (פנגולין)',
                 catInv: 'חסרי חוליות (סרטן פרסה)', catNautilus: 'חסרי חוליות (נאוטילוס)', catTrees: 'עצים (גינקו)',
+                catCassowary: 'עופות (קזואר)', catHoatzin: 'עופות (הואצין)', catMegapode: 'עופות (מגנפוד)', 
+                catIbis: 'עופות (מגלן קדוש)', catCrane: 'עופות (עגור קנדי)', catTinamou: 'עופות (טינמו)',
                 footer: 'פרויקט מחקר ייעודי לשימור הידע על אורגניזמים שעמדו במבחן הזמן. האתר נוצר על ידי ג\'מיני ועל ידי רם.',
                 navHome: 'בית', navAbout: 'אודות', btn: 'EN', dir: 'rtl'
             },
@@ -257,6 +298,8 @@
                 catHula: 'Amphibians (Hula Frog)', catTuatara: 'Reptiles (Tuatara)', catKomodo: 'Reptiles (Komodo)', catTurtles: 'Turtles (Leatherback)',
                 catMammal: 'Mammals (Platypus)', catEchidna: 'Mammals (Echidna)', catAardvark: 'Mammals (Aardvark)', catPangolin: 'Mammals (Pangolin)',
                 catInv: 'Invertebrates (Horseshoe Crab)', catNautilus: 'Invertebrates (Nautilus)', catTrees: 'Trees (Ginkgo)',
+                catCassowary: 'Birds (Cassowary)', catHoatzin: 'Birds (Hoatzin)', catMegapode: 'Birds (Megapode)', 
+                catIbis: 'Birds (Sacred Ibis)', catCrane: 'Birds (Sandhill Crane)', catTinamou: 'Birds (Tinamou)',
                 footer: 'A dedicated research project for preserving knowledge of organisms that stood the test of time. The site was created by Gemini and Ram.',
                 navHome: 'HOME', navAbout: 'ABOUT', btn: 'HE', dir: 'ltr'
             }
@@ -289,6 +332,14 @@
             document.getElementById('catNautilus').innerText = data.catNautilus;
             document.getElementById('catTrees').innerText = data.catTrees;
             
+            // New Bird Categories
+            document.getElementById('catCassowary').innerText = data.catCassowary;
+            document.getElementById('catHoatzin').innerText = data.catHoatzin;
+            document.getElementById('catMegapode').innerText = data.catMegapode;
+            document.getElementById('catIbis').innerText = data.catIbis;
+            document.getElementById('catCrane').innerText = data.catCrane;
+            document.getElementById('catTinamou').innerText = data.catTinamou;
+            
             document.getElementById('footerText').innerText = data.footer;
             document.getElementById('navHome').innerText = data.navHome;
             document.getElementById('navAbout').innerText = data.navAbout;
@@ -305,3 +356,4 @@
     </script>
 </body>
 </html>
+

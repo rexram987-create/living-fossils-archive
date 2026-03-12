@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: טינמו | ארכיון המאובנים החיים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #020617; 
+            --bg-card: #0f172a; 
+            --bg-pill: #1e293b;
+            --text-accent: #0ea5e9; 
+            --text-accent-secondary: #38bdf8;
+            --border-color: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-header {
+            color: var(--text-accent);
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .highlight-box {
+            background-color: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            border-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        /* Modal Styles */
+        #imageModal {
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #imageModal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-image {
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #imageModal.active .modal-image {
+            transform: scale(1);
+        }
+        
+        .zoomable-img {
+            cursor: zoom-in;
+            transition: opacity 0.2s ease;
+        }
+        .zoomable-img:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative font-sans selection:bg-sky-500/30">
+
+    <!-- Top Navigation -->
+    <nav class="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center relative z-10">
+        <a href="../index.html" class="nav-btn px-6 py-2 rounded-full text-sm font-medium flex items-center gap-2" data-he="<span>&rarr;</span> חזרה לארכיון" data-en="<span>&larr;</span> Back to Archive">
+            <span>&rarr;</span> חזרה לארכיון
+        </a>
+        <button id="langBtn" onclick="toggleLanguage()" class="nav-btn px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+            EN
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 pb-20 relative z-10">
+        
+        <!-- Zoomable Image Section -->
+        <div class="mb-12 mt-4 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl mx-auto max-w-2xl relative group">
+            <img 
+                src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/tinamou.png" 
+                alt="טינמו" 
+                class="w-full h-auto object-cover zoomable-img"
+                onclick="openModal(this.src, this.alt)"
+                onerror="this.src='https://via.placeholder.com/800x450/0a1122/0ea5e9?text= Tinamou'"
+            >
+            <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur px-3 py-1.5 rounded-full text-xs text-white flex items-center gap-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" data-he="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> לחץ להגדלה" data-en="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> Click to zoom">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                לחץ להגדלה
+            </div>
+        </div>
+
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <p class="text-slate-400 text-sm md:text-base mb-4 font-medium" data-he="מאפיין ייחודי: קרוב מעופף של היען, מטיל ביצים דמויות פורצלן מבריק שהזכר דוגר עליהן" data-en="Unique Feature: A flying relative of the ostrich, lays glossy porcelain-like eggs incubated by the male">מאפיין ייחודי: קרוב מעופף של היען, מטיל ביצים דמויות פורצלן מבריק שהזכר דוגר עליהן</p>
+            <h1 class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight" data-he="טינמו" data-en="Tinamou">טינמו</h1>
+            <p class="text-slate-400 font-mono text-lg mb-4 tracking-widest">Tinamiformes</p>
+            <p class="text-sky-400 font-bold text-xl mb-8" data-he='"האב הקדמון המעופף של הקזואר"' data-en='"The Flying Ancestor of the Cassowary"'>"האב הקדמון המעופף של הקזואר"</p>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16 text-center">
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>דגירה" data-en="Incubation<br>Period">תקופת<br>דגירה</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 20<br>ימים (זכר)' data-en='Up to 20<br>days (male)'>עד 20<br>ימים (זכר)</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="אורך<br>מירבי" data-en="Max<br>Length">אורך<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 50<br>ס"מ' data-en='Up to 50<br>cm'>עד 50<br>ס"מ</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="משקל<br>מירבי" data-en="Max<br>Weight">משקל<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 2.0<br>ק"ג' data-en='Up to 2.0<br>kg'>עד 2.0<br>ק"ג</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="שנת<br>גילוי" data-en="Discovery<br>Year">שנת<br>גילוי</span>
+                <span class="text-white font-bold text-lg leading-tight">1789</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>שושלת" data-en="Lineage<br>Period">תקופת<br>שושלת</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='מעל 60<br>מיליון<br>שנה' data-en='Over 60<br>Million<br>Years'>מעל 60<br>מיליון<br>שנה</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="מצב<br>שימור" data-en="Conservation<br>Status">מצב<br>שימור</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='משתנה<br>(תלוי מין)' data-en='Varies<br>(by species)'>משתנה<br>(תלוי מין)</span>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="space-y-8 text-slate-300 text-lg leading-relaxed text-justify">
+            
+            <h2 class="section-header" data-he="ייחודיות מדעית ופיזית:" data-en="Scientific and Physical Uniqueness:">ייחודיות מדעית ופיזית:</h2>
+            <p data-he="ממבט ראשון, הטינמו (Tinamou) החי ביערות וברמות של דרום ומרכז אמריקה, נראה כמו עוף קרקע שגרתי המזכיר חוגלה או שלו. אולם, מראית העין הזו מסתירה את אחת התגליות האבולוציוניות החשובות ביותר: הטינמו שייך לקלייד ה-Paleognathae (עופות קדומים הלסת), והוא קרוב המשפחה החי הקרוב ביותר של היענים, האמו והקזוארים. בניגוד לבני דודיו הענקיים שאיבדו את יכולת התעופה, <span class='text-sky-400 font-medium'>הטינמו הוא היחיד בקבוצה זו ששמר על היכולת לעוף!</span> הוא מהווה מודל חי המראה כיצד נראו האבות הקדמונים המעופפים של העופות חסרי התעופה הגדולים." data-en="At first glance, the Tinamou, living in the forests and highlands of South and Central America, looks like a standard ground bird resembling a partridge or quail. However, this appearance hides one of the most important evolutionary discoveries: the Tinamou belongs to the Paleognathae clade (ancient-jawed birds), and is the closest living relative of ostriches, emus, and cassowaries. Unlike its giant flightless cousins, <span class='text-sky-400 font-medium'>the Tinamou is the only one in this group that has retained the ability to fly!</span> It serves as a living model showing what the flying ancestors of the great flightless birds looked like.">
+                ממבט ראשון, הטינמו (Tinamou) החי ביערות וברמות של דרום ומרכז אמריקה, נראה כמו עוף קרקע שגרתי המזכיר חוגלה או שלו. אולם, מראית העין הזו מסתירה את אחת התגליות האבולוציוניות החשובות ביותר: הטינמו שייך לקלייד ה-Paleognathae (עופות קדומים הלסת), והוא קרוב המשפחה החי הקרוב ביותר של היענים, האמו והקזוארים. בניגוד לבני דודיו הענקיים שאיבדו את יכולת התעופה, <span class="text-sky-400 font-medium">הטינמו הוא היחיד בקבוצה זו ששמר על היכולת לעוף!</span> הוא מהווה מודל חי המראה כיצד נראו האבות הקדמונים המעופפים של העופות חסרי התעופה הגדולים.
+            </p>
+            <p data-he="מאפיין ייחודי נוסף שלהם הוא תהליך הרבייה. נקבות הטינמו מטילות ביצים שהן אולי היפות ביותר בעולם החי: ביצים צבעוניות לחלוטין (בירוק ברקת, כחול, סגול או צהוב-חלמון) בעלות <span class='text-sky-400 font-medium'>מרקם מבריק וחלָק שנראה ממש כמו פורצלן או זכוכית מלוטשת</span>. לאחר ההטלה, הנקבה עוזבת כדי לחפש זכרים אחרים, והזכר הוא זה שנשאר לדגור על הביצים (של מספר נקבות שונות) ולגדל את האפרוחים לבדו – מערכת רבייה פוליאנדרית נדירה ביותר בעולם העופות." data-en="Another unique feature is their reproductive process. Tinamou females lay eggs that are perhaps the most beautiful in the animal kingdom: intensely colored eggs (in emerald green, blue, purple, or yolk-yellow) with a <span class='text-sky-400 font-medium'>glossy, smooth texture that looks exactly like porcelain or polished glass</span>. After laying, the female leaves to seek other males, and the male is the one who stays to incubate the eggs (from several different females) and raise the chicks alone – a highly rare polyandrous reproductive system in the avian world.">
+                מאפיין ייחודי נוסף שלהם הוא תהליך הרבייה. נקבות הטינמו מטילות ביצים שהן אולי היפות ביותר בעולם החי: ביצים צבעוניות לחלוטין (בירוק ברקת, כחול, סגול או צהוב-חלמון) בעלות <span class="text-sky-400 font-medium">מרקם מבריק וחלָק שנראה ממש כמו פורצלן או זכוכית מלוטשת</span>. לאחר ההטלה, הנקבה עוזבת כדי לחפש זכרים אחרים, והזכר הוא זה שנשאר לדגור על הביצים (של מספר נקבות שונות) ולגדל את האפרוחים לבדו – מערכת רבייה פוליאנדרית נדירה ביותר בעולם העופות.
+            </p>
+
+            <h2 class="section-header" data-he="הרגלי תזונה:" data-en="Dietary Habits:">הרגלי תזונה:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="הטינמו הם ברובם המכריע ציפורים <span class='text-sky-400 font-medium'>אוכלות-כל (אומניבוריות)</span>, הניזונות על הקרקע ומסתמכות על הסוואתן הנהדרת כדי להימנע מטורפים בזמן שהן מחפשות מזון. התזונה שלהן משתנה מאוד בהתאם לעונה ולמין הספציפי (ישנם כ-47 מינים של טינמו)." data-en="Tinamous are overwhelmingly <span class='text-sky-400 font-medium'>omnivorous birds</span>, feeding on the ground and relying on their superb camouflage to avoid predators while foraging. Their diet varies greatly depending on the season and the specific species (there are about 47 species of tinamou).">
+                    הטינמו הם ברובם המכריע ציפורים <span class="text-sky-400 font-medium">אוכלות-כל (אומניבוריות)</span>, הניזונות על הקרקע ומסתמכות על הסוואתן הנהדרת כדי להימנע מטורפים בזמן שהן מחפשות מזון. התזונה שלהן משתנה מאוד בהתאם לעונה ולמין הספציפי (ישנם כ-47 מינים של טינמו).
+                </p>
+                <p data-he="הבסיס התזונתי שלהם כולל זרעים, פירות שנפלו מהעצים, שורשים ועלים רכים. במקביל, הם מהווים ציידים יעילים של רמשים: הם מנקרים בזריזות נמלים, טרמיטים, חיפושיות, זחלים, ולעיתים גם צפרדעים או לטאות קטנות הנקרות בדרכם ביערות הסבוכים או בערבות העשב הפתוחות (הפמפס)." data-en="Their dietary base includes seeds, fallen fruits, roots, and tender leaves. Simultaneously, they are efficient hunters of creepy-crawlies: they eagerly peck at ants, termites, beetles, caterpillars, and occasionally small frogs or lizards that cross their path in dense forests or open grasslands (the Pampas).">
+                    הבסיס התזונתי שלהם כולל זרעים, פירות שנפלו מהעצים, שורשים ועלים רכים. במקביל, הם מהווים ציידים יעילים של רמשים: הם מנקרים בזריזות נמלים, טרמיטים, חיפושיות, זחלים, ולעיתים גם צפרדעים או לטאות קטנות הנקרות בדרכם ביערות הסבוכים או בערבות העשב הפתוחות (הפמפס).
+                </p>
+            </div>
+
+            <h2 class="section-header" data-he="אטימולוגיה מורחבת (מקור השם):" data-en="Extended Etymology (Name Origin):">אטימולוגיה מורחבת (מקור השם):</h2>
+            
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-6">
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Tinamú (מקור ילידי):</h3>
+                    <p data-he="השם העממי והמדעי כאחד נגזרים ישירות משפת ה<strong>גאליבי (Galibi)</strong>, שפתם של בני הקאריב (Carib), ילידים שחיו בצפון אמריקה הדרומית. המילה &quot;Tinamú&quot; הייתה פשוט השם המקומי בו כינו הילידים את הציפור הזו." data-en="Both the common and scientific names derive directly from the <strong>Galibi</strong> language, spoken by the Carib people, indigenous to northern South America. The word &quot;Tinamú&quot; was simply the local name the natives used for this bird.">השם העממי והמדעי כאחד נגזרים ישירות משפת ה<strong>גאליבי (Galibi)</strong>, שפתם של בני הקאריב (Carib), ילידים שחיו בצפון אמריקה הדרומית. המילה "Tinamú" הייתה פשוט השם המקומי בו כינו הילידים את הציפור הזו.</p>
+                </div>
+                
+                <hr class="border-slate-700">
+                
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Tinamus (שם הסוג המדעי):</h3>
+                    <p data-he="החוקרים האירופאים הראשונים שקיטלגו את העוף במאה ה-18, ביצעו <strong>לטיניזציה (Latinization)</strong> לשם הילידי המקורי, וכך יצרו את שם הסוג הרשמי *Tinamus* אשר משמש במדע עד היום." data-en="The first European naturalists who cataloged the bird in the 18th century performed a <strong>Latinization</strong> of the original indigenous name, thus creating the official genus name *Tinamus* which is used in science to this day.">החוקרים האירופאים הראשונים שקיטלגו את העוף במאה ה-18, ביצעו <strong>לטיניזציה (Latinization)</strong> לשם הילידי המקורי, וכך יצרו את שם הסוג הרשמי *Tinamus* אשר משמש במדע עד היום.</p>
+                </div>
+
+                <hr class="border-slate-700">
+
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Tinamiformes (שם הסדרה):</h3>
+                    <p data-he="מורכב מהשם <strong>Tinamus</strong> והסיומת הלטינית השגורה בטקסונומיה <strong>formes</strong> שמשמעותה &quot;בעלי צורה של&quot;. משמעות השם היא &quot;עופות דמויי טינמו&quot;." data-en="Composed of the name <strong>Tinamus</strong> and the standard Latin taxonomic suffix <strong>formes</strong> meaning &quot;having the form of&quot;. The name translates to &quot;tinamou-like birds&quot;.">מורכב מהשם <strong>Tinamus</strong> והסיומת הלטינית השגורה בטקסונומיה <strong>formes</strong> שמשמעותה "בעלי צורה של". משמעות השם היא "עופות דמויי טינמו".</p>
+                </div>
+            </div>
+
+            <h2 class="section-header" data-he="היסטוריית הגילוי והשרידות:" data-en="History of Discovery and Survival:">היסטוריית הגילוי והשרידות:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="<strong class='text-white'>הגילוי המקורי:</strong> מיני הטינמו הראשונים תוארו מדעית החל מאמצע המאה ה-18, אך רבים מהם קוטלגו וסווגו על ידי הכימאי והבוטנאי הגרמני יוהאן פרידריך גמלין <span class='text-sky-400 font-mono text-base'>(Johann Friedrich Gmelin, שנות חיים: 1748–1804)</span> בשנת 1789, אשר הוציא לאור מהדורה מורחבת לספרו של קארל לינאוס." data-en="<strong class='text-white'>Original Discovery:</strong> The first tinamou species were scientifically described from the mid-18th century, but many were cataloged and classified by the German chemist and botanist Johann Friedrich Gmelin <span class='text-sky-400 font-mono text-base'>(Lifespan: 1748–1804)</span> in 1789, who published an expanded edition of Carl Linnaeus's book.">
+                    <strong class="text-white">הגילוי המקורי:</strong> מיני הטינמו הראשונים תוארו מדעית החל מאמצע המאה ה-18, אך רבים מהם קוטלגו וסווגו על ידי הכימאי והבוטנאי הגרמני יוהאן פרידריך גמלין <span class="text-sky-400 font-mono text-base">(Johann Friedrich Gmelin, שנות חיים: 1748–1804)</span> בשנת 1789, אשר הוציא לאור מהדורה מורחבת לספרו של קארל לינאוס.
+                </p>
+                <p data-he="<strong class='text-white'>הפרדוקס המעופף:</strong> במשך שנים, מדענים התקשו להאמין שהטינמו קרוב ליענים. רק לאחרונה, מחקרי DNA מתקדמים חשפו את האמת המדהימה: הטינמו אינו &quot;שריד שמרן&quot; שלא הספיק לאבד את התעופה, אלא שרבים מהעופות חסרי התעופה האחרים (כמו האמו והקיווי) איבדו את יכולת התעופה שלהם באופן עצמאי *לאחר* שהתפצלו מאב קדמון מעופף דמוי-טינמו שחי לפני למעלה מ-60 מיליון שנה. לכן הטינמו הוא המאובן החי שמציג את אב הטיפוס המקורי." data-en="<strong class='text-white'>The Flying Paradox:</strong> For years, scientists struggled to believe the tinamou was related to ostriches. Only recently, advanced DNA studies revealed the astounding truth: the tinamou isn't a &quot;conservative relic&quot; that hasn't yet lost flight, but rather many of the other flightless birds (like emus and kiwis) lost their ability to fly independently *after* splitting from a flying, tinamou-like ancestor that lived over 60 million years ago. Thus, the tinamou is the living fossil presenting the original prototype.">
+                    <strong class="text-white">הפרדוקס המעופף:</strong> במשך שנים, מדענים התקשו להאמין שהטינמו קרוב ליענים. רק לאחרונה, מחקרי DNA מתקדמים חשפו את האמת המדהימה: הטינמו אינו "שריד שמרן" שלא הספיק לאבד את התעופה, אלא שרבים מהעופות חסרי התעופה האחרים (כמו האמו והקיווי) איבדו את יכולת התעופה שלהם באופן עצמאי *לאחר* שהתפצלו מאב קדמון מעופף דמוי-טינמו שחי לפני למעלה מ-60 מיליון שנה. לכן הטינמו הוא המאובן החי שמציג את אב הטיפוס המקורי.
+                </p>
+                <p data-he="<strong class='text-white'>מצב שימור:</strong> מכיוון שמדובר במשפחה רחבה, מצב השימור שלהם משתנה מאוד. מינים מסוימים החיים בערבות הפתוחות משגשגים ונמצאים 'ללא חשש', אך מינים רבים אחרים החיים ביערות האמזונס נמצאים בסכנת הכחדה (חלקם מוגדרים Vulnerable או Endangered) עקב אובדן בתי גידול, כריתת יערות, וציד אנושי בשל בשרם הנחשב למעדן." data-en="<strong class='text-white'>Conservation Status:</strong> Because it is a broad family, their conservation status varies greatly. Some species living in open pampas thrive and are 'Least Concern', but many other species living in the Amazon forests are endangered (some defined as Vulnerable or Endangered) due to habitat loss, deforestation, and human hunting because their meat is considered a delicacy.">
+                    <strong class="text-white">מצב שימור:</strong> מכיוון שמדובר במשפחה רחבה, מצב השימור שלהם משתנה מאוד. מינים מסוימים החיים בערבות הפתוחות משגשגים ונמצאים 'ללא חשש', אך מינים רבים אחרים החיים ביערות האמזונס נמצאים בסכנת הכחדה (חלקם מוגדרים Vulnerable או Endangered) עקב אובדן בתי גידול, כריתת יערות, וציד אנושי בשל בשרם הנחשב למעדן.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
+            <a href="sandhillcrane.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="&rarr; הקודם: עגור קנדי" data-en="&larr; Prev: Sandhill Crane">
+                &rarr; הקודם: עגור קנדי
+            </a>
+            <a href="../index.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="חזרה לארכיון הראשי &larr;" data-en="Back to Main Archive &rarr;">
+                חזרה לארכיון הראשי &larr;
+            </a>
+        </div>
+        
+    </main>
+
+    <!-- Fullscreen Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onclick="closeModal()">
+        <button class="absolute top-6 left-6 text-white hover:text-sky-400 p-2 rounded-full bg-slate-800/50 transition-colors" onclick="closeModal(event)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <img id="modalImage" src="" alt="" class="modal-image max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-slate-700" onclick="event.stopPropagation()">
+    </div>
+
+    <script>
+        // Language Toggle Functionality
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            
+            // Toggle HTML direction and lang
+            document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            // Update button text
+            document.getElementById('langBtn').innerText = currentLang === 'he' ? 'EN' : 'HE';
+
+            // Find all elements with translation data and update them dynamically
+            document.querySelectorAll('[data-he]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        // Modal functionality for zoomable image
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src, alt) {
+            modalImg.src = src;
+            modalImg.alt = alt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; 
+            
+            setTimeout(() => {
+                if (!modal.classList.contains('active')) {
+                    modalImg.src = '';
+                }
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
+

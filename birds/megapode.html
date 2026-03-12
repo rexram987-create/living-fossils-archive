@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: מגנפוד | ארכיון המאובנים החיים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #020617; /* Very dark navy/black */
+            --bg-card: #0f172a; /* Slightly lighter navy for cards */
+            --bg-pill: #1e293b;
+            --text-accent: #0ea5e9; /* Light blue accent */
+            --text-accent-secondary: #38bdf8;
+            --border-color: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-header {
+            color: var(--text-accent);
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .highlight-box {
+            background-color: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            border-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        /* Modal Styles */
+        #imageModal {
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #imageModal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-image {
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #imageModal.active .modal-image {
+            transform: scale(1);
+        }
+        
+        /* Cursor for clickable image */
+        .zoomable-img {
+            cursor: zoom-in;
+            transition: opacity 0.2s ease;
+        }
+        .zoomable-img:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative font-sans selection:bg-sky-500/30">
+
+    <!-- Top Navigation -->
+    <nav class="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center relative z-10">
+        <a href="../index.html" class="nav-btn px-6 py-2 rounded-full text-sm font-medium flex items-center gap-2" data-he="<span>&rarr;</span> חזרה" data-en="<span>&larr;</span> Back">
+            <span>&rarr;</span> חזרה
+        </a>
+        <button id="langBtn" onclick="toggleLanguage()" class="nav-btn px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+            EN
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 pb-20 relative z-10">
+        
+        <!-- Zoomable Image Section -->
+        <div class="mb-12 mt-4 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl mx-auto max-w-2xl relative group">
+            <img 
+                src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/megapode.png" 
+                alt="מגנפוד" 
+                class="w-full h-auto object-cover zoomable-img"
+                onclick="openModal(this.src, this.alt)"
+                onerror="this.src='https://via.placeholder.com/800x450/0a1122/0ea5e9?text= Megapode'"
+            >
+            <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur px-3 py-1.5 rounded-full text-xs text-white flex items-center gap-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" data-he="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> לחץ להגדלה" data-en="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> Click to zoom">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                לחץ להגדלה
+            </div>
+        </div>
+
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <p class="text-slate-400 text-sm md:text-base mb-4 font-medium" data-he="מאפיין ייחודי: בונה תלי דגירה עצומים וגוזלים עצמאיים לחלוטין מיום הבקיעה" data-en="Unique Feature: Builds huge incubation mounds and chicks are fully independent from hatching">מאפיין ייחודי: בונה תלי דגירה עצומים וגוזלים עצמאיים לחלוטין מיום הבקיעה</p>
+            <h1 class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight" data-he="מגנפוד" data-en="Megapode">מגנפוד</h1>
+            <p class="text-slate-400 font-mono text-lg mb-4 tracking-widest">Megapodiidae</p>
+            <p class="text-sky-400 font-bold text-xl mb-8" data-he='"בנאי התלים הגדול"' data-en='"The Great Mound Builder"'>"בנאי התלים הגדול"</p>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16 text-center">
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>דגירה" data-en="Incubation<br>Period">תקופת<br>דגירה</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 90<br>ימים' data-en='Up to 90<br>days'>עד 90<br>ימים</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="אורך<br>מירבי" data-en="Max<br>Length">אורך<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 70<br>ס"מ' data-en='Up to 70<br>cm'>עד 70<br>ס"מ</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="משקל<br>מירבי" data-en="Max<br>Weight">משקל<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 2.5<br>ק"ג' data-en='Up to 2.5<br>kg'>עד 2.5<br>ק"ג</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="שנת<br>גילוי" data-en="Discovery<br>Year">שנת<br>גילוי</span>
+                <span class="text-white font-bold text-lg leading-tight">1831</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>שושלת" data-en="Lineage<br>Period">תקופת<br>שושלת</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='מעל 60<br>מיליון<br>שנה' data-en='Over 60<br>Million<br>Years'>מעל 60<br>מיליון<br>שנה</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="מצב<br>שימור" data-en="Conservation<br>Status">מצב<br>שימור</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='משתנה<br>(תלוי מין)' data-en='Varies<br>(by species)'>משתנה<br>(תלוי מין)</span>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="space-y-8 text-slate-300 text-lg leading-relaxed text-justify">
+            
+            <h2 class="section-header" data-he="ייחודיות מדעית ופיזית:" data-en="Scientific and Physical Uniqueness:">ייחודיות מדעית ופיזית:</h2>
+            <p data-he="המגנפוד נראה כשילוב בין תרנגול הודו לבין יצור פרהיסטורי. הוא חי באזורי אוסטרליה, גינאה החדשה ואינדונזיה, ונחשב לאחד מעופות הקרקע הפרימיטיביים ביותר החיים כיום. בניגוד מוחלט לרובם המכריע של העופות, המגנפודים אינם דוגרים על ביציהם באמצעות חום גופם. במקום זאת, הם בונים <span class='text-sky-400 font-medium'>מדגרות ביולוגיות עצומות (תלים)</span> – קומפוסט של צמחייה מרקיבה, אדמה וחול, היכול להגיע לגובה של מטרים ספורים." data-en="The megapode looks like a cross between a turkey and a prehistoric creature. It lives in Australia, New Guinea, and Indonesia, and is considered one of the most primitive ground birds alive today. Unlike the vast majority of birds, megapodes do not incubate their eggs with their body heat. Instead, they build <span class='text-sky-400 font-medium'>huge biological incubators (mounds)</span> – compost of rotting vegetation, earth, and sand, which can reach several meters in height.">
+                המגנפוד נראה כשילוב בין תרנגול הודו לבין יצור פרהיסטורי. הוא חי באזורי אוסטרליה, גינאה החדשה ואינדונזיה, ונחשב לאחד מעופות הקרקע הפרימיטיביים ביותר החיים כיום. בניגוד מוחלט לרובם המכריע של העופות, המגנפודים אינם דוגרים על ביציהם באמצעות חום גופם. במקום זאת, הם בונים <span class="text-sky-400 font-medium">מדגרות ביולוגיות עצומות (תלים)</span> – קומפוסט של צמחייה מרקיבה, אדמה וחול, היכול להגיע לגובה של מטרים ספורים.
+            </p>
+            <p data-he="הזכרים הם הבנאים והמתחזקים. הם משתמשים בחיישני חום רגישים הנמצאים במקורם כדי לבדוק את טמפרטורת התל באופן יומיומי. אם התל חם מדי, הם חופרים פתחי אוורור; אם הוא קר מדי, הם מוסיפים חומר אורגני. גוזלי המגנפוד הם אולי <span class='text-sky-400 font-medium'>העצמאיים ביותר בממלכת החי (Superprecocial)</span>. לאחר בקיעתם מהביצה עמוק בתוך התל החם, עליהם לחפור את דרכם החוצה בכוחות עצמם. ברגע שהם מגיחים לאוויר העולם, הם מנוצים, עיניהם פקוחות, והם מסוגלים לרוץ ואף לעוף ביום היוולדם, ללא כל עזרה או הדרכה מהוריהם." data-en="Males are the builders and maintainers. They use sensitive heat sensors in their beaks to check the mound's temperature daily. If it's too hot, they dig ventilation holes; if too cold, they add organic matter. Megapode chicks are perhaps <span class='text-sky-400 font-medium'>the most independent in the animal kingdom (Superprecocial)</span>. After hatching deep inside the warm mound, they must dig their way out themselves. Once they emerge, they are fully feathered, their eyes are open, and they can run and even fly on the day they are born, without any parental help.">
+                הזכרים הם הבנאים והמתחזקים. הם משתמשים בחיישני חום רגישים הנמצאים במקורם כדי לבדוק את טמפרטורת התל באופן יומיומי. אם התל חם מדי, הם חופרים פתחי אוורור; אם הוא קר מדי, הם מוסיפים חומר אורגני. גוזלי המגנפוד הם אולי <span class="text-sky-400 font-medium">העצמאיים ביותר בממלכת החי (Superprecocial)</span>. לאחר בקיעתם מהביצה עמוק בתוך התל החם, עליהם לחפור את דרכם החוצה בכוחות עצמם. ברגע שהם מגיחים לאוויר העולם, הם מנוצים, עיניהם פקוחות, והם מסוגלים לרוץ ואף לעוף ביום היוולדם, ללא כל עזרה או הדרכה מהוריהם.
+            </p>
+
+            <h2 class="section-header" data-he="הרגלי תזונה:" data-en="Dietary Habits:">הרגלי תזונה:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="המגנפודים הם ציפורים <span class='text-sky-400 font-medium'>אוכלות-כל (אומניבורים)</span>, הניזונות ממגוון רחב של מקורות מזון הנמצאים על קרקעית היער. התזונה שלהם מורכבת בעיקר מזרעים, פירות שנשרו, חרקים, תולעים וחסרי חוליות קטנים." data-en="Megapodes are <span class='text-sky-400 font-medium'>omnivorous birds</span>, feeding on a wide variety of food sources found on the forest floor. Their diet consists mainly of seeds, fallen fruits, insects, worms, and small invertebrates.">
+                    המגנפודים הם ציפורים <span class="text-sky-400 font-medium">אוכלות-כל (אומניבורים)</span>, הניזונות ממגוון רחב של מקורות מזון הנמצאים על קרקעית היער. התזונה שלהם מורכבת בעיקר מזרעים, פירות שנשרו, חרקים, תולעים וחסרי חוליות קטנים.
+                </p>
+                <p data-he="הם משתמשים ברגליהם החזקות והגדולות (אשר העניקו להם את שמם) כדי לחפור ולנבור בנשורת העלים ובאדמה הלחה בחיפוש אחר מזון. יכולת הנבירה המפותחת שלהם מסייעת להם לא רק בבניית תלי הדגירה העצומים, אלא גם בהשגת חלבונים חיוניים מתוך האדמה שבלעדיהם לא היו שורדים." data-en="They use their strong, large feet (which gave them their name) to dig and forage in leaf litter and damp soil. Their developed foraging ability helps them not only in building the massive incubation mounds but also in obtaining essential proteins from the earth, without which they would not survive.">
+                    הם משתמשים ברגליהם החזקות והגדולות (אשר העניקו להם את שמם) כדי לחפור ולנבור בנשורת העלים ובאדמה הלחה בחיפוש אחר מזון. יכולת הנבירה המפותחת שלהם מסייעת להם לא רק בבניית תלי הדגירה העצומים, אלא גם בהשגת חלבונים חיוניים מתוך האדמה שבלעדיהם לא היו שורדים.
+                </p>
+            </div>
+
+            <h2 class="section-header" data-he="אטימולוגיה מורחבת (מקור השם):" data-en="Extended Etymology (Name Origin):">אטימולוגיה מורחבת (מקור השם):</h2>
+            
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-6">
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Mega (תחילית):</h3>
+                    <p data-he="מקורו במילה היוונית העתיקה <strong>מגה (Μέγας)</strong> שמשמעותה <strong>גדול או עצום</strong>. מתייחס לממדים החריגים של איבריהם התחתונים ביחס לגודל גופם הכללי." data-en="Originates from the Ancient Greek word <strong>Mega (Μέγας)</strong> meaning <strong>large or huge</strong>. Refers to the disproportionate size of their lower limbs relative to their overall body size.">מקורו במילה היוונית העתיקה <strong>מגה (Μέγας)</strong> שמשמעותה <strong>גדול או עצום</strong>. מתייחס לממדים החריגים של איבריהם התחתונים ביחס לגודל גופם הכללי.</p>
+                </div>
+                
+                <hr class="border-slate-700">
+                
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Poda (סיומת):</h3>
+                    <p data-he="מקורו במילה היוונית העתיקה <strong>פוד (Πούς)</strong> שמשמעותה <strong>רגל או כף רגל</strong>. מתייחס לרגליים והטפרים החזקים שלהם, המשמשים ככלי עבודה מרכזי לחפירה וגריפת מאסות אדירות של אדמה לבניית התלים." data-en="Originates from the Ancient Greek word <strong>Poda (Πούς)</strong> meaning <strong>foot</strong>. Refers to their strong legs and claws, used as a primary tool for digging and sweeping massive amounts of earth to build mounds.">מקורו במילה היוונית העתיקה <strong>פוד (Πούς)</strong> שמשמעותה <strong>רגל או כף רגל</strong>. מתייחס לרגליים והטפרים החזקים שלהם, המשמשים ככלי עבודה מרכזי לחפירה וגריפת מאסות אדירות של אדמה לבניית התלים.</p>
+                </div>
+                
+                <div class="highlight-box mt-4">
+                    <p class="text-sky-100 font-medium" data-he="<span class='text-sky-400 font-bold'>המשמעות המלאה:</span> <strong>&quot;גדול-רגל&quot; (Large-footed).</strong><br>השם העברי (דגרתל) נגזר מפעולת ה<strong>דגירה</strong> ומה<strong>תל</strong> שאותו הם בונים, התאמה התנהגותית מרתקת המדגישה את אסטרטגיית הרבייה שלהם ולא את המבנה האנטומי שלהם." data-en="<span class='text-sky-400 font-bold'>Full Meaning:</span> <strong>&quot;Large-footed&quot;.</strong><br>The Hebrew name (Dagartel) derives from the action of <strong>incubating (Dgia)</strong> and the <strong>mound (Tel)</strong> they build, a fascinating behavioral adaptation highlighting their reproductive strategy rather than their anatomical structure.">
+                        <span class="text-sky-400 font-bold">המשמעות המלאה:</span> <strong>"גדול-רגל" (Large-footed).</strong><br>
+                        השם העברי (דגרתל) נגזר מפעולת ה<strong>דגירה</strong> ומה<strong>תל</strong> שאותו הם בונים, התאמה התנהגותית מרתקת המדגישה את אסטרטגיית הרבייה שלהם ולא את המבנה האנטומי שלהם.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="section-header" data-he="היסטוריית הגילוי והשרידות:" data-en="History of Discovery and Survival:">היסטוריית הגילוי והשרידות:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="<strong class='text-white'>הגילוי המקורי:</strong> המין תואר לראשונה מדעית בשנת 1831 על ידי חוקר הטבע והמנתח הצרפתי רנה פרימוור לסון <span class='text-sky-400 font-mono text-base'>(René Primevère Lesson, שנות חיים: 1794–1849)</span>, במהלך מסעות החקר הצרפתיים באוקיאניה ובאזור הים הפסיפי." data-en="<strong class='text-white'>Original Discovery:</strong> The species was first scientifically described in 1831 by the French naturalist and surgeon René Primevère Lesson <span class='text-sky-400 font-mono text-base'>(Lifespan: 1794–1849)</span>, during French exploratory voyages in Oceania and the Pacific.">
+                    <strong class="text-white">הגילוי המקורי:</strong> המין תואר לראשונה מדעית בשנת 1831 על ידי חוקר הטבע והמנתח הצרפתי רנה פרימוור לסון <span class="text-sky-400 font-mono text-base">(René Primevère Lesson, שנות חיים: 1794–1849)</span>, במהלך מסעות החקר הצרפתיים באוקיאניה ובאזור הים הפסיפי.
+                </p>
+                <p data-he="<strong class='text-white'>שימוש באנרגיה גיאותרמית:</strong> מעבר לשימוש בחום קומפוסט, תועדו מינים של מגנפודים (כמו אלו החיים באזורים וולקניים באינדונזיה) אשר קוברים את ביציהם בחולות שחורים בסמוך לנביעות גיאותרמיות של הרים געשיים פעילים, כשהם רותמים את חום כדור הארץ עצמו כאינקובטור." data-en="<strong class='text-white'>Geothermal Energy Use:</strong> Beyond using compost heat, some megapode species (like those in volcanic regions of Indonesia) bury their eggs in black sands near active geothermal vents, harnessing the earth's own heat as an incubator.">
+                    <strong class="text-white">שימוש באנרגיה גיאותרמית:</strong> מעבר לשימוש בחום קומפוסט, תועדו מינים של מגנפודים (כמו אלו החיים באזורים וולקניים באינדונזיה) אשר קוברים את ביציהם בחולות שחורים בסמוך לנביעות גיאותרמיות של הרים געשיים פעילים, כשהם רותמים את חום כדור הארץ עצמו כאינקובטור.
+                </p>
+                <p data-he="<strong class='text-white'>מאובן חי מובהק:</strong> משפחת הדגרתיליים נחשבת לקבוצה הבסיסית (Basal) והקדומה ביותר בסדרת התרנגולאים. חוקרים מאמינים כי אבותיהם התפצלו משאר העופות עוד בתור הקרטיקון (לפני כ-60 עד 70 מיליון שנים). שיטת הדגירה החיצונית שלהם נחשבת לשריד אבולוציוני עתיק יומין, המזכיר יותר את התנהגות הרבייה של זוחלים ודינוזאורים קדומים מאשר את זו של עופות מודרניים." data-en="<strong class='text-white'>Distinct Living Fossil:</strong> The Megapodiidae family is considered the basal and most ancient group in the Galliformes order. Researchers believe their ancestors split from other birds during the Cretaceous period (about 60-70 million years ago). Their external incubation method is an ancient evolutionary relic, more reminiscent of the reproductive behavior of ancient reptiles and dinosaurs than modern birds.">
+                    <strong class="text-white">מאובן חי מובהק:</strong> משפחת הדגרתיליים נחשבת לקבוצה הבסיסית (Basal) והקדומה ביותר בסדרת התרנגולאים. חוקרים מאמינים כי אבותיהם התפצלו משאר העופות עוד בתור הקרטיקון (לפני כ-60 עד 70 מיליון שנים). שיטת הדגירה החיצונית שלהם נחשבת לשריד אבולוציוני עתיק יומין, המזכיר יותר את התנהגות הרבייה של זוחלים ודינוזאורים קדומים מאשר את זו של עופות מודרניים.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
+            <a href="../index.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="&rarr; חזרה לארכיון" data-en="&larr; Back to Archive">
+                &rarr; חזרה לארכיון
+            </a>
+            <a href="sacredibis.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="הבא: מגלן קדוש &larr;" data-en="Next: Sacred Ibis &rarr;">
+                הבא: מגלן קדוש &larr;
+            </a>
+        </div>
+        
+    </main>
+
+    <!-- Fullscreen Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onclick="closeModal()">
+        <button class="absolute top-6 left-6 text-white hover:text-sky-400 p-2 rounded-full bg-slate-800/50 transition-colors" onclick="closeModal(event)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <img id="modalImage" src="" alt="" class="modal-image max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-slate-700" onclick="event.stopPropagation()">
+    </div>
+
+    <script>
+        // Language Toggle Functionality
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            
+            // Toggle HTML direction and lang
+            document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            // Update button text
+            document.getElementById('langBtn').innerText = currentLang === 'he' ? 'EN' : 'HE';
+
+            // Find all elements with translation data and update them dynamically
+            document.querySelectorAll('[data-he]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        // Modal functionality for zoomable image
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src, alt) {
+            modalImg.src = src;
+            modalImg.alt = alt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+
+        function closeModal(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            
+            // Clear src after animation finishes to prevent flicker
+            setTimeout(() => {
+                if (!modal.classList.contains('active')) {
+                    modalImg.src = '';
+                }
+            }, 300);
+        }
+
+        // Close modal on Escape key press
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

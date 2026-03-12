@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: הואצין | ארכיון המאובנים החיים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #020617; 
+            --bg-card: #0f172a; 
+            --bg-pill: #1e293b;
+            --text-accent: #0ea5e9; 
+            --text-accent-secondary: #38bdf8;
+            --border-color: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-header {
+            color: var(--text-accent);
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .highlight-box {
+            background-color: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            border-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        /* Modal Styles */
+        #imageModal {
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #imageModal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-image {
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #imageModal.active .modal-image {
+            transform: scale(1);
+        }
+        
+        .zoomable-img {
+            cursor: zoom-in;
+            transition: opacity 0.2s ease;
+        }
+        .zoomable-img:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative font-sans selection:bg-sky-500/30">
+
+    <!-- Top Navigation -->
+    <nav class="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center relative z-10">
+        <a href="../index.html" class="nav-btn px-6 py-2 rounded-full text-sm font-medium flex items-center gap-2" data-he="<span>&rarr;</span> חזרה" data-en="<span>&larr;</span> Back">
+            <span>&rarr;</span> חזרה
+        </a>
+        <button id="langBtn" onclick="toggleLanguage()" class="nav-btn px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+            EN
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 pb-20 relative z-10">
+        
+        <!-- Zoomable Image Section -->
+        <div class="mb-12 mt-4 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl mx-auto max-w-2xl relative group">
+            <img 
+                src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/hoatzin.png" 
+                alt="הואצין" 
+                class="w-full h-auto object-cover zoomable-img"
+                onclick="openModal(this.src, this.alt)"
+                onerror="this.src='https://via.placeholder.com/800x450/0a1122/0ea5e9?text= Hoatzin'"
+            >
+            <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur px-3 py-1.5 rounded-full text-xs text-white flex items-center gap-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" data-he="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> לחץ להגדלה" data-en="<svg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7' /></svg> Click to zoom">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                לחץ להגדלה
+            </div>
+        </div>
+
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <p class="text-slate-400 text-sm md:text-base mb-4 font-medium" data-he="מאפיין ייחודי: מעכלת עלים כמו פרה, וגוזליה מצוידים בטפרים על כנפיהם" data-en="Unique Feature: Digests leaves like a cow, and its chicks have claws on their wings">מאפיין ייחודי: מעכלת עלים כמו פרה, וגוזליה מצוידים בטפרים על כנפיהם</p>
+            <h1 class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight" data-he="הואצין" data-en="Hoatzin">הואצין</h1>
+            <p class="text-slate-400 font-mono text-lg mb-4 tracking-widest">Opisthocomidae</p>
+            <p class="text-sky-400 font-bold text-xl mb-8" data-he='"ציפור הסירחון של האמזונס"' data-en='"The Stinkbird of the Amazon"'>"ציפור הסירחון של האמזונס"</p>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16 text-center">
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>דגירה" data-en="Incubation<br>Period">תקופת<br>דגירה</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 32<br>ימים' data-en='Up to 32<br>days'>עד 32<br>ימים</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="אורך<br>מירבי" data-en="Max<br>Length">אורך<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 65<br>ס"מ' data-en='Up to 65<br>cm'>עד 65<br>ס"מ</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="משקל<br>מירבי" data-en="Max<br>Weight">משקל<br>מירבי</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='עד 1.0<br>ק"ג' data-en='Up to 1.0<br>kg'>עד 1.0<br>ק"ג</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="שנת<br>גילוי" data-en="Discovery<br>Year">שנת<br>גילוי</span>
+                <span class="text-white font-bold text-lg leading-tight">1776</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="תקופת<br>שושלת" data-en="Lineage<br>Period">תקופת<br>שושלת</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='מעל 64<br>מיליון<br>שנה' data-en='Over 64<br>Million<br>Years'>מעל 64<br>מיליון<br>שנה</span>
+            </div>
+            <div class="stat-box p-6 flex flex-col justify-center items-center h-32">
+                <span class="text-slate-400 text-sm mb-2" data-he="מצב<br>שימור" data-en="Conservation<br>Status">מצב<br>שימור</span>
+                <span class="text-white font-bold text-lg leading-tight" data-he='ללא חשש<br>(יציב)' data-en='Least Concern<br>(Stable)'>ללא חשש<br>(יציב)</span>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="space-y-8 text-slate-300 text-lg leading-relaxed text-justify">
+            
+            <h2 class="section-header" data-he="ייחודיות מדעית ופיזית:" data-en="Scientific and Physical Uniqueness:">ייחודיות מדעית ופיזית:</h2>
+            <p data-he="ההואצין (Hoatzin), השוכן בביצות וביערות המנגרובים של אגן האמזונס ונהר האורינוקו, הוא חידה אבולוציונית מהלכת. ציפור זו שייכת לסדרה משל עצמה, ללא קרובי משפחה חיים קרובים. המאפיין הפיזי המדהים ביותר שלהם נמצא אצל הגוזלים: <span class='text-sky-400 font-medium'>לגוזלי ההואצין יש שני טפרים חדים ופעילים על כל כנף</span>. טפרים אלו, המזכירים באופן מצמרר את הארכאופטריקס (הדינוזאור-ציפור הקדום), משמשים אותם לטיפוס על ענפי העצים טרם פיתוח יכולת תעופה." data-en="The Hoatzin, inhabiting the swamps and mangrove forests of the Amazon and Orinoco basins, is a walking evolutionary enigma. This bird belongs to its own unique order, with no close living relatives. Their most striking physical feature is found in the chicks: <span class='text-sky-400 font-medium'>Hoatzin chicks have two sharp, functional claws on each wing</span>. These claws, chillingly reminiscent of the Archaeopteryx (the ancient dinosaur-bird), are used for climbing tree branches before developing flight capabilities.">
+                ההואצין (Hoatzin), השוכן בביצות וביערות המנגרובים של אגן האמזונס ונהר האורינוקו, הוא חידה אבולוציונית מהלכת. ציפור זו שייכת לסדרה משל עצמה, ללא קרובי משפחה חיים קרובים. המאפיין הפיזי המדהים ביותר שלהם נמצא אצל הגוזלים: <span class="text-sky-400 font-medium">לגוזלי ההואצין יש שני טפרים חדים ופעילים על כל כנף</span>. טפרים אלו, המזכירים באופן מצמרר את הארכאופטריקס (הדינוזאור-ציפור הקדום), משמשים אותם לטיפוס על ענפי העצים טרם פיתוח יכולת תעופה.
+            </p>
+            <p data-he="אם טורף (כמו נחש או קוף) מאיים על הקן התלוי מעל המים, הגוזלים קופצים ישירות לנהר. הם שחיינים מצוינים, ולאחר שהסכנה חולפת, הם משתמשים בטפרי הכנפיים שלהם כדי לטפס בחזרה במעלה הגזע אל הקן. כשהם מתבגרים ומעלים נוצות תעופה, הטפרים הללו נושרים ומוחלפים בכנף רגילה." data-en="If a predator (like a snake or monkey) threatens the nest hanging over the water, the chicks jump directly into the river. They are excellent swimmers, and once the danger passes, they use their wing claws to climb back up the trunk to the nest. As they mature and grow flight feathers, these claws shed and are replaced by a normal wing.">
+                אם טורף (כמו נחש או קוף) מאיים על הקן התלוי מעל המים, הגוזלים קופצים ישירות לנהר. הם שחיינים מצוינים, ולאחר שהסכנה חולפת, הם משתמשים בטפרי הכנפיים שלהם כדי לטפס בחזרה במעלה הגזע אל הקן. כשהם מתבגרים ומעלים נוצות תעופה, הטפרים הללו נושרים ומוחלפים בכנף רגילה.
+            </p>
+
+            <h2 class="section-header" data-he="הרגלי תזונה:" data-en="Dietary Habits:">הרגלי תזונה:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="ההואצין הוא העוף היחיד בעולם שהוא <span class='text-sky-400 font-medium'>אוכל-עלים אקסקלוסיבי בעל מערכת תסיסה קדמית (Foregut fermenter)</span>. המשמעות היא שמערכת העיכול שלו מתפקדת באופן זהה למערכת העיכול של מעלי גירה (כמו פרות וכבשים). הזפק שלו, שבדרך כלל משמש ציפורים רק לאחסון מזון, התפתח לכדי איבר שרירי וגדול התופס כשליש מנפח גופו, ומלא בבקטריות מיוחדות שמפרקות את תאית העלים." data-en="The Hoatzin is the only bird in the world that is an <span class='text-sky-400 font-medium'>exclusive folivore with a foregut fermentation system</span>. This means its digestive system functions identically to that of ruminants (like cows and sheep). Its crop, normally used by birds just to store food, has evolved into a large muscular organ taking up about a third of its body volume, filled with specialized bacteria that break down leaf cellulose.">
+                    ההואצין הוא העוף היחיד בעולם שהוא <span class="text-sky-400 font-medium">אוכל-עלים אקסקלוסיבי בעל מערכת תסיסה קדמית (Foregut fermenter)</span>. המשמעות היא שמערכת העיכול שלו מתפקדת באופן זהה למערכת העיכול של מעלי גירה (כמו פרות וכבשים). הזפק שלו, שבדרך כלל משמש ציפורים רק לאחסון מזון, התפתח לכדי איבר שרירי וגדול התופס כשליש מנפח גופו, ומלא בבקטריות מיוחדות שמפרקות את תאית העלים.
+                </p>
+                <p data-he="בשל תהליך התסיסה החיידקית של העלים בתוך גופם, הם פולטים ריח חריף שמזכיר זבל פרות טרי. הריח הדוחה הזה העניק להם את הכינוי המקומי 'ציפור הסירחון' (Stinkbird), והוא משמש גם כמנגנון הגנה פסיבי שכן ציידים מקומיים נמנעים מציד שלהם עקב טעמם וריחם הרעים." data-en="Due to the bacterial fermentation of leaves inside their bodies, they emit a pungent odor reminiscent of fresh cow manure. This repulsive smell earned them the local nickname 'Stinkbird', and it also serves as a passive defense mechanism as local hunters avoid hunting them due to their bad taste and smell.">
+                    בשל תהליך התסיסה החיידקית של העלים בתוך גופם, הם פולטים ריח חריף שמזכיר זבל פרות טרי. הריח הדוחה הזה העניק להם את הכינוי המקומי 'ציפור הסירחון' (Stinkbird), והוא משמש גם כמנגנון הגנה פסיבי שכן ציידים מקומיים נמנעים מציד שלהם עקב טעמם וריחם הרעים.
+                </p>
+            </div>
+
+            <h2 class="section-header" data-he="אטימולוגיה מורחבת (מקור השם):" data-en="Extended Etymology (Name Origin):">אטימולוגיה מורחבת (מקור השם):</h2>
+            
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-6">
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Opistho (תחילית):</h3>
+                    <p data-he="חלקו הראשון של שם הסוג הלטיני. נגזר מהמילה ביוונית עתיקה <strong>Opisthos (ὄπισθε)</strong>, שמשמעותה <strong>אחור או מאחור</strong>." data-en="The first part of the Latin genus name. Derived from the Ancient Greek word <strong>Opisthos (ὄπισθε)</strong>, meaning <strong>behind or backward</strong>.">חלקו הראשון של שם הסוג הלטיני. נגזר מהמילה ביוונית עתיקה <strong>Opisthos (ὄπισθε)</strong>, שמשמעותה <strong>אחור או מאחור</strong>.</p>
+                </div>
+                
+                <hr class="border-slate-700">
+                
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Komos (סיומת):</h3>
+                    <p data-he="החלק השני נגזר מיוונית עתיקה <strong>Komos (κόμη)</strong>, שמשמעותו <strong>שיער או ציצה</strong>." data-en="The second part is derived from Ancient Greek <strong>Komos (κόμη)</strong>, meaning <strong>hair or tuft</strong>.">החלק השני נגזר מיוונית עתיקה <strong>Komos (κόμη)</strong>, שמשמעותו <strong>שיער או ציצה</strong>.</p>
+                </div>
+
+                <hr class="border-slate-700">
+
+                <div>
+                    <h3 class="text-teal-400 font-bold text-xl mb-2 hover:text-teal-300 transition-colors">Hoatzin (שם המין העממי):</h3>
+                    <p data-he="נגזר מהשפה ה<strong>נאהואטל (השפה האצטקית העתיקה במקסיקו)</strong>, מהמילה <strong>Huātzin</strong>. באצטקית, מילה זו תיארה עוף דמוי פסיון או טווס. למרות שההואצין כלל לא חיו באזורי האצטקים (אלא באמזונס), מתיישבים ספרדים השאילו את השם בגלל הדמיון החזותי הכללי." data-en="Derived from <strong>Nahuatl (the ancient Aztec language in Mexico)</strong>, from the word <strong>Huātzin</strong>. In Aztec, this word described a pheasant or peacock-like bird. Although the Hoatzin did not live in Aztec territories (but rather in the Amazon), Spanish settlers borrowed the name due to a general visual resemblance.">נגזר מהשפה ה<strong>נאהואטל (השפה האצטקית העתיקה במקסיקו)</strong>, מהמילה <strong>Huātzin</strong>. באצטקית, מילה זו תיארה עוף דמוי פסיון או טווס. למרות שההואצין כלל לא חיו באזורי האצטקים (אלא באמזונס), מתיישבים ספרדים השאילו את השם בגלל הדמיון החזותי הכללי.</p>
+                </div>
+                
+                <div class="highlight-box mt-4">
+                    <p class="text-sky-100 font-medium" data-he="<span class='text-sky-400 font-bold'>המשמעות המלאה:</span> <strong>&quot;בעל הציצה האחורית&quot; (Wearing a crest behind).</strong><br>השם המדעי מתאר במדויק את כתר הנוצות הפרוע והקוצני המעטר את החלק האחורי של ראשו האדום והחשוף, שנותן לו מראה של כוכב רוק פרהיסטורי." data-en="<span class='text-sky-400 font-bold'>Full Meaning:</span> <strong>&quot;Wearing a crest behind&quot;.</strong><br>The scientific name accurately describes the wild, spiky feather crown adorning the back of its bare red head, giving it the look of a prehistoric rock star.">
+                        <span class="text-sky-400 font-bold">המשמעות המלאה:</span> <strong>"בעל הציצה האחורית" (Wearing a crest behind).</strong><br>
+                        השם המדעי מתאר במדויק את כתר הנוצות הפרוע והקוצני המעטר את החלק האחורי של ראשו האדום והחשוף, שנותן לו מראה של כוכב רוק פרהיסטורי.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="section-header" data-he="היסטוריית הגילוי והשרידות:" data-en="History of Discovery and Survival:">היסטוריית הגילוי והשרידות:</h2>
+            <div class="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 space-y-4">
+                <p data-he="<strong class='text-white'>הגילוי המקורי:</strong> הציפור הייחודית הזו תוארה מדעית בשנת 1776 על ידי הזואולוג ואיש הדת הגרמני פיליפ לודוויג סטטיוס מילר <span class='text-sky-400 font-mono text-base'>(Philipp Ludwig Statius Müller, שנות חיים: 1725–1776)</span>. למרבה הצער, מילר נפטר באותה שנה שבה קוטלגה הציפור באופן רשמי." data-en="<strong class='text-white'>Original Discovery:</strong> This unique bird was scientifically described in 1776 by the German zoologist and clergyman Philipp Ludwig Statius Müller <span class='text-sky-400 font-mono text-base'>(Lifespan: 1725–1776)</span>. Unfortunately, Müller passed away the same year the bird was officially cataloged.">
+                    <strong class="text-white">הגילוי המקורי:</strong> הציפור הייחודית הזו תוארה מדעית בשנת 1776 על ידי הזואולוג ואיש הדת הגרמני פיליפ לודוויג סטטיוס מילר <span class="text-sky-400 font-mono text-base">(Philipp Ludwig Statius Müller, שנות חיים: 1725–1776)</span>. למרבה הצער, מילר נפטר באותה שנה שבה קוטלגה הציפור באופן רשמי.
+                </p>
+                <p data-he="<strong class='text-white'>חידה טקסונומית:</strong> ההואצין היווה כאב ראש לחוקרי טבע במשך מאות שנים. בשל תכונותיו הפיזיות (טפרי הכנפיים), תזונתו (תסיסה) וצורתו, הוא סווג בעבר כקרוב של תרנגולאים, לאחר מכן סווג כקרוב של קוקיות, ואפילו קרוב של יונים. רק מחקרי DNA מודרניים הוכיחו שהוא שריד עתיק כל כך (מעל 64 מיליון שנה), שהוא למעשה ענף נפרד לחלוטין מעץ האבולוציה של העופות, וכעת הוא מוגדר כמשפחה וסדרה יחידה במינה." data-en="<strong class='text-white'>Taxonomic Puzzle:</strong> The Hoatzin has been a headache for naturalists for centuries. Due to its physical traits (wing claws), diet (fermentation), and shape, it was previously classified as a relative of galliformes, then cuckoos, and even pigeons. Only modern DNA studies proved it is such an ancient relic (over 64 million years old) that it is an entirely separate branch from the avian evolutionary tree, now defined as a unique family and order.">
+                    <strong class="text-white">חידה טקסונומית:</strong> ההואצין היווה כאב ראש לחוקרי טבע במשך מאות שנים. בשל תכונותיו הפיזיות (טפרי הכנפיים), תזונתו (תסיסה) וצורתו, הוא סווג בעבר כקרוב של תרנגולאים, לאחר מכן סווג כקרוב של קוקיות, ואפילו קרוב של יונים. רק מחקרי DNA מודרניים הוכיחו שהוא שריד עתיק כל כך (מעל 64 מיליון שנה), שהוא למעשה ענף נפרד לחלוטין מעץ האבולוציה של העופות, וכעת הוא מוגדר כמשפחה וסדרה יחידה במינה.
+                </p>
+                <p data-he="<strong class='text-white'>מצב שימור:</strong> הריח העז שלהם הגן עליהם מציד אנושי מאסיבי, ולכן אוכלוסייתם יציבה יחסית. עם זאת, כאוכלי-עלים ויושבי עצים בלתי יעילים בתעופה, ההואצינים רגישים ביותר לבירוא יערות באמזונס. אובדן יערות הגדות (Riparian forests) שבהם הם מקננים מהווה את האיום המרכזי היחיד על עתידם של המאובנים החיים הללו." data-en="<strong class='text-white'>Conservation Status:</strong> Their strong odor has protected them from massive human hunting, so their population is relatively stable. However, as folivores and inefficient flyers, hoatzins are highly sensitive to Amazon deforestation. The loss of riparian forests where they nest is the main threat to the future of these living fossils.">
+                    <strong class="text-white">מצב שימור:</strong> הריח העז שלהם הגן עליהם מציד אנושי מאסיבי, ולכן אוכלוסייתם יציבה יחסית. עם זאת, כאוכלי-עלים ויושבי עצים בלתי יעילים בתעופה, ההואצינים רגישים ביותר לבירוא יערות באמזונס. אובדן יערות הגדות (Riparian forests) שבהם הם מקננים מהווה את האיום המרכזי היחיד על עתידם של המאובנים החיים הללו.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
+            <a href="cassowary.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="&rarr; הקודם: קזואר" data-en="&larr; Prev: Cassowary">
+                &rarr; הקודם: קזואר
+            </a>
+            <a href="sacredibis.html" class="nav-btn px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2" data-he="הבא: מגלן קדוש &larr;" data-en="Next: Sacred Ibis &rarr;">
+                הבא: מגלן קדוש &larr;
+            </a>
+        </div>
+        
+    </main>
+
+    <!-- Fullscreen Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onclick="closeModal()">
+        <button class="absolute top-6 left-6 text-white hover:text-sky-400 p-2 rounded-full bg-slate-800/50 transition-colors" onclick="closeModal(event)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <img id="modalImage" src="" alt="" class="modal-image max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-slate-700" onclick="event.stopPropagation()">
+    </div>
+
+    <script>
+        // Language Toggle Functionality
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            
+            // Toggle HTML direction and lang
+            document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            // Update button text
+            document.getElementById('langBtn').innerText = currentLang === 'he' ? 'EN' : 'HE';
+
+            // Find all elements with translation data and update them dynamically
+            document.querySelectorAll('[data-he]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        // Modal functionality for zoomable image
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src, alt) {
+            modalImg.src = src;
+            modalImg.alt = alt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; 
+            
+            setTimeout(() => {
+                if (!modal.classList.contains('active')) {
+                    modalImg.src = '';
+                }
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: מאטה מאטה | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
+            --border-card: #1d365d;
+            --text-accent: #f59e0b; /* Amber-500 matching the category accent */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.7;
+        }
+
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(245, 158, 11, 0.15);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-amber-400 hover:bg-amber-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
+    </div>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
+        
+        <!-- Hero Image -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/matamata.png" alt="מאטה מאטה" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/f59e0b?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: הסוואה מושלמת כעץ נרקב ושאיבת טרף בוואקום</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">מאטה מאטה</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Chelus fimbriata</p>
+                <p id="ui_trans" class="text-amber-400 font-bold italic pt-2">"צב מצויץ מפלצתי"</p>
+            </div>
+
+            <!-- Stats Grid (Pills) - 5 Columns -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">כ-40<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>קיטלוג</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1783<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>מירבי</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 50<br>ס"מ<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">משקל<br>מירבי</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 15<br>ק"ג<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat5_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">מצב<br>שימור</span>
+                    <span id="stat5_val" class="text-xs md:text-sm text-green-400 font-black leading-tight"><br>ללא חשש<br>(LC)</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">המאטה מאטה הוא ללא ספק אחד הזוחלים בעלי המראה המוזר והייחודי ביותר על פני כדור הארץ. שריונו (הקראפס) משונן, שטוח ועמוס בבליטות גבשושיות, ראשו משולש וגדול במיוחד, וצווארו ארוך ומוקף באינספור דשי עור קטנים. מראה זה מספק לו <span class="font-bold text-white">הסוואה אבסולוטית</span>: כשהוא שוכב ללא נוע בקרקעית הנהר הבוצית, הוא נראה בדיוק כמו חתיכת עץ רקוב או ערימת עלים מתים. אפו המוארך מתפקד כ"שנורקל", המאפשר לו לנשום תוך כדי ששאר גופו נשאר מוסתר מתחת לפני המים.</p>
+                    
+                    <p id="sec1_p2">בניגוד לרוב הצבים, המאטה מאטה לא יכול ללעוס את טרפו מכיוון שלסתותיו חלשות מאוד. במקום זאת, הוא משתמש בטכניקת ציד גאונית הנקראת <span class="font-bold text-white">אכילת יניקה (Suction feeding)</span>. דשי העור שעל ראשו משמשים כחיישנים המזהים תנודות זעירות במים שיוצרים דגים חולפים. כשהטרף מתקרב, הצב פותח את פיו הענק לרווחה במהירות אדירה. פעולה זו יוצרת ואקום רב-עוצמה שפשוט שואב את הדג (יחד עם כמות מים גדולה) ישירות לתוך גרונו בשלמותו, שם המים נפלטים החוצה והטרף נבלע.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-amber-300 text-base mb-1">Chelus (כלוס):</h3>
+                        <p id="sec2_desc1">שם הסוג מגיע מהמילה היוונית העתיקה **khelus** (χέλυς), שמשמעותה הפשוטה היא <span class="font-bold text-white">צב</span> או "שריון דמוי נבל" (ביוון העתיקה נהגו לייצר תיבות תהודה לנבלים משריונות צבים).</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-amber-300 text-base mb-1">fimbriata (פימבריאטה):</h3>
+                        <p id="sec2_desc2">מקורו במילה הלטינית **fimbriatus**, שפירושה <span class="font-bold text-white">מצויץ, בעל שוליים, או עטור גדילים</span>. שם זה מתאר במדויק את דשי העור הרבים והמסולסלים המעטרים את ראשו, צווארו וסנטרו של הצב, המעניקים לו את ההסוואה העלית שלו.</p>
+                    </div>
+                    <div class="bg-amber-900/20 p-4 rounded-xl border-r-2 border-amber-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-amber-200">השם העממי "מאטה מאטה" (Mata mata): מקורו בשפות הילידים של דרום אמריקה (ככל הנראה משפת הטופי - Tupi). המשמעות היא <span class="font-bold text-white">"הרוג! הרוג!"</span> או לחלופין מונח המתאר מראה מפלצתי ומעורר אימה. שם זה משקף את האופן שבו נתפס מראהו החייזרי בעיני השבטים המקומיים לאורך ההיסטוריה.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-amber-400 font-bold text-base mb-4 inline-block border-b border-amber-900/50 pb-1">היסטוריית הישרדות ואיומים כיום:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">שורד האמזונס:</span> <span id="sec3_v1">המאטה מאטה משתייך למשפחת הנטויי-צוואר (Chelidae) וחי בנהרות איטיים, ביצות ושלוליות יער ברחבי אגן האמזונס ואגן האורינוקו בדרום אמריקה. המורפולוגיה המוזרה שלו התפתחה לאורך כ-40 מיליון שנה, וסייעה לו לשרוד בכך שהפכה אותו ל"בלתי נראה" לחלוטין - הן עבור טורפים והן עבור טרפו.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">תיעוד מדעי:</span> <span id="sec3_v2">הצב תואר לראשונה מדעית בשנת 1783 על ידי הזואולוג הגרמני יוהאן גוטלוב שניידר (Johann Gottlob Schneider). לאחרונה, מחקרים גנטיים (משנת 2020) הצביעו על כך שייתכן וקיימים למעשה שני מינים נפרדים של מאטה מאטה (אחד לאגן האמזונס ואחד לאגן האורינוקו).</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">מצב שימור נוכחי:</span> <span id="sec3_v3">למרבה המזל, מין זה מוגדר תחת "ללא חשש" (Least Concern), בעיקר בזכות אזור התפוצה הרחב והעצום שלו ביערות דרום אמריקה וההסוואה המעולה שלו. עם זאת, המראה החייזרי והמרתק שלו הפך אותו למטרה מבוקשת ביותר בסחר חיות המחמד האקזוטיות (Black market pet trade), וזה, יחד עם הרס בתי הגידול עקב כריתת יערות, מהווה איום הולך וגובר על אוכלוסיות מקומיות מסוימות.</span></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="maryriverturtle.html" class="text-slate-400 hover:text-amber-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: צב נהר מרי</span>
+        </a>
+        <a href="cantorsgiantsoftshellturtle.html" class="text-amber-400 hover:text-amber-300 transition-colors text-sm font-bold bg-amber-900/20 px-5 py-2.5 rounded-full border border-amber-800/30 shadow-lg">
+            <span id="navNext">הבא: צב רך קנטור</span> <span>&larr;</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: הסוואה מושלמת כעץ נרקב ושאיבת טרף בוואקום',
+                ui_title: 'מאטה מאטה',
+                ui_sci: 'Chelus fimbriata',
+                ui_trans: '"צב מצויץ מפלצתי"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'כ-40<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>קיטלוג', stat2_val: '<br>1783<br>&nbsp;',
+                stat3_lbl: 'אורך<br>מירבי', stat3_val: 'עד 50<br>ס"מ<br>&nbsp;',
+                stat4_lbl: 'משקל<br>מירבי', stat4_val: 'עד 15<br>ק"ג<br>&nbsp;',
+                stat5_lbl: 'מצב<br>שימור', stat5_val: '<br>ללא חשש<br>(LC)',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'המאטה מאטה הוא ללא ספק אחד הזוחלים בעלי המראה המוזר והייחודי ביותר על פני כדור הארץ. שריונו (הקראפס) משונן, שטוח ועמוס בבליטות גבשושיות, ראשו משולש וגדול במיוחד, וצווארו ארוך ומוקף באינספור דשי עור קטנים. מראה זה מספק לו <span class="font-bold text-white">הסוואה אבסולוטית</span>: כשהוא שוכב ללא נוע בקרקעית הנהר הבוצית, הוא נראה בדיוק כמו חתיכת עץ רקוב או ערימת עלים מתים. אפו המוארך מתפקד כ"שנורקל", המאפשר לו לנשום תוך כדי ששאר גופו נשאר מוסתר מתחת לפני המים.',
+                sec1_p2: 'בניגוד לרוב הצבים, המאטה מאטה לא יכול ללעוס את טרפו מכיוון שלסתותיו חלשות מאוד. במקום זאת, הוא משתמש בטכניקת ציד גאונית הנקראת <span class="font-bold text-white">אכילת יניקה (Suction feeding)</span>. דשי העור שעל ראשו משמשים כחיישנים המזהים תנודות זעירות במים שיוצרים דגים חולפים. כשהטרף מתקרב, הצב פותח את פיו הענק לרווחה במהירות אדירה. פעולה זו יוצרת ואקום רב-עוצמה שפשוט שואב את הדג (יחד עם כמות מים גדולה) ישירות לתוך גרונו בשלמותו, שם המים נפלטים החוצה והטרף נבלע.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Chelus (כלוס):', sec2_desc1: 'שם הסוג מגיע מהמילה היוונית העתיקה **khelus** (χέλυς), שמשמעותה הפשוטה היא <span class="font-bold text-white">צב</span> או "שריון דמוי נבל" (ביוון העתיקה נהגו לייצר תיבות תהודה לנבלים משריונות צבים).',
+                sec2_sub2: 'fimbriata (פימבריאטה):', sec2_desc2: 'מקורו במילה הלטינית **fimbriatus**, שפירושה <span class="font-bold text-white">מצויץ, בעל שוליים, או עטור גדילים</span>. שם זה מתאר במדויק את דשי העור הרבים והמסולסלים המעטרים את ראשו, צווארו וסנטרו של הצב, המעניקים לו את ההסוואה העלית שלו.',
+                sec2_total: 'השם העממי "מאטה מאטה" (Mata mata): מקורו בשפות הילידים של דרום אמריקה (ככל הנראה משפת הטופי - Tupi). המשמעות היא <span class="font-bold text-white">"הרוג! הרוג!"</span> או לחלופין מונח המתאר מראה מפלצתי ומעורר אימה. שם זה משקף את האופן שבו נתפס מראהו החייזרי בעיני השבטים המקומיים לאורך ההיסטוריה.',
+                sec3_title: 'היסטוריית הישרדות ואיומים כיום:',
+                sec3_l1: 'שורד האמזונס:', sec3_v1: 'המאטה מאטה משתייך למשפחת הנטויי-צוואר (Chelidae) וחי בנהרות איטיים, ביצות ושלוליות יער ברחבי אגן האמזונס ואגן האורינוקו בדרום אמריקה. המורפולוגיה המוזרה שלו התפתחה לאורך כ-40 מיליון שנה, וסייעה לו לשרוד בכך שהפכה אותו ל"בלתי נראה" לחלוטין - הן עבור טורפים והן עבור טרפו.',
+                sec3_l2: 'תיעוד מדעי:', sec3_v2: 'הצב תואר לראשונה מדעית בשנת 1783 על ידי הזואולוג הגרמני יוהאן גוטלוב שניידר (Johann Gottlob Schneider). לאחרונה, מחקרים גנטיים (משנת 2020) הצביעו על כך שייתכן וקיימים למעשה שני מינים נפרדים של מאטה מאטה (אחד לאגן האמזונס ואחד לאגן האורינוקו).',
+                sec3_l3: 'מצב שימור נוכחי:', sec3_v3: 'למרבה המזל, מין זה מוגדר תחת "ללא חשש" (Least Concern), בעיקר בזכות אזור התפוצה הרחב והעצום שלו ביערות דרום אמריקה וההסוואה המעולה שלו. עם זאת, המראה החייזרי והמרתק שלו הפך אותו למטרה מבוקשת ביותר בסחר חיות המחמד האקזוטיות (Black market pet trade), וזה, יחד עם הרס בתי הגידול עקב כריתת יערות, מהווה איום הולך וגובר על אוכלוסיות מקומיות מסוימות.',
+                navPrev: 'הקודם: צב נהר מרי', navNext: 'הבא: צב רך קנטור', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                back: '← Back',
+                ui_feature: 'Unique feature: Perfect dead-leaf camouflage & vacuum suction feeding',
+                ui_title: 'Mata Mata',
+                ui_sci: 'Chelus fimbriata',
+                ui_trans: '"Fringed monstrous turtle"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: '~40<br>Million<br>Years',
+                stat2_lbl: 'Classified<br>In', stat2_val: '<br>1783<br>&nbsp;',
+                stat3_lbl: 'Max<br>Length', stat3_val: 'Up to 50<br>cm<br>&nbsp;',
+                stat4_lbl: 'Max<br>Weight', stat4_val: 'Up to 15<br>kg<br>&nbsp;',
+                stat5_lbl: 'Cons.<br>Status', stat5_val: '<br>Least Concern<br>(LC)',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The Mata Mata is undoubtedly one of the most bizarre and unique-looking reptiles on Earth. Its carapace (shell) is ridged, flat, and covered in bumpy knobs, its head is extremely large and triangular, and its long neck is fringed with numerous small skin flaps. This appearance provides it with <span class="font-bold text-white">absolute camouflage</span>: when lying motionless in the muddy riverbed, it looks exactly like a piece of rotting wood or a pile of dead leaves. Its elongated nose functions as a "snorkel," allowing it to breathe while keeping the rest of its body submerged.',
+                sec1_p2: 'Unlike most turtles, the Mata Mata cannot chew its prey because its jaws are very weak. Instead, it utilizes an ingenious hunting technique called <span class="font-bold text-white">suction feeding</span>. The skin flaps on its head act as sensors detecting tiny water vibrations created by passing fish. When prey approaches, the turtle rapidly opens its massive mouth. This action creates a powerful vacuum that literally sucks the fish (along with a large volume of water) whole directly into its throat, where the water is expelled and the prey is swallowed.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Chelus:', sec2_desc1: 'The genus name comes from the Ancient Greek word **khelus** (χέλυς), simply meaning <span class="font-bold text-white">turtle</span> or "lyre-like shell" (in ancient Greece, lyre soundboxes were made from turtle shells).',
+                sec2_sub2: 'fimbriata:', sec2_desc2: 'Originates from the Latin word **fimbriatus**, meaning <span class="font-bold text-white">fringed or bordered</span>. This name accurately describes the many wavy skin flaps adorning the turtle\'s head, neck, and chin, granting it its elite camouflage.',
+                sec2_total: 'The common name "Mata mata": Originates from South American indigenous languages (likely Tupi). It translates to <span class="font-bold text-white">"kill! kill!"</span> or serves as a term describing a monstrous, terrifying appearance. This name reflects how its alien-like look was perceived by local tribes throughout history.',
+                sec3_title: 'Survival History & Modern Threats:',
+                sec3_l1: 'Amazon Survivor:', sec3_v1: 'The Mata Mata belongs to the Chelidae family (side-necked turtles) and lives in slow-moving rivers, swamps, and forest pools across the Amazon and Orinoco basins in South America. Its bizarre morphology evolved over roughly 40 million years, helping it survive by making it completely "invisible" to both predators and prey.',
+                sec3_l2: 'Scientific Record:', sec3_v2: 'The turtle was first scientifically described in 1783 by German zoologist Johann Gottlob Schneider. Recently, genetic studies (from 2020) have suggested that there might actually be two distinct species of Mata Mata (one for the Amazon basin and one for the Orinoco basin).',
+                sec3_l3: 'Current Conservation Status:', sec3_v3: 'Fortunately, this species is listed as "Least Concern," primarily due to its vast distribution range in South American forests and its excellent camouflage. However, its fascinating, alien appearance has made it a highly sought-after target in the exotic pet trade. This, combined with habitat destruction from deforestation, poses a growing threat to certain local populations.',
+                navPrev: 'Prev: Mary River Turtle', navNext: 'Next: Cantor\'s Softshell', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const d = content[currentLang];
+            
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
+            
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
+            document.getElementById('stat5_lbl').innerHTML = d.stat5_lbl;
+            document.getElementById('stat5_val').innerHTML = d.stat5_val;
+            
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
+            
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerHTML = d.sec2_total;
+            
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
+            
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
+            document.documentElement.lang = currentLang;
+
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
+        }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

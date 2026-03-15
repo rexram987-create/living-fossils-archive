@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: צב נטוי-צוואר | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI */
+        :root {
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
+            --border-card: #1d365d;
+            --text-accent: #a855f7; /* Purple-500 matching the category accent */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.7;
+        }
+
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.15);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-purple-400 hover:bg-purple-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
+    </div>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
+        
+        <!-- Hero Image -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/sideneckedturtle.png" alt="צב נטוי-צוואר" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/a855f7?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: קיפול צוואר אופקי ושרידות יובש קיצונית</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">צב נטוי-צוואר</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Pelomedusa subrufa</p>
+                <p id="ui_trans" class="text-purple-400 font-bold italic pt-2">"צב בוץ-מדוזה גחון-אדום"</p>
+            </div>
+
+            <!-- Stats Grid (Pills) - 5 Columns -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">כ-120<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>קיטלוג</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1789<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>מירבי</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 30<br>ס"מ<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">משקל<br>מירבי</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 2<br>ק"ג<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat5_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">מצב<br>שימור</span>
+                    <span id="stat5_val" class="text-xs md:text-sm text-green-400 font-black leading-tight"><br>ללא חשש<br>(LC)</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">צבים נטויי-צוואר (Pleurodira) הם תת-סדרה קדומה של צבים המאופיינים בדרך הייחודית שבה הם מכניסים את ראשם לשריון. בניגוד לצבים המודרניים יותר (מוסתרי-צוואר) המושכים את ראשם ישר לאחור, הצבים נטויי-הצוואר מקפלים את צווארם הצידה לאורך שולי השריון הפנימיים מתחת לקרפייס. מין זה, המכונה "צב הקסדה האפריקאי", הוא אחד הנציגים הנפוצים, החסונים והעמידים ביותר של הקבוצה ביבשת אפריקה.</p>
+                    
+                    <p id="sec1_p2">צב זה ידוע ביכולת ההישרדות המדהימה שלו בתנאי יובש קיצוניים. כאשר ביצות הבוץ ושלוליות הסוואנה שבהן הוא חי מתייבשות לחלוטין בקיץ, הוא מתחפר עמוק באדמה ונכנס לתרדמת קיץ עמוקה (Aestivation). הוא יכול להישאר קבור במצב של חילוף חומרים אפסי למשך חודשים ואפילו שנים עד לבוא הגשמים. למרות גודלו הצנוע יחסית, הוא צייד קרניבור אקטיבי, ולעיתים קרובות פרטים מתאגדים כדי לצוד ב"להקות" קטנות, בעזרתן הם מסוגלים להטביע ולהכניע טרף גדול כמו ציפורי מים.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-purple-300 text-base mb-1">Pelomedusa (פלומדוזה):</h3>
+                        <p id="sec2_desc1">שם הסוג מורכב מחיבור מילים ביוונית עתיקה: **pelos** שמשמעותה <span class="font-bold text-white">בוץ</span>, ו-**Medusa** שמשמעותה <span class="font-bold text-white">מדוזה (המפלצת המיתולוגית מהמיתולוגיה היוונית)</span>. השם מתייחס לבית הגידול הבוצי ולמראה ראשו שעשוי היה להיראות מרתיע למגליו הראשונים.</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-purple-300 text-base mb-1">subrufa (סוברופה):</h3>
+                        <p id="sec2_desc2">מקורו בלטינית: **sub** שמשמעותה <span class="font-bold text-white">מתחת או למטה</span>, ו-**rufus** שמשמעותה <span class="font-bold text-white">אדום או צבע חלודה</span>. תיאור זה מצביע על צבעו האדמדם או צהבהב-חום של הפלסטרון (השריון הגחוני, התחתון) של הצב.</p>
+                    </div>
+                    <div class="bg-purple-900/20 p-4 rounded-xl border-r-2 border-purple-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-purple-200">המשמעות המלאה: "מפלצת-בוץ בעלת גחון אדום". שם תת-הסדרה, Pleurodira (נטויי-צוואר), מורכב מ-pleura (צד) ו-deire (צוואר).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-purple-400 font-bold text-base mb-4 inline-block border-b border-purple-900/50 pb-1">היסטוריית הישרדות ואיומים כיום:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">שורד גונדוואנה:</span> <span id="sec3_v1">תת-הסדרה של הצבים נטויי-הצוואר התפצלה משאר הצבים בעידן המזוזואיקון, לפני כ-120 מיליון שנה. שרידי מאובנים מעידים על כך שמקורם של צבים אלו הוא ביבשת-העל הדרומית העתיקה גונדוואנה. זו הסיבה שכיום צבים ממשפחות אלו נמצאים אך ורק בחצי הכדור הדרומי – באפריקה, דרום אמריקה ואוסטרליה.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">תיעוד מדעי:</span> <span id="sec3_v2">המין הוגדר וקוטלג רשמית בשנת 1789 על ידי חוקר הטבע הצרפתי פייר ז'וזף בונאטר (Pierre Joseph Bonnaterre).</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">מצב שימור נוכחי:</span> <span id="sec3_v3">למרבה המזל, צב נטוי-צוואר זה (צב הקסדה האפריקאי) מוגדר במצב <span class="font-bold text-green-400">"ללא חשש" (Least Concern)</span>. הוא נחשב לאחד הצבים הנפוצים ביותר ברחבי יבשת אפריקה (מסנגל ועד דרום אפריקה) ואף חי בחצי האי ערב. יכולת ההסתגלות העצומה שלו, תזונתו המגוונת ויכולתו לשרוד יובש, מגנים עליו מסכנת הכחדה נכון להיום, והאיום העיקרי עליו הוא סחר חיות מחמד, שכן הוא נפוץ מאוד באקווריומים ביתיים ברחבי העולם.</span></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="bigheadedturtle.html" class="text-slate-400 hover:text-purple-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: צב גדול-ראש</span>
+        </a>
+        <a href="../mammals/platypus.html" class="text-purple-400 hover:text-purple-300 transition-colors text-sm font-bold bg-purple-900/20 px-5 py-2.5 rounded-full border border-purple-800/30 shadow-lg">
+            <span id="navNext">הבא: פלטיפוס</span> <span>&larr;</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: קיפול צוואר אופקי ושרידות יובש קיצונית',
+                ui_title: 'צב נטוי-צוואר',
+                ui_sci: 'Pelomedusa subrufa',
+                ui_trans: '"צב בוץ-מדוזה גחון-אדום"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'כ-120<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>קיטלוג', stat2_val: '<br>1789<br>&nbsp;',
+                stat3_lbl: 'אורך<br>מירבי', stat3_val: 'עד 30<br>ס"מ<br>&nbsp;',
+                stat4_lbl: 'משקל<br>מירבי', stat4_val: 'עד 2<br>ק"ג<br>&nbsp;',
+                stat5_lbl: 'מצב<br>שימור', stat5_val: '<br>ללא חשש<br>(LC)',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'צבים נטויי-צוואר (Pleurodira) הם תת-סדרה קדומה של צבים המאופיינים בדרך הייחודית שבה הם מכניסים את ראשם לשריון. בניגוד לצבים המודרניים יותר (מוסתרי-צוואר) המושכים את ראשם ישר לאחור, הצבים נטויי-הצוואר מקפלים את צווארם הצידה לאורך שולי השריון הפנימיים מתחת לקרפייס. מין זה, המכונה "צב הקסדה האפריקאי", הוא אחד הנציגים הנפוצים, החסונים והעמידים ביותר של הקבוצה ביבשת אפריקה.',
+                sec1_p2: 'צב זה ידוע ביכולת ההישרדות המדהימה שלו בתנאי יובש קיצוניים. כאשר ביצות הבוץ ושלוליות הסוואנה שבהן הוא חי מתייבשות לחלוטין בקיץ, הוא מתחפר עמוק באדמה ונכנס לתרדמת קיץ עמוקה (Aestivation). הוא יכול להישאר קבור במצב של חילוף חומרים אפסי למשך חודשים ואפילו שנים עד לבוא הגשמים. למרות גודלו הצנוע יחסית, הוא צייד קרניבור אקטיבי, ולעיתים קרובות פרטים מתאגדים כדי לצוד ב"להקות" קטנות, בעזרתן הם מסוגלים להטביע ולהכניע טרף גדול כמו ציפורי מים.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Pelomedusa (פלומדוזה):', sec2_desc1: 'שם הסוג מורכב מחיבור מילים ביוונית עתיקה: **pelos** שמשמעותה <span class="font-bold text-white">בוץ</span>, ו-**Medusa** שמשמעותה <span class="font-bold text-white">מדוזה (המפלצת המיתולוגית מהמיתולוגיה היוונית)</span>. השם מתייחס לבית הגידול הבוצי ולמראה ראשו שעשוי היה להיראות מרתיע למגליו הראשונים.',
+                sec2_sub2: 'subrufa (סוברופה):', sec2_desc2: 'מקורו בלטינית: **sub** שמשמעותה <span class="font-bold text-white">מתחת או למטה</span>, ו-**rufus** שמשמעותה <span class="font-bold text-white">אדום או צבע חלודה</span>. תיאור זה מצביע על צבעו האדמדם או צהבהב-חום של הפלסטרון (השריון הגחוני, התחתון) של הצב.',
+                sec2_total: 'המשמעות המלאה: "מפלצת-בוץ בעלת גחון אדום". שם תת-הסדרה, Pleurodira (נטויי-צוואר), מורכב מ-pleura (צד) ו-deire (צוואר).',
+                sec3_title: 'היסטוריית הישרדות ואיומים כיום:',
+                sec3_l1: 'שורד גונדוואנה:', sec3_v1: 'תת-הסדרה של הצבים נטויי-הצוואר התפצלה משאר הצבים בעידן המזוזואיקון, לפני כ-120 מיליון שנה. שרידי מאובנים מעידים על כך שמקורם של צבים אלו הוא ביבשת-העל הדרומית העתיקה גונדוואנה. זו הסיבה שכיום צבים ממשפחות אלו נמצאים אך ורק בחצי הכדור הדרומי – באפריקה, דרום אמריקה ואוסטרליה.',
+                sec3_l2: 'תיעוד מדעי:', sec3_v2: 'המין הוגדר וקוטלג רשמית בשנת 1789 על ידי חוקר הטבע הצרפתי פייר ז\'וזף בונאטר (Pierre Joseph Bonnaterre).',
+                sec3_l3: 'מצב שימור נוכחי:', sec3_v3: 'למרבה המזל, צב נטוי-צוואר זה (צב הקסדה האפריקאי) מוגדר במצב <span class="font-bold text-green-400">"ללא חשש" (Least Concern)</span>. הוא נחשב לאחד הצבים הנפוצים ביותר ברחבי יבשת אפריקה (מסנגל ועד דרום אפריקה) ואף חי בחצי האי ערב. יכולת ההסתגלות העצומה שלו, תזונתו המגוונת ויכולתו לשרוד יובש, מגנים עליו מסכנת הכחדה נכון להיום, והאיום העיקרי עליו הוא סחר חיות מחמד, שכן הוא נפוץ מאוד באקווריומים ביתיים ברחבי העולם.',
+                navPrev: 'הקודם: צב גדול-ראש', navNext: 'הבא: פלטיפוס', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                back: '← Back',
+                ui_feature: 'Unique feature: Horizontal neck folding and extreme drought survival',
+                ui_title: 'Side-necked Turtle',
+                ui_sci: 'Pelomedusa subrufa',
+                ui_trans: '"Red-bellied mud Medusa"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: '~120<br>Million<br>Years',
+                stat2_lbl: 'Classified<br>In', stat2_val: '<br>1789<br>&nbsp;',
+                stat3_lbl: 'Max<br>Length', stat3_val: 'Up to 30<br>cm<br>&nbsp;',
+                stat4_lbl: 'Max<br>Weight', stat4_val: 'Up to 2<br>kg<br>&nbsp;',
+                stat5_lbl: 'Cons.<br>Status', stat5_val: '<br>Least Concern<br>(LC)',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'Side-necked turtles (Pleurodira) are an ancient suborder of turtles characterized by the unique way they retract their heads. Unlike the more modern hidden-necked turtles (Cryptodira) that pull their heads straight back, these turtles fold their necks sideways along the inner edge of their shell under the carapace. This particular species, known as the African helmeted turtle, is one of the most widespread, robust, and resilient representatives of the group on the African continent.',
+                sec1_p2: 'This turtle is renowned for its incredible survival ability in extreme drought conditions. When the mud swamps and savanna pools it inhabits dry up completely in the summer, it burrows deep into the ground and enters a deep summer dormancy (Aestivation). It can remain buried with near-zero metabolism for months or even years until the rains return. Despite its relatively modest size, it is an active carnivorous hunter, and individuals will often team up to hunt in small "packs," enabling them to drown and subdue larger prey such as water birds.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Pelomedusa:', sec2_desc1: 'The genus name is composed of Ancient Greek words: **pelos** meaning <span class="font-bold text-white">mud</span>, and **Medusa** meaning <span class="font-bold text-white">the mythological Gorgon monster</span>. The name refers to its muddy habitat and its head appearance, which might have seemed intimidating to its early discoverers.',
+                sec2_sub2: 'subrufa:', sec2_desc2: 'Originates from Latin: **sub** meaning <span class="font-bold text-white">under or beneath</span>, and **rufus** meaning <span class="font-bold text-white">red or rust-colored</span>. This describes the reddish or yellowish-brown color of the turtle\'s plastron (the lower belly shell).',
+                sec2_total: 'Full Meaning: "Red-bellied mud Medusa". The suborder name, Pleurodira (side-necked), consists of pleura (side) and deire (neck).',
+                sec3_title: 'Survival History & Modern Threats:',
+                sec3_l1: 'Gondwanan Survivor:', sec3_v1: 'The side-necked turtle suborder split from other turtles during the Mesozoic Era, about 120 million years ago. Fossil records indicate that these turtles originated on the ancient southern supercontinent of Gondwana. This is why today, turtles from these families are found exclusively in the Southern Hemisphere—in Africa, South America, and Australia.',
+                sec3_l2: 'Scientific Record:', sec3_v2: 'The species was officially defined and cataloged in 1789 by the French naturalist Pierre Joseph Bonnaterre.',
+                sec3_l3: 'Current Conservation Status:', sec3_v3: 'Fortunately, this side-necked turtle (the African helmeted turtle) is listed as <span class="font-bold text-green-400">Least Concern (LC)</span>. It is considered one of the most common turtles across the African continent (from Senegal to South Africa) and even lives in the Arabian Peninsula. Its immense adaptability, diverse diet, and ability to survive droughts protect it from extinction today, with the main threat being the pet trade, as it is very common in home aquariums worldwide.',
+                navPrev: 'Prev: Big-headed Turtle', navNext: 'Next: Platypus', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const d = content[currentLang];
+            
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
+            
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
+            document.getElementById('stat5_lbl').innerHTML = d.stat5_lbl;
+            document.getElementById('stat5_val').innerHTML = d.stat5_val;
+            
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
+            
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerHTML = d.sec2_total;
+            
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerHTML = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerHTML = d.sec3_v3;
+            
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
+            document.documentElement.lang = currentLang;
+
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
+        }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

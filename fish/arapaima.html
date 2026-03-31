@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: ארפאימה | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI with Red Accents */
+        :root {
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
+            --border-card: #1d365d;
+            --text-accent: #ef4444; /* Red-500 */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.7;
+        }
+
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(239, 68, 68, 0.15);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-red-400 hover:bg-red-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
+    </div>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
+        
+        <!-- Hero Image -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/arapaima.jpeg" alt="ארפאימה" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/ef4444?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: קשקשי שריון חסיני פיראניה ונשימת אוויר הכרחית</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">ארפאימה (פיררוקו)</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Arapaima gigas</p>
+                <p id="ui_trans" class="text-red-400 font-bold italic pt-2">"דג אדום ענק"</p>
+            </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">מעל 145<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>זיהוי</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1822<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>משוער</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 3.0<br>מטרים<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">משקל<br>מירבי</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">מעל 200<br>ק"ג<br>&nbsp;</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">הארפאימה, המוכר בברזיל כ"פיררוקו", הוא אחד מדגי המים המתוקים הגדולים בעולם ושריד חי לשושלת קדומה של דגים גרומי-לשון (Osteoglossiformes). הוא שולט באגמי ההצפה של אגן האמזונס. גופו העצום מצופה בשריון קשקשים פלאי המהווה מופת לביומימטיקה: כל קשקש מורכב משכבה חיצונית מינרלית קשה במיוחד, ושכבה פנימית של סיבי קולגן גמישים המסודרים בתבנית "דיקט" (שתי וערב). מבנה מורכב זה מעניק לדג הגנה מוחלטת המאפשרת לו לשחות בבטחה בלהקות של דגי פיראניה רעבים מבלי להיפגע.</p>
+                    
+                    <p id="sec1_p2">התאמתו הפיזיולוגית הדרמטית ביותר היא נשימת אוויר אטמוספרי הכרחית (Obligate air-breather). במהלך האבולוציה, שלפוחית השחייה שלו עברה התאמה קיצונית והפכה לאיבר דמוי-ריאה עשיר בכלי דם, הנפתח ישירות ללועו. בעוד הזימים שלו מנוונים ומשמשים בעיקר להפרשת פסולת, הארפאימה חייב לעלות לפני המים כל 5 עד 15 דקות כדי לבלוע אוויר ב"גמיעה" רועשת הניתנת לשמיעה ממרחק. יכולת זו מאפשרת לו לשגשג במימי האמזונס הרדודים והחמים, העניים לעיתים קרובות בחמצן.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-red-300 text-base mb-1">Arapaima (ארפאימה):</h3>
+                        <p id="sec2_desc1">שם הסוג מקורו בשפות הילידים של שבטי האמזונס (כמו שבט המקושי - Macushi). משמעות השם קשורה לרוב לכינוי המקומי של הדג, ומתייחסת לצבעוניות הייחודית שלו.</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-red-300 text-base mb-1">gigas (ג'יגאס):</h3>
+                        <p id="sec2_desc2">מקורו בשפה הלטינית (ובמקור מיוונית עתיקה "Gigas"), שפירושו <span class="font-bold text-white">ענק או עצום</span>. תוספת זו לשם המדעי מתארת בפשטות את ממדיו המפלצתיים של הדג, המסוגל לצמוח לאורכים של מספר מטרים.</p>
+                    </div>
+                    <div class="bg-red-900/20 p-4 rounded-xl border-r-2 border-red-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-red-200">שמות עממיים (Pirarucu / Paiche): בברזיל הוא נקרא "פיררוקו" (משפת הטופי: Pira = דג, Urucu = אדום), על שום העיטורים האדומים העזים המופיעים על קשקשיו לקראת זנבו. בפרו הוא מכונה "פאיצ'ה".</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-red-400 font-bold text-base mb-4 inline-block border-b border-red-900/50 pb-1">היסטוריה, גילוי ומאבקי שימור:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">שימוש ילידי:</span> <span id="sec3_v1">במשך דורות, צדו עמי האמזונס את הדג בעזרת צלצלים. מלבד בשרו, קשקשיו המחוספסים שימשו כפצירות לציפורניים, ולשונו הגרמית שימשה ככלי לגירוד זרעי גוארנה מחוספסים.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">תיעוד מדעי:</span> <span id="sec3_v2">הדג תואר וסווג רשמית בשנת 1822 על ידי הזואולוג השוויצרי היינריך רודולף שינץ, שהתבסס על רישומים ודגימות שהובאו מהיבשת החדשה.</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">מאבקי שימור:</span> <span id="sec3_v3">עקב ציד-יתר מסחרי (בעיקר בגלל נטייתו לעלות לפני המים לנשום, מה שהופך אותו לפגיע), אוכלוסייתו הידלדלה קשות. כיום הוא מוגן על ידי אמנת CITES, ופרויקטים של ניהול קהילתי בברזיל (כמו בשמורת ממירואה) הביאו להתאוששות מדהימה של מין זה בטבע.</span></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="lungfish.html" class="text-slate-400 hover:text-red-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: דג ריאות</span>
+        </a>
+        <a href="arowana.html" class="text-red-400 hover:text-red-300 transition-colors text-sm font-bold bg-red-900/20 px-5 py-2.5 rounded-full border border-red-800/30 shadow-lg">
+            <span id="navNext">הבא: ארואנה</span> <span>&larr;</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: קשקשי שריון חסיני פיראניה ונשימת אוויר הכרחית',
+                ui_title: 'ארפאימה (פיררוקו)',
+                ui_sci: 'Arapaima gigas',
+                ui_trans: '"דג אדום ענק"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'מעל 145<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>זיהוי', stat2_val: '<br>1822<br>&nbsp;',
+                stat3_lbl: 'אורך<br>משוער', stat3_val: 'עד 3.0<br>מטרים<br>&nbsp;',
+                stat4_lbl: 'משקל<br>מירבי', stat4_val: 'מעל 200<br>ק"ג<br>&nbsp;',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'הארפאימה, המוכר בברזיל כ"פיררוקו", הוא אחד מדגי המים המתוקים הגדולים בעולם ושריד חי לשושלת קדומה של דגים גרומי-לשון (Osteoglossiformes). הוא שולט באגמי ההצפה של אגן האמזונס. גופו העצום מצופה בשריון קשקשים פלאי המהווה מופת לביומימטיקה: כל קשקש מורכב משכבה חיצונית מינרלית קשה במיוחד, ושכבה פנימית של סיבי קולגן גמישים המסודרים בתבנית "דיקט" (שתי וערב). מבנה מורכב זה מעניק לדג הגנה מוחלטת המאפשרת לו לשחות בבטחה בלהקות של דגי פיראניה רעבים מבלי להיפגע.',
+                sec1_p2: 'התאמתו הפיזיולוגית הדרמטית ביותר היא נשימת אוויר אטמוספרי הכרחית (Obligate air-breather). במהלך האבולוציה, שלפוחית השחייה שלו עברה התאמה קיצונית והפכה לאיבר דמוי-ריאה עשיר בכלי דם, הנפתח ישירות ללועו. בעוד הזימים שלו מנוונים ומשמשים בעיקר להפרשת פסולת, הארפאימה חייב לעלות לפני המים כל 5 עד 15 דקות כדי לבלוע אוויר ב"גמיעה" רועשת הניתנת לשמיעה ממרחק. יכולת זו מאפשרת לו לשגשג במימי האמזונס הרדודים והחמים, העניים לעיתים קרובות בחמצן.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Arapaima (ארפאימה):', sec2_desc1: 'שם הסוג מקורו בשפות הילידים של שבטי האמזונס (כמו שבט המקושי - Macushi). משמעות השם קשורה לרוב לכינוי המקומי של הדג, ומתייחסת לצבעוניות הייחודית שלו.',
+                sec2_sub2: 'gigas (ג\'יגאס):', sec2_desc2: 'מקורו בשפה הלטינית (ובמקור מיוונית עתיקה "Gigas"), שפירושו <span class="font-bold text-white">ענק או עצום</span>. תוספת זו לשם המדעי מתארת בפשטות את ממדיו המפלצתיים של הדג, המסוגל לצמוח לאורכים של מספר מטרים.',
+                sec2_total: 'שמות עממיים (Pirarucu / Paiche): בברזיל הוא נקרא "פיררוקו" (משפת הטופי: Pira = דג, Urucu = אדום), על שום העיטורים האדומים העזים המופיעים על קשקשיו לקראת זנבו. בפרו הוא מכונה "פאיצ\'ה".',
+                sec3_title: 'היסטוריה, גילוי ומאבקי שימור:',
+                sec3_l1: 'שימוש ילידי:', sec3_v1: 'במשך דורות, צדו עמי האמזונס את הדג בעזרת צלצלים. מלבד בשרו, קשקשיו המחוספסים שימשו כפצירות לציפורניים, ולשונו הגרמית שימשה ככלי לגירוד זרעי גוארנה מחוספסים.',
+                sec3_l2: 'תיעוד מדעי:', sec3_v2: 'הדג תואר וסווג רשמית בשנת 1822 על ידי הזואולוג השוויצרי היינריך רודולף שינץ, שהתבסס על רישומים ודגימות שהובאו מהיבשת החדשה.',
+                sec3_l3: 'מאבקי שימור:', sec3_v3: 'עקב ציד-יתר מסחרי (בעיקר בגלל נטייתו לעלות לפני המים לנשום, מה שהופך אותו לפגיע), אוכלוסייתו הידלדלה קשות. כיום הוא מוגן על ידי אמנת CITES, ופרויקטים של ניהול קהילתי בברזיל (כמו בשמורת ממירואה) הביאו להתאוששות מדהימה של מין זה בטבע.',
+                navPrev: 'הקודם: דג ריאות', navNext: 'הבא: ארואנה', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                back: '← Back',
+                ui_feature: 'Unique feature: Piranha-proof armor scales and obligate air-breathing',
+                ui_title: 'Arapaima',
+                ui_sci: 'Arapaima gigas',
+                ui_trans: '"Giant Red Fish"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: 'Over 145<br>Million<br>Years',
+                stat2_lbl: 'Scientifically<br>Identified', stat2_val: '<br>1822<br>&nbsp;',
+                stat3_lbl: 'Estimated<br>Length', stat3_val: 'Up to 3.0<br>Meters<br>&nbsp;',
+                stat4_lbl: 'Max<br>Weight', stat4_val: 'Over 200<br>kg<br>&nbsp;',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The Arapaima, known in Brazil as the "Pirarucu", is one of the world\'s largest freshwater fish and a living relic of an ancient lineage of bonytongues (Osteoglossiformes). It dominates the floodplains of the Amazon basin. Its massive body is coated in a miraculous scaly armor that is a marvel of biomimetics: each scale consists of a highly mineralized, extremely hard outer layer, and a flexible inner layer of collagen fibers arranged in a "Bouligand" (plywood-like) structure. This complex configuration grants the fish absolute defense, allowing it to swim safely among schools of ravenous piranhas unscathed.',
+                sec1_p2: 'Its most dramatic physiological adaptation is its status as an obligate air-breather. During its evolution, its swim bladder underwent extreme modification, becoming a highly vascularized, lung-like organ that opens directly into its pharynx. While its gills are reduced and primarily used for excreting waste, the Arapaima must surface every 5 to 15 minutes to gulp air with a loud, distinctive sipping sound that can be heard from a distance. This ability allows it to thrive in the shallow, warm, and often hypoxic (oxygen-poor) waters of the Amazon.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Arapaima:', sec2_desc1: 'The genus name originates from the indigenous languages of Amazonian tribes (such as the Macushi). The meaning is tied to the local designation for the fish, referencing its unique presence and coloration.',
+                sec2_sub2: 'gigas:', sec2_desc2: 'Originates from Latin (and originally ancient Greek "Gigas"), meaning <span class="font-bold text-white">giant or immense</span>. This addition to the scientific name simply describes the monstrous proportions of the fish, which can grow to several meters in length.',
+                sec2_total: 'Common Names (Pirarucu / Paiche): In Brazil, it is called "Pirarucu" (from Tupi language: Pira = fish, Urucu = red), due to the striking bright red markings that appear on its scales towards the tail. In Peru, it is known as "Paiche".',
+                sec3_title: 'History, Discovery & Conservation:',
+                sec3_l1: 'Indigenous Use:', sec3_v1: 'For generations, Amazonian peoples hunted the fish with harpoons. Besides its meat, its rough scales were used as nail files, and its bony tongue served as a scraper for rough guarana seeds.',
+                sec3_l2: 'Scientific Record:', sec3_v2: 'The fish was formally described and classified in 1822 by Swiss zoologist Heinrich Rudolf Schinz, based on records and specimens brought from the New World.',
+                sec3_l3: 'Conservation Battles:', sec3_v3: 'Due to severe commercial overfishing (exacerbated by its need to surface for air, making it an easy target), populations plummeted. Today, it is protected by CITES, and community-based management projects in Brazil (like the Mamirauá Reserve) have led to an incredible recovery of the species in the wild.',
+                navPrev: 'Prev: Aust. Lungfish', navNext: 'Next: Arowana', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const d = content[currentLang];
+            
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
+            
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
+            
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
+            
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerText = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerText = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerHTML = d.sec2_total;
+            
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
+            
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
+            document.documentElement.lang = currentLang;
+
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
+        }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize Language
+        window.onload = () => {
+            currentLang = 'en'; 
+            toggleLanguage();
+        };
+    </script>
+</body>
+</html>

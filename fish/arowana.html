@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>מחקר מעמיק: ארואנה | The Eternal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* S25 Ultra Optimized - Deep Navy/Slate Premium UI with Amber/Gold Accents */
+        :root {
+            --bg-body: #030712; 
+            --bg-card: #0a1122; 
+            --bg-pill: #132342; 
+            --border-card: #1d365d;
+            --text-accent: #f59e0b; /* Amber-500 */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            line-height: 1.7;
+        }
+
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:active {
+            transform: scale(0.98);
+        }
+
+        .stat-pill {
+            background-color: var(--bg-pill);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: var(--text-accent);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .discovery-box {
+            background-color: var(--bg-pill);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(245, 158, 11, 0.15);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav max-w-3xl mx-auto w-full pointer-events-none">
+        <button onclick="toggleLanguage()" id="langBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-amber-400 hover:bg-amber-500 hover:text-white transition-all shadow-xl">EN</button>
+        <a href="../index.html" id="backBtn" class="pointer-events-auto bg-slate-900/80 backdrop-blur border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-slate-300 hover:text-white transition-all shadow-xl">← חזרה</a>
+    </div>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-black/90 backdrop-blur-md flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur transition-all active:scale-95 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <img id="modalImage" src="" alt="תמונה מוגדלת" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Main Content Card -->
+    <main class="premium-card w-full max-w-2xl mt-12 mb-8 relative">
+        
+        <!-- Hero Image -->
+        <img src="https://raw.githubusercontent.com/rexram987-create/living-fossils-archive/main/images/arowana.jpeg" alt="ארואנה" class="hero-img" onclick="openModal(this.src)" onerror="this.src='https://via.placeholder.com/800x450/0a1122/f59e0b?text=Image+Not+Found'">
+
+        <div class="p-6 md:p-8 space-y-10">
+            
+            <!-- Header Titles -->
+            <div class="text-center space-y-2">
+                <p id="ui_feature" class="text-sm text-slate-300 font-medium">מאפיין ייחודי: לשון חמושה בשיניים וזינוק אקרובטי מחוץ למים</p>
+                <h1 id="ui_title" class="text-4xl md:text-5xl font-black text-white tracking-tight">ארואנה (קוף המים)</h1>
+                <p id="ui_sci" class="text-lg text-slate-400 font-mono">Osteoglossum bicirrhosum</p>
+                <p id="ui_trans" class="text-amber-400 font-bold italic pt-2">"לשון-עצם בעלת שני מחושים"</p>
+            </div>
+
+            <!-- Stats Grid (Pills) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="stat-pill">
+                    <span id="stat1_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">תקופת<br>שושלת</span>
+                    <span id="stat1_val" class="text-xs md:text-sm text-white font-black leading-tight">מעל 140<br>מיליון<br>שנה</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat2_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">שנת<br>זיהוי</span>
+                    <span id="stat2_val" class="text-xs md:text-sm text-white font-black leading-tight"><br>1829<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="stat3_lbl" class="text-[10px] md:text-xs text-slate-400 font-bold mb-1">אורך<br>משוער</span>
+                    <span id="stat3_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 1.2<br>מטרים<br>&nbsp;</span>
+                </div>
+                <div class="stat-pill !border-amber-500/30 !bg-amber-900/10">
+                    <span id="stat4_lbl" class="text-[10px] md:text-xs text-amber-400 font-bold mb-1">זינוק<br>מירבי</span>
+                    <span id="stat4_val" class="text-xs md:text-sm text-white font-black leading-tight">עד 2.0<br>מטרים!<br>&nbsp;</span>
+                </div>
+            </div>
+
+            <!-- Scientific Uniqueness -->
+            <section>
+                <h2 id="sec1_title" class="section-title">ייחודיות מדעית ופיזית:</h2>
+                <div class="space-y-4 text-sm text-slate-300 text-justify">
+                    <p id="sec1_p1">הארואנה, המכונה לעיתים קרובות "קוף המים" בשל יכולות האקרובטיקה המדהימות שלה, היא טורף-על מרשים המפגין התאמה אבולוציונית נדירה לציד מעל פני המים. בשונה מרוב הדגים, פיה מופנה כלפי מעלה ופתוח כמעין "דלת סתרים", מה שמאפשר לה לאסוף טרף מפני השטח. היא מצוידת בשני מחושים (בינים) רגישים במיוחד בקצה הלסת התחתונה, המשמשים כחיישני תנועה המאתרים ויברציות זעירות של חרקים על פני המים, גם בחשיכה מוחלטת.</p>
+                    
+                    <p id="sec1_p2">התכונה המפורסמת ביותר של הארואנה הכסופה (ובנות דודתה) היא <strong>יכולת הזינוק הבליסטית</strong> שלה. בעזרת גוף דק ודמוי סרט ושרירי זנב חזקים במיוחד, היא מסוגלת לזנק לגובה בלתי נתפס של עד <strong class="text-amber-400">2 מטרים (כ-6.5 רגל)</strong> מעל פני המים! קפיצה מדויקת זו משמשת אותה כדי לקטוף ולצוד חרקים גדולים, עכבישים, עופות קטנים ואף עטלפים הנחים על ענפים נמוכים מעל הנהר. בנוסף, כמו קרובת משפחתה הארפאימה, גם היא מסוגלת לנשום אוויר אטמוספרי מה שמאפשר לה לשרוד בביצות רדודות ודלות בחמצן.</p>
+                </div>
+            </section>
+
+            <!-- Extended Etymology -->
+            <section>
+                <h2 id="sec2_title" class="section-title">אטימולוגיה מורחבת (מקור השם):</h2>
+                <div class="space-y-5 text-sm text-slate-300 text-justify mt-4">
+                    <div>
+                        <h3 id="sec2_sub1" class="font-bold text-amber-300 text-base mb-1">Osteoglossum (אוסטאוגלוסום):</h3>
+                        <p id="sec2_desc1">מיוונית עתיקה: <strong>Osteon</strong> (עצם) + <strong>Glossa</strong> (לשון). השם מתייחס למאפיין האנטומי הייחודי של סדרת גרומי-הלשון: לשון גרמית חזקה המצוידת בשיניים חדות, אשר מועכת ומרסקת את הטרף כנגד שיניים נוספות הממוקמות בתקרת הפה הגידים.</p>
+                    </div>
+                    <div>
+                        <h3 id="sec2_sub2" class="font-bold text-amber-300 text-base mb-1">bicirrhosum (ביקירוסום):</h3>
+                        <p id="sec2_desc2">מלטינית: <strong>Bi</strong> (שניים) + <strong>Cirrhus</strong> (תלתל או מחוש). החלק השני של השם המדעי מתאר בדיוק רב את שני הבינים (Barbels) הבולטים מקצה הלסת התחתונה של הדג, המשמשים אותו כרדאר ביולוגי.</p>
+                    </div>
+                    <div class="bg-amber-900/20 p-4 rounded-xl border-r-2 border-amber-500 mt-4">
+                        <p id="sec2_total" class="font-bold text-amber-200">שמות עממיים (Arowana / Dragon Fish): השם "ארואנה" נגזר קרוב לוודאי משפת הטופי הדרום-אמריקאית (Aruanã). באסיה, המינים הקרובים (Asian Arowana) זכו לכינוי "דג הדרקון" בשל קשקשיהם דמויי-השריון והבינים המזכירים את שפמו של הדרקון המיתולוגי הסיני, והם נחשבים כסמל למזל, שגשוג ועושר.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discovery Details (Bottom Box) -->
+            <section class="discovery-box">
+                <h2 id="sec3_title" class="text-amber-400 font-bold text-base mb-4 inline-block border-b border-amber-900/50 pb-1">היסטוריה, גילוי ומאבקי שימור:</h2>
+                <div class="space-y-3 text-sm text-slate-300 text-justify">
+                    <p><span id="sec3_l1" class="font-bold text-white">הוכחה לנדידת היבשות:</span> <span id="sec3_v1">שושלת הארואנות מדהימה גיאולוגית. מאובני ארואנות ומינים חיים קיימים בדרום אמריקה, אפריקה, אסיה ואוסטרליה. תפוצה עולמית זו של דג מים מתוקים שלא יכול לחצות אוקיינוסים מהווה הוכחה חיה לכך שמוצאם ביבשת-העל הקדומה "גונדוונה", לפני שהתפצלה.</span></p>
+                    <p><span id="sec3_l2" class="font-bold text-white">תיעוד מדעי:</span> <span id="sec3_v2">הארואנה הכסופה תוארה רשמית בשנת 1829 על ידי הזואולוג הצרפתי הנודע ז'ורז' קיווייה (Georges Cuvier).</span></p>
+                    <p><span id="sec3_l3" class="font-bold text-white">סמל סטטוס וסכנת הכחדה:</span> <span id="sec3_v3">בעוד שהמין הדרום-אמריקאי אינו בסכנה מיידית, ה"ארואנה האסיאתית" היא מסיפורי השימור הדרמטיים בעולם. עקב האמונה שהיא מביאה עושר, היא הפכה לדג האקווריום היקר בעולם (נמכרת בעשרות אלפי דולרים). הדבר הוביל לציד בלתי חוקי אובססיבי ולסכנת הכחדה חמורה בטבע. כיום היא מוגנת תחת אמנת CITES.</span></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Next/Prev Navigation -->
+    <nav class="w-full max-w-2xl mx-auto flex justify-between items-center px-4 mb-6">
+        <a href="arapaima.html" class="text-slate-400 hover:text-amber-400 transition-colors text-sm font-bold bg-card px-5 py-2.5 rounded-full border border-white/5 shadow-lg">
+            <span>&rarr;</span> <span id="navPrev">הקודם: ארפאימה</span>
+        </a>
+        <a href="bichir.html" class="text-amber-400 hover:text-amber-300 transition-colors text-sm font-bold bg-amber-900/20 px-5 py-2.5 rounded-full border border-amber-800/30 shadow-lg">
+            <span id="navNext">הבא: ביצ'יר</span> <span>&larr;</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLang = 'he';
+        const content = {
+            he: {
+                back: '← חזרה',
+                ui_feature: 'מאפיין ייחודי: לשון חמושה בשיניים וזינוק אקרובטי מחוץ למים',
+                ui_title: 'ארואנה (קוף המים)',
+                ui_sci: 'Osteoglossum bicirrhosum',
+                ui_trans: '"לשון-עצם בעלת שני מחושים"',
+                stat1_lbl: 'תקופת<br>שושלת', stat1_val: 'מעל 140<br>מיליון<br>שנה',
+                stat2_lbl: 'שנת<br>זיהוי', stat2_val: '<br>1829<br>&nbsp;',
+                stat3_lbl: 'אורך<br>משוער', stat3_val: 'עד 1.2<br>מטרים<br>&nbsp;',
+                stat4_lbl: 'זינוק<br>מירבי', stat4_val: 'עד 2.0<br>מטרים!<br>&nbsp;',
+                sec1_title: 'ייחודיות מדעית ופיזית:',
+                sec1_p1: 'הארואנה, המכונה לעיתים קרובות "קוף המים" בשל יכולות האקרובטיקה המדהימות שלה, היא טורף-על מרשים המפגין התאמה אבולוציונית נדירה לציד מעל פני המים. בשונה מרוב הדגים, פיה מופנה כלפי מעלה ופתוח כמעין "דלת סתרים", מה שמאפשר לה לאסוף טרף מפני השטח. היא מצוידת בשני מחושים (בינים) רגישים במיוחד בקצה הלסת התחתונה, המשמשים כחיישני תנועה המאתרים ויברציות זעירות של חרקים על פני המים, גם בחשיכה מוחלטת.',
+                sec1_p2: 'התכונה המפורסמת ביותר של הארואנה הכסופה (ובנות דודתה) היא <strong>יכולת הזינוק הבליסטית</strong> שלה. בעזרת גוף דק ודמוי סרט ושרירי זנב חזקים במיוחד, היא מסוגלת לזנק לגובה בלתי נתפס של עד <strong class="text-amber-400">2 מטרים (כ-6.5 רגל)</strong> מעל פני המים! קפיצה מדויקת זו משמשת אותה כדי לקטוף ולצוד חרקים גדולים, עכבישים, עופות קטנים ואף עטלפים הנחים על ענפים נמוכים מעל הנהר. בנוסף, כמו קרובת משפחתה הארפאימה, גם היא מסוגלת לנשום אוויר אטמוספרי מה שמאפשר לה לשרוד בביצות רדודות ודלות בחמצן.',
+                sec2_title: 'אטימולוגיה מורחבת (מקור השם):',
+                sec2_sub1: 'Osteoglossum (אוסטאוגלוסום):', sec2_desc1: 'מיוונית עתיקה: <strong>Osteon</strong> (עצם) + <strong>Glossa</strong> (לשון). השם מתייחס למאפיין האנטומי הייחודי של סדרת גרומי-הלשון: לשון גרמית חזקה המצוידת בשיניים חדות, אשר מועכת ומרסקת את הטרף כנגד שיניים נוספות הממוקמות בתקרת הפה הגידים.',
+                sec2_sub2: 'bicirrhosum (ביקירוסום):', sec2_desc2: 'מלטינית: <strong>Bi</strong> (שניים) + <strong>Cirrhus</strong> (תלתל או מחוש). החלק השני של השם המדעי מתאר בדיוק רב את שני הבינים (Barbels) הבולטים מקצה הלסת התחתונה של הדג, המשמשים אותו כרדאר ביולוגי.',
+                sec2_total: 'שמות עממיים (Arowana / Dragon Fish): השם "ארואנה" נגזר קרוב לוודאי משפת הטופי הדרום-אמריקאית (Aruanã). באסיה, המינים הקרובים (Asian Arowana) זכו לכינוי "דג הדרקון" בשל קשקשיהם דמויי-השריון והבינים המזכירים את שפמו של הדרקון המיתולוגי הסיני, והם נחשבים כסמל למזל, שגשוג ועושר.',
+                sec3_title: 'היסטוריה, גילוי ומאבקי שימור:',
+                sec3_l1: 'הוכחה לנדידת היבשות:', sec3_v1: 'שושלת הארואנות מדהימה גיאולוגית. מאובני ארואנות ומינים חיים קיימים בדרום אמריקה, אפריקה, אסיה ואוסטרליה. תפוצה עולמית זו של דג מים מתוקים שלא יכול לחצות אוקיינוסים מהווה הוכחה חיה לכך שמוצאם ביבשת-העל הקדומה "גונדוונה", לפני שהתפצלה.',
+                sec3_l2: 'תיעוד מדעי:', sec3_v2: 'הארואנה הכסופה תוארה רשמית בשנת 1829 על ידי הזואולוג הצרפתי הנודע ז\'ורז\' קיווייה (Georges Cuvier).',
+                sec3_l3: 'סמל סטטוס וסכנת הכחדה:', sec3_v3: 'בעוד שהמין הדרום-אמריקאי אינו בסכנה מיידית, ה"ארואנה האסיאתית" היא מסיפורי השימור הדרמטיים בעולם. עקב האמונה שהיא מביאה עושר, היא הפכה לדג האקווריום היקר בעולם (נמכרת בעשרות אלפי דולרים). הדבר הוביל לציד בלתי חוקי אובססיבי ולסכנת הכחדה חמורה בטבע. כיום היא מוגנת תחת אמנת CITES.',
+                navPrev: 'הקודם: ארפאימה', navNext: 'הבא: ביצ\'יר', btn: 'EN', dir: 'rtl'
+            },
+            en: {
+                back: '← Back',
+                ui_feature: 'Unique feature: Toothed bony tongue and acrobatic water jumps',
+                ui_title: 'Arowana (Water Monkey)',
+                ui_sci: 'Osteoglossum bicirrhosum',
+                ui_trans: '"Two-barbeled bone-tongue"',
+                stat1_lbl: 'Lineage<br>Age', stat1_val: 'Over 140<br>Million<br>Years',
+                stat2_lbl: 'Scientifically<br>Identified', stat2_val: '<br>1829<br>&nbsp;',
+                stat3_lbl: 'Estimated<br>Length', stat3_val: 'Up to 1.2<br>Meters<br>&nbsp;',
+                stat4_lbl: 'Maximum<br>Jump', stat4_val: 'Up to 2.0<br>Meters!<br>&nbsp;',
+                sec1_title: 'Scientific & Physical Uniqueness:',
+                sec1_p1: 'The Arowana, often nicknamed the "Water Monkey" for its incredible acrobatic abilities, is an impressive apex predator displaying a rare evolutionary adaptation for surface hunting. Unlike most fish, its mouth points upwards and opens like a trapdoor, allowing it to scoop prey from the surface. It is equipped with two highly sensitive barbels at the tip of its lower jaw, acting as motion sensors that detect minute vibrations of insects on the water surface, even in pitch blackness.',
+                sec1_p2: 'The most famous trait of the Silver Arowana (and its cousins) is its <strong>ballistic jumping ability</strong>. Using a slender, ribbon-like body and exceptionally strong tail muscles, it can leap to an unfathomable height of up to <strong class="text-amber-400">2 meters (approx. 6.5 feet)</strong> out of the water! This precise jump is used to snatch large insects, spiders, small birds, and even bats resting on low-hanging branches above the river. Furthermore, like its relative the Arapaima, it can breathe atmospheric air, allowing it to survive in shallow, oxygen-depleted swamps.',
+                sec2_title: 'Extended Etymology (Name Origin):',
+                sec2_sub1: 'Osteoglossum:', sec2_desc1: 'From ancient Greek: <strong>Osteon</strong> (bone) + <strong>Glossa</strong> (tongue). The name refers to the unique anatomical feature of the bonytongue order: a strong bony tongue equipped with sharp teeth, which crushes and grinds prey against teeth located on the roof of the mouth.',
+                sec2_sub2: 'bicirrhosum:', sec2_desc2: 'From Latin: <strong>Bi</strong> (two) + <strong>Cirrhus</strong> (curl or tentacle). The second part of the scientific name accurately describes the two prominent barbels extending from the fish\'s lower jaw, acting as biological radar.',
+                sec2_total: 'Common Names (Arowana / Dragon Fish): The name "Arowana" likely derives from the South American Tupi language (Aruanã). In Asia, closely related species (Asian Arowana) earned the moniker "Dragon Fish" due to their armor-like scales and barbels resembling the mythical Chinese dragon\'s whiskers, making them symbols of luck, prosperity, and wealth.',
+                sec3_title: 'History, Discovery & Conservation:',
+                sec3_l1: 'Proof of Continental Drift:', sec3_v1: 'The Arowana lineage is geologically astonishing. Arowana fossils and living species exist in South America, Africa, Asia, and Australia. This global distribution of a freshwater fish unable to cross oceans serves as living proof that they originated on the ancient supercontinent "Gondwana" before it broke apart.',
+                sec3_l2: 'Scientific Record:', sec3_v2: 'The Silver Arowana was formally described in 1829 by the renowned French zoologist Georges Cuvier.',
+                sec3_l3: 'Status Symbol & Extinction Threat:', sec3_v3: 'While the South American species is not in immediate danger, the "Asian Arowana" is one of the world\'s most dramatic conservation stories. Believed to bring wealth, it became the world\'s most expensive aquarium fish (selling for tens of thousands of dollars). This led to obsessive poaching and severe endangerment in the wild. Today, it is strictly protected under CITES.',
+                navPrev: 'Prev: Arapaima', navNext: 'Next: Bichir', btn: 'HE', dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const d = content[currentLang];
+            
+            document.getElementById('backBtn').innerText = d.back;
+            document.getElementById('ui_feature').innerText = d.ui_feature;
+            document.getElementById('ui_title').innerText = d.ui_title;
+            document.getElementById('ui_sci').innerText = d.ui_sci;
+            document.getElementById('ui_trans').innerText = d.ui_trans;
+            
+            document.getElementById('stat1_lbl').innerHTML = d.stat1_lbl;
+            document.getElementById('stat1_val').innerHTML = d.stat1_val;
+            document.getElementById('stat2_lbl').innerHTML = d.stat2_lbl;
+            document.getElementById('stat2_val').innerHTML = d.stat2_val;
+            document.getElementById('stat3_lbl').innerHTML = d.stat3_lbl;
+            document.getElementById('stat3_val').innerHTML = d.stat3_val;
+            document.getElementById('stat4_lbl').innerHTML = d.stat4_lbl;
+            document.getElementById('stat4_val').innerHTML = d.stat4_val;
+            
+            document.getElementById('sec1_title').innerText = d.sec1_title;
+            document.getElementById('sec1_p1').innerHTML = d.sec1_p1;
+            document.getElementById('sec1_p2').innerHTML = d.sec1_p2;
+            
+            document.getElementById('sec2_title').innerText = d.sec2_title;
+            document.getElementById('sec2_sub1').innerHTML = d.sec2_sub1;
+            document.getElementById('sec2_desc1').innerHTML = d.sec2_desc1;
+            document.getElementById('sec2_sub2').innerHTML = d.sec2_sub2;
+            document.getElementById('sec2_desc2').innerHTML = d.sec2_desc2;
+            document.getElementById('sec2_total').innerHTML = d.sec2_total;
+            
+            document.getElementById('sec3_title').innerText = d.sec3_title;
+            document.getElementById('sec3_l1').innerText = d.sec3_l1;
+            document.getElementById('sec3_v1').innerText = d.sec3_v1;
+            document.getElementById('sec3_l2').innerText = d.sec3_l2;
+            document.getElementById('sec3_v2').innerText = d.sec3_v2;
+            document.getElementById('sec3_l3').innerText = d.sec3_l3;
+            document.getElementById('sec3_v3').innerText = d.sec3_v3;
+            
+            document.getElementById('navPrev').innerText = d.navPrev;
+            document.getElementById('navNext').innerText = d.navNext;
+            document.getElementById('langBtn').innerText = d.btn;
+            
+            document.documentElement.dir = d.dir;
+            document.documentElement.lang = currentLang;
+
+            // Handle LTR/RTL borders
+            const etymTotalBox = document.getElementById('sec2_total').parentElement;
+            if (currentLang === 'en') {
+                etymTotalBox.classList.remove('border-r-2');
+                etymTotalBox.classList.add('border-l-2');
+            } else {
+                etymTotalBox.classList.remove('border-l-2');
+                etymTotalBox.classList.add('border-r-2');
+            }
+        }
+
+        // Modal (Lightbox) Logic
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; // Trigger reflow
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on backdrop click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize Language
+        window.onload = () => {
+            currentLang = 'en'; 
+            toggleLanguage();
+        };
+    </script>
+</body>
+</html>
